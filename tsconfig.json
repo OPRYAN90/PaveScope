@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    },
+    "jsx": "react-jsx",
+    "esModuleInterop": true,  // Add this line to fix your import issue
+    "allowSyntheticDefaultImports": true,  // Add this for default imports
+    "strict": true,  // Optional: Enables strict type checking
+    "moduleResolution": "node",  // Ensure Node.js module resolution
+    "resolveJsonModule": true,  // Allows importing JSON files
+    "skipLibCheck": true  // Skips type checking of declaration files
+  },
+  "include": ["src"]
+}
