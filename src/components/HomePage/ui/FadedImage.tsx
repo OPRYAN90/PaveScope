@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 interface FadingImageProps {
   images: string[];
   interval?: number;
-  height?: string; // Adding a customizable height
+  height?: string;
 }
 
 const FadingImage: React.FC<FadingImageProps> = ({
@@ -17,7 +17,6 @@ const FadingImage: React.FC<FadingImageProps> = ({
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, interval);
-
     return () => clearInterval(timer);
   }, [images, interval]);
 
@@ -30,11 +29,11 @@ const FadingImage: React.FC<FadingImageProps> = ({
         <img
           key={src}
           src={src}
-          alt={`Image ${index + 1}`}
+          alt={`Fading content ${index + 1}`}
           className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ${
             index === currentIndex ? "opacity-100" : "opacity-0"
           }`}
-          style={{ objectFit: "cover", width: "100%", height: "100%" }} // Ensures image fills the container
+          style={{ objectFit: "cover", width: "100%", height: "100%" }}
         />
       ))}
     </div>

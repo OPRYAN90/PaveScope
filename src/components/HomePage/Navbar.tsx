@@ -1,35 +1,27 @@
-import { useState, useEffect } from 'react';
-import { Button } from './ui/button';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
-import logo from '../../assets/images/logo.png';
+import { useState, useEffect } from "react";
+import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
+import logo from "../../assets/images/logo.png";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Scroll event listener
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true); // Add the "scrolled" class after scrolling 50px
-      } else {
-        setScrolled(false); // Remove it if the scroll is less than 50px
-      }
+      setScrolled(window.scrollY > 50);
     };
-
-    window.addEventListener('scroll', handleScroll);
-
-    // Clean up event listener on unmount
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-10 transition-all duration-300 ease-in-out ${
-        scrolled ? 'bg-white shadow-lg' : 'bg-transparent'
+        scrolled ? "bg-white shadow-lg" : "bg-transparent"
       }`}
     >
       <div className="flex justify-between items-center p-4 max-w-7xl mx-auto">
@@ -44,23 +36,43 @@ export default function Navbar() {
               className="w-full h-full object-cover"
             />
           </div>
-          <div onClick={scrollToTop} className="text-xl font-bold text-gray-800 cursor-pointer">
-          <span className="text-xl font-bold -ml-2">PaveScope</span>
+          <div
+            onClick={scrollToTop}
+            className="text-xl font-bold text-gray-800 cursor-pointer"
+          >
+            <span className="text-xl font-bold -ml-2">PaveScope</span>
           </div>
         </div>
         <div className="hidden md:flex space-x-9">
-          <a href="#" className="text-gray-600 hover:text-gray-900">
+          {/* Option A: Using Link for future pages
+          <Link to="/about" className="text-gray-600 hover:text-gray-900">About</Link>
+          <Link to="/team" className="text-gray-600 hover:text-gray-900">Team</Link>
+          <Link to="/purpose" className="text-gray-600 hover:text-gray-900">Purpose</Link>
+          <Link to="/specification" className="text-gray-600 hover:text-gray-900">Specification</Link>
+           */}
+          {/* Option B: Using anchor links (uncomment if using this approach) */}
+          <a href="#about" className="text-gray-600 hover:text-gray-900">
             About
           </a>
-          <a href="#" className="text-gray-600 hover:text-gray-900">
+          <a href="#team" className="text-gray-600 hover:text-gray-900">
             Team
           </a>
-          <a href="#" className="text-gray-600 hover:text-gray-900">
+          <a href="#purpose" className="text-gray-600 hover:text-gray-900">
             Purpose
           </a>
-          <a href="#" className="text-gray-600 hover:text-gray-900">
+          <a
+            href="#specification"
+            className="text-gray-600 hover:text-gray-900"
+          >
             Specification
           </a>
+
+          {/* Option C: Using buttons (uncomment if using this approach)
+          <button onClick={() => {}} className="text-gray-600 hover:text-gray-900">About</button>
+          <button onClick={() => {}} className="text-gray-600 hover:text-gray-900">Team</button>
+          <button onClick={() => {}} className="text-gray-600 hover:text-gray-900">Purpose</button>
+          <button onClick={() => {}} className="text-gray-600 hover:text-gray-900">Specification</button>
+          */}
         </div>
         <div className="flex space-x-4">
           <Link to="/login">
