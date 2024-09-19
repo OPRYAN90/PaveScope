@@ -1,16 +1,43 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": ".", // No need for 'src' anymore
     "paths": {
-      "@/*": ["*"]
+      "@/*": [
+        "./*"
+      ]
     },
-    "jsx": "react-jsx",
-    "esModuleInterop": true,  // Add this line to fix your import issue
-    "allowSyntheticDefaultImports": true,  // Add this for default imports
-    "strict": true,  // Optional: Enables strict type checking
-    "moduleResolution": "node",  // Ensure Node.js module resolution
-    "resolveJsonModule": true,  // Allows importing JSON files
-    "skipLibCheck": true  // Skips type checking of declaration files
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "noEmit": true,
+    "incremental": true,
+    "module": "esnext",
+    "isolatedModules": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["src"]
+  "include": [
+    "pages",
+    "components",
+    "lib",
+    "public",
+    "utils",
+    ".next/types/**/*.ts"
+, "components"  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
