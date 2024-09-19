@@ -68,7 +68,7 @@ export default function Navbar() {
               Login
             </Button>
           </Link>
-          <Link href="/get-started">
+          <Link href="/GetStarted">
             <Button
               variant="outline"
               className="px-4 py-2 text-white bg-blue-500 border border-blue-500 rounded-md shadow-sm transition-all duration-200 ease-in-out hover:bg-blue-600 hover:border-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"

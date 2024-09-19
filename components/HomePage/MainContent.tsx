@@ -14,7 +14,7 @@ export default function MainContent() {
       </p>
       <div className="flex space-x-4 mb-8">
         {/* Use Next.js Link for navigation */}
-        <Link href="/get-started">
+        <Link href="/GetStarted">
           <Button
             size="lg"
             className="bg-blue-500 hover:bg-blue-600 text-white"

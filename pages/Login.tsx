@@ -7,6 +7,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
+interface LoginResponse {
+  token: string;
+}
+
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,66 +21,72 @@ export default function Login() {
     e.preventDefault();
     setError('');
     try {
-      const response = await axios.post('/api/login', { email, password });
+      const response = await axios.post<LoginResponse>('/api/login', { email, password });
       if (response.status === 200) {
+        localStorage.setItem('token', response.data.token);
         router.push('/workpage');
       }
     } catch (error) {
       console.error('Error logging in:', error);
-      setError('Login failed. Please check your credentials.');
+      setError('Login failed. Please check your credentials and try again.');
     }
   };
 
   return (
-    <Card className="w-[350px]">
-      <CardHeader>
-        <CardTitle>Login</CardTitle>
-        <CardDescription>Log in to access your account</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleLogin}>
-          <div className="grid w-full items-center gap-4">
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="border-blue-200 focus:border-blue-400 focus:ring-blue-400"
-              />
+    <div className="flex items-center justify-center min-h-screen bg-blue-50">
+      <Card className="w-full max-w-md">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold text-center text-blue-700">Login</CardTitle>
+          <CardDescription className="text-center text-blue-600">
+            Enter your email and password to access your account
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleLogin}>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-blue-700">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="m@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="border-blue-200 focus:border-blue-400 focus:ring-blue-400"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-blue-700">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="border-blue-200 focus:border-blue-400 focus:ring-blue-400"
+                />
+              </div>
+              {error && (
+                <div className="p-3 bg-red-100 border border-red-400 rounded-md">
+                  <p className="text-red-700 text-sm" role="alert">{error}</p>
+                </div>
+              )}
+              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                Login
+              </Button>
             </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="border-blue-200 focus:border-blue-400 focus:ring-blue-400"
-              />
-            </div>
-          </div>
-          {error && (
-            <div className="mt-4 text-red-500">
-              {error}
-            </div>
-          )}
-          <Button type="submit" className="mt-4 w-full">
-            Login
-          </Button>
-        </form>
-      </CardContent>
-      <CardFooter className="flex justify-between">
-        <div className="text-sm">
-          Don&apos;t have an account?{' '}
-          <Link href="/signup" className="text-blue-500 hover:underline">
-            Get Started
-          </Link>
-        </div>
-      </CardFooter>
-    </Card>
+          </form>
+        </CardContent>
+        <CardFooter>
+          <p className="text-sm text-blue-600 text-center w-full">
+            Don&apos;t have an account?{' '}
+            <Link href="/GetStarted" className="font-medium text-blue-700 hover:underline">
+              Get Started
+            </Link>
+          </p>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }
