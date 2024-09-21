@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import Link from "next/link"; // Next.js Link
@@ -60,7 +61,7 @@ export default function Navbar() {
           </a>
         </div>
         <div className="flex space-x-4">
-          <Link href="/Login">
+          <Link href="/api/auth/login">
             <Button
               variant="outline"
               className="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-50 hover:border-gray-400 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
@@ -68,7 +69,7 @@ export default function Navbar() {
               Login
             </Button>
           </Link>
-          <Link href="/GetStarted">
+          <Link href="/api/auth/login?action=signup">
             <Button
               variant="outline"
               className="px-4 py-2 text-white bg-blue-500 border border-blue-500 rounded-md shadow-sm transition-all duration-200 ease-in-out hover:bg-blue-600 hover:border-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"

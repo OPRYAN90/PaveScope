@@ -72,6 +72,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ```
 pothole-detection-website
+├─ .cursorrules
 ├─ .git
 │  ├─ COMMIT_EDITMSG
 │  ├─ config
@@ -141,6 +142,7 @@ pothole-detection-website
 │  │  │  ├─ 39cce9c2ff39305caf8e1f439b89a8d3198dde
 │  │  │  └─ e7f15463d80789bde60c31cf55ca99175b096c
 │  │  ├─ 0d
+│  │  │  ├─ 1eb1d735faf88e17597cdecb9bcc956cdb3437
 │  │  │  ├─ c0f5721811009e13cfa10072a4e0b55c81149f
 │  │  │  ├─ e2e42fef655bfcbdaee9fdb92bf84f591f85ea
 │  │  │  └─ ed5bbc414d29ff9baef303e09e81d50c1bf021
@@ -150,10 +152,16 @@ pothole-detection-website
 │  │  ├─ 0f
 │  │  │  ├─ 298f065fd8f0ce3abe84b62a039c6d649e100b
 │  │  │  └─ 662086cd1fdf334b9261d923568645c08682f1
+│  │  ├─ 11
+│  │  │  └─ 8f366681b621ddfe53657317a60eb524c5df7a
 │  │  ├─ 12
 │  │  │  └─ 807a077b266bd3a3580cf92e84fd387412956c
 │  │  ├─ 14
 │  │  │  └─ 9a18defc24c863a63015a931c10601a642049a
+│  │  ├─ 15
+│  │  │  ├─ 618e8945de5e0f760c5883cd2061de687e9a5d
+│  │  │  ├─ 677199d394f5a42adf568752870e416eb5b3a0
+│  │  │  └─ 99a0c78aed1116c972f1b0f5bc8d229da822e2
 │  │  ├─ 16
 │  │  │  ├─ 32c2c4df6894a83b70fa949fb32a9d4881adf9
 │  │  │  ├─ 7523d1605ab20fcef79926871361187567a332
@@ -161,7 +169,9 @@ pothole-detection-website
 │  │  ├─ 17
 │  │  │  └─ 921eb4bb6cfa3d565398b95c983b227e68de47
 │  │  ├─ 18
-│  │  │  └─ 033c7e0997c5d1a7d5876a107a87e2e6b43c17
+│  │  │  ├─ 00dfa1b60706cc04f68c8236ff7744d154963d
+│  │  │  ├─ 033c7e0997c5d1a7d5876a107a87e2e6b43c17
+│  │  │  └─ 561d3256f86871365252660353e551961c92cf
 │  │  ├─ 19
 │  │  │  └─ 087eae8ca413a595c2a171454444944bf1b13c
 │  │  ├─ 1a
@@ -169,9 +179,11 @@ pothole-detection-website
 │  │  │  ├─ c30c1b3358e53e7e1736351a72d208c9315c9a
 │  │  │  └─ c50d143046570fb49e26885dcd5f0eef0ff318
 │  │  ├─ 1b
+│  │  │  ├─ 3b57dc827545addaeaf92d4c61976cf23d328d
 │  │  │  └─ e18a2234ebbcdb4b9fdca7ee3475b6cb9ab66d
 │  │  ├─ 1c
 │  │  │  ├─ 78ac422582ae2e280e2f70b6a53be0967cbf19
+│  │  │  ├─ b08ccd750f6dae00318c1106128e9dd3d91ea8
 │  │  │  ├─ bfa73bdbafcbaa5e0cc8413cd827442982536a
 │  │  │  └─ c3135351f6983186fda799ff49d006552c32b3
 │  │  ├─ 1d
@@ -192,7 +204,10 @@ pothole-detection-website
 │  │  │  ├─ 60768dc5ed2038ca4a4ee405a15f82886a290f
 │  │  │  └─ 8b25a8e7f10c40762ae1d990ac92c2ea4af21b
 │  │  ├─ 23
+│  │  │  ├─ aac9d517887e900aac283b4dcfb44dc71d5811
 │  │  │  └─ df4b98122fca48eb1129a15a17c227487516ca
+│  │  ├─ 24
+│  │  │  └─ 84aa4047e0c318bc4d1afab9053912c93b2b65
 │  │  ├─ 25
 │  │  │  ├─ 6515cc38c31453b8690abd84182c6ae7ed175a
 │  │  │  ├─ 78bcf1fc8446f5cf63f286d8f9210c3d27e000
@@ -226,6 +241,7 @@ pothole-detection-website
 │  │  ├─ 2e
 │  │  │  └─ cf3b2d740b7224fdc9119e5a2d98aa2bd92026
 │  │  ├─ 2f
+│  │  │  ├─ 204f958417614d1627d98483b3ebab159984b2
 │  │  │  ├─ 6d4614f6a1b00e20c6f9d9f59a52c983de30c9
 │  │  │  ├─ adad6dba61d3de647d10d887f2d463b8870a63
 │  │  │  ├─ d3b4a739c9c3a2404b0f0df7112c2a99748452
@@ -247,6 +263,8 @@ pothole-detection-website
 │  │  │  ├─ ad091d26d8a9dc95ebdf616e217d985ec215b8
 │  │  │  ├─ c8740b32bfa84763c0b306fff7f54a63eca2b7
 │  │  │  └─ da951a8c81134cc1cec9fd567b952c1b61856d
+│  │  ├─ 34
+│  │  │  └─ 67ae4adb9fef1a627ddb5842d87fb120056d50
 │  │  ├─ 35
 │  │  │  ├─ 6a7da201b3e73a27db9dd74651b73e1e23be68
 │  │  │  └─ 927b67fafd30c025f3c5e09a9effe3e2484bfa
@@ -294,12 +312,15 @@ pothole-detection-website
 │  │  ├─ 43
 │  │  │  ├─ 1b2cceacb925e47a53dd6d59318d4bf4767f31
 │  │  │  └─ 23833f50ab05fd3a66847176bd79d98757e07e
+│  │  ├─ 44
+│  │  │  └─ 4a51df9396f7a8401eb773503ab4ec710f0499
 │  │  ├─ 45
 │  │  │  ├─ 14b34a8885da32d25ec90a45c596d182980270
 │  │  │  ├─ 3fd84f4f7eb2d12c98023b1eac7e4b0f073d83
 │  │  │  └─ 437ffd0106fc25053f9d2698ffb53dc459d777
 │  │  ├─ 46
-│  │  │  └─ 3ae17a1cb269d8ba3532403c1016e4c7d86a13
+│  │  │  ├─ 3ae17a1cb269d8ba3532403c1016e4c7d86a13
+│  │  │  └─ beb9d7be09a1cf5e5f053f3307ac05177f63a0
 │  │  ├─ 47
 │  │  │  └─ 64b42917007021997eacea5d518d3fede6b045
 │  │  ├─ 48
@@ -324,6 +345,7 @@ pothole-detection-website
 │  │  ├─ 4d
 │  │  │  └─ 29575de80483b005c29bfcac5061cd2f45313e
 │  │  ├─ 4f
+│  │  │  ├─ 07f9de0f8252c04a6f517a9f58d8cf71d36a99
 │  │  │  ├─ 5e32c6938d7e7d8eb225fcdff7f2d2292aa888
 │  │  │  └─ c4b8e5d3328eb96c076e6887f7e9141a4ebc04
 │  │  ├─ 50
@@ -336,11 +358,17 @@ pothole-detection-website
 │  │  │  └─ 53d3ad9e6be6690549cb255f5952337b02401d
 │  │  ├─ 53
 │  │  │  ├─ c1a3a0f20fcbc2ad278f30b3bca2f1d242bbcc
-│  │  │  └─ d86cb10462b108e8cf5a2aedbbde2300564dae
+│  │  │  ├─ d86cb10462b108e8cf5a2aedbbde2300564dae
+│  │  │  ├─ dad31768abb18e812be0794aee1d9ea7fadd2d
+│  │  │  └─ f9ad825c17a2e725c278a9ec28b171bb710bdf
 │  │  ├─ 54
+│  │  │  ├─ 263584a6f0dc5fd38d9d32c077fead6f844eda
+│  │  │  ├─ 3a76c35fd1a96912da88531d318ab97c5e4b22
 │  │  │  ├─ 43d6f58ac4cd772099d4fddaabba7682f7420c
 │  │  │  └─ 5898248ceabc353980eb4c8d784c370ae55731
 │  │  ├─ 55
+│  │  │  ├─ 5522f5f619ce7cfae9bb5452936131f97555a1
+│  │  │  ├─ 78c8b9d381d051aa4973cae602c80e8e4e143f
 │  │  │  └─ d8ed9100fe3acec42266a7a6f1b60c2c443d75
 │  │  ├─ 56
 │  │  │  ├─ 225311335697124cab85be6bede84f534aaa74
@@ -353,6 +381,7 @@ pothole-detection-website
 │  │  │  └─ beeaccd87e230076cab531b8f418f40b6d1aeb
 │  │  ├─ 5a
 │  │  │  ├─ 523f2499501ce1d06bcafc61e6ca3402fb6bd2
+│  │  │  ├─ 9559286d59ba38ea661360662227d56f2739d1
 │  │  │  └─ f5345a8e2b297fff7b7ea38709054370d81e25
 │  │  ├─ 5b
 │  │  │  └─ 547268002135d9135f0ebe642fa8517f7db234
@@ -361,7 +390,8 @@ pothole-detection-website
 │  │  │  └─ c97ebd00ab11950b6f8777c2fea2ec10afc494
 │  │  ├─ 5d
 │  │  │  ├─ c5519da0a0ff599f39a0736cebe8f4e08e95c4
-│  │  │  └─ cd949b4cd0b8fd81ddc90799b4899d1fc378ae
+│  │  │  ├─ cd949b4cd0b8fd81ddc90799b4899d1fc378ae
+│  │  │  └─ e40f4c5bd0eb8e8c8f19ca0d6da6d022a9752f
 │  │  ├─ 5e
 │  │  │  └─ 8337ffc7a56fccf2fb55ac1012424296a0ef13
 │  │  ├─ 5f
@@ -372,6 +402,8 @@ pothole-detection-website
 │  │  ├─ 60
 │  │  │  ├─ 9b3a4774bd5296b9b362c5234b9b5efbfec3d0
 │  │  │  └─ c0eb774723a293fca09ea1530cc4d2f5fe1ff9
+│  │  ├─ 63
+│  │  │  └─ aa6a83d5329c86d4c0417eab3c00a5e9affeb0
 │  │  ├─ 64
 │  │  │  ├─ 00543bffe3a52533fbd8a0e5773b4cd4c34259
 │  │  │  ├─ 4c2e4d3ca6d83d5dacdbf562fad2985c965a67
@@ -383,6 +415,7 @@ pothole-detection-website
 │  │  ├─ 66
 │  │  │  └─ 63cb6413cd94779aaf44e8c708ff0b8af8be12
 │  │  ├─ 67
+│  │  │  ├─ 2ff510bed6b1a189ae8e3b731892599da06588
 │  │  │  ├─ 3a76a4998331c2f332d148aab4154a6098d96f
 │  │  │  └─ 86eee6d9a93e7ec94ac5b82bad76d0174fa1c6
 │  │  ├─ 68
@@ -393,6 +426,7 @@ pothole-detection-website
 │  │  │  └─ ea506fcc676caaa530a0dc1e20c03540b362b6
 │  │  ├─ 6a
 │  │  │  ├─ 192ebc63b9bd8cd6f1a0e1e33db7e32c2bf619
+│  │  │  ├─ 5c41c76d385049ccb6a577663850b12d50e79e
 │  │  │  ├─ 66126e401045c76587fb6e25815cf74705ee41
 │  │  │  └─ b93fecba7daa6a3ebd564a8ad9baad0aabf804
 │  │  ├─ 6b
@@ -414,7 +448,9 @@ pothole-detection-website
 │  │  ├─ 6f
 │  │  │  └─ 0c0a30f6a3fc2fa88724c81d3489c6b14ce5ad
 │  │  ├─ 70
-│  │  │  └─ 974f94dd9c1d26341a4f369d994a13d0619379
+│  │  │  ├─ 3571d7ae729dda4b98601a2eb8eff1b86fdc54
+│  │  │  ├─ 974f94dd9c1d26341a4f369d994a13d0619379
+│  │  │  └─ ee8b76cb8f22f03bdad5c45a469bc242911323
 │  │  ├─ 71
 │  │  │  ├─ 2d21b7793f0df1a1fbbe98baf4ea114adc2581
 │  │  │  ├─ 56107e3aec28c4f7cea055e4cd67b6cc1e828c
@@ -434,6 +470,11 @@ pothole-detection-website
 │  │  ├─ 76
 │  │  │  ├─ 0e5800c6129a140d8cda064cef65ff943b588c
 │  │  │  └─ 134647f39b33adbc23367b11b7eb842a3876c9
+│  │  ├─ 77
+│  │  │  └─ 4f34013db7cba79906468515f96da3d9c34f12
+│  │  ├─ 78
+│  │  │  ├─ c461a3550e30f2a8ee22b036e16ead57c80c0c
+│  │  │  └─ cac91bcb81c695a76fc31e672175b291900c24
 │  │  ├─ 79
 │  │  │  └─ bdab45211cc4923420aa61185e06c5e7950e90
 │  │  ├─ 7a
@@ -446,12 +487,15 @@ pothole-detection-website
 │  │  ├─ 7e
 │  │  │  ├─ 052f41b794794beaff0648baf7eac3fb52af22
 │  │  │  └─ e396aa1b8420f5ad1c04af674f518644edf934
+│  │  ├─ 7f
+│  │  │  └─ 1ce53ca5106fa76fcc1a1153de626fc95f0790
 │  │  ├─ 80
 │  │  │  ├─ 4b55289c9f1b4292ea129930798b5169bc7ac1
 │  │  │  ├─ 8b0d9cf742f40df722f74fa5196bc64fc87fa2
 │  │  │  └─ ebdcc224a1657e72c2a6003f889457f4bd57f7
 │  │  ├─ 81
 │  │  │  ├─ 25bd54b2b710505f45ace1a2bd596bd8b2b6aa
+│  │  │  ├─ b368c540e77ee8572885b6ac462df327bfee19
 │  │  │  └─ fe84071482314e0d11adff841f5204535a0fb6
 │  │  ├─ 82
 │  │  │  ├─ 1cbc409bc55c827dfdc06e7e17429fd4bfa97a
@@ -459,7 +503,9 @@ pothole-detection-website
 │  │  ├─ 83
 │  │  │  └─ 4ee2489f4c77998dbbd88d9fd618ceb8ed671c
 │  │  ├─ 84
-│  │  │  └─ 221fa480864e69af0464dc4dda45521de181e5
+│  │  │  ├─ 221fa480864e69af0464dc4dda45521de181e5
+│  │  │  ├─ 6ff995e552b677d22b50fb3555860f652c60a5
+│  │  │  └─ e33ed761a8f023603120fe72ec1a04e80ea534
 │  │  ├─ 85
 │  │  │  └─ bfa02acfe4dd7d20fb0502d8c12a6b01013e51
 │  │  ├─ 87
@@ -467,8 +513,10 @@ pothole-detection-website
 │  │  ├─ 88
 │  │  │  └─ 3344233f94a5b7a09483aff81a5d727407ec66
 │  │  ├─ 89
-│  │  │  └─ 6d7115766a6aefc9e0b8b8965f1f826ffd2de0
+│  │  │  ├─ 6d7115766a6aefc9e0b8b8965f1f826ffd2de0
+│  │  │  └─ f71b5d50c4622329eabca2a520ac90639933a5
 │  │  ├─ 8a
+│  │  │  ├─ 06b42f9d5c81de418026af5399d58782741b86
 │  │  │  └─ 64d5c7e7568a25c8924623cb74c719d9691df0
 │  │  ├─ 8b
 │  │  │  ├─ 04b1ce70760b4d55435e0c89e0d41cbed89880
@@ -499,10 +547,14 @@ pothole-detection-website
 │  │  │  ├─ 72b9fb03813f103008e676135997afb34cc0c4
 │  │  │  └─ d28313b703087dab003169d55fed69a5158065
 │  │  ├─ 95
-│  │  │  └─ eb6cb1a949fa42c1f26d2d1a2332231777b949
+│  │  │  ├─ 19564ec3c4067581dff25d4320ad09295cd0c1
+│  │  │  ├─ eb6cb1a949fa42c1f26d2d1a2332231777b949
+│  │  │  └─ eed9e749f39fb32d105b4d0aa05d9d3a8f7557
 │  │  ├─ 96
 │  │  │  ├─ 8cfc8bd6074d324cf92c8adb249fca199d8421
-│  │  │  └─ e73af55d4e8f237fe60111b2eb3a94a2e8783e
+│  │  │  ├─ e67f443706e7fceae16331e44c5ac44887d203
+│  │  │  ├─ e73af55d4e8f237fe60111b2eb3a94a2e8783e
+│  │  │  └─ f22c5236f84c0848e95a9479f47b0ca5a7b4ee
 │  │  ├─ 97
 │  │  │  ├─ 0d3278a6e3efed1e4f5e784f80c848bf8a26fc
 │  │  │  ├─ 0d574a4689dc4092c6dd8e7cb448971cd9c862
@@ -526,12 +578,16 @@ pothole-detection-website
 │  │  │  └─ 9776289002c7a7dcfc9b1d3c1586850846c240
 │  │  ├─ 9c
 │  │  │  ├─ 0e809ca763a90ec23b56759e6ca3c1e371318a
+│  │  │  ├─ 629a93c698547ad5df89a1874f36dcc615f8ec
 │  │  │  └─ 90efb8cf76e859cf0fce941851cec6832e1060
 │  │  ├─ 9d
+│  │  │  ├─ 396910961ca80764e90db166dbda58525da34f
 │  │  │  ├─ 70ffb6affc434238678eb07b4ed2c7c4428691
 │  │  │  └─ fc1c058cebbef8b891c5062be6f31033d7d186
 │  │  ├─ 9e
 │  │  │  └─ 26dfeeb6e641a33dae4961196235bdb965b21b
+│  │  ├─ 9f
+│  │  │  └─ 084a2a740f99e4ce416c65f5a90a5b8daaec4d
 │  │  ├─ a0
 │  │  │  ├─ 01c531f6417cad92d4f35bae616bcdc9629d45
 │  │  │  ├─ 2a0961ff36662b03c1ee56d0f0f8c28f24ed17
@@ -548,6 +604,8 @@ pothole-detection-website
 │  │  │  ├─ 85cb20e462108ed1928c76246e3d8a3c209112
 │  │  │  └─ ce7c19128b7cd73ba11a2da78f71d0355acabb
 │  │  ├─ a4
+│  │  │  ├─ 673dcf09a7557c290626cd2dd27a01898e436e
+│  │  │  ├─ 9a1a84b20ee3a7622fac6c0c0ae6266622ad5d
 │  │  │  └─ e47a6545bc15971f8f63fba70e4013df88a664
 │  │  ├─ a5
 │  │  │  └─ ada4ac035baac2465e0cd50ac38b3d65f672fc
@@ -558,9 +616,11 @@ pothole-detection-website
 │  │  │  ├─ 65efebdd3f252108045a7c0c4e8c3c6d5975ea
 │  │  │  └─ 853d12c1ed36b930186f0a5481e69ab25595da
 │  │  ├─ a9
-│  │  │  └─ 80cf0c8bdaf70bdb7c1305d1d2016863cd3d62
+│  │  │  ├─ 80cf0c8bdaf70bdb7c1305d1d2016863cd3d62
+│  │  │  └─ daee873b555813d65b1dd94faaac4101c634c1
 │  │  ├─ aa
 │  │  │  ├─ 069f27cbd9d53394428171c3989fd03db73c76
+│  │  │  ├─ 29e3f6a75d7a9289f047fc3d703a9ae4ffe766
 │  │  │  ├─ 93ce52f5ae9a90842d62e24a32b0474b927879
 │  │  │  └─ c94498bc0c32b0dddd39c97a50aaf89114c925
 │  │  ├─ ab
@@ -604,9 +664,11 @@ pothole-detection-website
 │  │  │  ├─ 4fb63e5a45307b8985999f2982a8c8f7de5f11
 │  │  │  ├─ 8bb9231e843270b6a7c4b18bb48fd0ea2a5214
 │  │  │  ├─ 9f57ce3602d69cf84265f58027719147a5648a
-│  │  │  └─ bd1a00745552fbe582c1e5ca6d00fb3b550117
+│  │  │  ├─ bd1a00745552fbe582c1e5ca6d00fb3b550117
+│  │  │  └─ e7847c0c6869e9de3a0e29576eef2b54f58e2c
 │  │  ├─ ba
-│  │  │  └─ 2ff6bdc6ea9a0c4929a356b49023d882699e02
+│  │  │  ├─ 2ff6bdc6ea9a0c4929a356b49023d882699e02
+│  │  │  └─ c383b0d0dbfac0918cb705b333307e069430b7
 │  │  ├─ bc
 │  │  │  ├─ 399ce6c8f044c3f35db7d363ea5fae750e1069
 │  │  │  ├─ 7de6e64c46cc6b0a21027322bf947e57f79b96
@@ -614,15 +676,19 @@ pothole-detection-website
 │  │  │  └─ bbb0e1597ce4bca769ca641df8fb9ccd2c7bd9
 │  │  ├─ bd
 │  │  │  ├─ 0f4d8a85675596e698efd0d27431d3baba5df6
+│  │  │  ├─ 0fa098d7dc74810c5d8575abfb3bbfb28da711
 │  │  │  ├─ 457d9b6f2fa5e36f11ce5e6b9003bd7191cf89
 │  │  │  └─ 4d41f662149566b368fe80b28576a0eb635d18
 │  │  ├─ be
 │  │  │  ├─ 1f18b2622a6181475a48ce5632b5f759e644e2
+│  │  │  ├─ 44855fc131cb7e311e4d75bca5cf633bfbb640
 │  │  │  └─ d78a6e6dcc7c3e43d8d4e9526569f1addfb0a2
 │  │  ├─ bf
-│  │  │  └─ 4f62d7a53b2884bcf2a5a6256f7e6990b87557
+│  │  │  ├─ 4f62d7a53b2884bcf2a5a6256f7e6990b87557
+│  │  │  └─ 5509898bcae605be841c9261a00c421f046371
 │  │  ├─ c0
 │  │  │  ├─ 349c6f45448f3d8db929cde16181899686f61f
+│  │  │  ├─ 58c11162b5aa8b614a4111ec83742557359b58
 │  │  │  ├─ 63df10647d660b895396e6817c41c2d9a91d53
 │  │  │  ├─ 87f8d4c3f8bfc75f0d1d8efa0c47abd68840be
 │  │  │  ├─ b3b0c69a45d35aa627a4a1b85f8f338d7a9482
@@ -633,8 +699,10 @@ pothole-detection-website
 │  │  │  ├─ 21bc9ac2909c65a96f75eb85fe4e51125f8aeb
 │  │  │  └─ 3012b0f4d5ffc65da4271fa536c89d2d5600bb
 │  │  ├─ c6
-│  │  │  └─ c02f7f1ea72e277c06fc5ac98c05ac54b1bb96
+│  │  │  ├─ c02f7f1ea72e277c06fc5ac98c05ac54b1bb96
+│  │  │  └─ e2050ac064ef0168fa47058ebcd34e1a864bd5
 │  │  ├─ c7
+│  │  │  ├─ 03bb8110c79a7a5e2dd506c4642e614e914190
 │  │  │  ├─ 20069cbe51af3d9bee8b772bf4904b16534fd3
 │  │  │  ├─ 5eae81fd755f8e5ad2b637182d0e4eeb6d2388
 │  │  │  └─ ddf5823c6009fa4e21ab7821fe07df9793e20c
@@ -646,14 +714,17 @@ pothole-detection-website
 │  │  │  ├─ 383463fb76594e5398865adb08711f7d1495b6
 │  │  │  └─ ccf1ccbaf25dff22d0039e06c9ea6d826aa9f1
 │  │  ├─ ca
+│  │  │  ├─ 13ecc6e1211d85a7a8908c66144826ad5fcb52
 │  │  │  ├─ 34f09f9ec50f3ab9a86027b435939c17ea559d
 │  │  │  └─ 93471a46e4ccd1f4a86af4d4ae700296283bc1
 │  │  ├─ cb
-│  │  │  └─ 449e20fa2ab109e904d1a12f4fd633483e1ecb
+│  │  │  ├─ 449e20fa2ab109e904d1a12f4fd633483e1ecb
+│  │  │  └─ bdc78101ef6b0d7995aac048262ae0c0e0fd86
 │  │  ├─ cc
 │  │  │  ├─ 0af96fe916fa086024e71098df83ba0bf0ac50
 │  │  │  ├─ 483cfefd4f2d221d9374f139c8a7196c6d0f87
-│  │  │  └─ 5f63b7c7c6cd765a51efcc42a89d2ddabe6de5
+│  │  │  ├─ 5f63b7c7c6cd765a51efcc42a89d2ddabe6de5
+│  │  │  └─ ac9705dccd6971d2db1592b07b5ba5336d8880
 │  │  ├─ cd
 │  │  │  └─ aa472af2c2a0ab2abe1cc732ef82995b449176
 │  │  ├─ ce
@@ -662,6 +733,7 @@ pothole-detection-website
 │  │  ├─ cf
 │  │  │  └─ 9a6e8046c60a971dd8ba57cf41e243571ac099
 │  │  ├─ d0
+│  │  │  ├─ 0ec86e9e6f298b03eeb5654471b94abfe1fd05
 │  │  │  ├─ 3817a58a5c3cb58604936491f350003db150dc
 │  │  │  ├─ 84ccade0d8b5bd77fd5174993bcef7b57644c9
 │  │  │  └─ 8e6059da8c0273f46f39cf6e52061e0900a42b
@@ -678,7 +750,8 @@ pothole-detection-website
 │  │  │  └─ e0315c4e69072be7fce6e410919db493daeb90
 │  │  ├─ d4
 │  │  │  ├─ 1af8fd4603ac8df8e90aea37abce1ee5a0e188
-│  │  │  └─ 66a254a9fc87f166333e37d9cc6458d8c635d2
+│  │  │  ├─ 66a254a9fc87f166333e37d9cc6458d8c635d2
+│  │  │  └─ c59a0a2b7e5e9f2f055b0f63779efe3f46537f
 │  │  ├─ d5
 │  │  │  └─ 63c0fb10ba0e42724b21286eb546ee4e5734fc
 │  │  ├─ d6
@@ -686,8 +759,14 @@ pothole-detection-website
 │  │  ├─ d9
 │  │  │  └─ ff66511b03835bb6aa639ff108b074616a6a49
 │  │  ├─ da
+│  │  │  ├─ 29f154cb1907a695b7d5125bf146fb074818af
+│  │  │  ├─ 4216720f92ebf51de677f96dd8124a74f748b2
 │  │  │  ├─ 7a93aad631915baa212ced15b8965c6b59d1ae
 │  │  │  └─ 83c21e534cb1f9a06534b48fc00e41b32339fb
+│  │  ├─ db
+│  │  │  └─ f84445f0378193bf34a77415fd6a0592bb4d7a
+│  │  ├─ dc
+│  │  │  └─ 0e6216890c0862b1d90913e508c875cceb3d61
 │  │  ├─ dd
 │  │  │  └─ 67b18d5dfa9fe497e2bec5a360e60c6ca689fd
 │  │  ├─ e0
@@ -698,10 +777,12 @@ pothole-detection-website
 │  │  ├─ e3
 │  │  │  └─ 7705fa859cfa7face63b23c13ec6c70474fd94
 │  │  ├─ e4
+│  │  │  ├─ 236a1b14e40d858226978e31929cbe6d7cd9fd
 │  │  │  └─ 3c80a8e484c8301543f7ca2449bc11f8e7f1b9
 │  │  ├─ e5
 │  │  │  ├─ 253a52e45fd35362354b02478f136b6765c5a3
 │  │  │  ├─ 2c6cbf6fda281dc3276e42140b6a9998fa9a8e
+│  │  │  ├─ ca5a672a8a16d73380244cf13ef8c90d3e85df
 │  │  │  └─ e5c32156e4890e83aadf24d6ab17ee84cf1e34
 │  │  ├─ e6
 │  │  │  ├─ 0d0820384220ee3aa8255a67b59738363a6843
@@ -722,6 +803,7 @@ pothole-detection-website
 │  │  │  └─ 2585e8c0bb8188184ed1e0703c4c8f2a8419b0
 │  │  ├─ ed
 │  │  │  ├─ 31ee4c3264a215896095e6db8ba7f70d35d386
+│  │  │  ├─ e87b1c376ed168ea26441f10e3c202d7f40b52
 │  │  │  └─ ec2b556a0be06913b25e6da79ec79b396c019a
 │  │  ├─ ee
 │  │  │  └─ b9f2ac94600654fdc78a4d887d661c91db759c
@@ -746,6 +828,8 @@ pothole-detection-website
 │  │  │  ├─ 76da5421f47f608a7cfcac3c65f98734635eb5
 │  │  │  └─ 89d569ad1f9de1aaa5349eeba50e514cb37b07
 │  │  ├─ fa
+│  │  │  ├─ 355fb24f88c5cbaed19f379f2a3b7d9be1bac3
+│  │  │  ├─ 3a467d35d4ae2ef92145a05f6e216992eafdd9
 │  │  │  └─ c6f065d8d8d45532bdc74a48a683a2ca307c2a
 │  │  ├─ fb
 │  │  │  └─ 46ba78b69f9430c12b8da4f900fe7ddfc09bfd
@@ -781,21 +865,21 @@ pothole-detection-website
 │  │  │  └─ .cache_nzjfs8
 │  │  ├─ images
 │  │  │  ├─ +cGGuX0Rx9Jd6bM5Yato-yQbN+A8GrSOHXmSA1D8jUs=
-│  │  │  │  └─ 60.1726786248057.Qy6a5vbKtwry3meDCxyLpZl1SIdHeqHduT4z6oak460=.webp
+│  │  │  │  └─ 60.1726875286124.Qy6a5vbKtwry3meDCxyLpZl1SIdHeqHduT4z6oak460=.webp
 │  │  │  ├─ DaXkBLNjRXcIXPCqcNTF-bIofqQNJDNN-jirZ77MiWw=
-│  │  │  │  └─ 60.1726786248352.S2LXDi0D5Zud8Sbl+kEe-TryrKLKQCNWPvDSi4Nml6c=.webp
+│  │  │  │  └─ 60.1726875286660.S2LXDi0D5Zud8Sbl+kEe-TryrKLKQCNWPvDSi4Nml6c=.webp
 │  │  │  ├─ Ha86V8NzZW5o+c3bi3pgRZlyVVt8gf7KgATcI-zSsuY=
-│  │  │  │  └─ 60.1726786248190.4XzFmeHPusiWX9rPJbJo4JRtvLfGAE65kihob3KwMUk=.webp
+│  │  │  │  └─ 60.1726875286409.4XzFmeHPusiWX9rPJbJo4JRtvLfGAE65kihob3KwMUk=.webp
 │  │  │  ├─ LJyi3Z+qeduvy4NHc50rUaZcToM-RXQUqcZle21SZzo=
-│  │  │  │  └─ 60.1726786248015.Erhm5DcRGl1llDSloa8agj9k8osjW--EfQUtmk7jnBA=.webp
+│  │  │  │  └─ 60.1726875286183.Erhm5DcRGl1llDSloa8agj9k8osjW--EfQUtmk7jnBA=.webp
 │  │  │  ├─ LSu49UjUleiJwNYpvoDpudu6aS1MPHB2r2vDSixTjlY=
-│  │  │  │  └─ 60.1726786248169.3iVHh6tZh4t-2SHHZtCkGTh8sLagJF4ZvI9uvJFzTdI=.webp
+│  │  │  │  └─ 60.1726875286215.3iVHh6tZh4t-2SHHZtCkGTh8sLagJF4ZvI9uvJFzTdI=.webp
 │  │  │  ├─ Tm0QOCi0mDdo+h5Vza9hfBZ3Pq0+CA6xxAmEUfYnlrY=
-│  │  │  │  └─ 60.1726786248137.FYXgb--O6-VO8-Ej6GwbaefknIw0-R5fTlQ7E3sJI-M=.webp
+│  │  │  │  └─ 60.1726875286319.FYXgb--O6-VO8-Ej6GwbaefknIw0-R5fTlQ7E3sJI-M=.webp
 │  │  │  ├─ u+mF+W1SPHqbn3+wejNobiy4oX9i48hLPb0nptrgD2Y=
-│  │  │  │  └─ 60.1726786248376.foZ+5Qk9C9LLDP-jhmPbB0yUPcHGNAkF19QdAvpTlxI=.webp
+│  │  │  │  └─ 60.1726875286692.foZ+5Qk9C9LLDP-jhmPbB0yUPcHGNAkF19QdAvpTlxI=.webp
 │  │  │  └─ yHUSEUR839iWiI6ElMxyweQr81jUiwGsHfrjFqyALMY=
-│  │  │     └─ 60.1726786248079.dUfJege5C1dO2K9m-TVcEB7Dbjn75Hr+SIdFOoEc8nU=.webp
+│  │  │     └─ 60.1726875286393.dUfJege5C1dO2K9m-TVcEB7Dbjn75Hr+SIdFOoEc8nU=.webp
 │  │  ├─ swc
 │  │  │  └─ plugins
 │  │  │     └─ v7_windows_x86_64_0.106.15
@@ -803,6 +887,15 @@ pothole-detection-website
 │  │     ├─ client-development
 │  │     │  ├─ 0.pack.gz
 │  │     │  ├─ 1.pack.gz
+│  │     │  ├─ 10.pack.gz
+│  │     │  ├─ 11.pack.gz
+│  │     │  ├─ 12.pack.gz
+│  │     │  ├─ 13.pack.gz
+│  │     │  ├─ 14.pack.gz
+│  │     │  ├─ 15.pack.gz
+│  │     │  ├─ 16.pack.gz
+│  │     │  ├─ 17.pack.gz
+│  │     │  ├─ 18.pack.gz
 │  │     │  ├─ 2.pack.gz
 │  │     │  ├─ 3.pack.gz
 │  │     │  ├─ 4.pack.gz
@@ -827,6 +920,13 @@ pothole-detection-website
 │  │     ├─ server-development
 │  │     │  ├─ 0.pack.gz
 │  │     │  ├─ 1.pack.gz
+│  │     │  ├─ 10.pack.gz
+│  │     │  ├─ 11.pack.gz
+│  │     │  ├─ 12.pack.gz
+│  │     │  ├─ 13.pack.gz
+│  │     │  ├─ 14.pack.gz
+│  │     │  ├─ 15.pack.gz
+│  │     │  ├─ 16.pack.gz
 │  │     │  ├─ 2.pack.gz
 │  │     │  ├─ 3.pack.gz
 │  │     │  ├─ 4.pack.gz
@@ -860,6 +960,10 @@ pothole-detection-website
 │  ├─ react-loadable-manifest.json
 │  ├─ server
 │  │  ├─ app
+│  │  │  ├─ api
+│  │  │  │  └─ auth
+│  │  │  │     └─ [auth0]
+│  │  │  │        └─ route.js
 │  │  │  └─ _not-found
 │  │  │     ├─ page.js
 │  │  │     └─ page_client-reference-manifest.js
@@ -871,9 +975,7 @@ pothole-detection-website
 │  │  ├─ next-font-manifest.js
 │  │  ├─ next-font-manifest.json
 │  │  ├─ pages
-│  │  │  ├─ GetStarted.js
 │  │  │  ├─ index.js
-│  │  │  ├─ login.js
 │  │  │  ├─ _app.js
 │  │  │  ├─ _document.js
 │  │  │  └─ _error.js
@@ -881,20 +983,36 @@ pothole-detection-website
 │  │  ├─ server-reference-manifest.js
 │  │  ├─ server-reference-manifest.json
 │  │  ├─ vendor-chunks
-│  │  │  └─ next.js
+│  │  │  ├─ @auth0.js
+│  │  │  ├─ @hapi.js
+│  │  │  ├─ @panva.js
+│  │  │  ├─ @sideway.js
+│  │  │  ├─ cookie.js
+│  │  │  ├─ debug.js
+│  │  │  ├─ has-flag.js
+│  │  │  ├─ joi.js
+│  │  │  ├─ jose.js
+│  │  │  ├─ lru-cache.js
+│  │  │  ├─ ms.js
+│  │  │  ├─ next.js
+│  │  │  ├─ oidc-token-hash.js
+│  │  │  ├─ openid-client.js
+│  │  │  ├─ supports-color.js
+│  │  │  ├─ tslib.js
+│  │  │  ├─ url-join.js
+│  │  │  └─ yallist.js
 │  │  └─ webpack-runtime.js
 │  ├─ static
 │  │  ├─ chunks
 │  │  │  ├─ app
+│  │  │  │  ├─ layout.js
 │  │  │  │  └─ _not-found
 │  │  │  │     └─ page.js
 │  │  │  ├─ app-pages-internals.js
 │  │  │  ├─ main-app.js
 │  │  │  ├─ main.js
 │  │  │  ├─ pages
-│  │  │  │  ├─ GetStarted.js
 │  │  │  │  ├─ index.js
-│  │  │  │  ├─ login.js
 │  │  │  │  ├─ _app.js
 │  │  │  │  └─ _error.js
 │  │  │  ├─ polyfills.js
@@ -904,79 +1022,52 @@ pothole-detection-website
 │  │  │  ├─ _buildManifest.js
 │  │  │  └─ _ssgManifest.js
 │  │  └─ webpack
-│  │     ├─ 10b0b238d2327de5.webpack.hot-update.json
-│  │     ├─ 10f78b05749d3033.webpack.hot-update.json
-│  │     ├─ 116681d47b106dea.webpack.hot-update.json
-│  │     ├─ 28f96a0838e53a0e.webpack.hot-update.json
-│  │     ├─ 291628bfd723237b.webpack.hot-update.json
-│  │     ├─ 299224650c4e1bf0.webpack.hot-update.json
-│  │     ├─ 330f405077c481f7.webpack.hot-update.json
-│  │     ├─ 35c429a33d8aa42b.webpack.hot-update.json
-│  │     ├─ 4cb388e1088d2283.webpack.hot-update.json
-│  │     ├─ 586980cb29db4e25.webpack.hot-update.json
-│  │     ├─ 5e6e2c25a4dcbd65.webpack.hot-update.json
+│  │     ├─ 2346f4e632cc5ae8.webpack.hot-update.json
+│  │     ├─ 333e691104bcb602.webpack.hot-update.json
+│  │     ├─ 50746cd569277894.webpack.hot-update.json
+│  │     ├─ 536b60f33720a8b0.webpack.hot-update.json
 │  │     ├─ 633457081244afec._.hot-update.json
-│  │     ├─ 64d01b996d4f3587.webpack.hot-update.json
-│  │     ├─ 83af7a3823648869.webpack.hot-update.json
-│  │     ├─ 894e3b0b17c74962.webpack.hot-update.json
-│  │     ├─ 8d7a37c1da32b47b.webpack.hot-update.json
-│  │     ├─ 9db45019b71a403f.webpack.hot-update.json
-│  │     ├─ a541c3976464989b.webpack.hot-update.json
 │  │     ├─ ab3b0a61c8861b9e.webpack.hot-update.json
-│  │     ├─ b1c672683622926b.webpack.hot-update.json
-│  │     ├─ b76c7a52a0fdf822.webpack.hot-update.json
-│  │     ├─ bdfbc15a31165928.webpack.hot-update.json
-│  │     ├─ cec1d7d3f61630a8.webpack.hot-update.json
-│  │     ├─ d128338c8f7b7d0d.webpack.hot-update.json
-│  │     ├─ e077ce525338eb2e.webpack.hot-update.json
-│  │     ├─ ef1d9e34f882342e.webpack.hot-update.json
-│  │     ├─ f00f3ddf399da39c.webpack.hot-update.json
-│  │     ├─ pages
-│  │     │  ├─ GetStarted.a541c3976464989b.hot-update.js
-│  │     │  ├─ index.10f78b05749d3033.hot-update.js
-│  │     │  ├─ index.28f96a0838e53a0e.hot-update.js
-│  │     │  ├─ index.299224650c4e1bf0.hot-update.js
-│  │     │  ├─ index.4cb388e1088d2283.hot-update.js
-│  │     │  ├─ index.586980cb29db4e25.hot-update.js
-│  │     │  ├─ index.5e6e2c25a4dcbd65.hot-update.js
-│  │     │  ├─ index.83af7a3823648869.hot-update.js
-│  │     │  ├─ index.8d7a37c1da32b47b.hot-update.js
-│  │     │  ├─ index.9db45019b71a403f.hot-update.js
-│  │     │  ├─ login.291628bfd723237b.hot-update.js
-│  │     │  ├─ login.64d01b996d4f3587.hot-update.js
-│  │     │  └─ _app.bdfbc15a31165928.hot-update.js
-│  │     ├─ webpack.10b0b238d2327de5.hot-update.js
-│  │     ├─ webpack.10f78b05749d3033.hot-update.js
-│  │     ├─ webpack.116681d47b106dea.hot-update.js
-│  │     ├─ webpack.28f96a0838e53a0e.hot-update.js
-│  │     ├─ webpack.291628bfd723237b.hot-update.js
-│  │     ├─ webpack.299224650c4e1bf0.hot-update.js
-│  │     ├─ webpack.330f405077c481f7.hot-update.js
-│  │     ├─ webpack.35c429a33d8aa42b.hot-update.js
-│  │     ├─ webpack.4cb388e1088d2283.hot-update.js
-│  │     ├─ webpack.586980cb29db4e25.hot-update.js
-│  │     ├─ webpack.5e6e2c25a4dcbd65.hot-update.js
-│  │     ├─ webpack.64d01b996d4f3587.hot-update.js
-│  │     ├─ webpack.83af7a3823648869.hot-update.js
-│  │     ├─ webpack.894e3b0b17c74962.hot-update.js
-│  │     ├─ webpack.8d7a37c1da32b47b.hot-update.js
-│  │     ├─ webpack.9db45019b71a403f.hot-update.js
-│  │     ├─ webpack.a541c3976464989b.hot-update.js
+│  │     ├─ c0b1b79559c2af64.webpack.hot-update.json
+│  │     ├─ cc20c8aeb1986a63.webpack.hot-update.json
+│  │     ├─ cd814142379e2cfc.webpack.hot-update.json
+│  │     ├─ f1022c955bf44f9b.webpack.hot-update.json
+│  │     ├─ f1f1178ad7d2a8ce.webpack.hot-update.json
+│  │     ├─ main.536b60f33720a8b0.hot-update.js
+│  │     ├─ main.f1022c955bf44f9b.hot-update.js
+│  │     ├─ webpack.2346f4e632cc5ae8.hot-update.js
+│  │     ├─ webpack.333e691104bcb602.hot-update.js
+│  │     ├─ webpack.50746cd569277894.hot-update.js
+│  │     ├─ webpack.536b60f33720a8b0.hot-update.js
 │  │     ├─ webpack.ab3b0a61c8861b9e.hot-update.js
-│  │     ├─ webpack.b1c672683622926b.hot-update.js
-│  │     ├─ webpack.b76c7a52a0fdf822.hot-update.js
-│  │     ├─ webpack.bdfbc15a31165928.hot-update.js
-│  │     ├─ webpack.cec1d7d3f61630a8.hot-update.js
-│  │     ├─ webpack.d128338c8f7b7d0d.hot-update.js
-│  │     ├─ webpack.e077ce525338eb2e.hot-update.js
-│  │     ├─ webpack.ef1d9e34f882342e.hot-update.js
-│  │     └─ webpack.f00f3ddf399da39c.hot-update.js
+│  │     ├─ webpack.c0b1b79559c2af64.hot-update.js
+│  │     ├─ webpack.cc20c8aeb1986a63.hot-update.js
+│  │     ├─ webpack.cd814142379e2cfc.hot-update.js
+│  │     ├─ webpack.f1022c955bf44f9b.hot-update.js
+│  │     └─ webpack.f1f1178ad7d2a8ce.hot-update.js
 │  ├─ trace
 │  └─ types
+│     ├─ app
+│     │  ├─ api
+│     │  │  └─ auth
+│     │  │     └─ [auth0]
+│     │  │        └─ route.ts
+│     │  └─ layout.ts
 │     └─ package.json
 ├─ .prettierrc
 ├─ app
-│  └─ index.css
+│  ├─ api
+│  │  ├─ auth
+│  │  │  └─ [auth0]
+│  │  │     └─ route.js
+│  │  └─ upload
+│  │     └─ route.ts
+│  ├─ components
+│  │  └─ ImageUpload.tsx
+│  ├─ dashboard
+│  │  └─ page.tsx
+│  ├─ index.css
+│  └─ layout.jsx
 ├─ components
 │  ├─ Get Started
 │  ├─ HomePage
@@ -997,6 +1088,7 @@ pothole-detection-website
 │        └─ label.tsx
 ├─ components.json
 ├─ lib
+│  ├─ db.ts
 │  └─ utils.ts
 ├─ next-env.d.ts
 ├─ next.config.js

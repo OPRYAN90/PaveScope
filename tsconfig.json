@@ -36,7 +36,7 @@
     "public",
     "utils",
     ".next/types/**/*.ts"
-, "components"  ],
+, "components", ".next/types/app/layout.jsx", "app/WorkPage.tsx", ".next/types/app/api/auth/[auth0]/route.js"  ],
   "exclude": [
     "node_modules"
   ]
