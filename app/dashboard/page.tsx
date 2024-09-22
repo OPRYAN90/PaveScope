@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../components/AuthProvider';
 import { useRouter } from 'next/navigation';
+import { signOutUser } from '../../lib/auth';
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/Login/ui/card";
 import { Button } from "../../components/Login/ui/button";
 import { Input } from "../../components/Login/ui/input";
@@ -12,6 +13,7 @@ import { Upload, BarChart2, Map, FileSpreadsheet, HelpCircle, Image, DollarSign,
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
 import { useNavigateOrScrollTop } from '../../utils/navigation';
 import DashboardLayout from '../dashboard-layout';
+import { ChevronDown, LogOut, Settings, User } from 'lucide-react';
 
 interface User {
   uid: string;
@@ -43,9 +45,19 @@ export default function WorkPage() {
   const router = useRouter();
   const handlePaveScopeClick = useNavigateOrScrollTop('/dashboard');
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleSidebarCollapse = (collapsed: boolean) => {
     setIsSidebarCollapsed(collapsed);
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOutUser();
+      router.push('/');
+    } catch (error) {
+      console.error("Error signing out", error);
+    }
   };
 
   useEffect(() => {
@@ -55,7 +67,6 @@ export default function WorkPage() {
   }, [user, loading, router]);
 
   useEffect(() => {
-    // Set window as the scrollable element
     useNavigateOrScrollTop.setScrollableElement(window);
   }, []);
 
@@ -64,26 +75,53 @@ export default function WorkPage() {
   }
 
   if (!user) {
-    return null; // This will prevent the dashboard from rendering before redirecting
+    return null;
   }
 
   return (
     <DashboardLayout>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-blue-800">Work Dashboard</h1>
-        <div className="flex items-center space-x-4">
-          {loading ? (
-            <span className="text-blue-600">Loading...</span>
-          ) : user ? (
-            <>
-              <span className="text-blue-600">{user.displayName || user.email}</span>
-              <Avatar>
-                <AvatarImage src={user.photoURL || `/placeholder.svg?height=40&width=40&text=${user.displayName?.charAt(0) || 'A'}`} alt={user.displayName || 'User'} />
-                <AvatarFallback>{user.displayName?.charAt(0) || 'A'}</AvatarFallback>
-              </Avatar>
-            </>
-          ) : (
-            <span className="text-blue-600">Not logged in</span>
+        <div className="relative">
+          <div 
+            className="flex items-center space-x-2 bg-blue-600 rounded-full pl-2 pr-4 py-2 shadow-md cursor-pointer hover:bg-blue-700 transition-colors duration-200"
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+          >
+            <Avatar className="h-8 w-8">
+              <AvatarImage src={user?.photoURL || `/placeholder.svg?height=32&width=32&text=${user?.displayName?.charAt(0) || 'A'}`} alt={user?.displayName || 'User'} />
+              <AvatarFallback>{user?.displayName?.charAt(0) || 'A'}</AvatarFallback>
+            </Avatar>
+            <span className="text-sm font-medium text-white">{user?.displayName || user?.email}</span>
+            <ChevronDown className="h-4 w-4 text-white" />
+          </div>
+          {isDropdownOpen && (
+            <div className="absolute right-0 mt-2 w-56 bg-blue-50 border border-blue-200 rounded-md shadow-lg z-20 py-1">
+              <div className="px-4 py-2 border-b border-blue-200">
+                <p className="text-sm font-semibold text-blue-800">{user?.displayName || 'User'}</p>
+                <p className="text-xs text-blue-600">{user?.email}</p>
+              </div>
+              <button
+                className="flex items-center w-full px-4 py-2 text-sm text-blue-700 hover:bg-blue-100 transition-colors duration-150"
+                onClick={() => {/* Add profile action */}}
+              >
+                <User className="h-4 w-4 mr-2" />
+                Profile
+              </button>
+              <button
+                className="flex items-center w-full px-4 py-2 text-sm text-blue-700 hover:bg-blue-100 transition-colors duration-150"
+                onClick={() => {/* Add settings action */}}
+              >
+                <Settings className="h-4 w-4 mr-2" />
+                Settings
+              </button>
+              <button
+                onClick={handleSignOut}
+                className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors duration-150"
+              >
+                <LogOut className="h-4 w-4 mr-2" />
+                Sign Out
+              </button>
+            </div>
           )}
         </div>
       </div>

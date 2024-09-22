@@ -1,8 +1,8 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/upload/page": "app/upload/page.js",
+  "/signin/page": "app/signin/page.js",
   "/dashboard/page": "app/dashboard/page.js",
-  "/model/page": "app/model/page.js",
   "/page": "app/page.js",
-  "/help/page": "app/help/page.js"
+  "/help/page": "app/help/page.js",
+  "/maps/page": "app/maps/page.js"
 }
