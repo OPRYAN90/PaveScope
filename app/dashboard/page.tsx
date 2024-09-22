@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
-import { useUser } from '@auth0/nextjs-auth0/client';
+import React, { useEffect } from 'react';
+import { useAuth } from '../../components/AuthProvider';
+import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/Login/ui/card";
 import { Button } from "../../components/Login/ui/button";
 import { Input } from "../../components/Login/ui/input";
@@ -11,6 +12,15 @@ import { Upload, BarChart2, Map, FileSpreadsheet, HelpCircle, Image, DollarSign,
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
 import { FollowingSidebar } from '../../components/FollowingSidebar';
 import { useNavigateOrScrollTop } from '../../utils/navigation';
+import { useState } from 'react';
+
+// Update the User interface to include the new fields
+interface User {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+  photoURL: string | null;
+}
 
 interface MetricCardProps {
   title: string;
@@ -31,7 +41,8 @@ const MetricCard: React.FC<MetricCardProps> = ({ title, value, icon: Icon }) => 
 );
 
 export default function WorkPage() {
-  const { user, isLoading } = useUser();
+  const { user, loading } = useAuth();
+  const router = useRouter();
   const handlePaveScopeClick = useNavigateOrScrollTop('/dashboard');
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
@@ -40,9 +51,23 @@ export default function WorkPage() {
   };
 
   useEffect(() => {
+    if (!loading && !user) {
+      router.push('/signin');
+    }
+  }, [user, loading, router]);
+
+  useEffect(() => {
     // Set window as the scrollable element
     useNavigateOrScrollTop.setScrollableElement(window);
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return null; // This will prevent the dashboard from rendering before redirecting
+  }
 
   return (
     <div className="flex min-h-screen bg-blue-50">
@@ -54,16 +79,16 @@ export default function WorkPage() {
         className={`flex-1 ${isSidebarCollapsed ? 'ml-16' : 'ml-56'} p-8 transition-all duration-300 ease-in-out`}
       >
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-\blue-800">Work Dashboard</h1>
+          <h1 className="text-3xl font-bold text-blue-800">Work Dashboard</h1>
           <div className="flex items-center space-x-4">
-            {isLoading ? (
+            {loading ? (
               <span className="text-blue-600">Loading...</span>
             ) : user ? (
               <>
-                <span className="text-blue-600">{user.name || 'User'}</span>
+                <span className="text-blue-600">{user.displayName || user.email}</span>
                 <Avatar>
-                  <AvatarImage src={user.picture || `/placeholder.svg?height=40&width=40&text=${user.name?.charAt(0) || 'A'}`} alt={user.name || 'User'} />
-                  <AvatarFallback>{user.name?.charAt(0) || 'A'}</AvatarFallback>
+                  <AvatarImage src={user.photoURL || `/placeholder.svg?height=40&width=40&text=${user.displayName?.charAt(0) || 'A'}`} alt={user.displayName || 'User'} />
+                  <AvatarFallback>{user.displayName?.charAt(0) || 'A'}</AvatarFallback>
                 </Avatar>
               </>
             ) : (

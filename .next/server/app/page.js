@@ -56,6 +56,423 @@ module.exports = require("next/dist/compiled/next-server/app-page.runtime.dev.js
 
 /***/ }),
 
+/***/ "buffer":
+/*!*************************!*\
+  !*** external "buffer" ***!
+  \*************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("buffer");
+
+/***/ }),
+
+/***/ "crypto":
+/*!*************************!*\
+  !*** external "crypto" ***!
+  \*************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("crypto");
+
+/***/ }),
+
+/***/ "dns":
+/*!**********************!*\
+  !*** external "dns" ***!
+  \**********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("dns");
+
+/***/ }),
+
+/***/ "events":
+/*!*************************!*\
+  !*** external "events" ***!
+  \*************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("events");
+
+/***/ }),
+
+/***/ "fs":
+/*!*********************!*\
+  !*** external "fs" ***!
+  \*********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("fs");
+
+/***/ }),
+
+/***/ "http":
+/*!***********************!*\
+  !*** external "http" ***!
+  \***********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("http");
+
+/***/ }),
+
+/***/ "http2":
+/*!************************!*\
+  !*** external "http2" ***!
+  \************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("http2");
+
+/***/ }),
+
+/***/ "https":
+/*!************************!*\
+  !*** external "https" ***!
+  \************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("https");
+
+/***/ }),
+
+/***/ "net":
+/*!**********************!*\
+  !*** external "net" ***!
+  \**********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("net");
+
+/***/ }),
+
+/***/ "node:assert":
+/*!******************************!*\
+  !*** external "node:assert" ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:assert");
+
+/***/ }),
+
+/***/ "node:async_hooks":
+/*!***********************************!*\
+  !*** external "node:async_hooks" ***!
+  \***********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:async_hooks");
+
+/***/ }),
+
+/***/ "node:buffer":
+/*!******************************!*\
+  !*** external "node:buffer" ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:buffer");
+
+/***/ }),
+
+/***/ "node:console":
+/*!*******************************!*\
+  !*** external "node:console" ***!
+  \*******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:console");
+
+/***/ }),
+
+/***/ "node:crypto":
+/*!******************************!*\
+  !*** external "node:crypto" ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:crypto");
+
+/***/ }),
+
+/***/ "node:diagnostics_channel":
+/*!*******************************************!*\
+  !*** external "node:diagnostics_channel" ***!
+  \*******************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:diagnostics_channel");
+
+/***/ }),
+
+/***/ "node:events":
+/*!******************************!*\
+  !*** external "node:events" ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:events");
+
+/***/ }),
+
+/***/ "node:http":
+/*!****************************!*\
+  !*** external "node:http" ***!
+  \****************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:http");
+
+/***/ }),
+
+/***/ "node:http2":
+/*!*****************************!*\
+  !*** external "node:http2" ***!
+  \*****************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:http2");
+
+/***/ }),
+
+/***/ "node:net":
+/*!***************************!*\
+  !*** external "node:net" ***!
+  \***************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:net");
+
+/***/ }),
+
+/***/ "node:perf_hooks":
+/*!**********************************!*\
+  !*** external "node:perf_hooks" ***!
+  \**********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:perf_hooks");
+
+/***/ }),
+
+/***/ "node:querystring":
+/*!***********************************!*\
+  !*** external "node:querystring" ***!
+  \***********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:querystring");
+
+/***/ }),
+
+/***/ "node:stream":
+/*!******************************!*\
+  !*** external "node:stream" ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:stream");
+
+/***/ }),
+
+/***/ "node:tls":
+/*!***************************!*\
+  !*** external "node:tls" ***!
+  \***************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:tls");
+
+/***/ }),
+
+/***/ "node:url":
+/*!***************************!*\
+  !*** external "node:url" ***!
+  \***************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:url");
+
+/***/ }),
+
+/***/ "node:util":
+/*!****************************!*\
+  !*** external "node:util" ***!
+  \****************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:util");
+
+/***/ }),
+
+/***/ "node:util/types":
+/*!**********************************!*\
+  !*** external "node:util/types" ***!
+  \**********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:util/types");
+
+/***/ }),
+
+/***/ "node:worker_threads":
+/*!**************************************!*\
+  !*** external "node:worker_threads" ***!
+  \**************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:worker_threads");
+
+/***/ }),
+
+/***/ "node:zlib":
+/*!****************************!*\
+  !*** external "node:zlib" ***!
+  \****************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:zlib");
+
+/***/ }),
+
+/***/ "os":
+/*!*********************!*\
+  !*** external "os" ***!
+  \*********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("os");
+
+/***/ }),
+
+/***/ "path":
+/*!***********************!*\
+  !*** external "path" ***!
+  \***********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("path");
+
+/***/ }),
+
+/***/ "process":
+/*!**************************!*\
+  !*** external "process" ***!
+  \**************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("process");
+
+/***/ }),
+
+/***/ "stream":
+/*!*************************!*\
+  !*** external "stream" ***!
+  \*************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("stream");
+
+/***/ }),
+
+/***/ "string_decoder":
+/*!*********************************!*\
+  !*** external "string_decoder" ***!
+  \*********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("string_decoder");
+
+/***/ }),
+
+/***/ "tls":
+/*!**********************!*\
+  !*** external "tls" ***!
+  \**********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("tls");
+
+/***/ }),
+
+/***/ "url":
+/*!**********************!*\
+  !*** external "url" ***!
+  \**********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("url");
+
+/***/ }),
+
+/***/ "util":
+/*!***********************!*\
+  !*** external "util" ***!
+  \***********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("util");
+
+/***/ }),
+
+/***/ "zlib":
+/*!***********************!*\
+  !*** external "zlib" ***!
+  \***********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("zlib");
+
+/***/ }),
+
+/***/ "?66e9":
+/*!********************************!*\
+  !*** utf-8-validate (ignored) ***!
+  \********************************/
+/***/ (() => {
+
+/* (ignored) */
+
+/***/ }),
+
 /***/ "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fpage&page=%2Fpage&appPaths=%2Fpage&pagePath=private-next-app-dir%2Fpage.tsx&appDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fpage&page=%2Fpage&appPaths=%2Fpage&pagePath=private-next-app-dir%2Fpage.tsx&appDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D! ***!
@@ -77,13 +494,13 @@ eval("Promise.resolve(/*! import() eager */).then(__webpack_require__.bind(__web
 
 /***/ }),
 
-/***/ "(ssr)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cnode_modules%5C%5C%40auth0%5C%5Cnextjs-auth0%5C%5Cdist%5C%5Cclient%5C%5Cindex.js%22%2C%22ids%22%3A%5B%22UserProvider%22%5D%7D&modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cstyles%5C%5Cglobals.css%22%2C%22ids%22%3A%5B%5D%7D&server=true!":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cnode_modules%5C%5C%40auth0%5C%5Cnextjs-auth0%5C%5Cdist%5C%5Cclient%5C%5Cindex.js%22%2C%22ids%22%3A%5B%22UserProvider%22%5D%7D&modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cstyles%5C%5Cglobals.css%22%2C%22ids%22%3A%5B%5D%7D&server=true! ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "(ssr)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Ccomponents%5C%5CAuthProvider.tsx%22%2C%22ids%22%3A%5B%22AuthProvider%22%5D%7D&modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cstyles%5C%5Cglobals.css%22%2C%22ids%22%3A%5B%5D%7D&server=true!":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Ccomponents%5C%5CAuthProvider.tsx%22%2C%22ids%22%3A%5B%22AuthProvider%22%5D%7D&modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cstyles%5C%5Cglobals.css%22%2C%22ids%22%3A%5B%5D%7D&server=true! ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("Promise.resolve(/*! import() eager */).then(__webpack_require__.bind(__webpack_require__, /*! ./node_modules/@auth0/nextjs-auth0/dist/client/index.js */ \"(ssr)/./node_modules/@auth0/nextjs-auth0/dist/client/index.js\"));\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9ub2RlX21vZHVsZXMvbmV4dC9kaXN0L2J1aWxkL3dlYnBhY2svbG9hZGVycy9uZXh0LWZsaWdodC1jbGllbnQtZW50cnktbG9hZGVyLmpzP21vZHVsZXM9JTdCJTIycmVxdWVzdCUyMiUzQSUyMkMlM0ElNUMlNUNVc2VycyU1QyU1Q3JmcmpvJTVDJTVDcG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZSU1QyU1Q25vZGVfbW9kdWxlcyU1QyU1QyU0MGF1dGgwJTVDJTVDbmV4dGpzLWF1dGgwJTVDJTVDZGlzdCU1QyU1Q2NsaWVudCU1QyU1Q2luZGV4LmpzJTIyJTJDJTIyaWRzJTIyJTNBJTVCJTIyVXNlclByb3ZpZGVyJTIyJTVEJTdEJm1vZHVsZXM9JTdCJTIycmVxdWVzdCUyMiUzQSUyMkMlM0ElNUMlNUNVc2VycyU1QyU1Q3JmcmpvJTVDJTVDcG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZSU1QyU1Q3N0eWxlcyU1QyU1Q2dsb2JhbHMuY3NzJTIyJTJDJTIyaWRzJTIyJTNBJTVCJTVEJTdEJnNlcnZlcj10cnVlISIsIm1hcHBpbmdzIjoiQUFBQSwwTkFBOEsiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9wb3Rob2xlLWRldGVjdGlvbi13ZWJzaXRlLz83N2M1Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCgvKiB3ZWJwYWNrTW9kZTogXCJlYWdlclwiLCB3ZWJwYWNrRXhwb3J0czogW1wiVXNlclByb3ZpZGVyXCJdICovIFwiQzpcXFxcVXNlcnNcXFxccmZyam9cXFxccG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZVxcXFxub2RlX21vZHVsZXNcXFxcQGF1dGgwXFxcXG5leHRqcy1hdXRoMFxcXFxkaXN0XFxcXGNsaWVudFxcXFxpbmRleC5qc1wiKTtcbiJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(ssr)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cnode_modules%5C%5C%40auth0%5C%5Cnextjs-auth0%5C%5Cdist%5C%5Cclient%5C%5Cindex.js%22%2C%22ids%22%3A%5B%22UserProvider%22%5D%7D&modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cstyles%5C%5Cglobals.css%22%2C%22ids%22%3A%5B%5D%7D&server=true!\n");
+eval("Promise.resolve(/*! import() eager */).then(__webpack_require__.bind(__webpack_require__, /*! ./components/AuthProvider.tsx */ \"(ssr)/./components/AuthProvider.tsx\"));\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9ub2RlX21vZHVsZXMvbmV4dC9kaXN0L2J1aWxkL3dlYnBhY2svbG9hZGVycy9uZXh0LWZsaWdodC1jbGllbnQtZW50cnktbG9hZGVyLmpzP21vZHVsZXM9JTdCJTIycmVxdWVzdCUyMiUzQSUyMkMlM0ElNUMlNUNVc2VycyU1QyU1Q3JmcmpvJTVDJTVDcG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZSU1QyU1Q2NvbXBvbmVudHMlNUMlNUNBdXRoUHJvdmlkZXIudHN4JTIyJTJDJTIyaWRzJTIyJTNBJTVCJTIyQXV0aFByb3ZpZGVyJTIyJTVEJTdEJm1vZHVsZXM9JTdCJTIycmVxdWVzdCUyMiUzQSUyMkMlM0ElNUMlNUNVc2VycyU1QyU1Q3JmcmpvJTVDJTVDcG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZSU1QyU1Q3N0eWxlcyU1QyU1Q2dsb2JhbHMuY3NzJTIyJTJDJTIyaWRzJTIyJTNBJTVCJTVEJTdEJnNlcnZlcj10cnVlISIsIm1hcHBpbmdzIjoiQUFBQSxzS0FBZ0oiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9wb3Rob2xlLWRldGVjdGlvbi13ZWJzaXRlLz9kMTY2Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCgvKiB3ZWJwYWNrTW9kZTogXCJlYWdlclwiLCB3ZWJwYWNrRXhwb3J0czogW1wiQXV0aFByb3ZpZGVyXCJdICovIFwiQzpcXFxcVXNlcnNcXFxccmZyam9cXFxccG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZVxcXFxjb21wb25lbnRzXFxcXEF1dGhQcm92aWRlci50c3hcIik7XG4iXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(ssr)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Ccomponents%5C%5CAuthProvider.tsx%22%2C%22ids%22%3A%5B%22AuthProvider%22%5D%7D&modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cstyles%5C%5Cglobals.css%22%2C%22ids%22%3A%5B%5D%7D&server=true!\n");
 
 /***/ }),
 
@@ -105,6 +522,17 @@ eval("Promise.resolve(/*! import() eager */).then(__webpack_require__.t.bind(__w
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ HomePage)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _components_HomePage_Navbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/HomePage/Navbar */ \"(ssr)/./components/HomePage/Navbar.tsx\");\n/* harmony import */ var _components_HomePage_MainContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/HomePage/MainContent */ \"(ssr)/./components/HomePage/MainContent.tsx\");\n/* harmony import */ var _components_HomePage_AutomationCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/HomePage/AutomationCard */ \"(ssr)/./components/HomePage/AutomationCard.tsx\");\n/* __next_internal_client_entry_do_not_use__ default auto */ \n\n\n\n\nfunction HomePage() {\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n        className: \"min-h-screen bg-white\",\n        children: [\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_components_HomePage_Navbar__WEBPACK_IMPORTED_MODULE_2__[\"default\"], {}, void 0, false, {\n                fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\page.tsx\",\n                lineNumber: 11,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"main\", {\n                className: \"flex flex-col lg:flex-row justify-between max-w-7xl mx-auto mt-20 px-4\",\n                children: [\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_components_HomePage_MainContent__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {}, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\page.tsx\",\n                        lineNumber: 13,\n                        columnNumber: 9\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                        className: \"lg:w-1/2 mt-8 lg:mt-0\",\n                        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_components_HomePage_AutomationCard__WEBPACK_IMPORTED_MODULE_4__[\"default\"], {}, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\page.tsx\",\n                            lineNumber: 15,\n                            columnNumber: 11\n                        }, this)\n                    }, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\page.tsx\",\n                        lineNumber: 14,\n                        columnNumber: 9\n                    }, this)\n                ]\n            }, void 0, true, {\n                fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\page.tsx\",\n                lineNumber: 12,\n                columnNumber: 7\n            }, this)\n        ]\n    }, void 0, true, {\n        fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\page.tsx\",\n        lineNumber: 10,\n        columnNumber: 5\n    }, this);\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9hcHAvcGFnZS50c3giLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7O0FBQzBCO0FBQ3lCO0FBQ1U7QUFFTTtBQUVwRCxTQUFTSTtJQUN0QixxQkFDRSw4REFBQ0M7UUFBSUMsV0FBVTs7MEJBQ2IsOERBQUNMLG1FQUFNQTs7Ozs7MEJBQ1AsOERBQUNNO2dCQUFLRCxXQUFVOztrQ0FDZCw4REFBQ0osd0VBQVdBOzs7OztrQ0FDWiw4REFBQ0c7d0JBQUlDLFdBQVU7a0NBQ2IsNEVBQUNILDJFQUFjQTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUt6QiIsInNvdXJjZXMiOlsid2VicGFjazovL3BvdGhvbGUtZGV0ZWN0aW9uLXdlYnNpdGUvLi9hcHAvcGFnZS50c3g/NzYwMyJdLCJzb3VyY2VzQ29udGVudCI6WyIndXNlIGNsaWVudCdcclxuaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0JztcclxuaW1wb3J0IE5hdmJhciBmcm9tIFwiLi4vY29tcG9uZW50cy9Ib21lUGFnZS9OYXZiYXJcIjtcclxuaW1wb3J0IE1haW5Db250ZW50IGZyb20gXCIuLi9jb21wb25lbnRzL0hvbWVQYWdlL01haW5Db250ZW50XCI7XHJcblxyXG5pbXBvcnQgQXV0b21hdGlvbkNhcmQgZnJvbSBcIi4uL2NvbXBvbmVudHMvSG9tZVBhZ2UvQXV0b21hdGlvbkNhcmRcIjtcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIEhvbWVQYWdlKCkge1xyXG4gIHJldHVybiAoXHJcbiAgICA8ZGl2IGNsYXNzTmFtZT1cIm1pbi1oLXNjcmVlbiBiZy13aGl0ZVwiPlxyXG4gICAgICA8TmF2YmFyIC8+XHJcbiAgICAgIDxtYWluIGNsYXNzTmFtZT1cImZsZXggZmxleC1jb2wgbGc6ZmxleC1yb3cganVzdGlmeS1iZXR3ZWVuIG1heC13LTd4bCBteC1hdXRvIG10LTIwIHB4LTRcIj5cclxuICAgICAgICA8TWFpbkNvbnRlbnQgLz5cclxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImxnOnctMS8yIG10LTggbGc6bXQtMFwiPlxyXG4gICAgICAgICAgPEF1dG9tYXRpb25DYXJkIC8+XHJcbiAgICAgICAgPC9kaXY+XHJcbiAgICAgIDwvbWFpbj5cclxuICAgIDwvZGl2PlxyXG4gICk7XHJcbn0iXSwibmFtZXMiOlsiUmVhY3QiLCJOYXZiYXIiLCJNYWluQ29udGVudCIsIkF1dG9tYXRpb25DYXJkIiwiSG9tZVBhZ2UiLCJkaXYiLCJjbGFzc05hbWUiLCJtYWluIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(ssr)/./app/page.tsx\n");
+
+/***/ }),
+
+/***/ "(ssr)/./components/AuthProvider.tsx":
+/*!*************************************!*\
+  !*** ./components/AuthProvider.tsx ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   AuthProvider: () => (/* binding */ AuthProvider),\n/* harmony export */   useAuth: () => (/* binding */ useAuth)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _firebase__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../firebase */ \"(ssr)/./firebase.ts\");\n/* __next_internal_client_entry_do_not_use__ useAuth,AuthProvider auto */ \n\n\nconst AuthContext = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.createContext)({\n    user: null,\n    loading: true\n});\nconst useAuth = ()=>(0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(AuthContext);\nconst AuthProvider = ({ children })=>{\n    const [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);\n    const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true);\n    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{\n        const unsubscribe = _firebase__WEBPACK_IMPORTED_MODULE_2__.auth.onAuthStateChanged((user)=>{\n            setUser(user);\n            setLoading(false);\n        });\n        return unsubscribe;\n    }, []);\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(AuthContext.Provider, {\n        value: {\n            user,\n            loading\n        },\n        children: children\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\AuthProvider.tsx\",\n        lineNumber: 29,\n        columnNumber: 5\n    }, undefined);\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9jb21wb25lbnRzL0F1dGhQcm92aWRlci50c3giLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7QUFDOEU7QUFFM0M7QUFPbkMsTUFBTU0sNEJBQWNMLG9EQUFhQSxDQUFrQjtJQUFFTSxNQUFNO0lBQU1DLFNBQVM7QUFBSztBQUV4RSxNQUFNQyxVQUFVLElBQU1QLGlEQUFVQSxDQUFDSSxhQUFhO0FBRTlDLE1BQU1JLGVBQXdELENBQUMsRUFBRUMsUUFBUSxFQUFFO0lBQ2hGLE1BQU0sQ0FBQ0osTUFBTUssUUFBUSxHQUFHUiwrQ0FBUUEsQ0FBYztJQUM5QyxNQUFNLENBQUNJLFNBQVNLLFdBQVcsR0FBR1QsK0NBQVFBLENBQUM7SUFFdkNELGdEQUFTQSxDQUFDO1FBQ1IsTUFBTVcsY0FBY1QsMkNBQUlBLENBQUNVLGtCQUFrQixDQUFDLENBQUNSO1lBQzNDSyxRQUFRTDtZQUNSTSxXQUFXO1FBQ2I7UUFFQSxPQUFPQztJQUNULEdBQUcsRUFBRTtJQUVMLHFCQUNFLDhEQUFDUixZQUFZVSxRQUFRO1FBQUNDLE9BQU87WUFBRVY7WUFBTUM7UUFBUTtrQkFDMUNHOzs7Ozs7QUFHUCxFQUFFIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vcG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZS8uL2NvbXBvbmVudHMvQXV0aFByb3ZpZGVyLnRzeD8xZjMyIl0sInNvdXJjZXNDb250ZW50IjpbIid1c2UgY2xpZW50JztcclxuaW1wb3J0IFJlYWN0LCB7IGNyZWF0ZUNvbnRleHQsIHVzZUNvbnRleHQsIHVzZUVmZmVjdCwgdXNlU3RhdGUgfSBmcm9tICdyZWFjdCc7XHJcbmltcG9ydCB7IFVzZXIgfSBmcm9tICdmaXJlYmFzZS9hdXRoJztcclxuaW1wb3J0IHsgYXV0aCB9IGZyb20gJy4uL2ZpcmViYXNlJztcclxuXHJcbmludGVyZmFjZSBBdXRoQ29udGV4dFR5cGUge1xyXG4gIHVzZXI6IFVzZXIgfCBudWxsO1xyXG4gIGxvYWRpbmc6IGJvb2xlYW47XHJcbn1cclxuXHJcbmNvbnN0IEF1dGhDb250ZXh0ID0gY3JlYXRlQ29udGV4dDxBdXRoQ29udGV4dFR5cGU+KHsgdXNlcjogbnVsbCwgbG9hZGluZzogdHJ1ZSB9KTtcclxuXHJcbmV4cG9ydCBjb25zdCB1c2VBdXRoID0gKCkgPT4gdXNlQ29udGV4dChBdXRoQ29udGV4dCk7XHJcblxyXG5leHBvcnQgY29uc3QgQXV0aFByb3ZpZGVyOiBSZWFjdC5GQzx7IGNoaWxkcmVuOiBSZWFjdC5SZWFjdE5vZGUgfT4gPSAoeyBjaGlsZHJlbiB9KSA9PiB7XHJcbiAgY29uc3QgW3VzZXIsIHNldFVzZXJdID0gdXNlU3RhdGU8VXNlciB8IG51bGw+KG51bGwpO1xyXG4gIGNvbnN0IFtsb2FkaW5nLCBzZXRMb2FkaW5nXSA9IHVzZVN0YXRlKHRydWUpO1xyXG5cclxuICB1c2VFZmZlY3QoKCkgPT4ge1xyXG4gICAgY29uc3QgdW5zdWJzY3JpYmUgPSBhdXRoLm9uQXV0aFN0YXRlQ2hhbmdlZCgodXNlcikgPT4ge1xyXG4gICAgICBzZXRVc2VyKHVzZXIpO1xyXG4gICAgICBzZXRMb2FkaW5nKGZhbHNlKTtcclxuICAgIH0pO1xyXG5cclxuICAgIHJldHVybiB1bnN1YnNjcmliZTtcclxuICB9LCBbXSk7XHJcblxyXG4gIHJldHVybiAoXHJcbiAgICA8QXV0aENvbnRleHQuUHJvdmlkZXIgdmFsdWU9e3sgdXNlciwgbG9hZGluZyB9fT5cclxuICAgICAge2NoaWxkcmVufVxyXG4gICAgPC9BdXRoQ29udGV4dC5Qcm92aWRlcj5cclxuICApO1xyXG59OyJdLCJuYW1lcyI6WyJSZWFjdCIsImNyZWF0ZUNvbnRleHQiLCJ1c2VDb250ZXh0IiwidXNlRWZmZWN0IiwidXNlU3RhdGUiLCJhdXRoIiwiQXV0aENvbnRleHQiLCJ1c2VyIiwibG9hZGluZyIsInVzZUF1dGgiLCJBdXRoUHJvdmlkZXIiLCJjaGlsZHJlbiIsInNldFVzZXIiLCJzZXRMb2FkaW5nIiwidW5zdWJzY3JpYmUiLCJvbkF1dGhTdGF0ZUNoYW5nZWQiLCJQcm92aWRlciIsInZhbHVlIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(ssr)/./components/AuthProvider.tsx\n");
 
 /***/ }),
 
@@ -148,7 +576,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Navbar)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _ui_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ui/button */ \"(ssr)/./components/HomePage/ui/button.tsx\");\n/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/link */ \"(ssr)/./node_modules/next/dist/api/link.js\");\n/* __next_internal_client_entry_do_not_use__ default auto */ \n\n\n // Next.js Link\nfunction Navbar() {\n    const [scrolled, setScrolled] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);\n    const scrollToTop = ()=>{\n        window.scrollTo({\n            top: 0,\n            behavior: \"smooth\"\n        });\n    };\n    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{\n        const handleScroll = ()=>{\n            setScrolled(window.scrollY > 50);\n        };\n        window.addEventListener(\"scroll\", handleScroll);\n        return ()=>window.removeEventListener(\"scroll\", handleScroll);\n    }, []);\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"nav\", {\n        className: `fixed top-0 left-0 w-full z-10 transition-all duration-300 ease-in-out ${scrolled ? \"bg-white shadow-lg\" : \"bg-transparent\"}`,\n        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n            className: \"flex justify-between items-center p-4 max-w-7xl mx-auto\",\n            children: [\n                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                    className: \"flex items-center space-x-2\",\n                    children: [\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                            className: \"mt-1 w-12 h-8 rounded-[40%] overflow-hidden cursor-pointer\",\n                            onClick: scrollToTop,\n                            children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"img\", {\n                                src: \"/images/logo.png\" // Public path reference\n                                ,\n                                alt: \"PaveScope Logo\",\n                                className: \"w-full h-full object-cover\"\n                            }, void 0, false, {\n                                fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                                lineNumber: 33,\n                                columnNumber: 13\n                            }, this)\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                            lineNumber: 29,\n                            columnNumber: 11\n                        }, this),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                            onClick: scrollToTop,\n                            className: \"text-xl font-bold text-gray-800 cursor-pointer\",\n                            children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"span\", {\n                                className: \"text-xl font-bold -ml-2\",\n                                children: \"PaveScope\"\n                            }, void 0, false, {\n                                fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                                lineNumber: 43,\n                                columnNumber: 13\n                            }, this)\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                            lineNumber: 39,\n                            columnNumber: 11\n                        }, this)\n                    ]\n                }, void 0, true, {\n                    fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                    lineNumber: 28,\n                    columnNumber: 9\n                }, this),\n                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                    className: \"hidden md:flex space-x-9\",\n                    children: [\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"a\", {\n                            href: \"#about\",\n                            className: \"text-gray-600 hover:text-gray-900\",\n                            children: \"About\"\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                            lineNumber: 47,\n                            columnNumber: 11\n                        }, this),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"a\", {\n                            href: \"#team\",\n                            className: \"text-gray-600 hover:text-gray-900\",\n                            children: \"Team\"\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                            lineNumber: 50,\n                            columnNumber: 11\n                        }, this),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"a\", {\n                            href: \"#purpose\",\n                            className: \"text-gray-600 hover:text-gray-900\",\n                            children: \"Purpose\"\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                            lineNumber: 53,\n                            columnNumber: 11\n                        }, this),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"a\", {\n                            href: \"#specification\",\n                            className: \"text-gray-600 hover:text-gray-900\",\n                            children: \"Specification\"\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                            lineNumber: 56,\n                            columnNumber: 11\n                        }, this)\n                    ]\n                }, void 0, true, {\n                    fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                    lineNumber: 46,\n                    columnNumber: 9\n                }, this),\n                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                    className: \"flex space-x-4\",\n                    children: [\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_link__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {\n                            href: \"/api/auth/login\",\n                            children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_ui_button__WEBPACK_IMPORTED_MODULE_2__.Button, {\n                                variant: \"outline\",\n                                className: \"px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-50 hover:border-gray-400 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500\",\n                                children: \"Login\"\n                            }, void 0, false, {\n                                fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                                lineNumber: 65,\n                                columnNumber: 13\n                            }, this)\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                            lineNumber: 64,\n                            columnNumber: 11\n                        }, this),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_link__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {\n                            href: \"/api/auth/login?action=signup\",\n                            children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_ui_button__WEBPACK_IMPORTED_MODULE_2__.Button, {\n                                variant: \"outline\",\n                                className: \"px-4 py-2 text-white bg-blue-500 border border-blue-500 rounded-md shadow-sm transition-all duration-200 ease-in-out hover:bg-blue-600 hover:border-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500\",\n                                children: \"Get Started\"\n                            }, void 0, false, {\n                                fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                                lineNumber: 73,\n                                columnNumber: 13\n                            }, this)\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                            lineNumber: 72,\n                            columnNumber: 11\n                        }, this)\n                    ]\n                }, void 0, true, {\n                    fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                    lineNumber: 63,\n                    columnNumber: 9\n                }, this)\n            ]\n        }, void 0, true, {\n            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n            lineNumber: 27,\n            columnNumber: 7\n        }, this)\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n        lineNumber: 22,\n        columnNumber: 5\n    }, this);\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9jb21wb25lbnRzL0hvbWVQYWdlL05hdmJhci50c3giLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7QUFDNEM7QUFDUDtBQUNSLENBQUMsZUFBZTtBQUU5QixTQUFTSTtJQUN0QixNQUFNLENBQUNDLFVBQVVDLFlBQVksR0FBR04sK0NBQVFBLENBQUM7SUFFekMsTUFBTU8sY0FBYztRQUNsQkMsT0FBT0MsUUFBUSxDQUFDO1lBQUVDLEtBQUs7WUFBR0MsVUFBVTtRQUFTO0lBQy9DO0lBRUFWLGdEQUFTQSxDQUFDO1FBQ1IsTUFBTVcsZUFBZTtZQUNuQk4sWUFBWUUsT0FBT0ssT0FBTyxHQUFHO1FBQy9CO1FBQ0FMLE9BQU9NLGdCQUFnQixDQUFDLFVBQVVGO1FBQ2xDLE9BQU8sSUFBTUosT0FBT08sbUJBQW1CLENBQUMsVUFBVUg7SUFDcEQsR0FBRyxFQUFFO0lBRUwscUJBQ0UsOERBQUNJO1FBQ0NDLFdBQVcsQ0FBQyx1RUFBdUUsRUFDakZaLFdBQVcsdUJBQXVCLGlCQUNuQyxDQUFDO2tCQUVGLDRFQUFDYTtZQUFJRCxXQUFVOzs4QkFDYiw4REFBQ0M7b0JBQUlELFdBQVU7O3NDQUNiLDhEQUFDQzs0QkFDQ0QsV0FBVTs0QkFDVkUsU0FBU1o7c0NBRVQsNEVBQUNhO2dDQUNDQyxLQUFJLG1CQUFtQix3QkFBd0I7O2dDQUMvQ0MsS0FBSTtnQ0FDSkwsV0FBVTs7Ozs7Ozs7Ozs7c0NBR2QsOERBQUNDOzRCQUNDQyxTQUFTWjs0QkFDVFUsV0FBVTtzQ0FFViw0RUFBQ007Z0NBQUtOLFdBQVU7MENBQTBCOzs7Ozs7Ozs7Ozs7Ozs7Ozs4QkFHOUMsOERBQUNDO29CQUFJRCxXQUFVOztzQ0FDYiw4REFBQ087NEJBQUVDLE1BQUs7NEJBQVNSLFdBQVU7c0NBQW9DOzs7Ozs7c0NBRy9ELDhEQUFDTzs0QkFBRUMsTUFBSzs0QkFBUVIsV0FBVTtzQ0FBb0M7Ozs7OztzQ0FHOUQsOERBQUNPOzRCQUFFQyxNQUFLOzRCQUFXUixXQUFVO3NDQUFvQzs7Ozs7O3NDQUdqRSw4REFBQ087NEJBQ0NDLE1BQUs7NEJBQ0xSLFdBQVU7c0NBQ1g7Ozs7Ozs7Ozs7Ozs4QkFJSCw4REFBQ0M7b0JBQUlELFdBQVU7O3NDQUNiLDhEQUFDZCxpREFBSUE7NEJBQUNzQixNQUFLO3NDQUNULDRFQUFDdkIsOENBQU1BO2dDQUNMd0IsU0FBUTtnQ0FDUlQsV0FBVTswQ0FDWDs7Ozs7Ozs7Ozs7c0NBSUgsOERBQUNkLGlEQUFJQTs0QkFBQ3NCLE1BQUs7c0NBQ1QsNEVBQUN2Qiw4Q0FBTUE7Z0NBQ0x3QixTQUFRO2dDQUNSVCxXQUFVOzBDQUNYOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBUWIiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9wb3Rob2xlLWRldGVjdGlvbi13ZWJzaXRlLy4vY29tcG9uZW50cy9Ib21lUGFnZS9OYXZiYXIudHN4PzY0YjIiXSwic291cmNlc0NvbnRlbnQiOlsiJ3VzZSBjbGllbnQnXHJcbmltcG9ydCB7IHVzZVN0YXRlLCB1c2VFZmZlY3QgfSBmcm9tIFwicmVhY3RcIjtcclxuaW1wb3J0IHsgQnV0dG9uIH0gZnJvbSBcIi4vdWkvYnV0dG9uXCI7XHJcbmltcG9ydCBMaW5rIGZyb20gXCJuZXh0L2xpbmtcIjsgLy8gTmV4dC5qcyBMaW5rXHJcblxyXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBOYXZiYXIoKSB7XHJcbiAgY29uc3QgW3Njcm9sbGVkLCBzZXRTY3JvbGxlZF0gPSB1c2VTdGF0ZShmYWxzZSk7XHJcblxyXG4gIGNvbnN0IHNjcm9sbFRvVG9wID0gKCkgPT4ge1xyXG4gICAgd2luZG93LnNjcm9sbFRvKHsgdG9wOiAwLCBiZWhhdmlvcjogXCJzbW9vdGhcIiB9KTtcclxuICB9O1xyXG5cclxuICB1c2VFZmZlY3QoKCkgPT4ge1xyXG4gICAgY29uc3QgaGFuZGxlU2Nyb2xsID0gKCkgPT4ge1xyXG4gICAgICBzZXRTY3JvbGxlZCh3aW5kb3cuc2Nyb2xsWSA+IDUwKTtcclxuICAgIH07XHJcbiAgICB3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcihcInNjcm9sbFwiLCBoYW5kbGVTY3JvbGwpO1xyXG4gICAgcmV0dXJuICgpID0+IHdpbmRvdy5yZW1vdmVFdmVudExpc3RlbmVyKFwic2Nyb2xsXCIsIGhhbmRsZVNjcm9sbCk7XHJcbiAgfSwgW10pO1xyXG5cclxuICByZXR1cm4gKFxyXG4gICAgPG5hdlxyXG4gICAgICBjbGFzc05hbWU9e2BmaXhlZCB0b3AtMCBsZWZ0LTAgdy1mdWxsIHotMTAgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tMzAwIGVhc2UtaW4tb3V0ICR7XHJcbiAgICAgICAgc2Nyb2xsZWQgPyBcImJnLXdoaXRlIHNoYWRvdy1sZ1wiIDogXCJiZy10cmFuc3BhcmVudFwiXHJcbiAgICAgIH1gfVxyXG4gICAgPlxyXG4gICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXgganVzdGlmeS1iZXR3ZWVuIGl0ZW1zLWNlbnRlciBwLTQgbWF4LXctN3hsIG14LWF1dG9cIj5cclxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggaXRlbXMtY2VudGVyIHNwYWNlLXgtMlwiPlxyXG4gICAgICAgICAgPGRpdlxyXG4gICAgICAgICAgICBjbGFzc05hbWU9XCJtdC0xIHctMTIgaC04IHJvdW5kZWQtWzQwJV0gb3ZlcmZsb3ctaGlkZGVuIGN1cnNvci1wb2ludGVyXCJcclxuICAgICAgICAgICAgb25DbGljaz17c2Nyb2xsVG9Ub3B9XHJcbiAgICAgICAgICA+XHJcbiAgICAgICAgICAgIDxpbWdcclxuICAgICAgICAgICAgICBzcmM9XCIvaW1hZ2VzL2xvZ28ucG5nXCIgLy8gUHVibGljIHBhdGggcmVmZXJlbmNlXHJcbiAgICAgICAgICAgICAgYWx0PVwiUGF2ZVNjb3BlIExvZ29cIlxyXG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cInctZnVsbCBoLWZ1bGwgb2JqZWN0LWNvdmVyXCJcclxuICAgICAgICAgICAgLz5cclxuICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgPGRpdlxyXG4gICAgICAgICAgICBvbkNsaWNrPXtzY3JvbGxUb1RvcH1cclxuICAgICAgICAgICAgY2xhc3NOYW1lPVwidGV4dC14bCBmb250LWJvbGQgdGV4dC1ncmF5LTgwMCBjdXJzb3ItcG9pbnRlclwiXHJcbiAgICAgICAgICA+XHJcbiAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInRleHQteGwgZm9udC1ib2xkIC1tbC0yXCI+UGF2ZVNjb3BlPC9zcGFuPlxyXG4gICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJoaWRkZW4gbWQ6ZmxleCBzcGFjZS14LTlcIj5cclxuICAgICAgICAgIDxhIGhyZWY9XCIjYWJvdXRcIiBjbGFzc05hbWU9XCJ0ZXh0LWdyYXktNjAwIGhvdmVyOnRleHQtZ3JheS05MDBcIj5cclxuICAgICAgICAgICAgQWJvdXRcclxuICAgICAgICAgIDwvYT5cclxuICAgICAgICAgIDxhIGhyZWY9XCIjdGVhbVwiIGNsYXNzTmFtZT1cInRleHQtZ3JheS02MDAgaG92ZXI6dGV4dC1ncmF5LTkwMFwiPlxyXG4gICAgICAgICAgICBUZWFtXHJcbiAgICAgICAgICA8L2E+XHJcbiAgICAgICAgICA8YSBocmVmPVwiI3B1cnBvc2VcIiBjbGFzc05hbWU9XCJ0ZXh0LWdyYXktNjAwIGhvdmVyOnRleHQtZ3JheS05MDBcIj5cclxuICAgICAgICAgICAgUHVycG9zZVxyXG4gICAgICAgICAgPC9hPlxyXG4gICAgICAgICAgPGFcclxuICAgICAgICAgICAgaHJlZj1cIiNzcGVjaWZpY2F0aW9uXCJcclxuICAgICAgICAgICAgY2xhc3NOYW1lPVwidGV4dC1ncmF5LTYwMCBob3Zlcjp0ZXh0LWdyYXktOTAwXCJcclxuICAgICAgICAgID5cclxuICAgICAgICAgICAgU3BlY2lmaWNhdGlvblxyXG4gICAgICAgICAgPC9hPlxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBzcGFjZS14LTRcIj5cclxuICAgICAgICAgIDxMaW5rIGhyZWY9XCIvYXBpL2F1dGgvbG9naW5cIj5cclxuICAgICAgICAgICAgPEJ1dHRvblxyXG4gICAgICAgICAgICAgIHZhcmlhbnQ9XCJvdXRsaW5lXCJcclxuICAgICAgICAgICAgICBjbGFzc05hbWU9XCJweC00IHB5LTIgdGV4dC1ncmF5LTcwMCBiZy13aGl0ZSBib3JkZXIgYm9yZGVyLWdyYXktMzAwIHJvdW5kZWQtbWQgc2hhZG93LXNtIHRyYW5zaXRpb24tYWxsIGR1cmF0aW9uLTIwMCBlYXNlLWluLW91dCBob3ZlcjpiZy1ncmF5LTUwIGhvdmVyOmJvcmRlci1ncmF5LTQwMCBob3Zlcjp0ZXh0LWdyYXktOTAwIGZvY3VzOm91dGxpbmUtbm9uZSBmb2N1czpyaW5nLTIgZm9jdXM6cmluZy1vZmZzZXQtMiBmb2N1czpyaW5nLWJsdWUtNTAwXCJcclxuICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgIExvZ2luXHJcbiAgICAgICAgICAgIDwvQnV0dG9uPlxyXG4gICAgICAgICAgPC9MaW5rPlxyXG4gICAgICAgICAgPExpbmsgaHJlZj1cIi9hcGkvYXV0aC9sb2dpbj9hY3Rpb249c2lnbnVwXCI+XHJcbiAgICAgICAgICAgIDxCdXR0b25cclxuICAgICAgICAgICAgICB2YXJpYW50PVwib3V0bGluZVwiXHJcbiAgICAgICAgICAgICAgY2xhc3NOYW1lPVwicHgtNCBweS0yIHRleHQtd2hpdGUgYmctYmx1ZS01MDAgYm9yZGVyIGJvcmRlci1ibHVlLTUwMCByb3VuZGVkLW1kIHNoYWRvdy1zbSB0cmFuc2l0aW9uLWFsbCBkdXJhdGlvbi0yMDAgZWFzZS1pbi1vdXQgaG92ZXI6YmctYmx1ZS02MDAgaG92ZXI6Ym9yZGVyLWJsdWUtNjAwIGZvY3VzOm91dGxpbmUtbm9uZSBmb2N1czpyaW5nLTIgZm9jdXM6cmluZy1vZmZzZXQtMiBmb2N1czpyaW5nLWJsdWUtNTAwXCJcclxuICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgIEdldCBTdGFydGVkXHJcbiAgICAgICAgICAgIDwvQnV0dG9uPlxyXG4gICAgICAgICAgPC9MaW5rPlxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICA8L2Rpdj5cclxuICAgIDwvbmF2PlxyXG4gICk7XHJcbn1cclxuIl0sIm5hbWVzIjpbInVzZVN0YXRlIiwidXNlRWZmZWN0IiwiQnV0dG9uIiwiTGluayIsIk5hdmJhciIsInNjcm9sbGVkIiwic2V0U2Nyb2xsZWQiLCJzY3JvbGxUb1RvcCIsIndpbmRvdyIsInNjcm9sbFRvIiwidG9wIiwiYmVoYXZpb3IiLCJoYW5kbGVTY3JvbGwiLCJzY3JvbGxZIiwiYWRkRXZlbnRMaXN0ZW5lciIsInJlbW92ZUV2ZW50TGlzdGVuZXIiLCJuYXYiLCJjbGFzc05hbWUiLCJkaXYiLCJvbkNsaWNrIiwiaW1nIiwic3JjIiwiYWx0Iiwic3BhbiIsImEiLCJocmVmIiwidmFyaWFudCJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(ssr)/./components/HomePage/Navbar.tsx\n");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Navbar)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _ui_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ui/button */ \"(ssr)/./components/HomePage/ui/button.tsx\");\n/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/link */ \"(ssr)/./node_modules/next/dist/api/link.js\");\n/* harmony import */ var _AuthProvider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../AuthProvider */ \"(ssr)/./components/AuthProvider.tsx\");\n/* harmony import */ var _lib_auth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../lib/auth */ \"(ssr)/./lib/auth.ts\");\n/* __next_internal_client_entry_do_not_use__ default auto */ \n\n\n // Next.js Link\n\n\nfunction Navbar() {\n    const [scrolled, setScrolled] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false);\n    const { user, loading } = (0,_AuthProvider__WEBPACK_IMPORTED_MODULE_4__.useAuth)();\n    const scrollToTop = ()=>{\n        window.scrollTo({\n            top: 0,\n            behavior: \"smooth\"\n        });\n    };\n    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{\n        const handleScroll = ()=>{\n            setScrolled(window.scrollY > 50);\n        };\n        window.addEventListener(\"scroll\", handleScroll);\n        return ()=>window.removeEventListener(\"scroll\", handleScroll);\n    }, []);\n    const handleSignOut = async ()=>{\n        try {\n            await (0,_lib_auth__WEBPACK_IMPORTED_MODULE_5__.signOutUser)();\n        } catch (error) {\n            console.error(\"Error signing out\", error);\n        }\n    };\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"nav\", {\n        className: `fixed top-0 left-0 w-full z-10 transition-all duration-300 ease-in-out ${scrolled ? \"bg-white shadow-lg\" : \"bg-transparent\"}`,\n        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n            className: \"flex justify-between items-center p-4 max-w-7xl mx-auto\",\n            children: [\n                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                    className: \"flex items-center space-x-2\",\n                    children: [\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                            className: \"mt-1 w-12 h-8 rounded-[40%] overflow-hidden cursor-pointer\",\n                            onClick: scrollToTop,\n                            children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"img\", {\n                                src: \"/images/logo.png\" // Public path reference\n                                ,\n                                alt: \"PaveScope Logo\",\n                                className: \"w-full h-full object-cover\"\n                            }, void 0, false, {\n                                fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                                lineNumber: 44,\n                                columnNumber: 13\n                            }, this)\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                            lineNumber: 40,\n                            columnNumber: 11\n                        }, this),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                            onClick: scrollToTop,\n                            className: \"text-xl font-bold text-gray-800 cursor-pointer\",\n                            children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"span\", {\n                                className: \"text-xl font-bold -ml-2\",\n                                children: \"PaveScope\"\n                            }, void 0, false, {\n                                fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                                lineNumber: 54,\n                                columnNumber: 13\n                            }, this)\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                            lineNumber: 50,\n                            columnNumber: 11\n                        }, this)\n                    ]\n                }, void 0, true, {\n                    fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                    lineNumber: 39,\n                    columnNumber: 9\n                }, this),\n                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                    className: \"hidden md:flex space-x-9\",\n                    children: [\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"a\", {\n                            href: \"#about\",\n                            className: \"text-gray-600 hover:text-gray-900\",\n                            children: \"About\"\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                            lineNumber: 58,\n                            columnNumber: 11\n                        }, this),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"a\", {\n                            href: \"#team\",\n                            className: \"text-gray-600 hover:text-gray-900\",\n                            children: \"Team\"\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                            lineNumber: 61,\n                            columnNumber: 11\n                        }, this),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"a\", {\n                            href: \"#purpose\",\n                            className: \"text-gray-600 hover:text-gray-900\",\n                            children: \"Purpose\"\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                            lineNumber: 64,\n                            columnNumber: 11\n                        }, this),\n                        /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"a\", {\n                            href: \"#specification\",\n                            className: \"text-gray-600 hover:text-gray-900\",\n                            children: \"Specification\"\n                        }, void 0, false, {\n                            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                            lineNumber: 67,\n                            columnNumber: 11\n                        }, this)\n                    ]\n                }, void 0, true, {\n                    fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                    lineNumber: 57,\n                    columnNumber: 9\n                }, this),\n                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n                    className: \"flex space-x-4\",\n                    children: loading ? /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"span\", {\n                        children: \"Loading...\"\n                    }, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                        lineNumber: 76,\n                        columnNumber: 13\n                    }, this) : user ? /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_ui_button__WEBPACK_IMPORTED_MODULE_2__.Button, {\n                        variant: \"outline\",\n                        onClick: handleSignOut,\n                        className: \"px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-50 hover:border-gray-400 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500\",\n                        children: \"Sign Out\"\n                    }, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                        lineNumber: 78,\n                        columnNumber: 13\n                    }, this) : /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {\n                        children: [\n                            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_link__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {\n                                href: \"/signin\",\n                                children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_ui_button__WEBPACK_IMPORTED_MODULE_2__.Button, {\n                                    variant: \"outline\",\n                                    className: \"px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-50 hover:border-gray-400 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500\",\n                                    children: \"Login\"\n                                }, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                                    lineNumber: 88,\n                                    columnNumber: 17\n                                }, this)\n                            }, void 0, false, {\n                                fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                                lineNumber: 87,\n                                columnNumber: 15\n                            }, this),\n                            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_link__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {\n                                href: \"/signup\",\n                                children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_ui_button__WEBPACK_IMPORTED_MODULE_2__.Button, {\n                                    variant: \"outline\",\n                                    className: \"px-4 py-2 text-white bg-blue-500 border border-blue-500 rounded-md shadow-sm transition-all duration-200 ease-in-out hover:bg-blue-600 hover:border-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500\",\n                                    children: \"Get Started\"\n                                }, void 0, false, {\n                                    fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                                    lineNumber: 96,\n                                    columnNumber: 17\n                                }, this)\n                            }, void 0, false, {\n                                fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                                lineNumber: 95,\n                                columnNumber: 15\n                            }, this)\n                        ]\n                    }, void 0, true)\n                }, void 0, false, {\n                    fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n                    lineNumber: 74,\n                    columnNumber: 9\n                }, this)\n            ]\n        }, void 0, true, {\n            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n            lineNumber: 38,\n            columnNumber: 7\n        }, this)\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\HomePage\\\\Navbar.tsx\",\n        lineNumber: 33,\n        columnNumber: 5\n    }, this);\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9jb21wb25lbnRzL0hvbWVQYWdlL05hdmJhci50c3giLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7OztBQUM0QztBQUNQO0FBQ1IsQ0FBQyxlQUFlO0FBQ0g7QUFDRztBQUU5QixTQUFTTTtJQUN0QixNQUFNLENBQUNDLFVBQVVDLFlBQVksR0FBR1IsK0NBQVFBLENBQUM7SUFDekMsTUFBTSxFQUFFUyxJQUFJLEVBQUVDLE9BQU8sRUFBRSxHQUFHTixzREFBT0E7SUFFakMsTUFBTU8sY0FBYztRQUNsQkMsT0FBT0MsUUFBUSxDQUFDO1lBQUVDLEtBQUs7WUFBR0MsVUFBVTtRQUFTO0lBQy9DO0lBRUFkLGdEQUFTQSxDQUFDO1FBQ1IsTUFBTWUsZUFBZTtZQUNuQlIsWUFBWUksT0FBT0ssT0FBTyxHQUFHO1FBQy9CO1FBQ0FMLE9BQU9NLGdCQUFnQixDQUFDLFVBQVVGO1FBQ2xDLE9BQU8sSUFBTUosT0FBT08sbUJBQW1CLENBQUMsVUFBVUg7SUFDcEQsR0FBRyxFQUFFO0lBRUwsTUFBTUksZ0JBQWdCO1FBQ3BCLElBQUk7WUFDRixNQUFNZixzREFBV0E7UUFDbkIsRUFBRSxPQUFPZ0IsT0FBTztZQUNkQyxRQUFRRCxLQUFLLENBQUMscUJBQXFCQTtRQUNyQztJQUNGO0lBRUEscUJBQ0UsOERBQUNFO1FBQ0NDLFdBQVcsQ0FBQyx1RUFBdUUsRUFDakZqQixXQUFXLHVCQUF1QixpQkFDbkMsQ0FBQztrQkFFRiw0RUFBQ2tCO1lBQUlELFdBQVU7OzhCQUNiLDhEQUFDQztvQkFBSUQsV0FBVTs7c0NBQ2IsOERBQUNDOzRCQUNDRCxXQUFVOzRCQUNWRSxTQUFTZjtzQ0FFVCw0RUFBQ2dCO2dDQUNDQyxLQUFJLG1CQUFtQix3QkFBd0I7O2dDQUMvQ0MsS0FBSTtnQ0FDSkwsV0FBVTs7Ozs7Ozs7Ozs7c0NBR2QsOERBQUNDOzRCQUNDQyxTQUFTZjs0QkFDVGEsV0FBVTtzQ0FFViw0RUFBQ007Z0NBQUtOLFdBQVU7MENBQTBCOzs7Ozs7Ozs7Ozs7Ozs7Ozs4QkFHOUMsOERBQUNDO29CQUFJRCxXQUFVOztzQ0FDYiw4REFBQ087NEJBQUVDLE1BQUs7NEJBQVNSLFdBQVU7c0NBQW9DOzs7Ozs7c0NBRy9ELDhEQUFDTzs0QkFBRUMsTUFBSzs0QkFBUVIsV0FBVTtzQ0FBb0M7Ozs7OztzQ0FHOUQsOERBQUNPOzRCQUFFQyxNQUFLOzRCQUFXUixXQUFVO3NDQUFvQzs7Ozs7O3NDQUdqRSw4REFBQ087NEJBQ0NDLE1BQUs7NEJBQ0xSLFdBQVU7c0NBQ1g7Ozs7Ozs7Ozs7Ozs4QkFJSCw4REFBQ0M7b0JBQUlELFdBQVU7OEJBQ1pkLHdCQUNDLDhEQUFDb0I7a0NBQUs7Ozs7OytCQUNKckIscUJBQ0YsOERBQUNQLDhDQUFNQTt3QkFDTCtCLFNBQVE7d0JBQ1JQLFNBQVNOO3dCQUNUSSxXQUFVO2tDQUNYOzs7Ozs2Q0FJRDs7MENBQ0UsOERBQUNyQixpREFBSUE7Z0NBQUM2QixNQUFLOzBDQUNULDRFQUFDOUIsOENBQU1BO29DQUNMK0IsU0FBUTtvQ0FDUlQsV0FBVTs4Q0FDWDs7Ozs7Ozs7Ozs7MENBSUgsOERBQUNyQixpREFBSUE7Z0NBQUM2QixNQUFLOzBDQUNULDRFQUFDOUIsOENBQU1BO29DQUNMK0IsU0FBUTtvQ0FDUlQsV0FBVTs4Q0FDWDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFVakIiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9wb3Rob2xlLWRldGVjdGlvbi13ZWJzaXRlLy4vY29tcG9uZW50cy9Ib21lUGFnZS9OYXZiYXIudHN4PzY0YjIiXSwic291cmNlc0NvbnRlbnQiOlsiJ3VzZSBjbGllbnQnXHJcbmltcG9ydCB7IHVzZVN0YXRlLCB1c2VFZmZlY3QgfSBmcm9tIFwicmVhY3RcIjtcclxuaW1wb3J0IHsgQnV0dG9uIH0gZnJvbSBcIi4vdWkvYnV0dG9uXCI7XHJcbmltcG9ydCBMaW5rIGZyb20gXCJuZXh0L2xpbmtcIjsgLy8gTmV4dC5qcyBMaW5rXHJcbmltcG9ydCB7IHVzZUF1dGggfSBmcm9tICcuLi9BdXRoUHJvdmlkZXInO1xyXG5pbXBvcnQgeyBzaWduT3V0VXNlciB9IGZyb20gJy4uLy4uL2xpYi9hdXRoJztcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIE5hdmJhcigpIHtcclxuICBjb25zdCBbc2Nyb2xsZWQsIHNldFNjcm9sbGVkXSA9IHVzZVN0YXRlKGZhbHNlKTtcclxuICBjb25zdCB7IHVzZXIsIGxvYWRpbmcgfSA9IHVzZUF1dGgoKTtcclxuXHJcbiAgY29uc3Qgc2Nyb2xsVG9Ub3AgPSAoKSA9PiB7XHJcbiAgICB3aW5kb3cuc2Nyb2xsVG8oeyB0b3A6IDAsIGJlaGF2aW9yOiBcInNtb290aFwiIH0pO1xyXG4gIH07XHJcblxyXG4gIHVzZUVmZmVjdCgoKSA9PiB7XHJcbiAgICBjb25zdCBoYW5kbGVTY3JvbGwgPSAoKSA9PiB7XHJcbiAgICAgIHNldFNjcm9sbGVkKHdpbmRvdy5zY3JvbGxZID4gNTApO1xyXG4gICAgfTtcclxuICAgIHdpbmRvdy5hZGRFdmVudExpc3RlbmVyKFwic2Nyb2xsXCIsIGhhbmRsZVNjcm9sbCk7XHJcbiAgICByZXR1cm4gKCkgPT4gd2luZG93LnJlbW92ZUV2ZW50TGlzdGVuZXIoXCJzY3JvbGxcIiwgaGFuZGxlU2Nyb2xsKTtcclxuICB9LCBbXSk7XHJcblxyXG4gIGNvbnN0IGhhbmRsZVNpZ25PdXQgPSBhc3luYyAoKSA9PiB7XHJcbiAgICB0cnkge1xyXG4gICAgICBhd2FpdCBzaWduT3V0VXNlcigpO1xyXG4gICAgfSBjYXRjaCAoZXJyb3IpIHtcclxuICAgICAgY29uc29sZS5lcnJvcihcIkVycm9yIHNpZ25pbmcgb3V0XCIsIGVycm9yKTtcclxuICAgIH1cclxuICB9O1xyXG5cclxuICByZXR1cm4gKFxyXG4gICAgPG5hdlxyXG4gICAgICBjbGFzc05hbWU9e2BmaXhlZCB0b3AtMCBsZWZ0LTAgdy1mdWxsIHotMTAgdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tMzAwIGVhc2UtaW4tb3V0ICR7XHJcbiAgICAgICAgc2Nyb2xsZWQgPyBcImJnLXdoaXRlIHNoYWRvdy1sZ1wiIDogXCJiZy10cmFuc3BhcmVudFwiXHJcbiAgICAgIH1gfVxyXG4gICAgPlxyXG4gICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXgganVzdGlmeS1iZXR3ZWVuIGl0ZW1zLWNlbnRlciBwLTQgbWF4LXctN3hsIG14LWF1dG9cIj5cclxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggaXRlbXMtY2VudGVyIHNwYWNlLXgtMlwiPlxyXG4gICAgICAgICAgPGRpdlxyXG4gICAgICAgICAgICBjbGFzc05hbWU9XCJtdC0xIHctMTIgaC04IHJvdW5kZWQtWzQwJV0gb3ZlcmZsb3ctaGlkZGVuIGN1cnNvci1wb2ludGVyXCJcclxuICAgICAgICAgICAgb25DbGljaz17c2Nyb2xsVG9Ub3B9XHJcbiAgICAgICAgICA+XHJcbiAgICAgICAgICAgIDxpbWdcclxuICAgICAgICAgICAgICBzcmM9XCIvaW1hZ2VzL2xvZ28ucG5nXCIgLy8gUHVibGljIHBhdGggcmVmZXJlbmNlXHJcbiAgICAgICAgICAgICAgYWx0PVwiUGF2ZVNjb3BlIExvZ29cIlxyXG4gICAgICAgICAgICAgIGNsYXNzTmFtZT1cInctZnVsbCBoLWZ1bGwgb2JqZWN0LWNvdmVyXCJcclxuICAgICAgICAgICAgLz5cclxuICAgICAgICAgIDwvZGl2PlxyXG4gICAgICAgICAgPGRpdlxyXG4gICAgICAgICAgICBvbkNsaWNrPXtzY3JvbGxUb1RvcH1cclxuICAgICAgICAgICAgY2xhc3NOYW1lPVwidGV4dC14bCBmb250LWJvbGQgdGV4dC1ncmF5LTgwMCBjdXJzb3ItcG9pbnRlclwiXHJcbiAgICAgICAgICA+XHJcbiAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInRleHQteGwgZm9udC1ib2xkIC1tbC0yXCI+UGF2ZVNjb3BlPC9zcGFuPlxyXG4gICAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgPC9kaXY+XHJcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJoaWRkZW4gbWQ6ZmxleCBzcGFjZS14LTlcIj5cclxuICAgICAgICAgIDxhIGhyZWY9XCIjYWJvdXRcIiBjbGFzc05hbWU9XCJ0ZXh0LWdyYXktNjAwIGhvdmVyOnRleHQtZ3JheS05MDBcIj5cclxuICAgICAgICAgICAgQWJvdXRcclxuICAgICAgICAgIDwvYT5cclxuICAgICAgICAgIDxhIGhyZWY9XCIjdGVhbVwiIGNsYXNzTmFtZT1cInRleHQtZ3JheS02MDAgaG92ZXI6dGV4dC1ncmF5LTkwMFwiPlxyXG4gICAgICAgICAgICBUZWFtXHJcbiAgICAgICAgICA8L2E+XHJcbiAgICAgICAgICA8YSBocmVmPVwiI3B1cnBvc2VcIiBjbGFzc05hbWU9XCJ0ZXh0LWdyYXktNjAwIGhvdmVyOnRleHQtZ3JheS05MDBcIj5cclxuICAgICAgICAgICAgUHVycG9zZVxyXG4gICAgICAgICAgPC9hPlxyXG4gICAgICAgICAgPGFcclxuICAgICAgICAgICAgaHJlZj1cIiNzcGVjaWZpY2F0aW9uXCJcclxuICAgICAgICAgICAgY2xhc3NOYW1lPVwidGV4dC1ncmF5LTYwMCBob3Zlcjp0ZXh0LWdyYXktOTAwXCJcclxuICAgICAgICAgID5cclxuICAgICAgICAgICAgU3BlY2lmaWNhdGlvblxyXG4gICAgICAgICAgPC9hPlxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBzcGFjZS14LTRcIj5cclxuICAgICAgICAgIHtsb2FkaW5nID8gKFxyXG4gICAgICAgICAgICA8c3Bhbj5Mb2FkaW5nLi4uPC9zcGFuPlxyXG4gICAgICAgICAgKSA6IHVzZXIgPyAoXHJcbiAgICAgICAgICAgIDxCdXR0b25cclxuICAgICAgICAgICAgICB2YXJpYW50PVwib3V0bGluZVwiXHJcbiAgICAgICAgICAgICAgb25DbGljaz17aGFuZGxlU2lnbk91dH1cclxuICAgICAgICAgICAgICBjbGFzc05hbWU9XCJweC00IHB5LTIgdGV4dC1ncmF5LTcwMCBiZy13aGl0ZSBib3JkZXIgYm9yZGVyLWdyYXktMzAwIHJvdW5kZWQtbWQgc2hhZG93LXNtIHRyYW5zaXRpb24tYWxsIGR1cmF0aW9uLTIwMCBlYXNlLWluLW91dCBob3ZlcjpiZy1ncmF5LTUwIGhvdmVyOmJvcmRlci1ncmF5LTQwMCBob3Zlcjp0ZXh0LWdyYXktOTAwIGZvY3VzOm91dGxpbmUtbm9uZSBmb2N1czpyaW5nLTIgZm9jdXM6cmluZy1vZmZzZXQtMiBmb2N1czpyaW5nLWJsdWUtNTAwXCJcclxuICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgIFNpZ24gT3V0XHJcbiAgICAgICAgICAgIDwvQnV0dG9uPlxyXG4gICAgICAgICAgKSA6IChcclxuICAgICAgICAgICAgPD5cclxuICAgICAgICAgICAgICA8TGluayBocmVmPVwiL3NpZ25pblwiPlxyXG4gICAgICAgICAgICAgICAgPEJ1dHRvblxyXG4gICAgICAgICAgICAgICAgICB2YXJpYW50PVwib3V0bGluZVwiXHJcbiAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cInB4LTQgcHktMiB0ZXh0LWdyYXktNzAwIGJnLXdoaXRlIGJvcmRlciBib3JkZXItZ3JheS0zMDAgcm91bmRlZC1tZCBzaGFkb3ctc20gdHJhbnNpdGlvbi1hbGwgZHVyYXRpb24tMjAwIGVhc2UtaW4tb3V0IGhvdmVyOmJnLWdyYXktNTAgaG92ZXI6Ym9yZGVyLWdyYXktNDAwIGhvdmVyOnRleHQtZ3JheS05MDAgZm9jdXM6b3V0bGluZS1ub25lIGZvY3VzOnJpbmctMiBmb2N1czpyaW5nLW9mZnNldC0yIGZvY3VzOnJpbmctYmx1ZS01MDBcIlxyXG4gICAgICAgICAgICAgICAgPlxyXG4gICAgICAgICAgICAgICAgICBMb2dpblxyXG4gICAgICAgICAgICAgICAgPC9CdXR0b24+XHJcbiAgICAgICAgICAgICAgPC9MaW5rPlxyXG4gICAgICAgICAgICAgIDxMaW5rIGhyZWY9XCIvc2lnbnVwXCI+XHJcbiAgICAgICAgICAgICAgICA8QnV0dG9uXHJcbiAgICAgICAgICAgICAgICAgIHZhcmlhbnQ9XCJvdXRsaW5lXCJcclxuICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwicHgtNCBweS0yIHRleHQtd2hpdGUgYmctYmx1ZS01MDAgYm9yZGVyIGJvcmRlci1ibHVlLTUwMCByb3VuZGVkLW1kIHNoYWRvdy1zbSB0cmFuc2l0aW9uLWFsbCBkdXJhdGlvbi0yMDAgZWFzZS1pbi1vdXQgaG92ZXI6YmctYmx1ZS02MDAgaG92ZXI6Ym9yZGVyLWJsdWUtNjAwIGZvY3VzOm91dGxpbmUtbm9uZSBmb2N1czpyaW5nLTIgZm9jdXM6cmluZy1vZmZzZXQtMiBmb2N1czpyaW5nLWJsdWUtNTAwXCJcclxuICAgICAgICAgICAgICAgID5cclxuICAgICAgICAgICAgICAgICAgR2V0IFN0YXJ0ZWRcclxuICAgICAgICAgICAgICAgIDwvQnV0dG9uPlxyXG4gICAgICAgICAgICAgIDwvTGluaz5cclxuICAgICAgICAgICAgPC8+XHJcbiAgICAgICAgICApfVxyXG4gICAgICAgIDwvZGl2PlxyXG4gICAgICA8L2Rpdj5cclxuICAgIDwvbmF2PlxyXG4gICk7XHJcbn1cclxuIl0sIm5hbWVzIjpbInVzZVN0YXRlIiwidXNlRWZmZWN0IiwiQnV0dG9uIiwiTGluayIsInVzZUF1dGgiLCJzaWduT3V0VXNlciIsIk5hdmJhciIsInNjcm9sbGVkIiwic2V0U2Nyb2xsZWQiLCJ1c2VyIiwibG9hZGluZyIsInNjcm9sbFRvVG9wIiwid2luZG93Iiwic2Nyb2xsVG8iLCJ0b3AiLCJiZWhhdmlvciIsImhhbmRsZVNjcm9sbCIsInNjcm9sbFkiLCJhZGRFdmVudExpc3RlbmVyIiwicmVtb3ZlRXZlbnRMaXN0ZW5lciIsImhhbmRsZVNpZ25PdXQiLCJlcnJvciIsImNvbnNvbGUiLCJuYXYiLCJjbGFzc05hbWUiLCJkaXYiLCJvbkNsaWNrIiwiaW1nIiwic3JjIiwiYWx0Iiwic3BhbiIsImEiLCJocmVmIiwidmFyaWFudCJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(ssr)/./components/HomePage/Navbar.tsx\n");
 
 /***/ }),
 
@@ -185,6 +613,39 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "(ssr)/./firebase.ts":
+/*!*********************!*\
+  !*** ./firebase.ts ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   analytics: () => (/* binding */ analytics),\n/* harmony export */   app: () => (/* binding */ app),\n/* harmony export */   auth: () => (/* binding */ auth)\n/* harmony export */ });\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"(ssr)/./node_modules/firebase/app/dist/index.mjs\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"(ssr)/./node_modules/firebase/auth/dist/index.mjs\");\n/* harmony import */ var firebase_analytics__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/analytics */ \"(ssr)/./node_modules/firebase/analytics/dist/index.mjs\");\n\n\n\n// Your web app's Firebase configuration\n// For Firebase JS SDK v7.20.0 and later, measurementId is optional\nconst firebaseConfig = {\n    apiKey: \"AIzaSyCEQX5yzQCXItrGfcxLOmM4Hp4DM_Tvv-4\",\n    authDomain: \"pavescope-12b68.firebaseapp.com\",\n    projectId: \"pavescope-12b68\",\n    storageBucket: \"pavescope-12b68.appspot.com\",\n    messagingSenderId: \"406588760425\",\n    appId: \"1:406588760425:web:043c6ed4db86dbf24a5df8\",\n    measurementId: \"G-6D4LDGW1BM\"\n};\n// Initialize Firebase\nconst app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.getAuth)(app);\nconst analytics = (0,firebase_analytics__WEBPACK_IMPORTED_MODULE_2__.getAnalytics)(app);\n\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9maXJlYmFzZS50cyIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBNkM7QUFDTDtBQUNVO0FBRWxELHdDQUF3QztBQUN4QyxtRUFBbUU7QUFDbkUsTUFBTUcsaUJBQWlCO0lBQ3JCQyxRQUFRO0lBQ1JDLFlBQVk7SUFDWkMsV0FBVztJQUNYQyxlQUFlO0lBQ2ZDLG1CQUFtQjtJQUNuQkMsT0FBTztJQUNQQyxlQUFlO0FBQ2pCO0FBRUEsc0JBQXNCO0FBQ3RCLE1BQU1DLE1BQU1YLDJEQUFhQSxDQUFDRztBQUMxQixNQUFNUyxPQUFPWCxzREFBT0EsQ0FBQ1U7QUFDckIsTUFBTUUsWUFBWVgsZ0VBQVlBLENBQUNTO0FBRUMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9wb3Rob2xlLWRldGVjdGlvbi13ZWJzaXRlLy4vZmlyZWJhc2UudHM/OTJmNCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBpbml0aWFsaXplQXBwIH0gZnJvbSBcImZpcmViYXNlL2FwcFwiO1xyXG5pbXBvcnQgeyBnZXRBdXRoIH0gZnJvbSBcImZpcmViYXNlL2F1dGhcIjtcclxuaW1wb3J0IHsgZ2V0QW5hbHl0aWNzIH0gZnJvbSBcImZpcmViYXNlL2FuYWx5dGljc1wiO1xyXG5cclxuLy8gWW91ciB3ZWIgYXBwJ3MgRmlyZWJhc2UgY29uZmlndXJhdGlvblxyXG4vLyBGb3IgRmlyZWJhc2UgSlMgU0RLIHY3LjIwLjAgYW5kIGxhdGVyLCBtZWFzdXJlbWVudElkIGlzIG9wdGlvbmFsXHJcbmNvbnN0IGZpcmViYXNlQ29uZmlnID0ge1xyXG4gIGFwaUtleTogXCJBSXphU3lDRVFYNXl6UUNYSXRyR2ZjeExPbU00SHA0RE1fVHZ2LTRcIixcclxuICBhdXRoRG9tYWluOiBcInBhdmVzY29wZS0xMmI2OC5maXJlYmFzZWFwcC5jb21cIixcclxuICBwcm9qZWN0SWQ6IFwicGF2ZXNjb3BlLTEyYjY4XCIsXHJcbiAgc3RvcmFnZUJ1Y2tldDogXCJwYXZlc2NvcGUtMTJiNjguYXBwc3BvdC5jb21cIixcclxuICBtZXNzYWdpbmdTZW5kZXJJZDogXCI0MDY1ODg3NjA0MjVcIixcclxuICBhcHBJZDogXCIxOjQwNjU4ODc2MDQyNTp3ZWI6MDQzYzZlZDRkYjg2ZGJmMjRhNWRmOFwiLFxyXG4gIG1lYXN1cmVtZW50SWQ6IFwiRy02RDRMREdXMUJNXCJcclxufTtcclxuXHJcbi8vIEluaXRpYWxpemUgRmlyZWJhc2VcclxuY29uc3QgYXBwID0gaW5pdGlhbGl6ZUFwcChmaXJlYmFzZUNvbmZpZyk7XHJcbmNvbnN0IGF1dGggPSBnZXRBdXRoKGFwcCk7XHJcbmNvbnN0IGFuYWx5dGljcyA9IGdldEFuYWx5dGljcyhhcHApO1xyXG5cclxuZXhwb3J0IHsgYXBwLCBhdXRoLCBhbmFseXRpY3MgfTsiXSwibmFtZXMiOlsiaW5pdGlhbGl6ZUFwcCIsImdldEF1dGgiLCJnZXRBbmFseXRpY3MiLCJmaXJlYmFzZUNvbmZpZyIsImFwaUtleSIsImF1dGhEb21haW4iLCJwcm9qZWN0SWQiLCJzdG9yYWdlQnVja2V0IiwibWVzc2FnaW5nU2VuZGVySWQiLCJhcHBJZCIsIm1lYXN1cmVtZW50SWQiLCJhcHAiLCJhdXRoIiwiYW5hbHl0aWNzIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(ssr)/./firebase.ts\n");
+
+/***/ }),
+
+/***/ "(ssr)/./lib/auth.ts":
+/*!*********************!*\
+  !*** ./lib/auth.ts ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   getCurrentUser: () => (/* binding */ getCurrentUser),\n/* harmony export */   signInWithEmail: () => (/* binding */ signInWithEmail),\n/* harmony export */   signInWithGoogle: () => (/* binding */ signInWithGoogle),\n/* harmony export */   signOutUser: () => (/* binding */ signOutUser),\n/* harmony export */   signUpWithEmail: () => (/* binding */ signUpWithEmail)\n/* harmony export */ });\n/* harmony import */ var _firebase__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../firebase */ \"(ssr)/./firebase.ts\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"(ssr)/./node_modules/firebase/auth/dist/index.mjs\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/firestore */ \"(ssr)/./node_modules/firebase/firestore/dist/index.mjs\");\n/* harmony import */ var _db__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./db */ \"(ssr)/./lib/db.ts\");\n\n\n\n\nconst googleProvider = new firebase_auth__WEBPACK_IMPORTED_MODULE_1__.GoogleAuthProvider();\nasync function signInWithGoogle() {\n    const provider = new firebase_auth__WEBPACK_IMPORTED_MODULE_1__.GoogleAuthProvider();\n    provider.addScope(\"profile\");\n    provider.addScope(\"email\");\n    try {\n        const result = await (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.signInWithPopup)(_firebase__WEBPACK_IMPORTED_MODULE_0__.auth, provider);\n        const user = result.user;\n        await updateUserProfile(user);\n        return user;\n    } catch (error) {\n        console.error(\"Error signing in with Google\", error);\n        throw error;\n    }\n}\nasync function updateUserProfile(user) {\n    const userRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.doc)(_db__WEBPACK_IMPORTED_MODULE_3__.db, \"users\", user.uid);\n    await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.setDoc)(userRef, {\n        displayName: user.displayName,\n        email: user.email,\n        photoURL: user.photoURL\n    }, {\n        merge: true\n    });\n}\nconst signUpWithEmail = async (email, password)=>{\n    try {\n        const result = await (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.createUserWithEmailAndPassword)(_firebase__WEBPACK_IMPORTED_MODULE_0__.auth, email, password);\n        return result.user;\n    } catch (error) {\n        console.error(\"Error signing up with email\", error);\n        throw error;\n    }\n};\nconst signInWithEmail = async (email, password)=>{\n    try {\n        const result = await (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.signInWithEmailAndPassword)(_firebase__WEBPACK_IMPORTED_MODULE_0__.auth, email, password);\n        return result.user;\n    } catch (error) {\n        console.error(\"Error signing in with email\", error);\n        throw error;\n    }\n};\nconst signOutUser = async ()=>{\n    try {\n        await (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.signOut)(_firebase__WEBPACK_IMPORTED_MODULE_0__.auth);\n    } catch (error) {\n        console.error(\"Error signing out\", error);\n        throw error;\n    }\n};\nconst getCurrentUser = ()=>{\n    return _firebase__WEBPACK_IMPORTED_MODULE_0__.auth.currentUser;\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9saWIvYXV0aC50cyIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7QUFBbUM7QUFRWjtBQUMwQjtBQUN2QjtBQUUxQixNQUFNUyxpQkFBaUIsSUFBSVAsNkRBQWtCQTtBQUV0QyxlQUFlUTtJQUNwQixNQUFNQyxXQUFXLElBQUlULDZEQUFrQkE7SUFDdkNTLFNBQVNDLFFBQVEsQ0FBQztJQUNsQkQsU0FBU0MsUUFBUSxDQUFDO0lBRWxCLElBQUk7UUFDRixNQUFNQyxTQUFTLE1BQU1aLDhEQUFlQSxDQUFDRCwyQ0FBSUEsRUFBRVc7UUFDM0MsTUFBTUcsT0FBT0QsT0FBT0MsSUFBSTtRQUN4QixNQUFNQyxrQkFBa0JEO1FBQ3hCLE9BQU9BO0lBQ1QsRUFBRSxPQUFPRSxPQUFPO1FBQ2RDLFFBQVFELEtBQUssQ0FBQyxnQ0FBZ0NBO1FBQzlDLE1BQU1BO0lBQ1I7QUFDRjtBQUVBLGVBQWVELGtCQUFrQkQsSUFBa0I7SUFDakQsTUFBTUksVUFBVVosdURBQUdBLENBQUNFLG1DQUFFQSxFQUFFLFNBQVNNLEtBQUtLLEdBQUc7SUFDekMsTUFBTVosMERBQU1BLENBQUNXLFNBQVM7UUFDcEJFLGFBQWFOLEtBQUtNLFdBQVc7UUFDN0JDLE9BQU9QLEtBQUtPLEtBQUs7UUFDakJDLFVBQVVSLEtBQUtRLFFBQVE7SUFFekIsR0FBRztRQUFFQyxPQUFPO0lBQUs7QUFDbkI7QUFFTyxNQUFNQyxrQkFBa0IsT0FBT0gsT0FBZUk7SUFDbkQsSUFBSTtRQUNGLE1BQU1aLFNBQVMsTUFBTVYsNkVBQThCQSxDQUFDSCwyQ0FBSUEsRUFBRXFCLE9BQU9JO1FBQ2pFLE9BQU9aLE9BQU9DLElBQUk7SUFDcEIsRUFBRSxPQUFPRSxPQUFPO1FBQ2RDLFFBQVFELEtBQUssQ0FBQywrQkFBK0JBO1FBQzdDLE1BQU1BO0lBQ1I7QUFDRixFQUFFO0FBRUssTUFBTVUsa0JBQWtCLE9BQU9MLE9BQWVJO0lBQ25ELElBQUk7UUFDRixNQUFNWixTQUFTLE1BQU1ULHlFQUEwQkEsQ0FBQ0osMkNBQUlBLEVBQUVxQixPQUFPSTtRQUM3RCxPQUFPWixPQUFPQyxJQUFJO0lBQ3BCLEVBQUUsT0FBT0UsT0FBTztRQUNkQyxRQUFRRCxLQUFLLENBQUMsK0JBQStCQTtRQUM3QyxNQUFNQTtJQUNSO0FBQ0YsRUFBRTtBQUVLLE1BQU1XLGNBQWM7SUFDekIsSUFBSTtRQUNGLE1BQU10QixzREFBT0EsQ0FBQ0wsMkNBQUlBO0lBQ3BCLEVBQUUsT0FBT2dCLE9BQU87UUFDZEMsUUFBUUQsS0FBSyxDQUFDLHFCQUFxQkE7UUFDbkMsTUFBTUE7SUFDUjtBQUNGLEVBQUU7QUFFSyxNQUFNWSxpQkFBaUI7SUFDNUIsT0FBTzVCLDJDQUFJQSxDQUFDNkIsV0FBVztBQUN6QixFQUFFIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vcG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZS8uL2xpYi9hdXRoLnRzP2JmN2UiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgYXV0aCB9IGZyb20gJy4uL2ZpcmViYXNlJztcclxuaW1wb3J0IHtcclxuICBzaWduSW5XaXRoUG9wdXAsXHJcbiAgR29vZ2xlQXV0aFByb3ZpZGVyLFxyXG4gIGNyZWF0ZVVzZXJXaXRoRW1haWxBbmRQYXNzd29yZCxcclxuICBzaWduSW5XaXRoRW1haWxBbmRQYXNzd29yZCxcclxuICBzaWduT3V0LFxyXG4gIFVzZXIgYXMgRmlyZWJhc2VVc2VyXHJcbn0gZnJvbSAnZmlyZWJhc2UvYXV0aCc7XHJcbmltcG9ydCB7IGRvYywgc2V0RG9jIH0gZnJvbSAnZmlyZWJhc2UvZmlyZXN0b3JlJztcclxuaW1wb3J0IHsgZGIgfSBmcm9tICcuL2RiJztcclxuXHJcbmNvbnN0IGdvb2dsZVByb3ZpZGVyID0gbmV3IEdvb2dsZUF1dGhQcm92aWRlcigpO1xyXG5cclxuZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIHNpZ25JbldpdGhHb29nbGUoKSB7XHJcbiAgY29uc3QgcHJvdmlkZXIgPSBuZXcgR29vZ2xlQXV0aFByb3ZpZGVyKCk7XHJcbiAgcHJvdmlkZXIuYWRkU2NvcGUoJ3Byb2ZpbGUnKTtcclxuICBwcm92aWRlci5hZGRTY29wZSgnZW1haWwnKTtcclxuXHJcbiAgdHJ5IHtcclxuICAgIGNvbnN0IHJlc3VsdCA9IGF3YWl0IHNpZ25JbldpdGhQb3B1cChhdXRoLCBwcm92aWRlcik7XHJcbiAgICBjb25zdCB1c2VyID0gcmVzdWx0LnVzZXI7XHJcbiAgICBhd2FpdCB1cGRhdGVVc2VyUHJvZmlsZSh1c2VyKTtcclxuICAgIHJldHVybiB1c2VyO1xyXG4gIH0gY2F0Y2ggKGVycm9yKSB7XHJcbiAgICBjb25zb2xlLmVycm9yKCdFcnJvciBzaWduaW5nIGluIHdpdGggR29vZ2xlJywgZXJyb3IpO1xyXG4gICAgdGhyb3cgZXJyb3I7XHJcbiAgfVxyXG59XHJcblxyXG5hc3luYyBmdW5jdGlvbiB1cGRhdGVVc2VyUHJvZmlsZSh1c2VyOiBGaXJlYmFzZVVzZXIpIHtcclxuICBjb25zdCB1c2VyUmVmID0gZG9jKGRiLCAndXNlcnMnLCB1c2VyLnVpZCk7XHJcbiAgYXdhaXQgc2V0RG9jKHVzZXJSZWYsIHtcclxuICAgIGRpc3BsYXlOYW1lOiB1c2VyLmRpc3BsYXlOYW1lLFxyXG4gICAgZW1haWw6IHVzZXIuZW1haWwsXHJcbiAgICBwaG90b1VSTDogdXNlci5waG90b1VSTCxcclxuICAgIC8vIEFkZCBhbnkgb3RoZXIgZmllbGRzIHlvdSB3YW50IHRvIHN0b3JlXHJcbiAgfSwgeyBtZXJnZTogdHJ1ZSB9KTtcclxufVxyXG5cclxuZXhwb3J0IGNvbnN0IHNpZ25VcFdpdGhFbWFpbCA9IGFzeW5jIChlbWFpbDogc3RyaW5nLCBwYXNzd29yZDogc3RyaW5nKSA9PiB7XHJcbiAgdHJ5IHtcclxuICAgIGNvbnN0IHJlc3VsdCA9IGF3YWl0IGNyZWF0ZVVzZXJXaXRoRW1haWxBbmRQYXNzd29yZChhdXRoLCBlbWFpbCwgcGFzc3dvcmQpO1xyXG4gICAgcmV0dXJuIHJlc3VsdC51c2VyO1xyXG4gIH0gY2F0Y2ggKGVycm9yKSB7XHJcbiAgICBjb25zb2xlLmVycm9yKFwiRXJyb3Igc2lnbmluZyB1cCB3aXRoIGVtYWlsXCIsIGVycm9yKTtcclxuICAgIHRocm93IGVycm9yO1xyXG4gIH1cclxufTtcclxuXHJcbmV4cG9ydCBjb25zdCBzaWduSW5XaXRoRW1haWwgPSBhc3luYyAoZW1haWw6IHN0cmluZywgcGFzc3dvcmQ6IHN0cmluZykgPT4ge1xyXG4gIHRyeSB7XHJcbiAgICBjb25zdCByZXN1bHQgPSBhd2FpdCBzaWduSW5XaXRoRW1haWxBbmRQYXNzd29yZChhdXRoLCBlbWFpbCwgcGFzc3dvcmQpO1xyXG4gICAgcmV0dXJuIHJlc3VsdC51c2VyO1xyXG4gIH0gY2F0Y2ggKGVycm9yKSB7XHJcbiAgICBjb25zb2xlLmVycm9yKFwiRXJyb3Igc2lnbmluZyBpbiB3aXRoIGVtYWlsXCIsIGVycm9yKTtcclxuICAgIHRocm93IGVycm9yO1xyXG4gIH1cclxufTtcclxuXHJcbmV4cG9ydCBjb25zdCBzaWduT3V0VXNlciA9IGFzeW5jICgpID0+IHtcclxuICB0cnkge1xyXG4gICAgYXdhaXQgc2lnbk91dChhdXRoKTtcclxuICB9IGNhdGNoIChlcnJvcikge1xyXG4gICAgY29uc29sZS5lcnJvcihcIkVycm9yIHNpZ25pbmcgb3V0XCIsIGVycm9yKTtcclxuICAgIHRocm93IGVycm9yO1xyXG4gIH1cclxufTtcclxuXHJcbmV4cG9ydCBjb25zdCBnZXRDdXJyZW50VXNlciA9ICgpOiBVc2VyIHwgbnVsbCA9PiB7XHJcbiAgcmV0dXJuIGF1dGguY3VycmVudFVzZXI7XHJcbn07Il0sIm5hbWVzIjpbImF1dGgiLCJzaWduSW5XaXRoUG9wdXAiLCJHb29nbGVBdXRoUHJvdmlkZXIiLCJjcmVhdGVVc2VyV2l0aEVtYWlsQW5kUGFzc3dvcmQiLCJzaWduSW5XaXRoRW1haWxBbmRQYXNzd29yZCIsInNpZ25PdXQiLCJkb2MiLCJzZXREb2MiLCJkYiIsImdvb2dsZVByb3ZpZGVyIiwic2lnbkluV2l0aEdvb2dsZSIsInByb3ZpZGVyIiwiYWRkU2NvcGUiLCJyZXN1bHQiLCJ1c2VyIiwidXBkYXRlVXNlclByb2ZpbGUiLCJlcnJvciIsImNvbnNvbGUiLCJ1c2VyUmVmIiwidWlkIiwiZGlzcGxheU5hbWUiLCJlbWFpbCIsInBob3RvVVJMIiwibWVyZ2UiLCJzaWduVXBXaXRoRW1haWwiLCJwYXNzd29yZCIsInNpZ25JbldpdGhFbWFpbCIsInNpZ25PdXRVc2VyIiwiZ2V0Q3VycmVudFVzZXIiLCJjdXJyZW50VXNlciJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(ssr)/./lib/auth.ts\n");
+
+/***/ }),
+
+/***/ "(ssr)/./lib/db.ts":
+/*!*******************!*\
+  !*** ./lib/db.ts ***!
+  \*******************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   saveImageToDatabase: () => (/* binding */ saveImageToDatabase),\n/* harmony export */   sql: () => (/* reexport safe */ _vercel_postgres__WEBPACK_IMPORTED_MODULE_0__.sql)\n/* harmony export */ });\n/* harmony import */ var _vercel_postgres__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vercel/postgres */ \"(ssr)/./node_modules/@vercel/postgres/dist/index-node.js\");\n\n\nasync function saveImageToDatabase(userId, fileName) {\n    // Assuming you're using a SQL database\n    const query = \"INSERT INTO user_images (user_id, file_name) VALUES (?, ?)\";\n    await db.execute(query, [\n        userId,\n        fileName\n    ]);\n} // ... other database functions\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9saWIvZGIudHMiLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQXVDO0FBRXhCO0FBRVIsZUFBZUMsb0JBQW9CQyxNQUFjLEVBQUVDLFFBQWdCO0lBQ3hFLHVDQUF1QztJQUN2QyxNQUFNQyxRQUFRO0lBQ2QsTUFBTUMsR0FBR0MsT0FBTyxDQUFDRixPQUFPO1FBQUNGO1FBQVFDO0tBQVM7QUFDNUMsRUFFQSwrQkFBK0IiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9wb3Rob2xlLWRldGVjdGlvbi13ZWJzaXRlLy4vbGliL2RiLnRzPzFkZjAiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgc3FsIH0gZnJvbSAnQHZlcmNlbC9wb3N0Z3Jlcyc7XHJcblxyXG5leHBvcnQgeyBzcWwgfTtcclxuXHJcbmV4cG9ydCBhc3luYyBmdW5jdGlvbiBzYXZlSW1hZ2VUb0RhdGFiYXNlKHVzZXJJZDogc3RyaW5nLCBmaWxlTmFtZTogc3RyaW5nKSB7XHJcbiAgLy8gQXNzdW1pbmcgeW91J3JlIHVzaW5nIGEgU1FMIGRhdGFiYXNlXHJcbiAgY29uc3QgcXVlcnkgPSAnSU5TRVJUIElOVE8gdXNlcl9pbWFnZXMgKHVzZXJfaWQsIGZpbGVfbmFtZSkgVkFMVUVTICg/LCA/KSc7XHJcbiAgYXdhaXQgZGIuZXhlY3V0ZShxdWVyeSwgW3VzZXJJZCwgZmlsZU5hbWVdKTtcclxufVxyXG5cclxuLy8gLi4uIG90aGVyIGRhdGFiYXNlIGZ1bmN0aW9ucyJdLCJuYW1lcyI6WyJzcWwiLCJzYXZlSW1hZ2VUb0RhdGFiYXNlIiwidXNlcklkIiwiZmlsZU5hbWUiLCJxdWVyeSIsImRiIiwiZXhlY3V0ZSJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(ssr)/./lib/db.ts\n");
+
+/***/ }),
+
 /***/ "(ssr)/./lib/utils.ts":
 /*!**********************!*\
   !*** ./lib/utils.ts ***!
@@ -214,7 +675,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ RootLayout)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"(rsc)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _styles_globals_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../styles/globals.css */ \"(rsc)/./styles/globals.css\");\n/* harmony import */ var _auth0_nextjs_auth0_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @auth0/nextjs-auth0/client */ \"(rsc)/./node_modules/@auth0/nextjs-auth0/dist/client/index.js\");\n/* harmony import */ var _auth0_nextjs_auth0_client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_auth0_nextjs_auth0_client__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\nfunction RootLayout({ children }) {\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"html\", {\n        lang: \"en\",\n        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_auth0_nextjs_auth0_client__WEBPACK_IMPORTED_MODULE_2__.UserProvider, {\n            children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"body\", {\n                children: children\n            }, void 0, false, {\n                fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\layout.jsx\",\n                lineNumber: 8,\n                columnNumber: 7\n            }, this)\n        }, void 0, false, {\n            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\layout.jsx\",\n            lineNumber: 7,\n            columnNumber: 5\n        }, this)\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\layout.jsx\",\n        lineNumber: 6,\n        columnNumber: 5\n    }, this);\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9hcHAvbGF5b3V0LmpzeCIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0FBQStCO0FBQzJCO0FBRTNDLFNBQVNDLFdBQVcsRUFBRUMsUUFBUSxFQUFFO0lBQzdDLHFCQUNFLDhEQUFDQztRQUFLQyxNQUFLO2tCQUNYLDRFQUFDSixvRUFBWUE7c0JBQ1gsNEVBQUNLOzBCQUFNSDs7Ozs7Ozs7Ozs7Ozs7OztBQUliIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vcG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZS8uL2FwcC9sYXlvdXQuanN4PzBjODEiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0ICcuLi9zdHlsZXMvZ2xvYmFscy5jc3MnO1xyXG5pbXBvcnQgeyBVc2VyUHJvdmlkZXIgfSBmcm9tICdAYXV0aDAvbmV4dGpzLWF1dGgwL2NsaWVudCc7XHJcblxyXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBSb290TGF5b3V0KHsgY2hpbGRyZW4gfSkge1xyXG4gIHJldHVybiAoXHJcbiAgICA8aHRtbCBsYW5nPVwiZW5cIj5cclxuICAgIDxVc2VyUHJvdmlkZXI+XHJcbiAgICAgIDxib2R5PntjaGlsZHJlbn08L2JvZHk+XHJcbiAgICA8L1VzZXJQcm92aWRlcj5cclxuICAgIDwvaHRtbD5cclxuICApO1xyXG59ICJdLCJuYW1lcyI6WyJVc2VyUHJvdmlkZXIiLCJSb290TGF5b3V0IiwiY2hpbGRyZW4iLCJodG1sIiwibGFuZyIsImJvZHkiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(rsc)/./app/layout.jsx\n");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ RootLayout)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"(rsc)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _styles_globals_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../styles/globals.css */ \"(rsc)/./styles/globals.css\");\n/* harmony import */ var _components_AuthProvider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/AuthProvider */ \"(rsc)/./components/AuthProvider.tsx\");\n\n\n\nfunction RootLayout({ children }) {\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"html\", {\n        lang: \"en\",\n        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_components_AuthProvider__WEBPACK_IMPORTED_MODULE_2__.AuthProvider, {\n            children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"body\", {\n                children: children\n            }, void 0, false, {\n                fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\layout.jsx\",\n                lineNumber: 8,\n                columnNumber: 9\n            }, this)\n        }, void 0, false, {\n            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\layout.jsx\",\n            lineNumber: 7,\n            columnNumber: 7\n        }, this)\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\layout.jsx\",\n        lineNumber: 6,\n        columnNumber: 5\n    }, this);\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9hcHAvbGF5b3V0LmpzeCIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBK0I7QUFDMkI7QUFFM0MsU0FBU0MsV0FBVyxFQUFFQyxRQUFRLEVBQUU7SUFDN0MscUJBQ0UsOERBQUNDO1FBQUtDLE1BQUs7a0JBQ1QsNEVBQUNKLGtFQUFZQTtzQkFDWCw0RUFBQ0s7MEJBQU1IOzs7Ozs7Ozs7Ozs7Ozs7O0FBSWYiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9wb3Rob2xlLWRldGVjdGlvbi13ZWJzaXRlLy4vYXBwL2xheW91dC5qc3g/MGM4MSJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgJy4uL3N0eWxlcy9nbG9iYWxzLmNzcyc7XHJcbmltcG9ydCB7IEF1dGhQcm92aWRlciB9IGZyb20gJy4uL2NvbXBvbmVudHMvQXV0aFByb3ZpZGVyJztcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIFJvb3RMYXlvdXQoeyBjaGlsZHJlbiB9KSB7XHJcbiAgcmV0dXJuIChcclxuICAgIDxodG1sIGxhbmc9XCJlblwiPlxyXG4gICAgICA8QXV0aFByb3ZpZGVyPlxyXG4gICAgICAgIDxib2R5PntjaGlsZHJlbn08L2JvZHk+XHJcbiAgICAgIDwvQXV0aFByb3ZpZGVyPlxyXG4gICAgPC9odG1sPlxyXG4gICk7XHJcbn0iXSwibmFtZXMiOlsiQXV0aFByb3ZpZGVyIiwiUm9vdExheW91dCIsImNoaWxkcmVuIiwiaHRtbCIsImxhbmciLCJib2R5Il0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(rsc)/./app/layout.jsx\n");
 
 /***/ }),
 
@@ -234,6 +695,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`C:\Users\rfrjo\pothole-detection-website\app\page.tsx#default`));
 
 
+/***/ }),
+
+/***/ "(rsc)/./components/AuthProvider.tsx":
+/*!*************************************!*\
+  !*** ./components/AuthProvider.tsx ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AuthProvider: () => (/* binding */ e1),
+/* harmony export */   useAuth: () => (/* binding */ e0)
+/* harmony export */ });
+/* harmony import */ var next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/dist/build/webpack/loaders/next-flight-loader/module-proxy */ "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-loader/module-proxy.js");
+
+
+const e0 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`C:\Users\rfrjo\pothole-detection-website\components\AuthProvider.tsx#useAuth`);
+
+const e1 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`C:\Users\rfrjo\pothole-detection-website\components\AuthProvider.tsx#AuthProvider`);
+
+
 /***/ })
 
 };
@@ -243,7 +726,7 @@ __webpack_require__.r(__webpack_exports__);
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/tslib","vendor-chunks/@auth0","vendor-chunks/@radix-ui","vendor-chunks/tailwind-merge","vendor-chunks/class-variance-authority","vendor-chunks/clsx"], () => (__webpack_exec__("(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fpage&page=%2Fpage&appPaths=%2Fpage&pagePath=private-next-app-dir%2Fpage.tsx&appDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!")));
+var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/@firebase","vendor-chunks/undici","vendor-chunks/@radix-ui","vendor-chunks/tailwind-merge","vendor-chunks/tslib","vendor-chunks/idb","vendor-chunks/class-variance-authority","vendor-chunks/firebase","vendor-chunks/clsx","vendor-chunks/@grpc","vendor-chunks/protobufjs","vendor-chunks/@neondatabase","vendor-chunks/ws","vendor-chunks/long","vendor-chunks/@protobufjs","vendor-chunks/lodash.camelcase","vendor-chunks/@vercel","vendor-chunks/node-gyp-build","vendor-chunks/bufferutil"], () => (__webpack_exec__("(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fpage&page=%2Fpage&appPaths=%2Fpage&pagePath=private-next-app-dir%2Fpage.tsx&appDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!")));
 module.exports = __webpack_exports__;
 
 })();
