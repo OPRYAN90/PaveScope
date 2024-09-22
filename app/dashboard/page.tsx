@@ -32,7 +32,7 @@ const MetricCard: React.FC<MetricCardProps> = ({ title, value, icon: Icon }) => 
   <Card>
     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
       <CardTitle className="text-sm font-medium">{title}</CardTitle>
-      <Icon className="h-4 w-4 text-blue-600" />
+      <Icon className="h-4 w-4 text-gray-600" />
     </CardHeader>
     <CardContent>
       <div className="text-2xl font-bold">{value}</div>
@@ -81,34 +81,34 @@ export default function WorkPage() {
   return (
     <DashboardLayout>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-blue-800">Work Dashboard</h1>
+        <h1 className="text-3xl font-bold text-gray-800">Work Dashboard</h1>
         <div className="relative">
           <div 
-            className="flex items-center space-x-2 bg-blue-600 rounded-full pl-2 pr-4 py-2 shadow-md cursor-pointer hover:bg-blue-700 transition-colors duration-200"
+            className="flex items-center space-x-2 bg-gray-100 rounded-full pl-2 pr-4 py-2 shadow-sm cursor-pointer hover:bg-gray-200 transition-colors duration-200"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           >
             <Avatar className="h-8 w-8">
               <AvatarImage src={user?.photoURL || `/placeholder.svg?height=32&width=32&text=${user?.displayName?.charAt(0) || 'A'}`} alt={user?.displayName || 'User'} />
               <AvatarFallback>{user?.displayName?.charAt(0) || 'A'}</AvatarFallback>
             </Avatar>
-            <span className="text-sm font-medium text-white">{user?.displayName || user?.email}</span>
-            <ChevronDown className="h-4 w-4 text-white" />
+            <span className="text-sm font-medium text-gray-700">{user?.displayName || user?.email}</span>
+            <ChevronDown className="h-4 w-4 text-gray-500" />
           </div>
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-56 bg-blue-50 border border-blue-200 rounded-md shadow-lg z-20 py-1">
-              <div className="px-4 py-2 border-b border-blue-200">
-                <p className="text-sm font-semibold text-blue-800">{user?.displayName || 'User'}</p>
-                <p className="text-xs text-blue-600">{user?.email}</p>
+            <div className="absolute right-0 mt-2 w-56 bg-gray-50 border border-gray-200 rounded-md shadow-lg z-20 py-1">
+              <div className="px-4 py-2 border-b border-gray-200">
+                <p className="text-sm font-semibold text-gray-700">{user?.displayName || 'User'}</p>
+                <p className="text-xs text-gray-500">{user?.email}</p>
               </div>
               <button
-                className="flex items-center w-full px-4 py-2 text-sm text-blue-700 hover:bg-blue-100 transition-colors duration-150"
+                className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 transition-colors duration-150"
                 onClick={() => {/* Add profile action */}}
               >
                 <User className="h-4 w-4 mr-2" />
                 Profile
               </button>
               <button
-                className="flex items-center w-full px-4 py-2 text-sm text-blue-700 hover:bg-blue-100 transition-colors duration-150"
+                className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 transition-colors duration-150"
                 onClick={() => {/* Add settings action */}}
               >
                 <Settings className="h-4 w-4 mr-2" />
@@ -116,7 +116,7 @@ export default function WorkPage() {
               </button>
               <button
                 onClick={handleSignOut}
-                className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors duration-150"
+                className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-100 transition-colors duration-150"
               >
                 <LogOut className="h-4 w-4 mr-2" />
                 Sign Out
@@ -219,7 +219,7 @@ export default function WorkPage() {
                 <Label htmlFor="parameter2">Parameter 2</Label>
                 <Input id="parameter2" type="number" placeholder="Enter value" />
               </div>
-              <Button type="submit" className="w-full">Apply</Button>
+              <Button type="submit" className="w-full bg-gray-700 hover:bg-gray-800 text-white">Apply</Button>
             </form>
           </CardContent>
         </Card>

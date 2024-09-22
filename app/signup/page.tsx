@@ -8,6 +8,8 @@ import { Button } from "../../components/Login/ui/button"
 import { Input } from "../../components/Login/ui/input"
 import { Label } from "../../components/Login/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/Login/ui/card"
+import { Home } from 'lucide-react' // Import the Home icon
+
 export default function SignUp() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -44,7 +46,14 @@ export default function SignUp() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 relative">
+      {/* Home button in the top-left corner */}
+      <Link href="/" className="absolute top-4 left-4">
+        <Button variant="ghost" size="icon" className="w-10 h-10">
+          <Home className="h-6 w-6" />
+        </Button>
+      </Link>
+
       <div className="w-full max-w-md px-4 py-8">
         <Card className="overflow-hidden shadow-xl rounded-2xl border border-blue-100">
           <CardHeader className="space-y-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6">
