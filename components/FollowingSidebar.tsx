@@ -1,6 +1,9 @@
+"use client";
+
 import React, { useState } from 'react';
 import { Button } from "./Login/ui/button";
 import { Upload, BarChart2, Map, FileSpreadsheet, HelpCircle, Image, ChevronLeft, ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 
 interface FollowingSidebarProps {
   onLogoClick: () => void;
@@ -15,6 +18,15 @@ export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick,
     setIsCollapsed(newCollapsedState);
     onCollapse(newCollapsedState);
   }
+
+  const navItems = [
+    { name: 'Upload', icon: Upload, href: '/upload' },
+    { name: 'Model', icon: BarChart2, href: '/model' },
+    { name: 'Detections', icon: Image, href: '/detections' },
+    { name: 'Maps', icon: Map, href: '/maps' },
+    { name: 'Spreadsheets', icon: FileSpreadsheet, href: '/spreadsheets' },
+    { name: 'Help', icon: HelpCircle, href: '/help' },
+  ];
 
   return (
     <aside className={`fixed left-0 top-0 ${isCollapsed ? 'w-16' : 'w-56'} h-screen bg-gradient-to-b from-blue-600 to-blue-800 text-white flex flex-col transition-all duration-300 ease-in-out z-10`}>
@@ -34,13 +46,15 @@ export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick,
         )}
       </div>
       <nav className="flex-grow overflow-y-auto mt-4">
-        {['Upload', 'Model', 'Detections', 'Maps', 'Spreadsheets', 'Help'].map((item, index) => (
-          <Button key={item} variant="ghost" className={`w-full justify-start hover:bg-blue-700 transition-colors ${isCollapsed ? 'px-0 py-4' : 'px-4 py-3 mb-2'}`}>
-            <div className={`flex items-center ${isCollapsed ? 'justify-center w-full' : ''}`}>
-              {React.createElement([Upload, BarChart2, Image, Map, FileSpreadsheet, HelpCircle][index], { className: "h-5 w-5" })}
-              {!isCollapsed && <span className="ml-3 text-base">{item}</span>}
-            </div>
-          </Button>
+        {navItems.map((item) => (
+          <Link href={item.href} key={item.name}>
+            <Button variant="ghost" className={`w-full justify-start hover:bg-blue-700 transition-colors ${isCollapsed ? 'px-0 py-4' : 'px-4 py-3 mb-2'}`}>
+              <div className={`flex items-center ${isCollapsed ? 'justify-center w-full' : ''}`}>
+                {React.createElement(item.icon, { className: "h-5 w-5" })}
+                {!isCollapsed && <span className="ml-3 text-base">{item.name}</span>}
+              </div>
+            </Button>
+          </Link>
         ))}
       </nav>
       <Button variant="ghost" className="w-full justify-center hover:bg-blue-700 transition-colors py-4" onClick={toggleSidebar}>

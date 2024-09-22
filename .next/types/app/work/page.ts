@@ -1,8 +1,8 @@
 // File: C:\Users\rfrjo\pothole-detection-website\app\work\page.tsx
-import * as entry from '../../../../app/work/page.js'
+import * as entry from '../../../../app/dashboard/page.jsx'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
-type TEntry = typeof import('../../../../app/work/page.js')
+type TEntry = typeof import('../../../../app/dashboard/page.jsx')
 
 // Check that the entry is a valid entry
 checkFields<Diff<{

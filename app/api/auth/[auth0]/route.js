@@ -3,7 +3,7 @@ import { handleAuth, handleLogin, handleCallback } from '@auth0/nextjs-auth0';
 
 export const GET = handleAuth({
   login: handleLogin({
-    returnTo: '/work',
+    returnTo: '/dashboard',
   }),
   callback: handleCallback({
     afterCallback: async (req, res, session, state) => {
@@ -14,7 +14,7 @@ export const GET = handleAuth({
       if (session) {
         return {
           ...session,
-          returnTo: '/work'
+          returnTo: '/dashboard'
         };
       }
       return session;
