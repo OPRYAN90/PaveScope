@@ -7,8 +7,10 @@ import {
   signOut,
   User as FirebaseUser
 } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
-import { db } from './db';
+// Remove the import for doc and setDoc
+// import { doc, setDoc } from 'firebase/firestore';
+// Remove the import for db
+// import { db } from './db';
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -20,7 +22,8 @@ export async function signInWithGoogle() {
   try {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
-    await updateUserProfile(user);
+    // Remove the call to updateUserProfile
+    // await updateUserProfile(user);
     return user;
   } catch (error) {
     console.error('Error signing in with Google', error);
@@ -28,15 +31,16 @@ export async function signInWithGoogle() {
   }
 }
 
-async function updateUserProfile(user: FirebaseUser) {
-  const userRef = doc(db, 'users', user.uid);
-  await setDoc(userRef, {
-    displayName: user.displayName,
-    email: user.email,
-    photoURL: user.photoURL,
-    // Add any other fields you want to store
-  }, { merge: true });
-}
+// Remove the updateUserProfile function
+// async function updateUserProfile(user: FirebaseUser) {
+//   const userRef = doc(db, 'users', user.uid);
+//   await setDoc(userRef, {
+//     displayName: user.displayName,
+//     email: user.email,
+//     photoURL: user.photoURL,
+//     // Add any other fields you want to store
+//   }, { merge: true });
+// }
 
 export const signUpWithEmail = async (email: string, password: string) => {
   try {
@@ -67,6 +71,6 @@ export const signOutUser = async () => {
   }
 };
 
-export const getCurrentUser = (): User | null => {
+export const getCurrentUser = (): FirebaseUser | null => {
   return auth.currentUser;
 };

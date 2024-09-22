@@ -56,105 +56,6 @@ module.exports = require("next/dist/compiled/next-server/app-page.runtime.dev.js
 
 /***/ }),
 
-/***/ "buffer":
-/*!*************************!*\
-  !*** external "buffer" ***!
-  \*************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("buffer");
-
-/***/ }),
-
-/***/ "crypto":
-/*!*************************!*\
-  !*** external "crypto" ***!
-  \*************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("crypto");
-
-/***/ }),
-
-/***/ "dns":
-/*!**********************!*\
-  !*** external "dns" ***!
-  \**********************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("dns");
-
-/***/ }),
-
-/***/ "events":
-/*!*************************!*\
-  !*** external "events" ***!
-  \*************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("events");
-
-/***/ }),
-
-/***/ "fs":
-/*!*********************!*\
-  !*** external "fs" ***!
-  \*********************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("fs");
-
-/***/ }),
-
-/***/ "http":
-/*!***********************!*\
-  !*** external "http" ***!
-  \***********************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("http");
-
-/***/ }),
-
-/***/ "http2":
-/*!************************!*\
-  !*** external "http2" ***!
-  \************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("http2");
-
-/***/ }),
-
-/***/ "https":
-/*!************************!*\
-  !*** external "https" ***!
-  \************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("https");
-
-/***/ }),
-
-/***/ "net":
-/*!**********************!*\
-  !*** external "net" ***!
-  \**********************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("net");
-
-/***/ }),
-
 /***/ "node:assert":
 /*!******************************!*\
   !*** external "node:assert" ***!
@@ -364,50 +265,6 @@ module.exports = require("node:zlib");
 
 /***/ }),
 
-/***/ "os":
-/*!*********************!*\
-  !*** external "os" ***!
-  \*********************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("os");
-
-/***/ }),
-
-/***/ "path":
-/*!***********************!*\
-  !*** external "path" ***!
-  \***********************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("path");
-
-/***/ }),
-
-/***/ "process":
-/*!**************************!*\
-  !*** external "process" ***!
-  \**************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("process");
-
-/***/ }),
-
-/***/ "stream":
-/*!*************************!*\
-  !*** external "stream" ***!
-  \*************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("stream");
-
-/***/ }),
-
 /***/ "string_decoder":
 /*!*********************************!*\
   !*** external "string_decoder" ***!
@@ -416,60 +273,6 @@ module.exports = require("stream");
 
 "use strict";
 module.exports = require("string_decoder");
-
-/***/ }),
-
-/***/ "tls":
-/*!**********************!*\
-  !*** external "tls" ***!
-  \**********************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("tls");
-
-/***/ }),
-
-/***/ "url":
-/*!**********************!*\
-  !*** external "url" ***!
-  \**********************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("url");
-
-/***/ }),
-
-/***/ "util":
-/*!***********************!*\
-  !*** external "util" ***!
-  \***********************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("util");
-
-/***/ }),
-
-/***/ "zlib":
-/*!***********************!*\
-  !*** external "zlib" ***!
-  \***********************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("zlib");
-
-/***/ }),
-
-/***/ "?66e9":
-/*!********************************!*\
-  !*** utf-8-validate (ignored) ***!
-  \********************************/
-/***/ (() => {
-
-/* (ignored) */
 
 /***/ }),
 
@@ -631,18 +434,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   getCurrentUser: () => (/* binding */ getCurrentUser),\n/* harmony export */   signInWithEmail: () => (/* binding */ signInWithEmail),\n/* harmony export */   signInWithGoogle: () => (/* binding */ signInWithGoogle),\n/* harmony export */   signOutUser: () => (/* binding */ signOutUser),\n/* harmony export */   signUpWithEmail: () => (/* binding */ signUpWithEmail)\n/* harmony export */ });\n/* harmony import */ var _firebase__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../firebase */ \"(ssr)/./firebase.ts\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"(ssr)/./node_modules/firebase/auth/dist/index.mjs\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/firestore */ \"(ssr)/./node_modules/firebase/firestore/dist/index.mjs\");\n/* harmony import */ var _db__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./db */ \"(ssr)/./lib/db.ts\");\n\n\n\n\nconst googleProvider = new firebase_auth__WEBPACK_IMPORTED_MODULE_1__.GoogleAuthProvider();\nasync function signInWithGoogle() {\n    const provider = new firebase_auth__WEBPACK_IMPORTED_MODULE_1__.GoogleAuthProvider();\n    provider.addScope(\"profile\");\n    provider.addScope(\"email\");\n    try {\n        const result = await (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.signInWithPopup)(_firebase__WEBPACK_IMPORTED_MODULE_0__.auth, provider);\n        const user = result.user;\n        await updateUserProfile(user);\n        return user;\n    } catch (error) {\n        console.error(\"Error signing in with Google\", error);\n        throw error;\n    }\n}\nasync function updateUserProfile(user) {\n    const userRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.doc)(_db__WEBPACK_IMPORTED_MODULE_3__.db, \"users\", user.uid);\n    await (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.setDoc)(userRef, {\n        displayName: user.displayName,\n        email: user.email,\n        photoURL: user.photoURL\n    }, {\n        merge: true\n    });\n}\nconst signUpWithEmail = async (email, password)=>{\n    try {\n        const result = await (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.createUserWithEmailAndPassword)(_firebase__WEBPACK_IMPORTED_MODULE_0__.auth, email, password);\n        return result.user;\n    } catch (error) {\n        console.error(\"Error signing up with email\", error);\n        throw error;\n    }\n};\nconst signInWithEmail = async (email, password)=>{\n    try {\n        const result = await (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.signInWithEmailAndPassword)(_firebase__WEBPACK_IMPORTED_MODULE_0__.auth, email, password);\n        return result.user;\n    } catch (error) {\n        console.error(\"Error signing in with email\", error);\n        throw error;\n    }\n};\nconst signOutUser = async ()=>{\n    try {\n        await (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.signOut)(_firebase__WEBPACK_IMPORTED_MODULE_0__.auth);\n    } catch (error) {\n        console.error(\"Error signing out\", error);\n        throw error;\n    }\n};\nconst getCurrentUser = ()=>{\n    return _firebase__WEBPACK_IMPORTED_MODULE_0__.auth.currentUser;\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9saWIvYXV0aC50cyIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7QUFBbUM7QUFRWjtBQUMwQjtBQUN2QjtBQUUxQixNQUFNUyxpQkFBaUIsSUFBSVAsNkRBQWtCQTtBQUV0QyxlQUFlUTtJQUNwQixNQUFNQyxXQUFXLElBQUlULDZEQUFrQkE7SUFDdkNTLFNBQVNDLFFBQVEsQ0FBQztJQUNsQkQsU0FBU0MsUUFBUSxDQUFDO0lBRWxCLElBQUk7UUFDRixNQUFNQyxTQUFTLE1BQU1aLDhEQUFlQSxDQUFDRCwyQ0FBSUEsRUFBRVc7UUFDM0MsTUFBTUcsT0FBT0QsT0FBT0MsSUFBSTtRQUN4QixNQUFNQyxrQkFBa0JEO1FBQ3hCLE9BQU9BO0lBQ1QsRUFBRSxPQUFPRSxPQUFPO1FBQ2RDLFFBQVFELEtBQUssQ0FBQyxnQ0FBZ0NBO1FBQzlDLE1BQU1BO0lBQ1I7QUFDRjtBQUVBLGVBQWVELGtCQUFrQkQsSUFBa0I7SUFDakQsTUFBTUksVUFBVVosdURBQUdBLENBQUNFLG1DQUFFQSxFQUFFLFNBQVNNLEtBQUtLLEdBQUc7SUFDekMsTUFBTVosMERBQU1BLENBQUNXLFNBQVM7UUFDcEJFLGFBQWFOLEtBQUtNLFdBQVc7UUFDN0JDLE9BQU9QLEtBQUtPLEtBQUs7UUFDakJDLFVBQVVSLEtBQUtRLFFBQVE7SUFFekIsR0FBRztRQUFFQyxPQUFPO0lBQUs7QUFDbkI7QUFFTyxNQUFNQyxrQkFBa0IsT0FBT0gsT0FBZUk7SUFDbkQsSUFBSTtRQUNGLE1BQU1aLFNBQVMsTUFBTVYsNkVBQThCQSxDQUFDSCwyQ0FBSUEsRUFBRXFCLE9BQU9JO1FBQ2pFLE9BQU9aLE9BQU9DLElBQUk7SUFDcEIsRUFBRSxPQUFPRSxPQUFPO1FBQ2RDLFFBQVFELEtBQUssQ0FBQywrQkFBK0JBO1FBQzdDLE1BQU1BO0lBQ1I7QUFDRixFQUFFO0FBRUssTUFBTVUsa0JBQWtCLE9BQU9MLE9BQWVJO0lBQ25ELElBQUk7UUFDRixNQUFNWixTQUFTLE1BQU1ULHlFQUEwQkEsQ0FBQ0osMkNBQUlBLEVBQUVxQixPQUFPSTtRQUM3RCxPQUFPWixPQUFPQyxJQUFJO0lBQ3BCLEVBQUUsT0FBT0UsT0FBTztRQUNkQyxRQUFRRCxLQUFLLENBQUMsK0JBQStCQTtRQUM3QyxNQUFNQTtJQUNSO0FBQ0YsRUFBRTtBQUVLLE1BQU1XLGNBQWM7SUFDekIsSUFBSTtRQUNGLE1BQU10QixzREFBT0EsQ0FBQ0wsMkNBQUlBO0lBQ3BCLEVBQUUsT0FBT2dCLE9BQU87UUFDZEMsUUFBUUQsS0FBSyxDQUFDLHFCQUFxQkE7UUFDbkMsTUFBTUE7SUFDUjtBQUNGLEVBQUU7QUFFSyxNQUFNWSxpQkFBaUI7SUFDNUIsT0FBTzVCLDJDQUFJQSxDQUFDNkIsV0FBVztBQUN6QixFQUFFIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vcG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZS8uL2xpYi9hdXRoLnRzP2JmN2UiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgYXV0aCB9IGZyb20gJy4uL2ZpcmViYXNlJztcclxuaW1wb3J0IHtcclxuICBzaWduSW5XaXRoUG9wdXAsXHJcbiAgR29vZ2xlQXV0aFByb3ZpZGVyLFxyXG4gIGNyZWF0ZVVzZXJXaXRoRW1haWxBbmRQYXNzd29yZCxcclxuICBzaWduSW5XaXRoRW1haWxBbmRQYXNzd29yZCxcclxuICBzaWduT3V0LFxyXG4gIFVzZXIgYXMgRmlyZWJhc2VVc2VyXHJcbn0gZnJvbSAnZmlyZWJhc2UvYXV0aCc7XHJcbmltcG9ydCB7IGRvYywgc2V0RG9jIH0gZnJvbSAnZmlyZWJhc2UvZmlyZXN0b3JlJztcclxuaW1wb3J0IHsgZGIgfSBmcm9tICcuL2RiJztcclxuXHJcbmNvbnN0IGdvb2dsZVByb3ZpZGVyID0gbmV3IEdvb2dsZUF1dGhQcm92aWRlcigpO1xyXG5cclxuZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIHNpZ25JbldpdGhHb29nbGUoKSB7XHJcbiAgY29uc3QgcHJvdmlkZXIgPSBuZXcgR29vZ2xlQXV0aFByb3ZpZGVyKCk7XHJcbiAgcHJvdmlkZXIuYWRkU2NvcGUoJ3Byb2ZpbGUnKTtcclxuICBwcm92aWRlci5hZGRTY29wZSgnZW1haWwnKTtcclxuXHJcbiAgdHJ5IHtcclxuICAgIGNvbnN0IHJlc3VsdCA9IGF3YWl0IHNpZ25JbldpdGhQb3B1cChhdXRoLCBwcm92aWRlcik7XHJcbiAgICBjb25zdCB1c2VyID0gcmVzdWx0LnVzZXI7XHJcbiAgICBhd2FpdCB1cGRhdGVVc2VyUHJvZmlsZSh1c2VyKTtcclxuICAgIHJldHVybiB1c2VyO1xyXG4gIH0gY2F0Y2ggKGVycm9yKSB7XHJcbiAgICBjb25zb2xlLmVycm9yKCdFcnJvciBzaWduaW5nIGluIHdpdGggR29vZ2xlJywgZXJyb3IpO1xyXG4gICAgdGhyb3cgZXJyb3I7XHJcbiAgfVxyXG59XHJcblxyXG5hc3luYyBmdW5jdGlvbiB1cGRhdGVVc2VyUHJvZmlsZSh1c2VyOiBGaXJlYmFzZVVzZXIpIHtcclxuICBjb25zdCB1c2VyUmVmID0gZG9jKGRiLCAndXNlcnMnLCB1c2VyLnVpZCk7XHJcbiAgYXdhaXQgc2V0RG9jKHVzZXJSZWYsIHtcclxuICAgIGRpc3BsYXlOYW1lOiB1c2VyLmRpc3BsYXlOYW1lLFxyXG4gICAgZW1haWw6IHVzZXIuZW1haWwsXHJcbiAgICBwaG90b1VSTDogdXNlci5waG90b1VSTCxcclxuICAgIC8vIEFkZCBhbnkgb3RoZXIgZmllbGRzIHlvdSB3YW50IHRvIHN0b3JlXHJcbiAgfSwgeyBtZXJnZTogdHJ1ZSB9KTtcclxufVxyXG5cclxuZXhwb3J0IGNvbnN0IHNpZ25VcFdpdGhFbWFpbCA9IGFzeW5jIChlbWFpbDogc3RyaW5nLCBwYXNzd29yZDogc3RyaW5nKSA9PiB7XHJcbiAgdHJ5IHtcclxuICAgIGNvbnN0IHJlc3VsdCA9IGF3YWl0IGNyZWF0ZVVzZXJXaXRoRW1haWxBbmRQYXNzd29yZChhdXRoLCBlbWFpbCwgcGFzc3dvcmQpO1xyXG4gICAgcmV0dXJuIHJlc3VsdC51c2VyO1xyXG4gIH0gY2F0Y2ggKGVycm9yKSB7XHJcbiAgICBjb25zb2xlLmVycm9yKFwiRXJyb3Igc2lnbmluZyB1cCB3aXRoIGVtYWlsXCIsIGVycm9yKTtcclxuICAgIHRocm93IGVycm9yO1xyXG4gIH1cclxufTtcclxuXHJcbmV4cG9ydCBjb25zdCBzaWduSW5XaXRoRW1haWwgPSBhc3luYyAoZW1haWw6IHN0cmluZywgcGFzc3dvcmQ6IHN0cmluZykgPT4ge1xyXG4gIHRyeSB7XHJcbiAgICBjb25zdCByZXN1bHQgPSBhd2FpdCBzaWduSW5XaXRoRW1haWxBbmRQYXNzd29yZChhdXRoLCBlbWFpbCwgcGFzc3dvcmQpO1xyXG4gICAgcmV0dXJuIHJlc3VsdC51c2VyO1xyXG4gIH0gY2F0Y2ggKGVycm9yKSB7XHJcbiAgICBjb25zb2xlLmVycm9yKFwiRXJyb3Igc2lnbmluZyBpbiB3aXRoIGVtYWlsXCIsIGVycm9yKTtcclxuICAgIHRocm93IGVycm9yO1xyXG4gIH1cclxufTtcclxuXHJcbmV4cG9ydCBjb25zdCBzaWduT3V0VXNlciA9IGFzeW5jICgpID0+IHtcclxuICB0cnkge1xyXG4gICAgYXdhaXQgc2lnbk91dChhdXRoKTtcclxuICB9IGNhdGNoIChlcnJvcikge1xyXG4gICAgY29uc29sZS5lcnJvcihcIkVycm9yIHNpZ25pbmcgb3V0XCIsIGVycm9yKTtcclxuICAgIHRocm93IGVycm9yO1xyXG4gIH1cclxufTtcclxuXHJcbmV4cG9ydCBjb25zdCBnZXRDdXJyZW50VXNlciA9ICgpOiBVc2VyIHwgbnVsbCA9PiB7XHJcbiAgcmV0dXJuIGF1dGguY3VycmVudFVzZXI7XHJcbn07Il0sIm5hbWVzIjpbImF1dGgiLCJzaWduSW5XaXRoUG9wdXAiLCJHb29nbGVBdXRoUHJvdmlkZXIiLCJjcmVhdGVVc2VyV2l0aEVtYWlsQW5kUGFzc3dvcmQiLCJzaWduSW5XaXRoRW1haWxBbmRQYXNzd29yZCIsInNpZ25PdXQiLCJkb2MiLCJzZXREb2MiLCJkYiIsImdvb2dsZVByb3ZpZGVyIiwic2lnbkluV2l0aEdvb2dsZSIsInByb3ZpZGVyIiwiYWRkU2NvcGUiLCJyZXN1bHQiLCJ1c2VyIiwidXBkYXRlVXNlclByb2ZpbGUiLCJlcnJvciIsImNvbnNvbGUiLCJ1c2VyUmVmIiwidWlkIiwiZGlzcGxheU5hbWUiLCJlbWFpbCIsInBob3RvVVJMIiwibWVyZ2UiLCJzaWduVXBXaXRoRW1haWwiLCJwYXNzd29yZCIsInNpZ25JbldpdGhFbWFpbCIsInNpZ25PdXRVc2VyIiwiZ2V0Q3VycmVudFVzZXIiLCJjdXJyZW50VXNlciJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(ssr)/./lib/auth.ts\n");
-
-/***/ }),
-
-/***/ "(ssr)/./lib/db.ts":
-/*!*******************!*\
-  !*** ./lib/db.ts ***!
-  \*******************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   saveImageToDatabase: () => (/* binding */ saveImageToDatabase),\n/* harmony export */   sql: () => (/* reexport safe */ _vercel_postgres__WEBPACK_IMPORTED_MODULE_0__.sql)\n/* harmony export */ });\n/* harmony import */ var _vercel_postgres__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vercel/postgres */ \"(ssr)/./node_modules/@vercel/postgres/dist/index-node.js\");\n\n\nasync function saveImageToDatabase(userId, fileName) {\n    // Assuming you're using a SQL database\n    const query = \"INSERT INTO user_images (user_id, file_name) VALUES (?, ?)\";\n    await db.execute(query, [\n        userId,\n        fileName\n    ]);\n} // ... other database functions\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9saWIvZGIudHMiLCJtYXBwaW5ncyI6Ijs7Ozs7O0FBQXVDO0FBRXhCO0FBRVIsZUFBZUMsb0JBQW9CQyxNQUFjLEVBQUVDLFFBQWdCO0lBQ3hFLHVDQUF1QztJQUN2QyxNQUFNQyxRQUFRO0lBQ2QsTUFBTUMsR0FBR0MsT0FBTyxDQUFDRixPQUFPO1FBQUNGO1FBQVFDO0tBQVM7QUFDNUMsRUFFQSwrQkFBK0IiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9wb3Rob2xlLWRldGVjdGlvbi13ZWJzaXRlLy4vbGliL2RiLnRzPzFkZjAiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgc3FsIH0gZnJvbSAnQHZlcmNlbC9wb3N0Z3Jlcyc7XHJcblxyXG5leHBvcnQgeyBzcWwgfTtcclxuXHJcbmV4cG9ydCBhc3luYyBmdW5jdGlvbiBzYXZlSW1hZ2VUb0RhdGFiYXNlKHVzZXJJZDogc3RyaW5nLCBmaWxlTmFtZTogc3RyaW5nKSB7XHJcbiAgLy8gQXNzdW1pbmcgeW91J3JlIHVzaW5nIGEgU1FMIGRhdGFiYXNlXHJcbiAgY29uc3QgcXVlcnkgPSAnSU5TRVJUIElOVE8gdXNlcl9pbWFnZXMgKHVzZXJfaWQsIGZpbGVfbmFtZSkgVkFMVUVTICg/LCA/KSc7XHJcbiAgYXdhaXQgZGIuZXhlY3V0ZShxdWVyeSwgW3VzZXJJZCwgZmlsZU5hbWVdKTtcclxufVxyXG5cclxuLy8gLi4uIG90aGVyIGRhdGFiYXNlIGZ1bmN0aW9ucyJdLCJuYW1lcyI6WyJzcWwiLCJzYXZlSW1hZ2VUb0RhdGFiYXNlIiwidXNlcklkIiwiZmlsZU5hbWUiLCJxdWVyeSIsImRiIiwiZXhlY3V0ZSJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(ssr)/./lib/db.ts\n");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   getCurrentUser: () => (/* binding */ getCurrentUser),\n/* harmony export */   signInWithEmail: () => (/* binding */ signInWithEmail),\n/* harmony export */   signInWithGoogle: () => (/* binding */ signInWithGoogle),\n/* harmony export */   signOutUser: () => (/* binding */ signOutUser),\n/* harmony export */   signUpWithEmail: () => (/* binding */ signUpWithEmail)\n/* harmony export */ });\n/* harmony import */ var _firebase__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../firebase */ \"(ssr)/./firebase.ts\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"(ssr)/./node_modules/firebase/auth/dist/index.mjs\");\n\n\n// Remove the import for doc and setDoc\n// import { doc, setDoc } from 'firebase/firestore';\n// Remove the import for db\n// import { db } from './db';\nconst googleProvider = new firebase_auth__WEBPACK_IMPORTED_MODULE_1__.GoogleAuthProvider();\nasync function signInWithGoogle() {\n    const provider = new firebase_auth__WEBPACK_IMPORTED_MODULE_1__.GoogleAuthProvider();\n    provider.addScope(\"profile\");\n    provider.addScope(\"email\");\n    try {\n        const result = await (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.signInWithPopup)(_firebase__WEBPACK_IMPORTED_MODULE_0__.auth, provider);\n        const user = result.user;\n        // Remove the call to updateUserProfile\n        // await updateUserProfile(user);\n        return user;\n    } catch (error) {\n        console.error(\"Error signing in with Google\", error);\n        throw error;\n    }\n}\n// Remove the updateUserProfile function\n// async function updateUserProfile(user: FirebaseUser) {\n//   const userRef = doc(db, 'users', user.uid);\n//   await setDoc(userRef, {\n//     displayName: user.displayName,\n//     email: user.email,\n//     photoURL: user.photoURL,\n//     // Add any other fields you want to store\n//   }, { merge: true });\n// }\nconst signUpWithEmail = async (email, password)=>{\n    try {\n        const result = await (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.createUserWithEmailAndPassword)(_firebase__WEBPACK_IMPORTED_MODULE_0__.auth, email, password);\n        return result.user;\n    } catch (error) {\n        console.error(\"Error signing up with email\", error);\n        throw error;\n    }\n};\nconst signInWithEmail = async (email, password)=>{\n    try {\n        const result = await (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.signInWithEmailAndPassword)(_firebase__WEBPACK_IMPORTED_MODULE_0__.auth, email, password);\n        return result.user;\n    } catch (error) {\n        console.error(\"Error signing in with email\", error);\n        throw error;\n    }\n};\nconst signOutUser = async ()=>{\n    try {\n        await (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.signOut)(_firebase__WEBPACK_IMPORTED_MODULE_0__.auth);\n    } catch (error) {\n        console.error(\"Error signing out\", error);\n        throw error;\n    }\n};\nconst getCurrentUser = ()=>{\n    return _firebase__WEBPACK_IMPORTED_MODULE_0__.auth.currentUser;\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9saWIvYXV0aC50cyIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0FBQW1DO0FBUVo7QUFDdkIsdUNBQXVDO0FBQ3ZDLG9EQUFvRDtBQUNwRCwyQkFBMkI7QUFDM0IsNkJBQTZCO0FBRTdCLE1BQU1NLGlCQUFpQixJQUFJSiw2REFBa0JBO0FBRXRDLGVBQWVLO0lBQ3BCLE1BQU1DLFdBQVcsSUFBSU4sNkRBQWtCQTtJQUN2Q00sU0FBU0MsUUFBUSxDQUFDO0lBQ2xCRCxTQUFTQyxRQUFRLENBQUM7SUFFbEIsSUFBSTtRQUNGLE1BQU1DLFNBQVMsTUFBTVQsOERBQWVBLENBQUNELDJDQUFJQSxFQUFFUTtRQUMzQyxNQUFNRyxPQUFPRCxPQUFPQyxJQUFJO1FBQ3hCLHVDQUF1QztRQUN2QyxpQ0FBaUM7UUFDakMsT0FBT0E7SUFDVCxFQUFFLE9BQU9DLE9BQU87UUFDZEMsUUFBUUQsS0FBSyxDQUFDLGdDQUFnQ0E7UUFDOUMsTUFBTUE7SUFDUjtBQUNGO0FBRUEsd0NBQXdDO0FBQ3hDLHlEQUF5RDtBQUN6RCxnREFBZ0Q7QUFDaEQsNEJBQTRCO0FBQzVCLHFDQUFxQztBQUNyQyx5QkFBeUI7QUFDekIsK0JBQStCO0FBQy9CLGdEQUFnRDtBQUNoRCx5QkFBeUI7QUFDekIsSUFBSTtBQUVHLE1BQU1FLGtCQUFrQixPQUFPQyxPQUFlQztJQUNuRCxJQUFJO1FBQ0YsTUFBTU4sU0FBUyxNQUFNUCw2RUFBOEJBLENBQUNILDJDQUFJQSxFQUFFZSxPQUFPQztRQUNqRSxPQUFPTixPQUFPQyxJQUFJO0lBQ3BCLEVBQUUsT0FBT0MsT0FBTztRQUNkQyxRQUFRRCxLQUFLLENBQUMsK0JBQStCQTtRQUM3QyxNQUFNQTtJQUNSO0FBQ0YsRUFBRTtBQUVLLE1BQU1LLGtCQUFrQixPQUFPRixPQUFlQztJQUNuRCxJQUFJO1FBQ0YsTUFBTU4sU0FBUyxNQUFNTix5RUFBMEJBLENBQUNKLDJDQUFJQSxFQUFFZSxPQUFPQztRQUM3RCxPQUFPTixPQUFPQyxJQUFJO0lBQ3BCLEVBQUUsT0FBT0MsT0FBTztRQUNkQyxRQUFRRCxLQUFLLENBQUMsK0JBQStCQTtRQUM3QyxNQUFNQTtJQUNSO0FBQ0YsRUFBRTtBQUVLLE1BQU1NLGNBQWM7SUFDekIsSUFBSTtRQUNGLE1BQU1iLHNEQUFPQSxDQUFDTCwyQ0FBSUE7SUFDcEIsRUFBRSxPQUFPWSxPQUFPO1FBQ2RDLFFBQVFELEtBQUssQ0FBQyxxQkFBcUJBO1FBQ25DLE1BQU1BO0lBQ1I7QUFDRixFQUFFO0FBRUssTUFBTU8saUJBQWlCO0lBQzVCLE9BQU9uQiwyQ0FBSUEsQ0FBQ29CLFdBQVc7QUFDekIsRUFBRSIsInNvdXJjZXMiOlsid2VicGFjazovL3BvdGhvbGUtZGV0ZWN0aW9uLXdlYnNpdGUvLi9saWIvYXV0aC50cz9iZjdlIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IGF1dGggfSBmcm9tICcuLi9maXJlYmFzZSc7XHJcbmltcG9ydCB7XHJcbiAgc2lnbkluV2l0aFBvcHVwLFxyXG4gIEdvb2dsZUF1dGhQcm92aWRlcixcclxuICBjcmVhdGVVc2VyV2l0aEVtYWlsQW5kUGFzc3dvcmQsXHJcbiAgc2lnbkluV2l0aEVtYWlsQW5kUGFzc3dvcmQsXHJcbiAgc2lnbk91dCxcclxuICBVc2VyIGFzIEZpcmViYXNlVXNlclxyXG59IGZyb20gJ2ZpcmViYXNlL2F1dGgnO1xyXG4vLyBSZW1vdmUgdGhlIGltcG9ydCBmb3IgZG9jIGFuZCBzZXREb2NcclxuLy8gaW1wb3J0IHsgZG9jLCBzZXREb2MgfSBmcm9tICdmaXJlYmFzZS9maXJlc3RvcmUnO1xyXG4vLyBSZW1vdmUgdGhlIGltcG9ydCBmb3IgZGJcclxuLy8gaW1wb3J0IHsgZGIgfSBmcm9tICcuL2RiJztcclxuXHJcbmNvbnN0IGdvb2dsZVByb3ZpZGVyID0gbmV3IEdvb2dsZUF1dGhQcm92aWRlcigpO1xyXG5cclxuZXhwb3J0IGFzeW5jIGZ1bmN0aW9uIHNpZ25JbldpdGhHb29nbGUoKSB7XHJcbiAgY29uc3QgcHJvdmlkZXIgPSBuZXcgR29vZ2xlQXV0aFByb3ZpZGVyKCk7XHJcbiAgcHJvdmlkZXIuYWRkU2NvcGUoJ3Byb2ZpbGUnKTtcclxuICBwcm92aWRlci5hZGRTY29wZSgnZW1haWwnKTtcclxuXHJcbiAgdHJ5IHtcclxuICAgIGNvbnN0IHJlc3VsdCA9IGF3YWl0IHNpZ25JbldpdGhQb3B1cChhdXRoLCBwcm92aWRlcik7XHJcbiAgICBjb25zdCB1c2VyID0gcmVzdWx0LnVzZXI7XHJcbiAgICAvLyBSZW1vdmUgdGhlIGNhbGwgdG8gdXBkYXRlVXNlclByb2ZpbGVcclxuICAgIC8vIGF3YWl0IHVwZGF0ZVVzZXJQcm9maWxlKHVzZXIpO1xyXG4gICAgcmV0dXJuIHVzZXI7XHJcbiAgfSBjYXRjaCAoZXJyb3IpIHtcclxuICAgIGNvbnNvbGUuZXJyb3IoJ0Vycm9yIHNpZ25pbmcgaW4gd2l0aCBHb29nbGUnLCBlcnJvcik7XHJcbiAgICB0aHJvdyBlcnJvcjtcclxuICB9XHJcbn1cclxuXHJcbi8vIFJlbW92ZSB0aGUgdXBkYXRlVXNlclByb2ZpbGUgZnVuY3Rpb25cclxuLy8gYXN5bmMgZnVuY3Rpb24gdXBkYXRlVXNlclByb2ZpbGUodXNlcjogRmlyZWJhc2VVc2VyKSB7XHJcbi8vICAgY29uc3QgdXNlclJlZiA9IGRvYyhkYiwgJ3VzZXJzJywgdXNlci51aWQpO1xyXG4vLyAgIGF3YWl0IHNldERvYyh1c2VyUmVmLCB7XHJcbi8vICAgICBkaXNwbGF5TmFtZTogdXNlci5kaXNwbGF5TmFtZSxcclxuLy8gICAgIGVtYWlsOiB1c2VyLmVtYWlsLFxyXG4vLyAgICAgcGhvdG9VUkw6IHVzZXIucGhvdG9VUkwsXHJcbi8vICAgICAvLyBBZGQgYW55IG90aGVyIGZpZWxkcyB5b3Ugd2FudCB0byBzdG9yZVxyXG4vLyAgIH0sIHsgbWVyZ2U6IHRydWUgfSk7XHJcbi8vIH1cclxuXHJcbmV4cG9ydCBjb25zdCBzaWduVXBXaXRoRW1haWwgPSBhc3luYyAoZW1haWw6IHN0cmluZywgcGFzc3dvcmQ6IHN0cmluZykgPT4ge1xyXG4gIHRyeSB7XHJcbiAgICBjb25zdCByZXN1bHQgPSBhd2FpdCBjcmVhdGVVc2VyV2l0aEVtYWlsQW5kUGFzc3dvcmQoYXV0aCwgZW1haWwsIHBhc3N3b3JkKTtcclxuICAgIHJldHVybiByZXN1bHQudXNlcjtcclxuICB9IGNhdGNoIChlcnJvcikge1xyXG4gICAgY29uc29sZS5lcnJvcihcIkVycm9yIHNpZ25pbmcgdXAgd2l0aCBlbWFpbFwiLCBlcnJvcik7XHJcbiAgICB0aHJvdyBlcnJvcjtcclxuICB9XHJcbn07XHJcblxyXG5leHBvcnQgY29uc3Qgc2lnbkluV2l0aEVtYWlsID0gYXN5bmMgKGVtYWlsOiBzdHJpbmcsIHBhc3N3b3JkOiBzdHJpbmcpID0+IHtcclxuICB0cnkge1xyXG4gICAgY29uc3QgcmVzdWx0ID0gYXdhaXQgc2lnbkluV2l0aEVtYWlsQW5kUGFzc3dvcmQoYXV0aCwgZW1haWwsIHBhc3N3b3JkKTtcclxuICAgIHJldHVybiByZXN1bHQudXNlcjtcclxuICB9IGNhdGNoIChlcnJvcikge1xyXG4gICAgY29uc29sZS5lcnJvcihcIkVycm9yIHNpZ25pbmcgaW4gd2l0aCBlbWFpbFwiLCBlcnJvcik7XHJcbiAgICB0aHJvdyBlcnJvcjtcclxuICB9XHJcbn07XHJcblxyXG5leHBvcnQgY29uc3Qgc2lnbk91dFVzZXIgPSBhc3luYyAoKSA9PiB7XHJcbiAgdHJ5IHtcclxuICAgIGF3YWl0IHNpZ25PdXQoYXV0aCk7XHJcbiAgfSBjYXRjaCAoZXJyb3IpIHtcclxuICAgIGNvbnNvbGUuZXJyb3IoXCJFcnJvciBzaWduaW5nIG91dFwiLCBlcnJvcik7XHJcbiAgICB0aHJvdyBlcnJvcjtcclxuICB9XHJcbn07XHJcblxyXG5leHBvcnQgY29uc3QgZ2V0Q3VycmVudFVzZXIgPSAoKTogRmlyZWJhc2VVc2VyIHwgbnVsbCA9PiB7XHJcbiAgcmV0dXJuIGF1dGguY3VycmVudFVzZXI7XHJcbn07Il0sIm5hbWVzIjpbImF1dGgiLCJzaWduSW5XaXRoUG9wdXAiLCJHb29nbGVBdXRoUHJvdmlkZXIiLCJjcmVhdGVVc2VyV2l0aEVtYWlsQW5kUGFzc3dvcmQiLCJzaWduSW5XaXRoRW1haWxBbmRQYXNzd29yZCIsInNpZ25PdXQiLCJnb29nbGVQcm92aWRlciIsInNpZ25JbldpdGhHb29nbGUiLCJwcm92aWRlciIsImFkZFNjb3BlIiwicmVzdWx0IiwidXNlciIsImVycm9yIiwiY29uc29sZSIsInNpZ25VcFdpdGhFbWFpbCIsImVtYWlsIiwicGFzc3dvcmQiLCJzaWduSW5XaXRoRW1haWwiLCJzaWduT3V0VXNlciIsImdldEN1cnJlbnRVc2VyIiwiY3VycmVudFVzZXIiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(ssr)/./lib/auth.ts\n");
 
 /***/ }),
 
@@ -726,7 +518,7 @@ const e1 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__W
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/@firebase","vendor-chunks/undici","vendor-chunks/@radix-ui","vendor-chunks/tailwind-merge","vendor-chunks/tslib","vendor-chunks/idb","vendor-chunks/class-variance-authority","vendor-chunks/firebase","vendor-chunks/clsx","vendor-chunks/@grpc","vendor-chunks/protobufjs","vendor-chunks/@neondatabase","vendor-chunks/ws","vendor-chunks/long","vendor-chunks/@protobufjs","vendor-chunks/lodash.camelcase","vendor-chunks/@vercel","vendor-chunks/node-gyp-build","vendor-chunks/bufferutil"], () => (__webpack_exec__("(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fpage&page=%2Fpage&appPaths=%2Fpage&pagePath=private-next-app-dir%2Fpage.tsx&appDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!")));
+var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/undici","vendor-chunks/@firebase","vendor-chunks/tslib","vendor-chunks/idb","vendor-chunks/firebase","vendor-chunks/@radix-ui","vendor-chunks/tailwind-merge","vendor-chunks/class-variance-authority","vendor-chunks/clsx"], () => (__webpack_exec__("(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fpage&page=%2Fpage&appPaths=%2Fpage&pagePath=private-next-app-dir%2Fpage.tsx&appDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!")));
 module.exports = __webpack_exports__;
 
 })();
