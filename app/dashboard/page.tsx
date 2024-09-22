@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../components/AuthProvider';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/Login/ui/card";
@@ -10,11 +10,9 @@ import { Label } from "../../components/Login/ui/label";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../../components/ui/select";
 import { Upload, BarChart2, Map, FileSpreadsheet, HelpCircle, Image, DollarSign, Box } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
-import { FollowingSidebar } from '../../components/FollowingSidebar';
 import { useNavigateOrScrollTop } from '../../utils/navigation';
-import { useState } from 'react';
+import DashboardLayout from '../dashboard-layout';
 
-// Update the User interface to include the new fields
 interface User {
   uid: string;
   email: string | null;
@@ -70,132 +68,124 @@ export default function WorkPage() {
   }
 
   return (
-    <div className="flex min-h-screen bg-blue-50">
-      <FollowingSidebar 
-        onCollapse={handleSidebarCollapse} 
-        onLogoClick={handlePaveScopeClick}
-      />
-      <main 
-        className={`flex-1 ${isSidebarCollapsed ? 'ml-16' : 'ml-56'} p-8 transition-all duration-300 ease-in-out`}
-      >
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-blue-800">Work Dashboard</h1>
-          <div className="flex items-center space-x-4">
-            {loading ? (
-              <span className="text-blue-600">Loading...</span>
-            ) : user ? (
-              <>
-                <span className="text-blue-600">{user.displayName || user.email}</span>
-                <Avatar>
-                  <AvatarImage src={user.photoURL || `/placeholder.svg?height=40&width=40&text=${user.displayName?.charAt(0) || 'A'}`} alt={user.displayName || 'User'} />
-                  <AvatarFallback>{user.displayName?.charAt(0) || 'A'}</AvatarFallback>
-                </Avatar>
-              </>
-            ) : (
-              <span className="text-blue-600">Not logged in</span>
-            )}
-          </div>
+    <DashboardLayout>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold text-blue-800">Work Dashboard</h1>
+        <div className="flex items-center space-x-4">
+          {loading ? (
+            <span className="text-blue-600">Loading...</span>
+          ) : user ? (
+            <>
+              <span className="text-blue-600">{user.displayName || user.email}</span>
+              <Avatar>
+                <AvatarImage src={user.photoURL || `/placeholder.svg?height=40&width=40&text=${user.displayName?.charAt(0) || 'A'}`} alt={user.displayName || 'User'} />
+                <AvatarFallback>{user.displayName?.charAt(0) || 'A'}</AvatarFallback>
+              </Avatar>
+            </>
+          ) : (
+            <span className="text-blue-600">Not logged in</span>
+          )}
         </div>
+      </div>
 
-        {/* Metrics */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-          <MetricCard title="Total Images" value="1,234" icon={Image} />
-          <MetricCard title="Detections" value="567" icon={BarChart2} />
-          <MetricCard title="Estimated Cost" value="$12,345" icon={DollarSign} />
-          <MetricCard title="Volume of Materials" value="890 m³" icon={Box} />
-        </div>
+      {/* Metrics */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+        <MetricCard title="Total Images" value="1,234" icon={Image} />
+        <MetricCard title="Detections" value="567" icon={BarChart2} />
+        <MetricCard title="Estimated Cost" value="$12,345" icon={DollarSign} />
+        <MetricCard title="Volume of Materials" value="890 m³" icon={Box} />
+      </div>
 
-        {/* Main content areas */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Maps */}
-          <Card className="col-span-1 lg:col-span-1">
-            <CardHeader>
-              <CardTitle>Maps</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="aspect-video bg-gray-200 flex items-center justify-center text-gray-500">
-                Map API Placeholder
-              </div>
-            </CardContent>
-          </Card>
+      {/* Main content areas */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Maps */}
+        <Card className="col-span-1 lg:col-span-1">
+          <CardHeader>
+            <CardTitle>Maps</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="aspect-video bg-gray-200 flex items-center justify-center text-gray-500">
+              Map API Placeholder
+            </div>
+          </CardContent>
+        </Card>
 
-          {/* Gallery */}
-          <Card className="col-span-1 lg:col-span-1">
-            <CardHeader>
-              <CardTitle>Gallery</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-3 gap-4">
-                {[...Array(6)].map((_, i) => (
-                  <div key={i} className="aspect-square bg-gray-200" />
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+        {/* Gallery */}
+        <Card className="col-span-1 lg:col-span-1">
+          <CardHeader>
+            <CardTitle>Gallery</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-3 gap-4">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="aspect-square bg-gray-200" />
+              ))}
+            </div>
+          </CardContent>
+        </Card>
 
-          {/* Spreadsheet */}
-          <Card className="col-span-1 lg:col-span-1">
-            <CardHeader>
-              <CardTitle>Spreadsheet</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b">
-                      <th className="px-4 py-2 text-left">Column 1</th>
-                      <th className="px-4 py-2 text-left">Column 2</th>
-                      <th className="px-4 py-2 text-left">Column 3</th>
+        {/* Spreadsheet */}
+        <Card className="col-span-1 lg:col-span-1">
+          <CardHeader>
+            <CardTitle>Spreadsheet</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b">
+                    <th className="px-4 py-2 text-left">Column 1</th>
+                    <th className="px-4 py-2 text-left">Column 2</th>
+                    <th className="px-4 py-2 text-left">Column 3</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[...Array(5)].map((_, i) => (
+                    <tr key={i} className="border-b">
+                      <td className="px-4 py-2">Data {i+1}</td>
+                      <td className="px-4 py-2">Data {i+1}</td>
+                      <td className="px-4 py-2">Data {i+1}</td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {[...Array(5)].map((_, i) => (
-                      <tr key={i} className="border-b">
-                        <td className="px-4 py-2">Data {i+1}</td>
-                        <td className="px-4 py-2">Data {i+1}</td>
-                        <td className="px-4 py-2">Data {i+1}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </CardContent>
-          </Card>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
 
-          {/* Model Parameters */}
-          <Card className="col-span-1 lg:col-span-1">
-            <CardHeader>
-              <CardTitle>Model Parameters</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="model">Model</Label>
-                  <Select>
-                    <SelectTrigger id="model">
-                      <SelectValue placeholder="Select a model" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="model1">Model 1</SelectItem>
-                      <SelectItem value="model2">Model 2</SelectItem>
-                      <SelectItem value="model3">Model 3</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="parameter1">Parameter 1</Label>
-                  <Input id="parameter1" type="number" placeholder="Enter value" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="parameter2">Parameter 2</Label>
-                  <Input id="parameter2" type="number" placeholder="Enter value" />
-                </div>
-                <Button type="submit" className="w-full">Apply</Button>
-              </form>
-            </CardContent>
-          </Card>
-        </div>
-      </main>
-    </div>
+        {/* Model Parameters */}
+        <Card className="col-span-1 lg:col-span-1">
+          <CardHeader>
+            <CardTitle>Model Parameters</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="model">Model</Label>
+                <Select>
+                  <SelectTrigger id="model">
+                    <SelectValue placeholder="Select a model" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="model1">Model 1</SelectItem>
+                    <SelectItem value="model2">Model 2</SelectItem>
+                    <SelectItem value="model3">Model 3</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="parameter1">Parameter 1</Label>
+                <Input id="parameter1" type="number" placeholder="Enter value" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="parameter2">Parameter 2</Label>
+                <Input id="parameter2" type="number" placeholder="Enter value" />
+              </div>
+              <Button type="submit" className="w-full">Apply</Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    </DashboardLayout>
   );
 }

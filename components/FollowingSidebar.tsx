@@ -55,16 +55,15 @@ export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick,
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className={`py-4 px-3 flex items-center ${isCollapsed ? 'justify-center' : ''} cursor-pointer`} onClick={onLogoClick}>
-        {!isCollapsed && (
+      <div className={`py-4 px-3 flex items-center ${isCollapsed && !isHovered ? 'justify-center' : ''} cursor-pointer`} onClick={onLogoClick}>
+        {!isCollapsed || isHovered ? (
           <>
             <div className="w-10 h-10 flex-shrink-0 mr-3">
               <img src="/images/logo.png" alt="PaveScope Logo" className="w-full h-full object-contain" />
             </div>
             <h2 className="text-xl font-bold">PaveScope</h2>
           </>
-        )}
-        {isCollapsed && (
+        ) : (
           <div className="w-8 h-8">
             <img src="/images/logo-icon.png" alt="PaveScope Icon" className="w-full h-full object-contain" />
           </div>
@@ -73,10 +72,10 @@ export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick,
       <nav className="flex-grow overflow-y-auto mt-4">
         {navItems.map((item) => (
           <Link href={item.href} key={item.name}>
-            <Button variant="ghost" className={`w-full justify-start hover:bg-blue-700 transition-colors ${isCollapsed ? 'px-0 py-4' : 'px-4 py-3 mb-2'}`}>
-              <div className={`flex items-center ${isCollapsed ? 'justify-center w-full' : ''}`}>
+            <Button variant="ghost" className={`w-full justify-start hover:bg-blue-700 transition-colors ${isCollapsed && !isHovered ? 'px-0 py-4' : 'px-4 py-3 mb-2'}`}>
+              <div className={`flex items-center ${isCollapsed && !isHovered ? 'justify-center w-full' : ''}`}>
                 {React.createElement(item.icon, { className: "h-5 w-5" })}
-                {!isCollapsed && <span className="ml-3 text-base">{item.name}</span>}
+                {(!isCollapsed || isHovered) && <span className="ml-3 text-base">{item.name}</span>}
               </div>
             </Button>
           </Link>
