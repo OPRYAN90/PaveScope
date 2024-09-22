@@ -1351,6 +1351,12 @@ video {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
 }
+.hover\:ml-56:hover {
+  margin-left: 14rem;
+}
+.hover\:w-56:hover {
+  width: 14rem;
+}
 .hover\:scale-105:hover {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;

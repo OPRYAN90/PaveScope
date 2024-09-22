@@ -6,6 +6,7 @@ import { useNavigateOrScrollTop } from '../utils/navigation';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSidebarHovered, setIsSidebarHovered] = useState(false);
 
   const handleSidebarCollapse = (collapsed: boolean) => {
     setIsSidebarCollapsed(collapsed);
@@ -25,8 +26,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <FollowingSidebar 
         onCollapse={handleSidebarCollapse} 
         onLogoClick={handleLogoClick}
+        onHover={setIsSidebarHovered} // Pass the onHover prop
       />
-      <main className={`flex-1 ${isSidebarCollapsed ? 'ml-16' : 'ml-56'} p-8 transition-all duration-300 ease-in-out overflow-y-auto`}>
+      <main className={`flex-1 ${isSidebarCollapsed ? 'ml-16' : 'ml-56'} ${isSidebarHovered && isSidebarCollapsed ? 'ml-56' : ''} p-8 transition-all duration-300 ease-in-out overflow-y-auto`}>
         {children}
       </main>
     </div>

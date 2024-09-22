@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "./Login/ui/button";
 import { Upload, BarChart2, Map, FileSpreadsheet, HelpCircle, Image, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
@@ -8,16 +8,37 @@ import Link from 'next/link';
 interface FollowingSidebarProps {
   onLogoClick: () => void;
   onCollapse: (isCollapsed: boolean) => void;
+  onHover?: (isHovered: boolean) => void; // Make onHover optional
 }
 
-export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick, onCollapse }) => {
+export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick, onCollapse, onHover }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    const savedState = localStorage.getItem('sidebar-collapsed');
+    if (savedState) {
+      setIsCollapsed(JSON.parse(savedState));
+      onCollapse(JSON.parse(savedState));
+    }
+  }, [onCollapse]);
 
   function toggleSidebar() {
     const newCollapsedState = !isCollapsed;
     setIsCollapsed(newCollapsedState);
     onCollapse(newCollapsedState);
+    localStorage.setItem('sidebar-collapsed', JSON.stringify(newCollapsedState));
   }
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (onHover) onHover(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    if (onHover) onHover(false);
+  };
 
   const navItems = [
     { name: 'Upload', icon: Upload, href: '/upload' },
@@ -29,7 +50,11 @@ export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick,
   ];
 
   return (
-    <aside className={`fixed left-0 top-0 ${isCollapsed ? 'w-16' : 'w-56'} h-screen bg-gradient-to-b from-blue-600 to-blue-800 text-white flex flex-col transition-all duration-300 ease-in-out z-10`}>
+    <aside
+      className={`fixed left-0 top-0 ${isCollapsed && !isHovered ? 'w-16' : 'w-56'} h-screen bg-gradient-to-b from-blue-600 to-blue-800 text-white flex flex-col transition-all duration-300 ease-in-out z-10`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className={`py-4 px-3 flex items-center ${isCollapsed ? 'justify-center' : ''} cursor-pointer`} onClick={onLogoClick}>
         {!isCollapsed && (
           <>
