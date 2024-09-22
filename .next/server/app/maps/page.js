@@ -56,6 +56,226 @@ module.exports = require("next/dist/compiled/next-server/app-page.runtime.dev.js
 
 /***/ }),
 
+/***/ "node:assert":
+/*!******************************!*\
+  !*** external "node:assert" ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:assert");
+
+/***/ }),
+
+/***/ "node:async_hooks":
+/*!***********************************!*\
+  !*** external "node:async_hooks" ***!
+  \***********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:async_hooks");
+
+/***/ }),
+
+/***/ "node:buffer":
+/*!******************************!*\
+  !*** external "node:buffer" ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:buffer");
+
+/***/ }),
+
+/***/ "node:console":
+/*!*******************************!*\
+  !*** external "node:console" ***!
+  \*******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:console");
+
+/***/ }),
+
+/***/ "node:crypto":
+/*!******************************!*\
+  !*** external "node:crypto" ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:crypto");
+
+/***/ }),
+
+/***/ "node:diagnostics_channel":
+/*!*******************************************!*\
+  !*** external "node:diagnostics_channel" ***!
+  \*******************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:diagnostics_channel");
+
+/***/ }),
+
+/***/ "node:events":
+/*!******************************!*\
+  !*** external "node:events" ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:events");
+
+/***/ }),
+
+/***/ "node:http":
+/*!****************************!*\
+  !*** external "node:http" ***!
+  \****************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:http");
+
+/***/ }),
+
+/***/ "node:http2":
+/*!*****************************!*\
+  !*** external "node:http2" ***!
+  \*****************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:http2");
+
+/***/ }),
+
+/***/ "node:net":
+/*!***************************!*\
+  !*** external "node:net" ***!
+  \***************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:net");
+
+/***/ }),
+
+/***/ "node:perf_hooks":
+/*!**********************************!*\
+  !*** external "node:perf_hooks" ***!
+  \**********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:perf_hooks");
+
+/***/ }),
+
+/***/ "node:querystring":
+/*!***********************************!*\
+  !*** external "node:querystring" ***!
+  \***********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:querystring");
+
+/***/ }),
+
+/***/ "node:stream":
+/*!******************************!*\
+  !*** external "node:stream" ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:stream");
+
+/***/ }),
+
+/***/ "node:tls":
+/*!***************************!*\
+  !*** external "node:tls" ***!
+  \***************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:tls");
+
+/***/ }),
+
+/***/ "node:url":
+/*!***************************!*\
+  !*** external "node:url" ***!
+  \***************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:url");
+
+/***/ }),
+
+/***/ "node:util":
+/*!****************************!*\
+  !*** external "node:util" ***!
+  \****************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:util");
+
+/***/ }),
+
+/***/ "node:util/types":
+/*!**********************************!*\
+  !*** external "node:util/types" ***!
+  \**********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:util/types");
+
+/***/ }),
+
+/***/ "node:worker_threads":
+/*!**************************************!*\
+  !*** external "node:worker_threads" ***!
+  \**************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:worker_threads");
+
+/***/ }),
+
+/***/ "node:zlib":
+/*!****************************!*\
+  !*** external "node:zlib" ***!
+  \****************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("node:zlib");
+
+/***/ }),
+
+/***/ "string_decoder":
+/*!*********************************!*\
+  !*** external "string_decoder" ***!
+  \*********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("string_decoder");
+
+/***/ }),
+
 /***/ "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fmaps%2Fpage&page=%2Fmaps%2Fpage&appPaths=%2Fmaps%2Fpage&pagePath=private-next-app-dir%2Fmaps%2Fpage.tsx&appDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fmaps%2Fpage&page=%2Fmaps%2Fpage&appPaths=%2Fmaps%2Fpage&pagePath=private-next-app-dir%2Fmaps%2Fpage.tsx&appDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D! ***!
@@ -77,13 +297,13 @@ eval("Promise.resolve(/*! import() eager */).then(__webpack_require__.bind(__web
 
 /***/ }),
 
-/***/ "(ssr)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cnode_modules%5C%5C%40auth0%5C%5Cnextjs-auth0%5C%5Cdist%5C%5Cclient%5C%5Cindex.js%22%2C%22ids%22%3A%5B%22UserProvider%22%5D%7D&modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cstyles%5C%5Cglobals.css%22%2C%22ids%22%3A%5B%5D%7D&server=true!":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cnode_modules%5C%5C%40auth0%5C%5Cnextjs-auth0%5C%5Cdist%5C%5Cclient%5C%5Cindex.js%22%2C%22ids%22%3A%5B%22UserProvider%22%5D%7D&modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cstyles%5C%5Cglobals.css%22%2C%22ids%22%3A%5B%5D%7D&server=true! ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "(ssr)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Ccomponents%5C%5CAuthProvider.tsx%22%2C%22ids%22%3A%5B%22AuthProvider%22%5D%7D&modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cstyles%5C%5Cglobals.css%22%2C%22ids%22%3A%5B%5D%7D&server=true!":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Ccomponents%5C%5CAuthProvider.tsx%22%2C%22ids%22%3A%5B%22AuthProvider%22%5D%7D&modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cstyles%5C%5Cglobals.css%22%2C%22ids%22%3A%5B%5D%7D&server=true! ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("Promise.resolve(/*! import() eager */).then(__webpack_require__.bind(__webpack_require__, /*! ./node_modules/@auth0/nextjs-auth0/dist/client/index.js */ \"(ssr)/./node_modules/@auth0/nextjs-auth0/dist/client/index.js\"));\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9ub2RlX21vZHVsZXMvbmV4dC9kaXN0L2J1aWxkL3dlYnBhY2svbG9hZGVycy9uZXh0LWZsaWdodC1jbGllbnQtZW50cnktbG9hZGVyLmpzP21vZHVsZXM9JTdCJTIycmVxdWVzdCUyMiUzQSUyMkMlM0ElNUMlNUNVc2VycyU1QyU1Q3JmcmpvJTVDJTVDcG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZSU1QyU1Q25vZGVfbW9kdWxlcyU1QyU1QyU0MGF1dGgwJTVDJTVDbmV4dGpzLWF1dGgwJTVDJTVDZGlzdCU1QyU1Q2NsaWVudCU1QyU1Q2luZGV4LmpzJTIyJTJDJTIyaWRzJTIyJTNBJTVCJTIyVXNlclByb3ZpZGVyJTIyJTVEJTdEJm1vZHVsZXM9JTdCJTIycmVxdWVzdCUyMiUzQSUyMkMlM0ElNUMlNUNVc2VycyU1QyU1Q3JmcmpvJTVDJTVDcG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZSU1QyU1Q3N0eWxlcyU1QyU1Q2dsb2JhbHMuY3NzJTIyJTJDJTIyaWRzJTIyJTNBJTVCJTVEJTdEJnNlcnZlcj10cnVlISIsIm1hcHBpbmdzIjoiQUFBQSwwTkFBOEsiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9wb3Rob2xlLWRldGVjdGlvbi13ZWJzaXRlLz83N2M1Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCgvKiB3ZWJwYWNrTW9kZTogXCJlYWdlclwiLCB3ZWJwYWNrRXhwb3J0czogW1wiVXNlclByb3ZpZGVyXCJdICovIFwiQzpcXFxcVXNlcnNcXFxccmZyam9cXFxccG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZVxcXFxub2RlX21vZHVsZXNcXFxcQGF1dGgwXFxcXG5leHRqcy1hdXRoMFxcXFxkaXN0XFxcXGNsaWVudFxcXFxpbmRleC5qc1wiKTtcbiJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(ssr)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cnode_modules%5C%5C%40auth0%5C%5Cnextjs-auth0%5C%5Cdist%5C%5Cclient%5C%5Cindex.js%22%2C%22ids%22%3A%5B%22UserProvider%22%5D%7D&modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cstyles%5C%5Cglobals.css%22%2C%22ids%22%3A%5B%5D%7D&server=true!\n");
+eval("Promise.resolve(/*! import() eager */).then(__webpack_require__.bind(__webpack_require__, /*! ./components/AuthProvider.tsx */ \"(ssr)/./components/AuthProvider.tsx\"));\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9ub2RlX21vZHVsZXMvbmV4dC9kaXN0L2J1aWxkL3dlYnBhY2svbG9hZGVycy9uZXh0LWZsaWdodC1jbGllbnQtZW50cnktbG9hZGVyLmpzP21vZHVsZXM9JTdCJTIycmVxdWVzdCUyMiUzQSUyMkMlM0ElNUMlNUNVc2VycyU1QyU1Q3JmcmpvJTVDJTVDcG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZSU1QyU1Q2NvbXBvbmVudHMlNUMlNUNBdXRoUHJvdmlkZXIudHN4JTIyJTJDJTIyaWRzJTIyJTNBJTVCJTIyQXV0aFByb3ZpZGVyJTIyJTVEJTdEJm1vZHVsZXM9JTdCJTIycmVxdWVzdCUyMiUzQSUyMkMlM0ElNUMlNUNVc2VycyU1QyU1Q3JmcmpvJTVDJTVDcG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZSU1QyU1Q3N0eWxlcyU1QyU1Q2dsb2JhbHMuY3NzJTIyJTJDJTIyaWRzJTIyJTNBJTVCJTVEJTdEJnNlcnZlcj10cnVlISIsIm1hcHBpbmdzIjoiQUFBQSxzS0FBZ0oiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9wb3Rob2xlLWRldGVjdGlvbi13ZWJzaXRlLz9kMTY2Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCgvKiB3ZWJwYWNrTW9kZTogXCJlYWdlclwiLCB3ZWJwYWNrRXhwb3J0czogW1wiQXV0aFByb3ZpZGVyXCJdICovIFwiQzpcXFxcVXNlcnNcXFxccmZyam9cXFxccG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZVxcXFxjb21wb25lbnRzXFxcXEF1dGhQcm92aWRlci50c3hcIik7XG4iXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(ssr)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Ccomponents%5C%5CAuthProvider.tsx%22%2C%22ids%22%3A%5B%22AuthProvider%22%5D%7D&modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5Crfrjo%5C%5Cpothole-detection-website%5C%5Cstyles%5C%5Cglobals.css%22%2C%22ids%22%3A%5B%5D%7D&server=true!\n");
 
 /***/ }),
 
@@ -108,6 +328,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "(ssr)/./components/AuthProvider.tsx":
+/*!*************************************!*\
+  !*** ./components/AuthProvider.tsx ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   AuthProvider: () => (/* binding */ AuthProvider),\n/* harmony export */   useAuth: () => (/* binding */ useAuth)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _firebase__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../firebase */ \"(ssr)/./firebase.ts\");\n/* __next_internal_client_entry_do_not_use__ useAuth,AuthProvider auto */ \n\n\nconst AuthContext = /*#__PURE__*/ (0,react__WEBPACK_IMPORTED_MODULE_1__.createContext)({\n    user: null,\n    loading: true\n});\nconst useAuth = ()=>(0,react__WEBPACK_IMPORTED_MODULE_1__.useContext)(AuthContext);\nconst AuthProvider = ({ children })=>{\n    const [user, setUser] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);\n    const [loading, setLoading] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(true);\n    (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(()=>{\n        const unsubscribe = _firebase__WEBPACK_IMPORTED_MODULE_2__.auth.onAuthStateChanged((user)=>{\n            setUser(user);\n            setLoading(false);\n        });\n        return unsubscribe;\n    }, []);\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(AuthContext.Provider, {\n        value: {\n            user,\n            loading\n        },\n        children: children\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\AuthProvider.tsx\",\n        lineNumber: 29,\n        columnNumber: 5\n    }, undefined);\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9jb21wb25lbnRzL0F1dGhQcm92aWRlci50c3giLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7QUFDOEU7QUFFM0M7QUFPbkMsTUFBTU0sNEJBQWNMLG9EQUFhQSxDQUFrQjtJQUFFTSxNQUFNO0lBQU1DLFNBQVM7QUFBSztBQUV4RSxNQUFNQyxVQUFVLElBQU1QLGlEQUFVQSxDQUFDSSxhQUFhO0FBRTlDLE1BQU1JLGVBQXdELENBQUMsRUFBRUMsUUFBUSxFQUFFO0lBQ2hGLE1BQU0sQ0FBQ0osTUFBTUssUUFBUSxHQUFHUiwrQ0FBUUEsQ0FBYztJQUM5QyxNQUFNLENBQUNJLFNBQVNLLFdBQVcsR0FBR1QsK0NBQVFBLENBQUM7SUFFdkNELGdEQUFTQSxDQUFDO1FBQ1IsTUFBTVcsY0FBY1QsMkNBQUlBLENBQUNVLGtCQUFrQixDQUFDLENBQUNSO1lBQzNDSyxRQUFRTDtZQUNSTSxXQUFXO1FBQ2I7UUFFQSxPQUFPQztJQUNULEdBQUcsRUFBRTtJQUVMLHFCQUNFLDhEQUFDUixZQUFZVSxRQUFRO1FBQUNDLE9BQU87WUFBRVY7WUFBTUM7UUFBUTtrQkFDMUNHOzs7Ozs7QUFHUCxFQUFFIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vcG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZS8uL2NvbXBvbmVudHMvQXV0aFByb3ZpZGVyLnRzeD8xZjMyIl0sInNvdXJjZXNDb250ZW50IjpbIid1c2UgY2xpZW50JztcclxuaW1wb3J0IFJlYWN0LCB7IGNyZWF0ZUNvbnRleHQsIHVzZUNvbnRleHQsIHVzZUVmZmVjdCwgdXNlU3RhdGUgfSBmcm9tICdyZWFjdCc7XHJcbmltcG9ydCB7IFVzZXIgfSBmcm9tICdmaXJlYmFzZS9hdXRoJztcclxuaW1wb3J0IHsgYXV0aCB9IGZyb20gJy4uL2ZpcmViYXNlJztcclxuXHJcbmludGVyZmFjZSBBdXRoQ29udGV4dFR5cGUge1xyXG4gIHVzZXI6IFVzZXIgfCBudWxsO1xyXG4gIGxvYWRpbmc6IGJvb2xlYW47XHJcbn1cclxuXHJcbmNvbnN0IEF1dGhDb250ZXh0ID0gY3JlYXRlQ29udGV4dDxBdXRoQ29udGV4dFR5cGU+KHsgdXNlcjogbnVsbCwgbG9hZGluZzogdHJ1ZSB9KTtcclxuXHJcbmV4cG9ydCBjb25zdCB1c2VBdXRoID0gKCkgPT4gdXNlQ29udGV4dChBdXRoQ29udGV4dCk7XHJcblxyXG5leHBvcnQgY29uc3QgQXV0aFByb3ZpZGVyOiBSZWFjdC5GQzx7IGNoaWxkcmVuOiBSZWFjdC5SZWFjdE5vZGUgfT4gPSAoeyBjaGlsZHJlbiB9KSA9PiB7XHJcbiAgY29uc3QgW3VzZXIsIHNldFVzZXJdID0gdXNlU3RhdGU8VXNlciB8IG51bGw+KG51bGwpO1xyXG4gIGNvbnN0IFtsb2FkaW5nLCBzZXRMb2FkaW5nXSA9IHVzZVN0YXRlKHRydWUpO1xyXG5cclxuICB1c2VFZmZlY3QoKCkgPT4ge1xyXG4gICAgY29uc3QgdW5zdWJzY3JpYmUgPSBhdXRoLm9uQXV0aFN0YXRlQ2hhbmdlZCgodXNlcikgPT4ge1xyXG4gICAgICBzZXRVc2VyKHVzZXIpO1xyXG4gICAgICBzZXRMb2FkaW5nKGZhbHNlKTtcclxuICAgIH0pO1xyXG5cclxuICAgIHJldHVybiB1bnN1YnNjcmliZTtcclxuICB9LCBbXSk7XHJcblxyXG4gIHJldHVybiAoXHJcbiAgICA8QXV0aENvbnRleHQuUHJvdmlkZXIgdmFsdWU9e3sgdXNlciwgbG9hZGluZyB9fT5cclxuICAgICAge2NoaWxkcmVufVxyXG4gICAgPC9BdXRoQ29udGV4dC5Qcm92aWRlcj5cclxuICApO1xyXG59OyJdLCJuYW1lcyI6WyJSZWFjdCIsImNyZWF0ZUNvbnRleHQiLCJ1c2VDb250ZXh0IiwidXNlRWZmZWN0IiwidXNlU3RhdGUiLCJhdXRoIiwiQXV0aENvbnRleHQiLCJ1c2VyIiwibG9hZGluZyIsInVzZUF1dGgiLCJBdXRoUHJvdmlkZXIiLCJjaGlsZHJlbiIsInNldFVzZXIiLCJzZXRMb2FkaW5nIiwidW5zdWJzY3JpYmUiLCJvbkF1dGhTdGF0ZUNoYW5nZWQiLCJQcm92aWRlciIsInZhbHVlIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(ssr)/./components/AuthProvider.tsx\n");
+
+/***/ }),
+
 /***/ "(ssr)/./components/FollowingSidebar.tsx":
 /*!*****************************************!*\
   !*** ./components/FollowingSidebar.tsx ***!
@@ -127,6 +358,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   Button: () => (/* binding */ Button),\n/* harmony export */   buttonVariants: () => (/* binding */ buttonVariants)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _radix_ui_react_slot__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @radix-ui/react-slot */ \"(ssr)/./node_modules/@radix-ui/react-slot/dist/index.mjs\");\n/* harmony import */ var class_variance_authority__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! class-variance-authority */ \"(ssr)/./node_modules/class-variance-authority/dist/index.mjs\");\n/* harmony import */ var lib_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lib/utils */ \"(ssr)/./lib/utils.ts\");\n\n\n\n\n\nconst buttonVariants = (0,class_variance_authority__WEBPACK_IMPORTED_MODULE_2__.cva)(\"inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50\", {\n    variants: {\n        variant: {\n            default: \"bg-primary text-primary-foreground hover:bg-primary/90\",\n            destructive: \"bg-destructive text-destructive-foreground hover:bg-destructive/90\",\n            outline: \"border border-input bg-background hover:bg-accent hover:text-accent-foreground\",\n            secondary: \"bg-secondary text-secondary-foreground hover:bg-secondary/80\",\n            ghost: \"hover:bg-accent hover:text-accent-foreground\",\n            link: \"text-primary underline-offset-4 hover:underline\"\n        },\n        size: {\n            default: \"h-10 px-4 py-2\",\n            sm: \"h-9 rounded-md px-3\",\n            lg: \"h-11 rounded-md px-8\",\n            icon: \"h-10 w-10\"\n        }\n    },\n    defaultVariants: {\n        variant: \"default\",\n        size: \"default\"\n    }\n});\nconst Button = /*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(({ className, variant, size, asChild = false, ...props }, ref)=>{\n    const Comp = asChild ? _radix_ui_react_slot__WEBPACK_IMPORTED_MODULE_4__.Slot : \"button\";\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(Comp, {\n        className: (0,lib_utils__WEBPACK_IMPORTED_MODULE_3__.cn)(buttonVariants({\n            variant,\n            size,\n            className\n        })),\n        ref: ref,\n        ...props\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\components\\\\Login\\\\ui\\\\button.tsx\",\n        lineNumber: 46,\n        columnNumber: 7\n    }, undefined);\n});\nButton.displayName = \"Button\";\n\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9jb21wb25lbnRzL0xvZ2luL3VpL2J1dHRvbi50c3giLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7OztBQUE4QjtBQUNhO0FBQ3NCO0FBRW5DO0FBRTlCLE1BQU1JLGlCQUFpQkYsNkRBQUdBLENBQ3hCLDBSQUNBO0lBQ0VHLFVBQVU7UUFDUkMsU0FBUztZQUNQQyxTQUFTO1lBQ1RDLGFBQ0U7WUFDRkMsU0FDRTtZQUNGQyxXQUNFO1lBQ0ZDLE9BQU87WUFDUEMsTUFBTTtRQUNSO1FBQ0FDLE1BQU07WUFDSk4sU0FBUztZQUNUTyxJQUFJO1lBQ0pDLElBQUk7WUFDSkMsTUFBTTtRQUNSO0lBQ0Y7SUFDQUMsaUJBQWlCO1FBQ2ZYLFNBQVM7UUFDVE8sTUFBTTtJQUNSO0FBQ0Y7QUFTRixNQUFNSyx1QkFBU2xCLDZDQUFnQixDQUM3QixDQUFDLEVBQUVvQixTQUFTLEVBQUVkLE9BQU8sRUFBRU8sSUFBSSxFQUFFUSxVQUFVLEtBQUssRUFBRSxHQUFHQyxPQUFPLEVBQUVDO0lBQ3hELE1BQU1DLE9BQU9ILFVBQVVwQixzREFBSUEsR0FBRztJQUM5QixxQkFDRSw4REFBQ3VCO1FBQ0NKLFdBQVdqQiw2Q0FBRUEsQ0FBQ0MsZUFBZTtZQUFFRTtZQUFTTztZQUFNTztRQUFVO1FBQ3hERyxLQUFLQTtRQUNKLEdBQUdELEtBQUs7Ozs7OztBQUdmO0FBRUZKLE9BQU9PLFdBQVcsR0FBRztBQUVZIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vcG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZS8uL2NvbXBvbmVudHMvTG9naW4vdWkvYnV0dG9uLnRzeD9mMzE5Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCAqIGFzIFJlYWN0IGZyb20gXCJyZWFjdFwiXG5pbXBvcnQgeyBTbG90IH0gZnJvbSBcIkByYWRpeC11aS9yZWFjdC1zbG90XCJcbmltcG9ydCB7IGN2YSwgdHlwZSBWYXJpYW50UHJvcHMgfSBmcm9tIFwiY2xhc3MtdmFyaWFuY2UtYXV0aG9yaXR5XCJcblxuaW1wb3J0IHsgY24gfSBmcm9tIFwibGliL3V0aWxzXCJcblxuY29uc3QgYnV0dG9uVmFyaWFudHMgPSBjdmEoXG4gIFwiaW5saW5lLWZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHdoaXRlc3BhY2Utbm93cmFwIHJvdW5kZWQtbWQgdGV4dC1zbSBmb250LW1lZGl1bSByaW5nLW9mZnNldC1iYWNrZ3JvdW5kIHRyYW5zaXRpb24tY29sb3JzIGZvY3VzLXZpc2libGU6b3V0bGluZS1ub25lIGZvY3VzLXZpc2libGU6cmluZy0yIGZvY3VzLXZpc2libGU6cmluZy1yaW5nIGZvY3VzLXZpc2libGU6cmluZy1vZmZzZXQtMiBkaXNhYmxlZDpwb2ludGVyLWV2ZW50cy1ub25lIGRpc2FibGVkOm9wYWNpdHktNTBcIixcbiAge1xuICAgIHZhcmlhbnRzOiB7XG4gICAgICB2YXJpYW50OiB7XG4gICAgICAgIGRlZmF1bHQ6IFwiYmctcHJpbWFyeSB0ZXh0LXByaW1hcnktZm9yZWdyb3VuZCBob3ZlcjpiZy1wcmltYXJ5LzkwXCIsXG4gICAgICAgIGRlc3RydWN0aXZlOlxuICAgICAgICAgIFwiYmctZGVzdHJ1Y3RpdmUgdGV4dC1kZXN0cnVjdGl2ZS1mb3JlZ3JvdW5kIGhvdmVyOmJnLWRlc3RydWN0aXZlLzkwXCIsXG4gICAgICAgIG91dGxpbmU6XG4gICAgICAgICAgXCJib3JkZXIgYm9yZGVyLWlucHV0IGJnLWJhY2tncm91bmQgaG92ZXI6YmctYWNjZW50IGhvdmVyOnRleHQtYWNjZW50LWZvcmVncm91bmRcIixcbiAgICAgICAgc2Vjb25kYXJ5OlxuICAgICAgICAgIFwiYmctc2Vjb25kYXJ5IHRleHQtc2Vjb25kYXJ5LWZvcmVncm91bmQgaG92ZXI6Ymctc2Vjb25kYXJ5LzgwXCIsXG4gICAgICAgIGdob3N0OiBcImhvdmVyOmJnLWFjY2VudCBob3Zlcjp0ZXh0LWFjY2VudC1mb3JlZ3JvdW5kXCIsXG4gICAgICAgIGxpbms6IFwidGV4dC1wcmltYXJ5IHVuZGVybGluZS1vZmZzZXQtNCBob3Zlcjp1bmRlcmxpbmVcIixcbiAgICAgIH0sXG4gICAgICBzaXplOiB7XG4gICAgICAgIGRlZmF1bHQ6IFwiaC0xMCBweC00IHB5LTJcIixcbiAgICAgICAgc206IFwiaC05IHJvdW5kZWQtbWQgcHgtM1wiLFxuICAgICAgICBsZzogXCJoLTExIHJvdW5kZWQtbWQgcHgtOFwiLFxuICAgICAgICBpY29uOiBcImgtMTAgdy0xMFwiLFxuICAgICAgfSxcbiAgICB9LFxuICAgIGRlZmF1bHRWYXJpYW50czoge1xuICAgICAgdmFyaWFudDogXCJkZWZhdWx0XCIsXG4gICAgICBzaXplOiBcImRlZmF1bHRcIixcbiAgICB9LFxuICB9XG4pXG5cbmV4cG9ydCBpbnRlcmZhY2UgQnV0dG9uUHJvcHNcbiAgZXh0ZW5kcyBSZWFjdC5CdXR0b25IVE1MQXR0cmlidXRlczxIVE1MQnV0dG9uRWxlbWVudD4sXG4gICAgVmFyaWFudFByb3BzPHR5cGVvZiBidXR0b25WYXJpYW50cz4ge1xuICBhc0NoaWxkPzogYm9vbGVhblxufVxuXG5jb25zdCBCdXR0b24gPSBSZWFjdC5mb3J3YXJkUmVmPEhUTUxCdXR0b25FbGVtZW50LCBCdXR0b25Qcm9wcz4oXG4gICh7IGNsYXNzTmFtZSwgdmFyaWFudCwgc2l6ZSwgYXNDaGlsZCA9IGZhbHNlLCAuLi5wcm9wcyB9LCByZWYpID0+IHtcbiAgICBjb25zdCBDb21wID0gYXNDaGlsZCA/IFNsb3QgOiBcImJ1dHRvblwiXG4gICAgcmV0dXJuIChcbiAgICAgIDxDb21wXG4gICAgICAgIGNsYXNzTmFtZT17Y24oYnV0dG9uVmFyaWFudHMoeyB2YXJpYW50LCBzaXplLCBjbGFzc05hbWUgfSkpfVxuICAgICAgICByZWY9e3JlZn1cbiAgICAgICAgey4uLnByb3BzfVxuICAgICAgLz5cbiAgICApXG4gIH1cbilcbkJ1dHRvbi5kaXNwbGF5TmFtZSA9IFwiQnV0dG9uXCJcblxuZXhwb3J0IHsgQnV0dG9uLCBidXR0b25WYXJpYW50cyB9XG4iXSwibmFtZXMiOlsiUmVhY3QiLCJTbG90IiwiY3ZhIiwiY24iLCJidXR0b25WYXJpYW50cyIsInZhcmlhbnRzIiwidmFyaWFudCIsImRlZmF1bHQiLCJkZXN0cnVjdGl2ZSIsIm91dGxpbmUiLCJzZWNvbmRhcnkiLCJnaG9zdCIsImxpbmsiLCJzaXplIiwic20iLCJsZyIsImljb24iLCJkZWZhdWx0VmFyaWFudHMiLCJCdXR0b24iLCJmb3J3YXJkUmVmIiwiY2xhc3NOYW1lIiwiYXNDaGlsZCIsInByb3BzIiwicmVmIiwiQ29tcCIsImRpc3BsYXlOYW1lIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(ssr)/./components/Login/ui/button.tsx\n");
+
+/***/ }),
+
+/***/ "(ssr)/./firebase.ts":
+/*!*********************!*\
+  !*** ./firebase.ts ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   analytics: () => (/* binding */ analytics),\n/* harmony export */   app: () => (/* binding */ app),\n/* harmony export */   auth: () => (/* binding */ auth)\n/* harmony export */ });\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"(ssr)/./node_modules/firebase/app/dist/index.mjs\");\n/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ \"(ssr)/./node_modules/firebase/auth/dist/index.mjs\");\n/* harmony import */ var firebase_analytics__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/analytics */ \"(ssr)/./node_modules/firebase/analytics/dist/index.mjs\");\n\n\n\n// Your web app's Firebase configuration\n// For Firebase JS SDK v7.20.0 and later, measurementId is optional\nconst firebaseConfig = {\n    apiKey: \"AIzaSyCEQX5yzQCXItrGfcxLOmM4Hp4DM_Tvv-4\",\n    authDomain: \"pavescope-12b68.firebaseapp.com\",\n    projectId: \"pavescope-12b68\",\n    storageBucket: \"pavescope-12b68.appspot.com\",\n    messagingSenderId: \"406588760425\",\n    appId: \"1:406588760425:web:043c6ed4db86dbf24a5df8\",\n    measurementId: \"G-6D4LDGW1BM\"\n};\n// Initialize Firebase\nconst app = (0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\nconst auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_1__.getAuth)(app);\nconst analytics = (0,firebase_analytics__WEBPACK_IMPORTED_MODULE_2__.getAnalytics)(app);\n\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9maXJlYmFzZS50cyIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBNkM7QUFDTDtBQUNVO0FBRWxELHdDQUF3QztBQUN4QyxtRUFBbUU7QUFDbkUsTUFBTUcsaUJBQWlCO0lBQ3JCQyxRQUFRO0lBQ1JDLFlBQVk7SUFDWkMsV0FBVztJQUNYQyxlQUFlO0lBQ2ZDLG1CQUFtQjtJQUNuQkMsT0FBTztJQUNQQyxlQUFlO0FBQ2pCO0FBRUEsc0JBQXNCO0FBQ3RCLE1BQU1DLE1BQU1YLDJEQUFhQSxDQUFDRztBQUMxQixNQUFNUyxPQUFPWCxzREFBT0EsQ0FBQ1U7QUFDckIsTUFBTUUsWUFBWVgsZ0VBQVlBLENBQUNTO0FBRUMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9wb3Rob2xlLWRldGVjdGlvbi13ZWJzaXRlLy4vZmlyZWJhc2UudHM/OTJmNCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBpbml0aWFsaXplQXBwIH0gZnJvbSBcImZpcmViYXNlL2FwcFwiO1xyXG5pbXBvcnQgeyBnZXRBdXRoIH0gZnJvbSBcImZpcmViYXNlL2F1dGhcIjtcclxuaW1wb3J0IHsgZ2V0QW5hbHl0aWNzIH0gZnJvbSBcImZpcmViYXNlL2FuYWx5dGljc1wiO1xyXG5cclxuLy8gWW91ciB3ZWIgYXBwJ3MgRmlyZWJhc2UgY29uZmlndXJhdGlvblxyXG4vLyBGb3IgRmlyZWJhc2UgSlMgU0RLIHY3LjIwLjAgYW5kIGxhdGVyLCBtZWFzdXJlbWVudElkIGlzIG9wdGlvbmFsXHJcbmNvbnN0IGZpcmViYXNlQ29uZmlnID0ge1xyXG4gIGFwaUtleTogXCJBSXphU3lDRVFYNXl6UUNYSXRyR2ZjeExPbU00SHA0RE1fVHZ2LTRcIixcclxuICBhdXRoRG9tYWluOiBcInBhdmVzY29wZS0xMmI2OC5maXJlYmFzZWFwcC5jb21cIixcclxuICBwcm9qZWN0SWQ6IFwicGF2ZXNjb3BlLTEyYjY4XCIsXHJcbiAgc3RvcmFnZUJ1Y2tldDogXCJwYXZlc2NvcGUtMTJiNjguYXBwc3BvdC5jb21cIixcclxuICBtZXNzYWdpbmdTZW5kZXJJZDogXCI0MDY1ODg3NjA0MjVcIixcclxuICBhcHBJZDogXCIxOjQwNjU4ODc2MDQyNTp3ZWI6MDQzYzZlZDRkYjg2ZGJmMjRhNWRmOFwiLFxyXG4gIG1lYXN1cmVtZW50SWQ6IFwiRy02RDRMREdXMUJNXCJcclxufTtcclxuXHJcbi8vIEluaXRpYWxpemUgRmlyZWJhc2VcclxuY29uc3QgYXBwID0gaW5pdGlhbGl6ZUFwcChmaXJlYmFzZUNvbmZpZyk7XHJcbmNvbnN0IGF1dGggPSBnZXRBdXRoKGFwcCk7XHJcbmNvbnN0IGFuYWx5dGljcyA9IGdldEFuYWx5dGljcyhhcHApO1xyXG5cclxuZXhwb3J0IHsgYXBwLCBhdXRoLCBhbmFseXRpY3MgfTsiXSwibmFtZXMiOlsiaW5pdGlhbGl6ZUFwcCIsImdldEF1dGgiLCJnZXRBbmFseXRpY3MiLCJmaXJlYmFzZUNvbmZpZyIsImFwaUtleSIsImF1dGhEb21haW4iLCJwcm9qZWN0SWQiLCJzdG9yYWdlQnVja2V0IiwibWVzc2FnaW5nU2VuZGVySWQiLCJhcHBJZCIsIm1lYXN1cmVtZW50SWQiLCJhcHAiLCJhdXRoIiwiYW5hbHl0aWNzIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(ssr)/./firebase.ts\n");
 
 /***/ }),
 
@@ -188,7 +430,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ RootLayout)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"(rsc)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _styles_globals_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../styles/globals.css */ \"(rsc)/./styles/globals.css\");\n/* harmony import */ var _auth0_nextjs_auth0_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @auth0/nextjs-auth0/client */ \"(rsc)/./node_modules/@auth0/nextjs-auth0/dist/client/index.js\");\n/* harmony import */ var _auth0_nextjs_auth0_client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_auth0_nextjs_auth0_client__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\nfunction RootLayout({ children }) {\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"html\", {\n        lang: \"en\",\n        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_auth0_nextjs_auth0_client__WEBPACK_IMPORTED_MODULE_2__.UserProvider, {\n            children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"body\", {\n                children: children\n            }, void 0, false, {\n                fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\layout.jsx\",\n                lineNumber: 8,\n                columnNumber: 7\n            }, this)\n        }, void 0, false, {\n            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\layout.jsx\",\n            lineNumber: 7,\n            columnNumber: 5\n        }, this)\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\layout.jsx\",\n        lineNumber: 6,\n        columnNumber: 5\n    }, this);\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9hcHAvbGF5b3V0LmpzeCIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0FBQStCO0FBQzJCO0FBRTNDLFNBQVNDLFdBQVcsRUFBRUMsUUFBUSxFQUFFO0lBQzdDLHFCQUNFLDhEQUFDQztRQUFLQyxNQUFLO2tCQUNYLDRFQUFDSixvRUFBWUE7c0JBQ1gsNEVBQUNLOzBCQUFNSDs7Ozs7Ozs7Ozs7Ozs7OztBQUliIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vcG90aG9sZS1kZXRlY3Rpb24td2Vic2l0ZS8uL2FwcC9sYXlvdXQuanN4PzBjODEiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0ICcuLi9zdHlsZXMvZ2xvYmFscy5jc3MnO1xyXG5pbXBvcnQgeyBVc2VyUHJvdmlkZXIgfSBmcm9tICdAYXV0aDAvbmV4dGpzLWF1dGgwL2NsaWVudCc7XHJcblxyXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBSb290TGF5b3V0KHsgY2hpbGRyZW4gfSkge1xyXG4gIHJldHVybiAoXHJcbiAgICA8aHRtbCBsYW5nPVwiZW5cIj5cclxuICAgIDxVc2VyUHJvdmlkZXI+XHJcbiAgICAgIDxib2R5PntjaGlsZHJlbn08L2JvZHk+XHJcbiAgICA8L1VzZXJQcm92aWRlcj5cclxuICAgIDwvaHRtbD5cclxuICApO1xyXG59ICJdLCJuYW1lcyI6WyJVc2VyUHJvdmlkZXIiLCJSb290TGF5b3V0IiwiY2hpbGRyZW4iLCJodG1sIiwibGFuZyIsImJvZHkiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(rsc)/./app/layout.jsx\n");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ RootLayout)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"(rsc)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _styles_globals_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../styles/globals.css */ \"(rsc)/./styles/globals.css\");\n/* harmony import */ var _components_AuthProvider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/AuthProvider */ \"(rsc)/./components/AuthProvider.tsx\");\n\n\n\nfunction RootLayout({ children }) {\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"html\", {\n        lang: \"en\",\n        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_components_AuthProvider__WEBPACK_IMPORTED_MODULE_2__.AuthProvider, {\n            children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"body\", {\n                children: children\n            }, void 0, false, {\n                fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\layout.jsx\",\n                lineNumber: 8,\n                columnNumber: 9\n            }, this)\n        }, void 0, false, {\n            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\layout.jsx\",\n            lineNumber: 7,\n            columnNumber: 7\n        }, this)\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\layout.jsx\",\n        lineNumber: 6,\n        columnNumber: 5\n    }, this);\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9hcHAvbGF5b3V0LmpzeCIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBK0I7QUFDMkI7QUFFM0MsU0FBU0MsV0FBVyxFQUFFQyxRQUFRLEVBQUU7SUFDN0MscUJBQ0UsOERBQUNDO1FBQUtDLE1BQUs7a0JBQ1QsNEVBQUNKLGtFQUFZQTtzQkFDWCw0RUFBQ0s7MEJBQU1IOzs7Ozs7Ozs7Ozs7Ozs7O0FBSWYiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9wb3Rob2xlLWRldGVjdGlvbi13ZWJzaXRlLy4vYXBwL2xheW91dC5qc3g/MGM4MSJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgJy4uL3N0eWxlcy9nbG9iYWxzLmNzcyc7XHJcbmltcG9ydCB7IEF1dGhQcm92aWRlciB9IGZyb20gJy4uL2NvbXBvbmVudHMvQXV0aFByb3ZpZGVyJztcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIFJvb3RMYXlvdXQoeyBjaGlsZHJlbiB9KSB7XHJcbiAgcmV0dXJuIChcclxuICAgIDxodG1sIGxhbmc9XCJlblwiPlxyXG4gICAgICA8QXV0aFByb3ZpZGVyPlxyXG4gICAgICAgIDxib2R5PntjaGlsZHJlbn08L2JvZHk+XHJcbiAgICAgIDwvQXV0aFByb3ZpZGVyPlxyXG4gICAgPC9odG1sPlxyXG4gICk7XHJcbn0iXSwibmFtZXMiOlsiQXV0aFByb3ZpZGVyIiwiUm9vdExheW91dCIsImNoaWxkcmVuIiwiaHRtbCIsImxhbmciLCJib2R5Il0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(rsc)/./app/layout.jsx\n");
 
 /***/ }),
 
@@ -201,6 +443,28 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ MapsPage)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"(rsc)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"(rsc)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/rsc/react.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _dashboard_layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../dashboard-layout */ \"(rsc)/./app/dashboard-layout.tsx\");\n\n\n\nfunction MapsPage() {\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_dashboard_layout__WEBPACK_IMPORTED_MODULE_2__[\"default\"], {\n        children: /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"div\", {\n            children: [\n                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"h1\", {\n                    className: \"text-3xl font-bold mb-4\",\n                    children: \"Maps\"\n                }, void 0, false, {\n                    fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\maps\\\\page.tsx\",\n                    lineNumber: 8,\n                    columnNumber: 7\n                }, this),\n                /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"p\", {\n                    children: \"View geographical representations of your data and detections here.\"\n                }, void 0, false, {\n                    fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\maps\\\\page.tsx\",\n                    lineNumber: 9,\n                    columnNumber: 7\n                }, this)\n            ]\n        }, void 0, true, {\n            fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\maps\\\\page.tsx\",\n            lineNumber: 7,\n            columnNumber: 5\n        }, this)\n    }, void 0, false, {\n        fileName: \"C:\\\\Users\\\\rfrjo\\\\pothole-detection-website\\\\app\\\\maps\\\\page.tsx\",\n        lineNumber: 6,\n        columnNumber: 5\n    }, this);\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9hcHAvbWFwcy9wYWdlLnRzeCIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0FBQTBCO0FBQ3dCO0FBRW5DLFNBQVNFO0lBQ3RCLHFCQUNFLDhEQUFDRCx5REFBZUE7a0JBQ2hCLDRFQUFDRTs7OEJBQ0MsOERBQUNDO29CQUFHQyxXQUFVOzhCQUEwQjs7Ozs7OzhCQUN4Qyw4REFBQ0M7OEJBQUU7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBSVQiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9wb3Rob2xlLWRldGVjdGlvbi13ZWJzaXRlLy4vYXBwL21hcHMvcGFnZS50c3g/NmExMyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QgZnJvbSAncmVhY3QnO1xyXG5pbXBvcnQgRGFzaGJvYXJkTGF5b3V0IGZyb20gJy4uL2Rhc2hib2FyZC1sYXlvdXQnO1xyXG5cclxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gTWFwc1BhZ2UoKSB7XHJcbiAgcmV0dXJuIChcclxuICAgIDxEYXNoYm9hcmRMYXlvdXQ+XHJcbiAgICA8ZGl2PlxyXG4gICAgICA8aDEgY2xhc3NOYW1lPVwidGV4dC0zeGwgZm9udC1ib2xkIG1iLTRcIj5NYXBzPC9oMT5cclxuICAgICAgPHA+VmlldyBnZW9ncmFwaGljYWwgcmVwcmVzZW50YXRpb25zIG9mIHlvdXIgZGF0YSBhbmQgZGV0ZWN0aW9ucyBoZXJlLjwvcD5cclxuICAgIDwvZGl2PlxyXG4gICAgPC9EYXNoYm9hcmRMYXlvdXQ+XHJcbiAgKTtcclxufSJdLCJuYW1lcyI6WyJSZWFjdCIsIkRhc2hib2FyZExheW91dCIsIk1hcHNQYWdlIiwiZGl2IiwiaDEiLCJjbGFzc05hbWUiLCJwIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(rsc)/./app/maps/page.tsx\n");
 
+/***/ }),
+
+/***/ "(rsc)/./components/AuthProvider.tsx":
+/*!*************************************!*\
+  !*** ./components/AuthProvider.tsx ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AuthProvider: () => (/* binding */ e1),
+/* harmony export */   useAuth: () => (/* binding */ e0)
+/* harmony export */ });
+/* harmony import */ var next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! next/dist/build/webpack/loaders/next-flight-loader/module-proxy */ "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-loader/module-proxy.js");
+
+
+const e0 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`C:\Users\rfrjo\pothole-detection-website\components\AuthProvider.tsx#useAuth`);
+
+const e1 = (0,next_dist_build_webpack_loaders_next_flight_loader_module_proxy__WEBPACK_IMPORTED_MODULE_0__.createProxy)(String.raw`C:\Users\rfrjo\pothole-detection-website\components\AuthProvider.tsx#AuthProvider`);
+
+
 /***/ })
 
 };
@@ -210,7 +474,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/@auth0","vendor-chunks/tslib","vendor-chunks/@radix-ui","vendor-chunks/tailwind-merge","vendor-chunks/class-variance-authority","vendor-chunks/clsx","vendor-chunks/lucide-react"], () => (__webpack_exec__("(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fmaps%2Fpage&page=%2Fmaps%2Fpage&appPaths=%2Fmaps%2Fpage&pagePath=private-next-app-dir%2Fmaps%2Fpage.tsx&appDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!")));
+var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/undici","vendor-chunks/@firebase","vendor-chunks/tslib","vendor-chunks/idb","vendor-chunks/firebase","vendor-chunks/@radix-ui","vendor-chunks/tailwind-merge","vendor-chunks/class-variance-authority","vendor-chunks/clsx","vendor-chunks/lucide-react"], () => (__webpack_exec__("(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fmaps%2Fpage&page=%2Fmaps%2Fpage&appPaths=%2Fmaps%2Fpage&pagePath=private-next-app-dir%2Fmaps%2Fpage.tsx&appDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=C%3A%5CUsers%5Crfrjo%5Cpothole-detection-website&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=&preferredRegion=&middlewareConfig=e30%3D!")));
 module.exports = __webpack_exports__;
 
 })();
