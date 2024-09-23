@@ -55,33 +55,42 @@ export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick,
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className={`py-2 px-3 flex items-center ${isCollapsed && !isHovered ? 'justify-center' : 'justify-start'} cursor-pointer`} onClick={onLogoClick}>
+      <div className={`py-2 px-3 flex items-center ${isCollapsed && !isHovered ? 'justify-center' : 'justify-start'} cursor-pointer h-[72px]`} onClick={onLogoClick}>
         {!isCollapsed || isHovered ? (
           <>
-            <div className="w-16 h-16 flex-shrink-0 mr-3 flex items-center justify-center ml-[-10px] mt-[-0px]">
+            <div className="w-16 h-16 flex-shrink-0 mr-3 flex items-center justify-center ml-[-10px] mt-[4px]">
               <img src="/images/logo.png" alt="PaveScope Logo" className="w-full h-full object-contain" />
             </div>
-            <h2 className="text-xl font-bold text-left ml-[-20px] mt-[-5px]">PaveScope</h2>
+            <h2 className="text-xl font-bold text-left ml-[-20px]">PaveScope</h2>
           </>
         ) : (
-          <div className="w-8 h-8 ml-[-5px] mt-[-9px]">
+          <div className="w-8 h-8">
             <img src="/images/logo-icon.png" alt="PaveScope Icon" className="w-full h-full object-contain" />
           </div>
         )}
       </div>
-      <nav className="flex-grow overflow-y-auto mt-0">
+      <nav className="flex-grow overflow-y-auto">
         {navItems.map((item) => (
           <Link href={item.href} key={item.name}>
-            <Button variant="ghost" className={`w-full justify-start hover:bg-blue-700 transition-colors ${isCollapsed && !isHovered ? 'px-0 py-4' : 'px-4 py-3 mb-1'}`}>
+            <Button 
+              variant="ghost" 
+              className={`w-full justify-start hover:bg-blue-700 transition-colors h-[48px] ${isCollapsed && !isHovered ? 'px-0' : 'px-4'}`}
+            >
               <div className={`flex items-center ${isCollapsed && !isHovered ? 'justify-center w-full' : ''}`}>
-                {React.createElement(item.icon, { className: "h-5 w-5" })}
-                {(!isCollapsed || isHovered) && <span className="ml-3 text-base">{item.name}</span>}
+                <div className={`${isCollapsed && !isHovered ? 'w-5' : 'w-5 ml-[-5px]'} flex-shrink-0`}>
+                  {React.createElement(item.icon, { className: "h-5 w-5" })}
+                </div>
+                {(!isCollapsed || isHovered) && (
+                  <span className="ml-3 text-base transition-opacity duration-300 ease-in-out">
+                    {item.name}
+                  </span>
+                )}
               </div>
             </Button>
           </Link>
         ))}
       </nav>
-      <Button variant="ghost" className="w-full justify-center hover:bg-blue-700 transition-colors py-4" onClick={toggleSidebar}>
+      <Button variant="ghost" className="w-full justify-center hover:bg-blue-700 transition-colors h-[48px]" onClick={toggleSidebar}>
         {isCollapsed ? <ChevronRight className="h-5 w-5" /> : <ChevronLeft className="h-5 w-5" />}
       </Button>
     </aside>
