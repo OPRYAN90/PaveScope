@@ -15,7 +15,7 @@ export default function UploadPage() {
   const [files, setFiles] = useState<File[]>([])
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
-  const [uploadedImages, setUploadedImages] = useState<string[]>([])
+  const [uploadedImages, setUploadedImages] = useState<Array<{url: string, path: string}>>([])
   const [isLoading, setIsLoading] = useState(true)
   const { user } = useAuth()
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
@@ -32,10 +32,13 @@ export default function UploadPage() {
     try {
       const imagesRef = ref(storage, `users/${user.uid}/images`)
       const imageList = await listAll(imagesRef)
-      const urls = await Promise.all(
-        imageList.items.map(item => getDownloadURL(item))
+      const imageData = await Promise.all(
+        imageList.items.map(async (item) => {
+          const url = await getDownloadURL(item)
+          return { url, path: item.fullPath }
+        })
       )
-      setUploadedImages(urls)
+      setUploadedImages(imageData)
     } catch (error) {
       console.error("Error loading images:", error)
     } finally {
@@ -78,7 +81,13 @@ export default function UploadPage() {
 
     try {
       const newImageUrls = await Promise.all(uploadPromises)
-      setUploadedImages(prev => [...prev, ...newImageUrls])
+      setUploadedImages(prev => [
+        ...prev,
+        ...newImageUrls.map((url, index) => ({
+          url,
+          path: `users/${user.uid}/images/${files[index].name}`
+        }))
+      ])
       setFiles([])
       setProgress(0)
     } catch (error) {
@@ -100,19 +109,15 @@ export default function UploadPage() {
     setSelectedImage(null)
   }
 
-  const handleDeleteImage = async (imageUrl: string) => {
+  const handleDeleteImage = async (imagePath: string) => {
     if (!user) return
     try {
-      const fileName = imageUrl.split('%2F').pop()?.split('?')[0]
-      if (!fileName) throw new Error("Couldn't extract file name from URL")
-
-      const imageRef = ref(storage, `users/${user.uid}/images/${fileName}`)
-      
+      const imageRef = ref(storage, imagePath)
       await deleteObject(imageRef)
-
-      setUploadedImages(prevImages => prevImages.filter(img => img !== imageUrl))
+      setUploadedImages(prevImages => prevImages.filter(img => img.path !== imagePath))
     } catch (error) {
       console.error("Error deleting image:", error)
+      alert("Failed to delete the image. Please try again.")
     }
   }
 
@@ -184,10 +189,10 @@ export default function UploadPage() {
                 {uploadedImages.map((image, index) => (
                   <div key={index} className="relative group">
                     <img 
-                      src={image} 
+                      src={image.url} 
                       alt={`Uploaded image ${index + 1}`} 
                       className="w-full h-40 object-cover rounded-lg cursor-pointer"
-                      onClick={() => handleImageClick(image)}
+                      onClick={() => handleImageClick(image.url)}
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                       <Button 
@@ -196,7 +201,7 @@ export default function UploadPage() {
                         className="mr-2"
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleImageClick(image);
+                          handleImageClick(image.url);
                         }}
                       >
                         View
@@ -206,7 +211,7 @@ export default function UploadPage() {
                       className="absolute top-2 right-2 p-1 bg-red-500 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200"
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleDeleteImage(image);
+                        handleDeleteImage(image.path);
                       }}
                     >
                       <Trash2 className="h-4 w-4" />
