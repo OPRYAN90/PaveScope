@@ -1,17 +1,47 @@
 'use client'
 
-import React, { useState } from 'react'
-import { Upload, File, X, Image as ImageIcon } from 'lucide-react'
+import React, { useState, useEffect } from 'react'
+import { Upload, File, X, Image as ImageIcon, Loader2, Trash2 } from 'lucide-react'
 import DashboardLayout from '../dashboard-layout'
 import { Button } from "../../components/Login/ui/button"
 import { Card, CardContent } from "../../components/Login/ui/card"
 import { Progress } from "../../components/ui/progress"
+import { useAuth } from '../../components/AuthProvider'
+import { storage } from '../../firebase'
+import { ref, uploadBytesResumable, getDownloadURL, listAll, deleteObject } from 'firebase/storage'
+import FullScreenImageModal from '../../components/FullScreenImageModal'
 
 export default function UploadPage() {
   const [files, setFiles] = useState<File[]>([])
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
   const [uploadedImages, setUploadedImages] = useState<string[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const { user } = useAuth()
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (user) {
+      loadUserImages()
+    }
+  }, [user])
+
+  const loadUserImages = async () => {
+    if (!user) return
+    setIsLoading(true)
+    try {
+      const imagesRef = ref(storage, `users/${user.uid}/images`)
+      const imageList = await listAll(imagesRef)
+      const urls = await Promise.all(
+        imageList.items.map(item => getDownloadURL(item))
+      )
+      setUploadedImages(urls)
+    } catch (error) {
+      console.error("Error loading images:", error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -20,22 +50,70 @@ export default function UploadPage() {
   }
 
   const handleUpload = async () => {
+    if (!user) return
     setUploading(true)
-    // Simulating upload progress
-    for (let i = 0; i <= 100; i += 10) {
-      setProgress(i)
-      await new Promise(resolve => setTimeout(resolve, 500))
-    }
-    // Simulating adding uploaded files to the gallery
-    const newImages = files.map(file => URL.createObjectURL(file))
-    setUploadedImages(prev => [...prev, ...newImages])
-    setUploading(false)
-    setFiles([])
     setProgress(0)
+
+    const uploadPromises = files.map(file => {
+      const storageRef = ref(storage, `users/${user.uid}/images/${file.name}`)
+      const uploadTask = uploadBytesResumable(storageRef, file)
+
+      return new Promise<string>((resolve, reject) => {
+        uploadTask.on('state_changed',
+          (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            setProgress(progress)
+          },
+          (error) => {
+            console.error("Upload error:", error)
+            reject(error)
+          },
+          async () => {
+            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref)
+            resolve(downloadURL)
+          }
+        )
+      })
+    })
+
+    try {
+      const newImageUrls = await Promise.all(uploadPromises)
+      setUploadedImages(prev => [...prev, ...newImageUrls])
+      setFiles([])
+      setProgress(0)
+    } catch (error) {
+      console.error("Error uploading files:", error)
+    } finally {
+      setUploading(false)
+    }
   }
 
   const removeFile = (index: number) => {
     setFiles(files.filter((_, i) => i !== index))
+  }
+
+  const handleImageClick = (imageUrl: string) => {
+    setSelectedImage(imageUrl)
+  }
+
+  const closeModal = () => {
+    setSelectedImage(null)
+  }
+
+  const handleDeleteImage = async (imageUrl: string) => {
+    if (!user) return
+    try {
+      const fileName = imageUrl.split('%2F').pop()?.split('?')[0]
+      if (!fileName) throw new Error("Couldn't extract file name from URL")
+
+      const imageRef = ref(storage, `users/${user.uid}/images/${fileName}`)
+      
+      await deleteObject(imageRef)
+
+      setUploadedImages(prevImages => prevImages.filter(img => img !== imageUrl))
+    } catch (error) {
+      console.error("Error deleting image:", error)
+    }
   }
 
   return (
@@ -96,26 +174,59 @@ export default function UploadPage() {
         <Card className="bg-white shadow-lg rounded-lg overflow-hidden">
           <CardContent className="p-6">
             <h2 className="text-2xl font-bold mb-4 text-blue-800">Image Gallery</h2>
-            {uploadedImages.length > 0 ? (
+            {isLoading ? (
+              <div className="flex justify-center items-center py-12">
+                <Loader2 className="h-8 w-8 text-blue-500 animate-spin" />
+                <span className="ml-2 text-gray-600">Loading images...</span>
+              </div>
+            ) : uploadedImages.length > 0 ? (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {uploadedImages.map((image, index) => (
                   <div key={index} className="relative group">
-                    <img src={image} alt={`Uploaded image ${index + 1}`} className="w-full h-40 object-cover rounded-lg" />
+                    <img 
+                      src={image} 
+                      alt={`Uploaded image ${index + 1}`} 
+                      className="w-full h-40 object-cover rounded-lg cursor-pointer"
+                      onClick={() => handleImageClick(image)}
+                    />
                     <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                      <Button variant="secondary" size="sm">View</Button>
+                      <Button 
+                        variant="secondary" 
+                        size="sm" 
+                        className="mr-2"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleImageClick(image);
+                        }}
+                      >
+                        View
+                      </Button>
                     </div>
+                    <button 
+                      className="absolute top-2 right-2 p-1 bg-red-500 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteImage(image);
+                      }}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
                   </div>
                 ))}
               </div>
             ) : (
               <div className="text-center py-12">
                 <ImageIcon className="mx-auto h-12 w-12 text-blue-300 mb-4" />
-                <p className="text-gray-500">Upload images to see them in the gallery</p>
+                <p className="text-gray-500">No images uploaded yet</p>
               </div>
             )}
           </CardContent>
         </Card>
       </div>
+
+      {selectedImage && (
+        <FullScreenImageModal imageUrl={selectedImage} onClose={closeModal} />
+      )}
     </DashboardLayout>
   )
 }
