@@ -599,6 +599,36 @@ video {
 .mr-1 {
   margin-right: 0.25rem;
 }
+.ml-0 {
+  margin-left: 0px;
+}
+.ml-auto {
+  margin-left: auto;
+}
+.ml-\[-20px\] {
+  margin-left: -20px;
+}
+.ml-\[-10px\] {
+  margin-left: -10px;
+}
+.ml-\[-5px\] {
+  margin-left: -5px;
+}
+.mt-\[-5px\] {
+  margin-top: -5px;
+}
+.mt-\[-9px\] {
+  margin-top: -9px;
+}
+.mt-\[-1px\] {
+  margin-top: -1px;
+}
+.mt-\[-0px\] {
+  margin-top: -0px;
+}
+.mt-0 {
+  margin-top: 0px;
+}
 .block {
   display: block;
 }
