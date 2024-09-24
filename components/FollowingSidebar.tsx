@@ -14,6 +14,7 @@ interface FollowingSidebarProps {
 export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick, onCollapse, onHover }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [showText, setShowText] = useState(true);
 
   useEffect(() => {
     const savedState = localStorage.getItem('sidebar-collapsed');
@@ -28,16 +29,27 @@ export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick,
     setIsCollapsed(newCollapsedState);
     onCollapse(newCollapsedState);
     localStorage.setItem('sidebar-collapsed', JSON.stringify(newCollapsedState));
+    if (newCollapsedState) {
+      setShowText(false);
+    } else {
+      setTimeout(() => setShowText(true), 150);
+    }
   }
 
   const handleMouseEnter = () => {
     setIsHovered(true);
     if (onHover) onHover(true);
+    if (isCollapsed) {
+      setTimeout(() => setShowText(true), 150);
+    }
   };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
     if (onHover) onHover(false);
+    if (isCollapsed) {
+      setShowText(false);
+    }
   };
 
   const navItems = [
@@ -61,7 +73,11 @@ export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick,
             <div className="w-16 h-16 flex-shrink-0 mr-3 flex items-center justify-center ml-[-10px] mt-[4px]">
               <img src="/images/logo.png" alt="PaveScope Logo" className="w-full h-full object-contain" />
             </div>
-            <h2 className="text-xl font-bold text-left ml-[-20px]">PaveScope</h2>
+            {showText && (
+              <h2 className="text-xl font-bold text-left ml-[-20px] transition-opacity duration-200 ease-in-out">
+                PaveScope
+              </h2>
+            )}
           </>
         ) : (
           <div className="w-8 h-8">
@@ -80,8 +96,8 @@ export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick,
                 <div className={`${isCollapsed && !isHovered ? 'w-5' : 'w-5 ml-[-5px]'} flex-shrink-0`}>
                   {React.createElement(item.icon, { className: "h-5 w-5" })}
                 </div>
-                {(!isCollapsed || isHovered) && (
-                  <span className="ml-3 text-base transition-opacity duration-300 ease-in-out">
+                {(!isCollapsed || isHovered) && showText && (
+                  <span className="ml-3 text-base transition-opacity duration-200 ease-in-out">
                     {item.name}
                   </span>
                 )}
