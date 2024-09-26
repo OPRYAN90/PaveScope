@@ -10,7 +10,7 @@ import { Search, Mail, Phone, MessageCircle } from 'lucide-react'
 const faqs = [
   {
     question: "How do I upload images for analysis?",
-    answer: "Navigate to the Upload page, click on the 'Choose Files' button or drag and drop your images into the designated area. Then click 'Upload' to process your images."
+    answer: "Navigate to the Upload page, click on the &apos;Choose Files&apos; button or drag and drop your images into the designated area. Then click &apos;Upload&apos; to process your images."
   },
   {
     question: "What file formats are supported?",
@@ -84,7 +84,7 @@ export default function HelpPage() {
             </CardHeader>
             <CardContent>
               <p className="text-gray-600 mb-4">
-                Can't find what you're looking for? Our support team is here to help.
+                Can&apos;t find what you&apos;re looking for? Our support team is here to help.
               </p>
               <div className="space-y-3">
                 <div className="flex items-center">
