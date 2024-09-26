@@ -1,5 +1,5 @@
 'use client'
-
+import React from 'react'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { signInWithEmail, signInWithGoogle } from '../../lib/auth'
@@ -99,7 +99,7 @@ export default function SignIn() {
           </CardContent>
           <CardFooter className="bg-gray-50 p-6 rounded-b-2xl">
             <p className="text-sm text-gray-600 text-center w-full">
-              Don't have an account?{' '}
+              Don&apos;t have an account?&nbsp;
               <Link href="/get-started" className="font-medium text-blue-600 hover:underline transition duration-200">
                 Get Started
               </Link>

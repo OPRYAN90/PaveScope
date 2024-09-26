@@ -118,7 +118,7 @@ export default function SignUp() {
           </CardContent>
           <CardFooter className="bg-gray-50 p-6 rounded-b-2xl">
             <p className="text-sm text-gray-600 text-center w-full">
-              Already have an account?{' '}
+              Already have an account?&nbsp;
               <Link href="/signin" className="font-medium text-blue-600 hover:underline transition duration-200">
                 Sign in
               </Link>
