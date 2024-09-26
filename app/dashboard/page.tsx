@@ -14,6 +14,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar"
 import { useNavigateOrScrollTop } from '../../utils/navigation';
 import DashboardLayout from '../dashboard-layout';
 import { ChevronDown, LogOut, Settings, User } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+const FirebaseComponent = dynamic(() => import('../components/FirebaseComponent'), {
+  ssr: false,
+});
 
 interface User {
   uid: string;
