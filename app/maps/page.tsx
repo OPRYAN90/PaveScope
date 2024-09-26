@@ -5,7 +5,7 @@ import DashboardLayout from '../dashboard-layout'
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/Login/ui/card"
 import { Button } from "../../components/Login/ui/button"
 import { Input } from "../../components/Login/ui/input"
-import { Select } from "../../components/ui/select"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select"
 import { MapPin, Layers, Filter, Search } from 'lucide-react'
 
 export default function MapsPage() {
@@ -48,20 +48,30 @@ export default function MapsPage() {
               <CardContent className="space-y-4">
                 <div>
                   <label htmlFor="area-select" className="block text-sm font-medium text-gray-700 mb-1">Select Area</label>
-                  <Select id="area-select" value={selectedArea} onChange={handleAreaChange}>
-                    <option value="">Choose an area</option>
-                    <option value="downtown">Downtown</option>
-                    <option value="suburbs">Suburbs</option>
-                    <option value="highway">Highway</option>
+                  <Select value={selectedArea} onValueChange={setSelectedArea}>
+                    <SelectTrigger id="area-select">
+                      <SelectValue placeholder="Choose an area" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="">Choose an area</SelectItem>
+                      <SelectItem value="downtown">Downtown</SelectItem>
+                      <SelectItem value="suburbs">Suburbs</SelectItem>
+                      <SelectItem value="highway">Highway</SelectItem>
+                    </SelectContent>
                   </Select>
                 </div>
                 <div>
                   <label htmlFor="filter-select" className="block text-sm font-medium text-gray-700 mb-1">Filter By</label>
-                  <Select id="filter-select" value={filterType} onChange={handleFilterChange}>
-                    <option value="">All issues</option>
-                    <option value="potholes">Potholes</option>
-                    <option value="cracks">Cracks</option>
-                    <option value="degradation">Surface Degradation</option>
+                  <Select value={filterType} onValueChange={setFilterType}>
+                    <SelectTrigger id="filter-select">
+                      <SelectValue placeholder="All issues" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="">All issues</SelectItem>
+                      <SelectItem value="potholes">Potholes</SelectItem>
+                      <SelectItem value="cracks">Cracks</SelectItem>
+                      <SelectItem value="degradation">Surface Degradation</SelectItem>
+                    </SelectContent>
                   </Select>
                 </div>
                 <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
