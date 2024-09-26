@@ -18,7 +18,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const firebase = initializeFirebase();
-    if (firebase) {
+    if (firebase && firebase.auth) {
       const unsubscribe = firebase.auth.onAuthStateChanged((user: User | null) => {
         setUser(user);
         setLoading(false);
@@ -33,4 +33,4 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       {children}
     </AuthContext.Provider>
   );
-};
+}
