@@ -25,6 +25,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
 
       return () => unsubscribe();
+    } else {
+      setLoading(false);
     }
   }, []);
 

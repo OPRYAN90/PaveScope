@@ -182,6 +182,10 @@ export default function UploadPage() {
     }
   }
 
+  if (typeof window === 'undefined') {
+    return null; // or a loading indicator
+  }
+
   return (
     <DashboardLayout>
       <div className="p-6 bg-blue-50 min-h-screen">
