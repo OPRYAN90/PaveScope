@@ -7,15 +7,28 @@ import { Button } from "../../components/Login/ui/button"
 import { Card, CardContent } from "../../components/Login/ui/card"
 import { Progress } from "../../components/ui/progress"
 import { useAuth } from '../../components/AuthProvider'
-import { storage } from '../../firebase'
+import { storage, db } from '../../firebase'
 import { ref, uploadBytesResumable, getDownloadURL, listAll, deleteObject } from 'firebase/storage'
+import { collection, addDoc } from 'firebase/firestore'
 import FullScreenImageModal from '../../components/FullScreenImageModal'
+import EXIF from 'exif-js'
+
+interface FileWithGPS {
+  file: File;
+  gpsData: { latitude: number; longitude: number } | null;
+}
+
+interface UploadedImage {
+  url: string;
+  path: string;
+  gpsData: { latitude: number; longitude: number } | null;
+}
 
 export default function UploadPage() {
-  const [files, setFiles] = useState<File[]>([])
+  const [files, setFiles] = useState<FileWithGPS[]>([])
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
-  const [uploadedImages, setUploadedImages] = useState<Array<{url: string, path: string}>>([])
+  const [uploadedImages, setUploadedImages] = useState<UploadedImage[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const { user } = useAuth()
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
@@ -38,7 +51,8 @@ export default function UploadPage() {
           return { url, path: item.fullPath }
         })
       )
-      setUploadedImages(imageData)
+      const updatedImageData = imageData.map(img => ({ ...img, gpsData: null }))
+      setUploadedImages(updatedImageData)
     } catch (error) {
       console.error("Error loading images:", error)
     } finally {
@@ -46,54 +60,93 @@ export default function UploadPage() {
     }
   }
 
+  function extractGPSData(file: File): Promise<{ latitude: number; longitude: number } | null> {
+    return new Promise((resolve) => {
+      EXIF.getData(file as any, function(this: any) {
+        try {
+          const exifData = EXIF.getAllTags(this);
+          console.log("EXIF data:", exifData);
+
+          let gpsData: { latitude: number; longitude: number } | null = null;
+
+          if (exifData.GPSLatitude && exifData.GPSLongitude && exifData.GPSLatitudeRef && exifData.GPSLongitudeRef) {
+            let lat = exifData.GPSLatitude[0] + exifData.GPSLatitude[1] / 60 + exifData.GPSLatitude[2] / 3600;
+            let lon = exifData.GPSLongitude[0] + exifData.GPSLongitude[1] / 60 + exifData.GPSLongitude[2] / 3600;
+            
+            if (exifData.GPSLatitudeRef === "S") lat = -lat;
+            if (exifData.GPSLongitudeRef === "W") lon = -lon;
+            
+            gpsData = { latitude: lat, longitude: lon };
+          }
+
+          console.log("Extracted GPS data:", gpsData);
+          resolve(gpsData);
+        } catch (error) {
+          console.error("Error extracting EXIF data:", error);
+          resolve(null);
+        }
+      });
+    });
+  }
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setFiles(Array.from(e.target.files))
+      const selectedFiles = Array.from(e.target.files);
+      const filesWithGPS = selectedFiles.map(file => {
+        return new Promise<FileWithGPS>(async (resolve) => {
+          const gpsData = await extractGPSData(file);
+          resolve({ file, gpsData });
+        });
+      });
+
+      Promise.all(filesWithGPS).then((filesWithGPSData) => {
+        setFiles(filesWithGPSData);
+      });
     }
   }
 
   const handleUpload = async () => {
-    if (!user) return
-    setUploading(true)
-    setProgress(0)
+    if (!user) return;
+    setUploading(true);
+    setProgress(0);
 
     const uploadPromises = files.map(file => {
-      const storageRef = ref(storage, `users/${user.uid}/images/${file.name}`)
-      const uploadTask = uploadBytesResumable(storageRef, file)
+      const storageRef = ref(storage, `users/${user.uid}/images/${file.file.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, file.file);
 
-      return new Promise<string>((resolve, reject) => {
+      return new Promise<{ url: string; path: string }>((resolve, reject) => {
         uploadTask.on('state_changed',
           (snapshot) => {
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            setProgress(progress)
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setProgress(progress);
           },
           (error) => {
-            console.error("Upload error:", error)
-            reject(error)
+            console.error("Upload error:", error);
+            reject(error);
           },
           async () => {
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref)
-            resolve(downloadURL)
+            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+            resolve({ 
+              url: downloadURL, 
+              path: `users/${user.uid}/images/${file.file.name}` 
+            });
           }
-        )
-      })
-    })
+        );
+      });
+    });
 
     try {
-      const newImageUrls = await Promise.all(uploadPromises)
+      const newImageData = await Promise.all(uploadPromises);
       setUploadedImages(prev => [
         ...prev,
-        ...newImageUrls.map((url, index) => ({
-          url,
-          path: `users/${user.uid}/images/${files[index].name}`
-        }))
-      ])
-      setFiles([])
-      setProgress(0)
+        ...newImageData.map(img => ({ ...img, gpsData: null }))
+      ]);
+      setFiles([]);
+      setProgress(0);
     } catch (error) {
-      console.error("Error uploading files:", error)
+      console.error("Error uploading files:", error);
     } finally {
-      setUploading(false)
+      setUploading(false);
     }
   }
 
@@ -146,11 +199,16 @@ export default function UploadPage() {
               <div className="mb-6">
                 <h2 className="text-lg font-semibold mb-2 text-blue-800">Selected Files:</h2>
                 <ul className="space-y-2">
-                  {files.map((file, index) => (
+                  {files.map(({ file, gpsData }, index) => (
                     <li key={index} className="flex items-center justify-between bg-blue-50 p-2 rounded">
                       <div className="flex items-center">
                         <File className="h-5 w-5 text-blue-500 mr-2" />
                         <span className="text-sm text-gray-700">{file.name}</span>
+                        {gpsData && (
+                          <span className="text-xs text-green-600 ml-2">
+                            GPS: {gpsData.latitude.toFixed(6)}, {gpsData.longitude.toFixed(6)}
+                          </span>
+                        )}
                       </div>
                       <button onClick={() => removeFile(index)} className="text-red-500 hover:text-red-700">
                         <X className="h-5 w-5" />
