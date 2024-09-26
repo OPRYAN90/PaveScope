@@ -7,11 +7,11 @@ import { Button } from "../../components/Login/ui/button"
 import { Card, CardContent } from "../../components/Login/ui/card"
 import { Progress } from "../../components/ui/progress"
 import { useAuth } from '../../components/AuthProvider'
-import { storage, db } from '../../firebase'
 import { ref, uploadBytesResumable, getDownloadURL, listAll, deleteObject } from 'firebase/storage'
 import { collection, addDoc } from 'firebase/firestore'
 import FullScreenImageModal from '../../components/FullScreenImageModal'
 import EXIF from 'exif-js'
+import { initializeFirebase } from '../firebase-client'
 
 interface FileWithGPS {
   file: File;
@@ -32,18 +32,26 @@ export default function UploadPage() {
   const [isLoading, setIsLoading] = useState(true)
   const { user } = useAuth()
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [firebase, setFirebase] = useState<any>(null)
 
   useEffect(() => {
-    if (user) {
+    const firebaseInstance = initializeFirebase();
+    if (firebaseInstance) {
+      setFirebase(firebaseInstance);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (user && firebase) {
       loadUserImages()
     }
-  }, [user])
+  }, [user, firebase])
 
   const loadUserImages = async () => {
-    if (!user) return
+    if (!user || !firebase) return
     setIsLoading(true)
     try {
-      const imagesRef = ref(storage, `users/${user.uid}/images`)
+      const imagesRef = ref(firebase.storage, `users/${user.uid}/images`)
       const imageList = await listAll(imagesRef)
       const imageData = await Promise.all(
         imageList.items.map(async (item) => {
@@ -106,12 +114,12 @@ export default function UploadPage() {
   }
 
   const handleUpload = async () => {
-    if (!user) return;
+    if (!user || !firebase) return;
     setUploading(true);
     setProgress(0);
 
     const uploadPromises = files.map(file => {
-      const storageRef = ref(storage, `users/${user.uid}/images/${file.file.name}`);
+      const storageRef = ref(firebase.storage, `users/${user.uid}/images/${file.file.name}`);
       const uploadTask = uploadBytesResumable(storageRef, file.file);
 
       return new Promise<{ url: string; path: string }>((resolve, reject) => {
@@ -163,9 +171,9 @@ export default function UploadPage() {
   }
 
   const handleDeleteImage = async (imagePath: string) => {
-    if (!user) return
+    if (!user || !firebase) return
     try {
-      const imageRef = ref(storage, imagePath)
+      const imageRef = ref(firebase.storage, imagePath)
       await deleteObject(imageRef)
       setUploadedImages(prevImages => prevImages.filter(img => img.path !== imagePath))
     } catch (error) {
