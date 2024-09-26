@@ -16,7 +16,7 @@ import DashboardLayout from '../dashboard-layout';
 import { ChevronDown, LogOut, Settings, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
-const FirebaseComponent = dynamic(() => import('../components/FirebaseComponent'), {
+const FirebaseComponent = dynamic(() => import('../../components/FirebaseComponent'), {
   ssr: false,
 });
 
