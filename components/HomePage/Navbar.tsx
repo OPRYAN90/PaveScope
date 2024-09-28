@@ -4,10 +4,12 @@ import { Button } from "./ui/button";
 import Link from "next/link"; // Next.js Link
 import { useAuth } from '../AuthProvider';
 import { signOutUser } from '../../lib/auth';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const { user, loading } = useAuth();
+  const router = useRouter();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -28,6 +30,10 @@ export default function Navbar() {
     } catch (error) {
       console.error("Error signing out", error);
     }
+  };
+
+  const handleDashboardClick = () => {
+    router.push('/dashboard');
   };
 
   return (
@@ -76,13 +82,22 @@ export default function Navbar() {
           {loading ? (
             <span>Loading...</span>
           ) : user ? (
-            <Button
-              variant="outline"
-              onClick={handleSignOut}
-              className="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-50 hover:border-gray-400 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            >
-              Sign Out
-            </Button>
+            <>
+              <Button
+                variant="outline"
+                onClick={handleDashboardClick}
+                className="px-4 py-2 text-white bg-blue-500 border border-blue-500 rounded-md shadow-sm transition-all duration-200 ease-in-out hover:bg-blue-600 hover:border-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              >
+                Dashboard
+              </Button>
+              <Button
+                variant="outline"
+                onClick={handleSignOut}
+                className="px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-50 hover:border-gray-400 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              >
+                Sign Out
+              </Button>
+            </>
           ) : (
             <>
               <Link href="/signin">
