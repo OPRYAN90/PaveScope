@@ -5,7 +5,11 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx}', // If applicable
   ],
   theme: {
-    extend: {},
+    extend: {
+      width: {
+        '58': '14.5rem',
+      },
+    },
   },
   plugins: [],
 };

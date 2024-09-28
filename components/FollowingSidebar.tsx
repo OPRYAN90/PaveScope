@@ -63,7 +63,7 @@ export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick,
 
   return (
     <aside
-      className={`fixed left-0 top-0 ${isCollapsed && !isHovered ? 'w-16' : 'w-56'} h-screen bg-gradient-to-b from-blue-600 to-blue-800 text-white flex flex-col transition-all duration-300 ease-in-out z-10`}
+      className={`fixed left-0 top-0 ${isCollapsed && !isHovered ? 'w-14' : 'w-52'} h-screen bg-gradient-to-b from-blue-600 to-blue-800 text-white flex flex-col transition-all duration-300 ease-in-out z-10`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -85,16 +85,16 @@ export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick,
           </div>
         )}
       </div>
-      <nav className="flex-grow overflow-y-auto">
+      <nav className="flex-grow overflow-y-auto pt-1 pb-2">
         {navItems.map((item) => (
           <Link href={item.href} key={item.name}>
             <Button 
               variant="ghost" 
-              className={`w-full justify-start hover:bg-blue-700 transition-colors h-[48px] ${isCollapsed && !isHovered ? 'px-0' : 'px-4'}`}
+              className={`w-full justify-start hover:bg-blue-700 transition-colors h-[52px] my-1 ${isCollapsed && !isHovered ? 'px-0' : 'px-3'}`}
             >
               <div className={`flex items-center ${isCollapsed && !isHovered ? 'justify-center w-full' : ''}`}>
-                <div className={`${isCollapsed && !isHovered ? 'w-5' : 'w-5 ml-[-5px]'} flex-shrink-0`}>
-                  {React.createElement(item.icon, { className: "h-5 w-5" })}
+                <div className={`${isCollapsed && !isHovered ? 'w-6' : 'w-6'} flex-shrink-0`}>
+                  {React.createElement(item.icon, { className: "h-6 w-6" })}
                 </div>
                 {(!isCollapsed || isHovered) && showText && (
                   <span className="ml-3 text-base transition-opacity duration-200 ease-in-out">
@@ -107,7 +107,7 @@ export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick,
         ))}
       </nav>
       <Button variant="ghost" className="w-full justify-center hover:bg-blue-700 transition-colors h-[48px]" onClick={toggleSidebar}>
-        {isCollapsed ? <ChevronRight className="h-5 w-5" /> : <ChevronLeft className="h-5 w-5" />}
+        {isCollapsed ? <ChevronRight className="h-6 w-6" /> : <ChevronLeft className="h-6 w-6" />}
       </Button>
     </aside>
   );
