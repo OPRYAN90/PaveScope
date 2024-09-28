@@ -357,7 +357,7 @@ export default function UploadPage() {
                 <span className="ml-2 text-gray-600">Loading images...</span>
               </div>
             ) : uploadedImages.length > 0 ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {uploadedImages.map((image, index) => (
                   <div key={index} className="relative group">
                     <img 
