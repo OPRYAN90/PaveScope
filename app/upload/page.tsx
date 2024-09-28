@@ -7,8 +7,9 @@ import { Button } from "../../components/Login/ui/button"
 import { Card, CardContent } from "../../components/Login/ui/card"
 import { Progress } from "../../components/ui/progress"
 import { useAuth } from '../../components/AuthProvider'
-import { storage } from '../../firebase'
+import { storage, db } from '../../firebase'
 import { ref, uploadBytesResumable, getDownloadURL, listAll, deleteObject } from 'firebase/storage'
+import { collection, addDoc, deleteDoc, doc, query, where, getDocs, orderBy, onSnapshot } from 'firebase/firestore'
 import FullScreenImageModal from '../../components/FullScreenImageModal'
 import { Input } from "../../components/Login/ui/input"
 import { useToast } from "../../components/ui/use-toast"
@@ -40,10 +41,35 @@ export default function UploadPage() {
     }
   }, [user])
 
+  useEffect(() => {
+    if (user) {
+      console.log("Setting up Firestore listener")
+      try {
+        const q = query(collection(db, 'users', user.uid, 'images'), orderBy('uploadedAt', 'desc'))
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+          console.log("Firestore snapshot received")
+          const images = querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            url: doc.data().url,
+            path: `users/${user.uid}/images/${doc.data().fileName}`,
+          }))
+          setUploadedImages(images)
+        }, (error) => {
+          console.error("Firestore listener error:", error)
+        })
+
+        return () => unsubscribe()
+      } catch (error) {
+        console.error("Error setting up Firestore listener:", error)
+      }
+    }
+  }, [user])
+
   const loadUserImages = async () => {
     if (!user) return
     setIsLoading(true)
     try {
+      console.log("Loading user images from Storage")
       const imagesRef = ref(storage, `users/${user.uid}/images`)
       const imageList = await listAll(imagesRef)
       const imageData = await Promise.all(
@@ -53,6 +79,7 @@ export default function UploadPage() {
         })
       )
       setUploadedImages(imageData)
+      console.log("Images loaded successfully")
     } catch (error) {
       console.error("Error loading images:", error)
       toast({
@@ -130,66 +157,94 @@ export default function UploadPage() {
     setUploading(true)
     setProgress(0)
 
-    const uploadPromises = filesToUpload.map((fileObj) => {
-      const { id, file, gps } = fileObj
-      const fileName = file.name
-      const manualGps = gpsInput[id]
-
-      if (!gps && (!manualGps || !manualGps.lat || !manualGps.lng)) {
-        toast({
-          variant: 'destructive',
-          title: 'Error',
-          description: `GPS data missing for ${fileName}`,
-        })
-        return Promise.reject(`GPS data missing for ${fileName}`)
-      }
-
-      const finalGps = gps || { 
-        lat: parseFloat(manualGps.lat), 
-        lng: parseFloat(manualGps.lng),
-        alt: manualGps.alt ? parseFloat(manualGps.alt) : undefined
-      }
-      const metadata = {
-        customMetadata: {
-          gpsLat: finalGps.lat.toString(),
-          gpsLng: finalGps.lng.toString(),
-          gpsAlt: finalGps.alt ? finalGps.alt.toString() : '',
-        },
-      }
-
-      const storageRef = ref(storage, `users/${user.uid}/images/${fileName}`)
-      const uploadTask = uploadBytesResumable(storageRef, file, metadata)
-
-      return new Promise<{ url: string; fileName: string }>((resolve, reject) => {
-        uploadTask.on(
-          'state_changed',
-          (snapshot) => {
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            setProgress(progress)
-          },
-          (error) => {
-            console.error('Upload error:', error)
-            reject(error)
-          },
-          async () => {
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref)
-            resolve({ url: downloadURL, fileName })
-          }
-        )
-      })
-    })
-
     try {
+      const uploadPromises = filesToUpload.map(async (fileObj) => {
+        const { id, file, gps } = fileObj
+        const fileName = file.name
+        const manualGps = gpsInput[id]
+
+        if (!gps && (!manualGps || !manualGps.lat || !manualGps.lng)) {
+          toast({
+            variant: 'destructive',
+            title: 'Error',
+            description: `GPS data missing for ${fileName}`,
+          })
+          return null
+        }
+
+        const finalGps = gps || { 
+          lat: parseFloat(manualGps.lat), 
+          lng: parseFloat(manualGps.lng),
+          alt: manualGps.alt ? parseFloat(manualGps.alt) : null
+        }
+        const metadata = {
+          customMetadata: {
+            gpsLat: finalGps.lat.toString(),
+            gpsLng: finalGps.lng.toString(),
+            gpsAlt: finalGps.alt?.toString() ?? '', // Ensure it's a string or empty
+          },
+        }
+
+        const storageRef = ref(storage, `users/${user.uid}/images/${fileName}`)
+        const uploadTask = uploadBytesResumable(storageRef, file, metadata)
+
+        return new Promise<{ url: string; fileName: string; gps: typeof finalGps } | null>((resolve, reject) => {
+          uploadTask.on(
+            'state_changed',
+            (snapshot) => {
+              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              setProgress(progress)
+            },
+            (error) => {
+              console.error('Upload error:', error)
+              reject(error)
+            },
+            async () => {
+              try {
+                const downloadURL = await getDownloadURL(uploadTask.snapshot.ref)
+                console.log("File uploaded successfully:", fileName)
+
+                // Add metadata to Firestore
+                try {
+                  await addDoc(collection(db, "users", user.uid, "images"), {
+                    fileName: fileName,
+                    url: downloadURL,
+                    gps: {
+                      lat: finalGps.lat,
+                      lng: finalGps.lng,
+                      alt: finalGps.alt !== null ? Number(finalGps.alt) : null // Ensure it's a primitive number or null
+                    },
+                    uploadedAt: new Date(),
+                  })
+                  console.log("Metadata added to Firestore:", fileName)
+                } catch (firestoreError) {
+                  console.error("Error adding metadata to Firestore:", firestoreError)
+                  throw firestoreError
+                }
+
+                resolve({ url: downloadURL, fileName, gps: finalGps })
+              } catch (error) {
+                console.error("Upload error:", error)
+                reject(error)
+              }
+            }
+          )
+        })
+      })
+
       const results = await Promise.all(uploadPromises)
+      const successfulUploads = results.filter(result => result !== null) as Array<{ url: string; fileName: string; gps: { lat: number; lng: number; alt?: number | null } }>
       
-      // Update uploaded images
-      setUploadedImages((prev) => [
-        ...prev,
-        ...results.map(result => ({
-          url: result.url,
-          path: `users/${user.uid}/images/${result.fileName}`,
-        })),
-      ])
+      // Update uploaded images and save metadata to Firestore
+      const newUploadedImages = successfulUploads.map(result => ({
+        url: result.url,
+        path: `users/${user.uid}/images/${result.fileName}`,
+      }))
+
+      // Remove this line:
+      // setUploadedImages((prev) => [...prev, ...newUploadedImages])
+
+      // The Firestore listener will automatically update the state
 
       // Clear all uploaded files and GPS inputs
       setFilesToUpload([])
@@ -199,15 +254,13 @@ export default function UploadPage() {
         fileInputRef.current.value = '' // Reset file input
       }
 
-      // Show success toast
       toast({
         title: 'Upload Successful',
-        description: `Successfully uploaded ${results.length} file(s)`,
+        description: `Successfully uploaded ${successfulUploads.length} file(s)`,
         variant: 'default',
       })
 
       setProgress(0)
-      console.log('After upload - filesToUpload:', [], 'gpsInput:', {})
     } catch (error) {
       console.error('Error uploading files:', error)
       toast({
@@ -245,12 +298,38 @@ export default function UploadPage() {
   const handleDeleteImage = async (imagePath: string) => {
     if (!user) return
     try {
+      console.log("Deleting image:", imagePath)
       const imageRef = ref(storage, imagePath)
       await deleteObject(imageRef)
+
+      // Delete from Firestore
+      const fileName = imagePath.split('/').pop()
+      const q = query(collection(db, 'users', user.uid, 'images'), where('fileName', '==', fileName))
+      const querySnapshot = await getDocs(q)
+      querySnapshot.forEach(async (doc) => {
+        try {
+          await deleteDoc(doc.ref)
+          console.log("Deleted Firestore document for:", fileName)
+        } catch (error) {
+          console.error("Error deleting Firestore document:", error)
+        }
+      })
+
+      // Update local state immediately
       setUploadedImages((prevImages) => prevImages.filter((img) => img.path !== imagePath))
+
+      toast({
+        title: 'Image Deleted',
+        description: 'The image has been successfully deleted.',
+        variant: 'default',
+      })
     } catch (error) {
       console.error('Error deleting image:', error)
-      alert('Failed to delete the image. Please try again.')
+      toast({
+        title: 'Delete Error',
+        description: 'Failed to delete the image. Please try again.',
+        variant: 'destructive',
+      })
     }
   }
 

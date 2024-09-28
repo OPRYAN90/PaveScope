@@ -81,7 +81,7 @@ export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick,
           </>
         ) : (
           <div className="w-8 h-8">
-            <img src="/images/logo-icon.png" alt="PaveScope Icon" className="w-full h-full object-contain" />
+            <img src="/images/logo.png" alt="PaveScope Icon" className="w-full h-full object-contain" />
           </div>
         )}
       </div>
