@@ -115,9 +115,23 @@ export default function UploadPage() {
       reader.onload = (e) => {
         const exif = EXIF.readFromBinaryFile(e.target?.result as ArrayBuffer)
         if (exif && exif.GPSLatitude && exif.GPSLongitude) {
-          const lat = exif.GPSLatitude[0] + exif.GPSLatitude[1] / 60 + exif.GPSLatitude[2] / 3600
-          const lng = exif.GPSLongitude[0] + exif.GPSLongitude[1] / 60 + exif.GPSLongitude[2] / 3600
-          const alt = exif.GPSAltitude ? exif.GPSAltitude : undefined
+          const latDegrees = exif.GPSLatitude[0].numerator / exif.GPSLatitude[0].denominator
+          const latMinutes = exif.GPSLatitude[1].numerator / exif.GPSLatitude[1].denominator
+          const latSeconds = exif.GPSLatitude[2].numerator / exif.GPSLatitude[2].denominator
+          const latDirection = exif.GPSLatitudeRef || "N"
+          
+          const lngDegrees = exif.GPSLongitude[0].numerator / exif.GPSLongitude[0].denominator
+          const lngMinutes = exif.GPSLongitude[1].numerator / exif.GPSLongitude[1].denominator
+          const lngSeconds = exif.GPSLongitude[2].numerator / exif.GPSLongitude[2].denominator
+          const lngDirection = exif.GPSLongitudeRef || "E"
+          
+          let lat = latDegrees + latMinutes / 60 + latSeconds / 3600
+          let lng = lngDegrees + lngMinutes / 60 + lngSeconds / 3600
+          
+          if (latDirection === "S") lat = -lat
+          if (lngDirection === "W") lng = -lng
+          
+          const alt = exif.GPSAltitude ? exif.GPSAltitude.numerator / exif.GPSAltitude.denominator : undefined
           resolve({ lat, lng, alt })
         } else {
           resolve(undefined)

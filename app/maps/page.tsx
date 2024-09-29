@@ -9,7 +9,7 @@ import { Input } from "../../components/Login/ui/input"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../../components/ui/select"
 import { Slider } from "../../components/ui/slider"
 import { Switch } from "../../components/ui/switch"
-import { MapPin, Layers, Filter, Search, ChevronUp, ChevronDown } from 'lucide-react'
+import { MapPin, Layers, Filter, Search, ChevronUp, ChevronDown, X } from 'lucide-react'
 import { Label } from "../../components/Login/ui/label"
 import Script from 'next/script'
 import { useAuth } from '../../components/AuthProvider'
@@ -27,6 +27,7 @@ export default function MapsPage() {
   const pathname = usePathname()
   const [userImages, setUserImages] = useState<Array<{url: string, gps: {lat: number, lng: number}}>>([])
   const { user } = useAuth()
+  const [selectedImage, setSelectedImage] = useState<{url: string, gps: {lat: number, lng: number}} | null>(null)
 
   const handleAreaChange = (value: string) => {
     setSelectedArea(value)
@@ -93,17 +94,17 @@ export default function MapsPage() {
         position: { lat: image.gps.lat, lng: image.gps.lng },
         map: map,
         icon: {
-          url: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
-          scaledSize: new google.maps.Size(30, 30)
+          path: google.maps.SymbolPath.CIRCLE,
+          fillColor: '#808080',
+          fillOpacity: 1,
+          strokeColor: '#ffffff',
+          strokeWeight: 2,
+          scale: 8,
         }
       })
 
-      const infoWindow = new google.maps.InfoWindow({
-        content: `<img src="${image.url}" alt="User uploaded image" style="max-width: 200px; max-height: 200px;">`
-      })
-
       marker.addListener('click', () => {
-        infoWindow.open(map, marker)
+        setSelectedImage(image)
       })
     })
   }
@@ -120,8 +121,29 @@ export default function MapsPage() {
           
           <div className="grid grid-cols-1 gap-6">
             <Card className="overflow-hidden">
-              <CardContent className="p-0">
+              <CardContent className="p-0 relative">
                 <div ref={mapRef} className="h-[600px] w-full" />
+                {selectedImage && (
+                  <Card className="absolute top-4 right-4 w-64 bg-white shadow-xl z-10">
+                    <CardHeader className="p-2 relative">
+                      <CardTitle className="text-sm font-semibold text-blue-700">Image Details</CardTitle>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        onClick={() => setSelectedImage(null)}
+                        className="absolute top-1 right-1 p-1 h-auto"
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </CardHeader>
+                    <CardContent className="p-2">
+                      <img src={selectedImage.url} alt="Selected location" className="w-full h-32 object-cover rounded-md mb-2" />
+                      <p className="text-xs text-gray-600">
+                        Lat: {selectedImage.gps.lat.toFixed(6)}, Lng: {selectedImage.gps.lng.toFixed(6)}
+                      </p>
+                    </CardContent>
+                  </Card>
+                )}
               </CardContent>
             </Card>
 
