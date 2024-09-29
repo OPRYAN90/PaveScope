@@ -22,7 +22,13 @@ export default function ModelPage() {
   const [modelType, setModelType] = useState('yolov8')
   const [confidenceThreshold, setConfidenceThreshold] = useState(0.5)
   const [useGPU, setUseGPU] = useState(false)
-  const [selectedImages, setSelectedImages] = useState<string[]>([])
+  const [selectedImages, setSelectedImages] = useState<string[]>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('selectedImages')
+      return saved ? JSON.parse(saved) : []
+    }
+    return []
+  })
   const [showConfidenceWarning, setShowConfidenceWarning] = useState(false)
   const [showGPUWarning, setShowGPUWarning] = useState(false)
   const [isGalleryOpen, setIsGalleryOpen] = useState(false)
@@ -32,6 +38,7 @@ export default function ModelPage() {
   const [isLoadingImages, setIsLoadingImages] = useState(true)
   const [isUploadingImages, setIsUploadingImages] = useState(false)
   const { user } = useAuth()
+  const [loadingImages, setLoadingImages] = useState<{ [key: string]: boolean }>({})
 
   useEffect(() => {
     if (user) {
@@ -56,6 +63,12 @@ export default function ModelPage() {
       }))
       setUserImages(images)
       setAvailableImages(images.map(img => img.url))
+      // Initialize loading state for each image
+      const initialLoadingState = images.reduce((acc, img) => {
+        acc[img.url] = true
+        return acc
+      }, {} as { [key: string]: boolean })
+      setLoadingImages(initialLoadingState)
     } catch (error) {
       console.error('Error fetching user images:', error)
     } finally {
@@ -84,6 +97,11 @@ export default function ModelPage() {
       clearTimeout(gpuTimer)
     }
   }, [showConfidenceWarning, showGPUWarning])
+
+  // Add this useEffect to save selectedImages to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('selectedImages', JSON.stringify(selectedImages))
+  }, [selectedImages])
 
   const handleConfidenceChange = (value: number[]) => {
     setConfidenceThreshold(value[0])
@@ -126,7 +144,11 @@ export default function ModelPage() {
     setIsUploadingImages(true)
     // Simulate an upload delay
     setTimeout(() => {
-      setSelectedImages(prev => [...prev, ...selectedGalleryImages])
+      setSelectedImages(prev => {
+        const newSelectedImages = [...prev, ...selectedGalleryImages]
+        localStorage.setItem('selectedImages', JSON.stringify(newSelectedImages))
+        return newSelectedImages
+      })
       setSelectedGalleryImages([])
       setIsGalleryOpen(false)
       setIsUploadingImages(false)
@@ -134,7 +156,15 @@ export default function ModelPage() {
   }
 
   const removeSelectedImage = (imageToRemove: string) => {
-    setSelectedImages(prev => prev.filter(img => img !== imageToRemove))
+    setSelectedImages(prev => {
+      const newSelectedImages = prev.filter(img => img !== imageToRemove)
+      localStorage.setItem('selectedImages', JSON.stringify(newSelectedImages))
+      return newSelectedImages
+    })
+  }
+
+  const handleImageLoad = (imageUrl: string) => {
+    setLoadingImages(prev => ({ ...prev, [imageUrl]: false }))
   }
 
   return (
@@ -260,11 +290,11 @@ export default function ModelPage() {
               {selectedImages.length > 0 ? (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                   {selectedImages.map((image, index) => (
-                    <div key={index} className="relative group">
+                    <div key={index} className="relative group aspect-square">
                       <img
                         src={image}
                         alt={`Selected image ${index + 1}`}
-                        className="w-full h-48 object-cover rounded-lg shadow-md"
+                        className="w-full h-full object-cover rounded-lg shadow-md"
                       />
                       <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                         <Button
@@ -313,10 +343,16 @@ export default function ModelPage() {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                   {userImages.map((image, index) => (
                     <div key={index} className="relative group aspect-square">
+                      {loadingImages[image.url] && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-gray-200 rounded-lg">
+                          <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+                        </div>
+                      )}
                       <img 
                         src={image.url} 
                         alt={`Gallery image ${index + 1}`} 
-                        className="w-full h-full object-cover rounded-lg shadow-md cursor-pointer transition-transform duration-200 ease-in-out transform hover:scale-105"
+                        className={`w-full h-full object-cover rounded-lg shadow-md cursor-pointer transition-transform duration-200 ease-in-out transform hover:scale-105 ${loadingImages[image.url] ? 'opacity-0' : 'opacity-100'}`}
+                        onLoad={() => handleImageLoad(image.url)}
                       />
                       <div 
                         className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg"
