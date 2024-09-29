@@ -8,7 +8,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from ".
 import { Slider } from "../../components/ui/slider"
 import { Switch } from "../../components/ui/switch"
 import { Label } from "../../components/Login/ui/label"
-import { Save, RefreshCw, Play, AlertCircle, X, Image as ImageIcon, Upload } from 'lucide-react'
+import { Save, RefreshCw, Play, AlertCircle, X, Image as ImageIcon, Upload, Settings } from 'lucide-react'
 import { Alert, AlertDescription } from "../../components/ui/alert"
 import { ScrollArea } from "../../components/ui/scroll-area"
 
@@ -78,45 +78,52 @@ export default function ModelPage() {
       <div className="flex flex-col h-screen bg-blue-50">
         <div className="p-6">
           <h1 className="text-3xl font-bold mb-6 text-blue-800">Model Inference Settings</h1>
-          <p className="text-gray-600 mb-6">Adjust the AI model parameters for inference on road images.</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <Card className="flex flex-col">
               <CardHeader>
                 <CardTitle className="text-xl font-semibold text-blue-700">Model Configuration</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4 flex-grow">
-                <div>
-                  <Label htmlFor="model-type">Model Type</Label>
-                  <Select value={modelType} onValueChange={setModelType}>
-                    <SelectTrigger id="model-type">
-                      <SelectValue placeholder="Select model type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="yolov8">YOLOv8</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <Label htmlFor="confidence-threshold">Confidence Threshold</Label>
-                  <Slider
-                    id="confidence-threshold"
-                    min={0}
-                    max={1}
-                    step={0.01}
-                    value={[confidenceThreshold]}
-                    onValueChange={handleConfidenceChange}
-                    className="my-4"
-                  />
-                  <span className="text-sm text-gray-500">{confidenceThreshold.toFixed(2)}</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Switch
-                    id="use-gpu"
-                    checked={useGPU}
-                    onCheckedChange={handleGPUChange}
-                  />
-                  <Label htmlFor="use-gpu" className="text-sm text-gray-700">Use GPU Acceleration</Label>
+              <CardContent className="space-y-6 flex-grow flex flex-col justify-between">
+                <div className="bg-gray-100 p-4 rounded-lg shadow-inner">
+                  <div className="flex justify-between items-center mb-4">
+                    <div className="flex items-center space-x-2">
+                      <Settings className="w-5 h-5 text-blue-600" />
+                      <span className="text-sm font-medium text-blue-700">Model Type:</span>
+                      <span className="text-sm font-bold text-blue-800">{modelType}</span>
+                    </div>
+                    <Select value={modelType} onValueChange={setModelType}>
+                      <SelectTrigger id="model-type" className="w-[180px]">
+                        <SelectValue placeholder="Select model type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="yolov8">YOLOv8</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <Label htmlFor="confidence-threshold" className="text-sm font-medium text-blue-700">Confidence Threshold</Label>
+                      <span className="text-sm font-bold text-blue-800">{confidenceThreshold.toFixed(2)}</span>
+                    </div>
+                    <Slider
+                      id="confidence-threshold"
+                      min={0}
+                      max={1}
+                      step={0.01}
+                      value={[confidenceThreshold]}
+                      onValueChange={handleConfidenceChange}
+                      className="my-4"
+                    />
+                  </div>
+                  <div className="flex items-center justify-between mt-4">
+                    <Label htmlFor="use-gpu" className="text-sm font-medium text-blue-700">Use GPU Acceleration</Label>
+                    <Switch
+                      id="use-gpu"
+                      checked={useGPU}
+                      onCheckedChange={handleGPUChange}
+                    />
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -126,34 +133,45 @@ export default function ModelPage() {
                 <CardTitle className="text-xl font-semibold text-blue-700">Inference Settings</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6 flex-grow flex flex-col justify-between">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-700">Selected Images: {selectedImages.length}</span>
-                  <Button variant="outline" size="sm" onClick={() => setSelectedImages([])}>
-                    Clear Selection
-                  </Button>
+                <div className="bg-gray-100 p-4 rounded-lg shadow-inner">
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center space-x-2">
+                      <ImageIcon className="w-5 h-5 text-blue-600" />
+                      <span className="text-sm font-medium text-blue-700">Selected Images:</span>
+                      <span className="text-sm font-bold text-blue-800">{selectedImages.length}</span>
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={() => setSelectedImages([])}
+                      className="text-blue-600 hover:text-blue-700 hover:bg-blue-100"
+                    >
+                      Clear Selection
+                    </Button>
+                  </div>
                 </div>
-                <div className="grid grid-cols-3 gap-4 flex-grow">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 flex-grow">
                   <Button 
                     onClick={handleSaveChanges} 
-                    className="bg-blue-600 hover:bg-blue-700 text-white w-full h-full rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex flex-col items-center justify-center"
+                    className="bg-blue-600 hover:bg-blue-700 text-white w-full h-full rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex flex-col items-center justify-center p-4"
                   >
                     <Save className="w-6 h-6 mb-2" />
-                    <span>Save Settings</span>
+                    <span className="text-sm font-medium">Save Settings</span>
                   </Button>
                   <Button 
                     onClick={handleResetDefaults} 
                     variant="outline" 
-                    className="w-full h-full rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex flex-col items-center justify-center"
+                    className="w-full h-full rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex flex-col items-center justify-center p-4 border-blue-300 hover:bg-blue-50"
                   >
-                    <RefreshCw className="w-6 h-6 mb-2" />
-                    <span>Reset Defaults</span>
+                    <RefreshCw className="w-6 h-6 mb-2 text-blue-600" />
+                    <span className="text-sm font-medium text-blue-600">Reset Defaults</span>
                   </Button>
                   <Button 
                     onClick={handleRunInference} 
-                    className="bg-green-600 hover:bg-green-700 text-white w-full h-full rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex flex-col items-center justify-center"
+                    className="bg-green-600 hover:bg-green-700 text-white w-full h-full rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex flex-col items-center justify-center p-4"
                   >
                     <Play className="w-6 h-6 mb-2" />
-                    <span>Run Inference</span>
+                    <span className="text-sm font-medium">Run Inference</span>
                   </Button>
                 </div>
               </CardContent>
@@ -174,10 +192,14 @@ export default function ModelPage() {
                 onChange={handleImageUpload}
               />
               <label htmlFor="image-upload">
-                <Button variant="outline" as="span" className="cursor-pointer">
-                  <Upload className="w-4 h-4 mr-2" />
-                  Upload Images
-                </Button>
+                <span className="cursor-pointer">
+                  <Button variant="outline" asChild>
+                    <span className="flex items-center">
+                      <Upload className="w-4 h-4 mr-2" />
+                      Upload Images
+                    </span>
+                  </Button>
+                </span>
               </label>
             </div>
           </CardHeader>

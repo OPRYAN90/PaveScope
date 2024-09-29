@@ -127,8 +127,10 @@ export default function MapsPage() {
                 <div ref={mapRef} className="h-[600px] w-full" />
                 {selectedImage && (
                   <Card className="absolute top-4 right-4 w-64 bg-white shadow-xl z-10">
-                    <CardHeader className="p-2 relative">
-                      <CardTitle className="text-sm font-semibold text-blue-700">Image Details</CardTitle>
+                    <CardHeader className="p-2 relative flex items-center justify-between">
+                      <CardTitle className="text-sm font-semibold text-blue-700 leading-none translate-y-[5px]">
+                        Image Details
+                      </CardTitle>
                       <Button 
                         variant="ghost" 
                         size="sm" 
@@ -136,7 +138,7 @@ export default function MapsPage() {
                           setSelectedImage(null)
                           setIsImageLoading(false)
                         }}
-                        className="absolute top-1 right-1 p-1 h-auto"
+                        className="absolute top-1 right-1 p-1 h-auto -translate-y-[.5px]"
                       >
                         <X className="h-4 w-4" />
                       </Button>
@@ -155,9 +157,11 @@ export default function MapsPage() {
                           onLoad={() => setIsImageLoading(false)}
                         />
                       </div>
-                      <p className="text-xs text-gray-600">
-                        Lat: {selectedImage.gps.lat.toFixed(6)}, Lng: {selectedImage.gps.lng.toFixed(6)}
-                      </p>
+                      <div className="text-center">
+                        <p className="text-xs text-gray-600">
+                          Lat: {selectedImage.gps.lat.toFixed(6)}, Lng: {selectedImage.gps.lng.toFixed(6)}
+                        </p>
+                      </div>
                     </CardContent>
                   </Card>
                 )}
