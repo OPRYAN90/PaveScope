@@ -1,116 +1,244 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 import DashboardLayout from '../dashboard-layout'
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/Login/ui/card"
 import { Button } from "../../components/Login/ui/button"
 import { Input } from "../../components/Login/ui/input"
-import { Select } from "../../components/ui/select"
-import { MapPin, Layers, Filter, Search } from 'lucide-react'
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../../components/ui/select"
+import { Slider } from "../../components/ui/slider"
+import { Switch } from "../../components/ui/switch"
+import { MapPin, Layers, Filter, Search, ChevronUp, ChevronDown } from 'lucide-react'
+import { Label } from "../../components/Login/ui/label"
+import Script from 'next/script'
+import { useAuth } from '../../components/AuthProvider'
+import { db } from '../../firebase'
+import { collection, query, where, getDocs } from 'firebase/firestore'
 
 export default function MapsPage() {
   const [selectedArea, setSelectedArea] = useState('')
   const [filterType, setFilterType] = useState('')
+  const [zoomLevel, setZoomLevel] = useState(2)
+  const [showControls, setShowControls] = useState(true)
+  const mapRef = useRef<HTMLDivElement>(null)
+  const [mapLoaded, setMapLoaded] = useState(false)
+  const [map, setMap] = useState<google.maps.Map | null>(null)
+  const pathname = usePathname()
+  const [userImages, setUserImages] = useState<Array<{url: string, gps: {lat: number, lng: number}}>>([])
+  const { user } = useAuth()
 
-  const handleAreaChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedArea(e.target.value)
+  const handleAreaChange = (value: string) => {
+    setSelectedArea(value)
   }
 
-  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilterType(e.target.value)
+  const handleFilterChange = (value: string) => {
+    setFilterType(value)
+  }
+
+  useEffect(() => {
+    if (mapLoaded && mapRef.current && !map) {
+      const newMap = new google.maps.Map(mapRef.current, {
+        center: { lat: 0, lng: 0 },
+        zoom: zoomLevel,
+      })
+      setMap(newMap)
+    }
+
+    return () => {
+      if (map) {
+        google.maps.event.clearInstanceListeners(map)
+        setMap(null)
+      }
+    }
+  }, [mapLoaded, zoomLevel, map, pathname])
+
+  useEffect(() => {
+    if (map) {
+      map.setZoom(zoomLevel)
+    }
+  }, [zoomLevel, map])
+
+  useEffect(() => {
+    if (user && map) {
+      fetchUserImages()
+    }
+  }, [user, map])
+
+  const fetchUserImages = async () => {
+    if (!user) return
+
+    try {
+      const q = query(collection(db, 'users', user.uid, 'images'))
+      const querySnapshot = await getDocs(q)
+      const images = querySnapshot.docs.map(doc => {
+        const data = doc.data()
+        return {
+          url: data.url,
+          gps: data.gps
+        }
+      })
+      setUserImages(images)
+      addMarkersToMap(images)
+    } catch (error) {
+      console.error('Error fetching user images:', error)
+    }
+  }
+
+  const addMarkersToMap = (images: Array<{url: string, gps: {lat: number, lng: number}}>) => {
+    if (!map) return
+
+    images.forEach((image) => {
+      const marker = new google.maps.Marker({
+        position: { lat: image.gps.lat, lng: image.gps.lng },
+        map: map,
+        icon: {
+          url: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
+          scaledSize: new google.maps.Size(30, 30)
+        }
+      })
+
+      const infoWindow = new google.maps.InfoWindow({
+        content: `<img src="${image.url}" alt="User uploaded image" style="max-width: 200px; max-height: 200px;">`
+      })
+
+      marker.addListener('click', () => {
+        infoWindow.open(map, marker)
+      })
+    })
   }
 
   return (
-    <DashboardLayout>
-      <div className="p-6 bg-blue-50 min-h-screen">
-        <h1 className="text-3xl font-bold mb-6 text-blue-800">Maps</h1>
-        <p className="text-gray-600 mb-6">View geographical representations of your data and detections here.</p>
-
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          <Card className="lg:col-span-3">
-            <CardHeader>
-              <CardTitle className="text-xl font-semibold text-blue-700">Interactive Map</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {/* Placeholder for the map */}
-              <div className="bg-gray-200 h-[500px] rounded-lg flex items-center justify-center">
-                <MapPin className="h-16 w-16 text-blue-500" />
-                <span className="ml-2 text-lg text-gray-600">Map Placeholder</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold text-blue-700">Map Controls</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <label htmlFor="area-select" className="block text-sm font-medium text-gray-700 mb-1">Select Area</label>
-                  <Select id="area-select" value={selectedArea} onChange={handleAreaChange}>
-                    <option value="">Choose an area</option>
-                    <option value="downtown">Downtown</option>
-                    <option value="suburbs">Suburbs</option>
-                    <option value="highway">Highway</option>
-                  </Select>
-                </div>
-                <div>
-                  <label htmlFor="filter-select" className="block text-sm font-medium text-gray-700 mb-1">Filter By</label>
-                  <Select id="filter-select" value={filterType} onChange={handleFilterChange}>
-                    <option value="">All issues</option>
-                    <option value="potholes">Potholes</option>
-                    <option value="cracks">Cracks</option>
-                    <option value="degradation">Surface Degradation</option>
-                  </Select>
-                </div>
-                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                  <Filter className="mr-2 h-4 w-4" /> Apply Filters
-                </Button>
+    <>
+      <Script
+        src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyAtRjdZYF7O3721qyEjn1c6d47hvJDe4sc&libraries=places`}
+        onLoad={() => setMapLoaded(true)}
+      />
+      <DashboardLayout>
+        <div className="p-6 bg-gray-100 min-h-screen">
+          <h1 className="text-3xl font-bold mb-6 text-blue-800">Maps & Filters</h1>
+          
+          <div className="grid grid-cols-1 gap-6">
+            <Card className="overflow-hidden">
+              <CardContent className="p-0">
+                <div ref={mapRef} className="h-[600px] w-full" />
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold text-blue-700">Search Location</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex space-x-2">
-                  <Input type="text" placeholder="Enter address or coordinates" />
-                  <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-                    <Search className="h-4 w-4" />
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowControls(!showControls)}
+                className="w-full py-3 flex items-center justify-center"
+              >
+                {showControls ? (
+                  <>
+                    <ChevronUp className="h-6 w-6 mr-2" /> Hide Controls
+                  </>
+                ) : (
+                  <>
+                    <ChevronDown className="h-6 w-6 mr-2" /> Show Controls
+                  </>
+                )}
+              </Button>
+              
+              {showControls && (
+                <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg font-semibold text-blue-700">Area and Filters</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="area-select">Select Area</Label>
+                        <Select value={selectedArea} onValueChange={handleAreaChange}>
+                          <SelectTrigger id="area-select">
+                            <SelectValue placeholder="Choose an area" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="downtown">Downtown</SelectItem>
+                            <SelectItem value="suburbs">Suburbs</SelectItem>
+                            <SelectItem value="highway">Highway</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="filter-select">Filter By</Label>
+                        <Select value={filterType} onValueChange={handleFilterChange}>
+                          <SelectTrigger id="filter-select">
+                            <SelectValue placeholder="All issues" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="potholes">Potholes</SelectItem>
+                            <SelectItem value="cracks">Cracks</SelectItem>
+                            <SelectItem value="degradation">Surface Degradation</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <Button className="w-full">
+                        <Filter className="mr-2 h-4 w-4" /> Apply Filters
+                      </Button>
+                    </CardContent>
+                  </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold text-blue-700">Map Layers</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  <label className="flex items-center space-x-2">
-                    <input type="checkbox" className="form-checkbox text-blue-600" />
-                    <span>Show Potholes</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input type="checkbox" className="form-checkbox text-blue-600" />
-                    <span>Show Cracks</span>
-                  </label>
-                  <label className="flex items-center space-x-2">
-                    <input type="checkbox" className="form-checkbox text-blue-600" />
-                    <span>Show Surface Degradation</span>
-                  </label>
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg font-semibold text-blue-700">Search and Zoom</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="space-y-2">
+                        <Label>Search Location</Label>
+                        <div className="flex space-x-2">
+                          <Input type="text" placeholder="Enter address or coordinates" />
+                          <Button size="icon">
+                            <Search className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <Label>Zoom Level: {zoomLevel}</Label>
+                        <Slider
+                          min={1}
+                          max={20}
+                          step={1}
+                          value={[zoomLevel]}
+                          onValueChange={(value) => setZoomLevel(value[0])}
+                        />
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg font-semibold text-blue-700">Map Layers</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="potholes" className="cursor-pointer">Show Potholes</Label>
+                          <Switch id="potholes" />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="cracks" className="cursor-pointer">Show Cracks</Label>
+                          <Switch id="cracks" />
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="degradation" className="cursor-pointer">Show Surface Degradation</Label>
+                          <Switch id="degradation" />
+                        </div>
+                      </div>
+                      <Button className="w-full">
+                        <Layers className="mr-2 h-4 w-4" /> Update Layers
+                      </Button>
+                    </CardContent>
+                  </Card>
                 </div>
-                <Button className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white">
-                  <Layers className="mr-2 h-4 w-4" /> Update Layers
-                </Button>
-              </CardContent>
-            </Card>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </DashboardLayout>
+      </DashboardLayout>
+    </>
   )
 }

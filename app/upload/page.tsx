@@ -8,7 +8,7 @@ import { Card, CardContent } from "../../components/Login/ui/card"
 import { Progress } from "../../components/ui/progress"
 import { useAuth } from '../../components/AuthProvider'
 import { storage, db } from '../../firebase'
-import { ref, uploadBytesResumable, getDownloadURL, listAll, deleteObject } from 'firebase/storage'
+import { ref, uploadBytesResumable, getDownloadURL, listAll, deleteObject, getMetadata } from 'firebase/storage'
 import { collection, addDoc, deleteDoc, doc, query, where, getDocs, orderBy, onSnapshot } from 'firebase/firestore'
 import FullScreenImageModal from '../../components/FullScreenImageModal'
 import { Input } from "../../components/Login/ui/input"
@@ -19,7 +19,7 @@ export default function UploadPage() {
   const [filesToUpload, setFilesToUpload] = useState<Array<{id: string, file: File, gps?: {lat: number, lng: number, alt?: number}}>>([])
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
-  const [uploadedImages, setUploadedImages] = useState<Array<{url: string, path: string}>>([])
+  const [uploadedImages, setUploadedImages] = useState<Array<{url: string, path: string, gps?: {lat: number, lng: number, alt?: number}}>>([])
   const [isLoading, setIsLoading] = useState(true)
   const { user } = useAuth()
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
@@ -46,12 +46,23 @@ export default function UploadPage() {
       console.log("Setting up Firestore listener")
       try {
         const q = query(collection(db, 'users', user.uid, 'images'), orderBy('uploadedAt', 'desc'))
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const unsubscribe = onSnapshot(q, async (querySnapshot) => {
           console.log("Firestore snapshot received")
-          const images = querySnapshot.docs.map(doc => ({
-            id: doc.id,
-            url: doc.data().url,
-            path: `users/${user.uid}/images/${doc.data().fileName}`,
+          const images = await Promise.all(querySnapshot.docs.map(async (doc) => {
+            const data = doc.data()
+            const storageRef = ref(storage, `users/${user.uid}/images/${data.fileName}`)
+            const metadata = await getMetadata(storageRef)
+            const gps = {
+              lat: parseFloat(metadata.customMetadata?.gpsLat || '0'),
+              lng: parseFloat(metadata.customMetadata?.gpsLng || '0'),
+              alt: metadata.customMetadata?.gpsAlt ? parseFloat(metadata.customMetadata.gpsAlt) : undefined
+            }
+            return {
+              id: doc.id,
+              url: data.url,
+              path: `users/${user.uid}/images/${data.fileName}`,
+              gps: gps
+            }
           }))
           setUploadedImages(images)
         }, (error) => {
@@ -75,7 +86,13 @@ export default function UploadPage() {
       const imageData = await Promise.all(
         imageList.items.map(async (item) => {
           const url = await getDownloadURL(item)
-          return { url, path: item.fullPath }
+          const metadata = await getMetadata(item)
+          const gps = {
+            lat: parseFloat(metadata.customMetadata?.gpsLat || '0'),
+            lng: parseFloat(metadata.customMetadata?.gpsLng || '0'),
+            alt: metadata.customMetadata?.gpsAlt ? parseFloat(metadata.customMetadata.gpsAlt) : undefined
+          }
+          return { url, path: item.fullPath, gps }
         })
       )
       setUploadedImages(imageData)
@@ -239,6 +256,7 @@ export default function UploadPage() {
       const newUploadedImages = successfulUploads.map(result => ({
         url: result.url,
         path: `users/${user.uid}/images/${result.fileName}`,
+        gps: result.gps // Ensure GPS data is included
       }))
 
       // Remove this line:
@@ -439,6 +457,12 @@ export default function UploadPage() {
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                 {uploadedImages.map((image, index) => (
                   <div key={index} className="relative group">
+                    <div className="absolute top-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs p-1 truncate z-10">
+                      {image.gps ? 
+                        `${image.gps.lat.toFixed(6)}, ${image.gps.lng.toFixed(6)}${image.gps.alt !== undefined ? `, ${image.gps.alt.toFixed(1)}m` : ''}` 
+                        : 'No GPS data'
+                      }
+                    </div>
                     <img 
                       src={image.url} 
                       alt={`Uploaded image ${index + 1}`} 
@@ -459,7 +483,7 @@ export default function UploadPage() {
                       </Button>
                     </div>
                     <button 
-                      className="absolute top-2 right-2 p-1 bg-red-500 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                      className="absolute bottom-2 right-2 p-1 bg-red-500 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleDeleteImage(image.path);
