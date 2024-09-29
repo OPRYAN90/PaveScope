@@ -2,6 +2,6 @@
   "/dashboard/page": "app/dashboard/page.js",
   "/maps/page": "app/maps/page.js",
   "/upload/page": "app/upload/page.js",
-  "/detections/page": "app/detections/page.js",
-  "/model/page": "app/model/page.js"
+  "/model/page": "app/model/page.js",
+  "/detections/page": "app/detections/page.js"
 }
