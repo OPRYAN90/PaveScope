@@ -9,7 +9,7 @@ import { Input } from "../../components/Login/ui/input"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../../components/ui/select"
 import { Slider } from "../../components/ui/slider"
 import { Switch } from "../../components/ui/switch"
-import { MapPin, Layers, Filter, Search, ChevronUp, ChevronDown, X } from 'lucide-react'
+import { MapPin, Layers, Filter, Search, ChevronUp, ChevronDown, X, Loader2 } from 'lucide-react'
 import { Label } from "../../components/Login/ui/label"
 import Script from 'next/script'
 import { useAuth } from '../../components/AuthProvider'
@@ -28,6 +28,7 @@ export default function MapsPage() {
   const [userImages, setUserImages] = useState<Array<{url: string, gps: {lat: number, lng: number}}>>([])
   const { user } = useAuth()
   const [selectedImage, setSelectedImage] = useState<{url: string, gps: {lat: number, lng: number}} | null>(null)
+  const [isImageLoading, setIsImageLoading] = useState(false)
 
   const handleAreaChange = (value: string) => {
     setSelectedArea(value)
@@ -104,6 +105,7 @@ export default function MapsPage() {
       })
 
       marker.addListener('click', () => {
+        setIsImageLoading(true)
         setSelectedImage(image)
       })
     })
@@ -130,14 +132,29 @@ export default function MapsPage() {
                       <Button 
                         variant="ghost" 
                         size="sm" 
-                        onClick={() => setSelectedImage(null)}
+                        onClick={() => {
+                          setSelectedImage(null)
+                          setIsImageLoading(false)
+                        }}
                         className="absolute top-1 right-1 p-1 h-auto"
                       >
                         <X className="h-4 w-4" />
                       </Button>
                     </CardHeader>
                     <CardContent className="p-2">
-                      <img src={selectedImage.url} alt="Selected location" className="w-full h-32 object-cover rounded-md mb-2" />
+                      <div className="w-full h-32 relative">
+                        {isImageLoading && (
+                          <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+                            <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+                          </div>
+                        )}
+                        <img 
+                          src={selectedImage.url} 
+                          alt="Selected location" 
+                          className={`w-full h-32 object-cover rounded-md mb-2 ${isImageLoading ? 'invisible' : 'visible'}`}
+                          onLoad={() => setIsImageLoading(false)}
+                        />
+                      </div>
                       <p className="text-xs text-gray-600">
                         Lat: {selectedImage.gps.lat.toFixed(6)}, Lng: {selectedImage.gps.lng.toFixed(6)}
                       </p>
