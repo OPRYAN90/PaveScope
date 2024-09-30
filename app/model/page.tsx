@@ -8,7 +8,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from ".
 import { Slider } from "../../components/ui/slider"
 import { Switch } from "../../components/ui/switch"
 import { Label } from "../../components/Login/ui/label"
-import { Save, RefreshCw, Play, AlertCircle, X, Image as ImageIcon, Upload, Settings, Trash2, Loader2 } from 'lucide-react'
+import { Save, RefreshCw, Play, AlertCircle, X, Image as ImageIcon, Upload, Settings, Trash2, Loader2, MapPin } from 'lucide-react'
 import { Alert, AlertDescription } from "../../components/ui/alert"
 import { ScrollArea } from "../../components/ui/scroll-area"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../../components/ui/dialog"
@@ -17,6 +17,17 @@ import { useAuth } from '../../components/AuthProvider'
 import { storage, db } from '../../firebase'
 import { collection, query, getDocs, orderBy } from 'firebase/firestore'
 import { ref, getDownloadURL } from 'firebase/storage'
+
+// Update the interface for image data
+interface ImageData {
+  url: string;
+  path: string;
+  gps: {
+    lat: number;
+    lng: number;
+    alt?: number;
+  };
+}
 
 export default function ModelPage() {
   const [modelType, setModelType] = useState('yolov8')
@@ -34,7 +45,7 @@ export default function ModelPage() {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false)
   const [availableImages, setAvailableImages] = useState<string[]>([])
   const [selectedGalleryImages, setSelectedGalleryImages] = useState<string[]>([])
-  const [userImages, setUserImages] = useState<Array<{url: string, path: string}>>([])
+  const [userImages, setUserImages] = useState<ImageData[]>([])
   const [isLoadingImages, setIsLoadingImages] = useState(true)
   const [isUploadingImages, setIsUploadingImages] = useState(false)
   const { user } = useAuth()
@@ -70,7 +81,12 @@ export default function ModelPage() {
         const url = await getDownloadURL(storageRef)
         return {
           url,
-          path: `users/${user.uid}/images/${data.fileName}`
+          path: `users/${user.uid}/images/${data.fileName}`,
+          gps: {
+            lat: data.gps.lat,
+            lng: data.gps.lng,
+            alt: data.gps.alt
+          }
         }
       }))
       setUserImages(images)
@@ -301,25 +317,35 @@ export default function ModelPage() {
             <ScrollArea className="h-[calc(100vh-400px)]">
               {selectedImages.length > 0 ? (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                  {selectedImages.map((image, index) => (
-                    <div key={index} className="relative group aspect-square">
-                      <img
-                        src={image}
-                        alt={`Selected image ${index + 1}`}
-                        className="w-full h-full object-cover rounded-lg shadow-md"
-                      />
-                      <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="bg-yellow-400 hover:bg-yellow-500 text-yellow-900"
-                          onClick={() => removeSelectedImage(image)}
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
+                  {selectedImages.map((imageUrl, index) => {
+                    const imageData = userImages.find(img => img.url === imageUrl)
+                    return (
+                      <div key={index} className="relative group aspect-square">
+                        <img
+                          src={imageUrl}
+                          alt={`Selected image ${index + 1}`}
+                          className="w-full h-full object-cover rounded-lg shadow-md"
+                        />
+                        <div className="absolute inset-0 bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg"></div>
+                        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-20">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="bg-yellow-400 hover:bg-yellow-500 text-yellow-900"
+                            onClick={() => removeSelectedImage(imageUrl)}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                        {imageData && (
+                          <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs p-1 truncate z-10">
+                            <MapPin className="inline-block w-3 h-3 mr-1" />
+                            {`${imageData.gps.lat.toFixed(6)}, ${imageData.gps.lng.toFixed(6)}${imageData.gps.alt !== undefined ? `, ${imageData.gps.alt.toFixed(1)}m` : ''}`}
+                          </div>
+                        )}
                       </div>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
               ) : (
                 <div 
@@ -378,6 +404,10 @@ export default function ModelPage() {
                             onCheckedChange={() => handleImageSelection(image.url)}
                             className="h-5 w-5 border-2 border-white bg-blue-600 text-white"
                           />
+                        </div>
+                        <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs p-1 truncate z-10">
+                          <MapPin className="inline-block w-3 h-3 mr-1" />
+                          {`${image.gps.lat.toFixed(6)}, ${image.gps.lng.toFixed(6)}${image.gps.alt !== undefined ? `, ${image.gps.alt.toFixed(1)}m` : ''}`}
                         </div>
                       </div>
                     ))}
