@@ -15,6 +15,7 @@ import { Input } from "../../components/Login/ui/input"
 import { useToast } from "../../components/ui/use-toast"
 import EXIF from 'exif-js'
 import { toast as hotToast } from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 
 interface GPSData {
   lat: number;
@@ -42,6 +43,7 @@ export default function UploadPage() {
   const { toast } = useToast()
   const [key, setKey] = useState(0)
   const [duplicateImages, setDuplicateImages] = useState<string[]>([])
+  const router = useRouter()
 
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -398,9 +400,8 @@ export default function UploadPage() {
   const handleDeleteImage = async (imagePath: string) => {
     if (!user) return
     try {
-      console.log("Deleting image:", imagePath)
-      const imageRef = ref(storage, imagePath)
-      await deleteObject(imageRef)
+      const storageRef = ref(storage, imagePath)
+      await deleteObject(storageRef)
 
       // Delete from Firestore
       const fileName = imagePath.split('/').pop()
@@ -418,11 +419,19 @@ export default function UploadPage() {
       // Update local state immediately
       setUploadedImages((prevImages) => prevImages.filter((img) => img.path !== imagePath))
 
+      // Remove the deleted image from localStorage
+      const savedImages = JSON.parse(localStorage.getItem('selectedImages') || '[]')
+      const updatedSavedImages = savedImages.filter((img: string) => !img.endsWith(fileName))
+      localStorage.setItem('selectedImages', JSON.stringify(updatedSavedImages))
+
       toast({
         title: 'Image Deleted',
         description: 'The image has been successfully deleted.',
         variant: 'default',
       })
+
+      // Force a refresh of the model page
+      router.refresh()
     } catch (error) {
       console.error('Error deleting image:', error)
       toast({

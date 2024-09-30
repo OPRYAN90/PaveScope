@@ -46,6 +46,18 @@ export default function ModelPage() {
     }
   }, [user])
 
+  useEffect(() => {
+    // This effect will run whenever userImages changes
+    if (userImages.length > 0) {
+      // Filter out any selected images that are no longer in userImages
+      setSelectedImages(prevSelected => 
+        prevSelected.filter(selectedImg => 
+          userImages.some(userImg => userImg.url === selectedImg)
+        )
+      )
+    }
+  }, [userImages])
+
   const fetchUserImages = async () => {
     if (!user) return
     setIsLoadingImages(true)
