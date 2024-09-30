@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useCallback, useRef } from 'react'
-import { Upload, File, Loader2, Trash2, MapPin, ImageIcon, Compass } from 'lucide-react'
+import { Upload, File, Loader2, Trash2, MapPin, ImageIcon, Compass, AlertCircle } from 'lucide-react'
 import DashboardLayout from '../dashboard-layout'
 import { Button } from "../../components/Login/ui/button"
 import { Card, CardContent } from "../../components/Login/ui/card"
@@ -41,6 +41,7 @@ export default function UploadPage() {
   const [gpsInput, setGpsInput] = useState<{[key: string]: {lat: string, lng: string, alt: string}}>({})
   const { toast } = useToast()
   const [key, setKey] = useState(0)
+  const [duplicateImages, setDuplicateImages] = useState<string[]>([])
 
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -174,13 +175,21 @@ export default function UploadPage() {
         file 
       }))
       const processedFiles = await processFiles(newFiles)
+      
+      // Check for duplicates
+      const duplicates = processedFiles.filter(file => 
+        uploadedImages.some(img => img.path.endsWith(file.file.name))
+      ).map(file => file.file.name);
+      
+      setDuplicateImages(duplicates);
+
       setFilesToUpload((prev) => {
         const updated = [...prev, ...processedFiles]
         console.log('Updated filesToUpload:', updated)
         return updated
       })
     }
-  }, [processFiles])
+  }, [processFiles, uploadedImages])
 
   const handleGpsInput = useCallback((fileId: string, coord: 'lat' | 'lng' | 'alt', value: string) => {
     const numValue = parseFloat(value)
@@ -244,6 +253,17 @@ export default function UploadPage() {
             gpsLng: finalGps.lng.toString(),
             gpsAlt: finalGps.alt.toString(),
           },
+        }
+
+        // Check if an image with the same name already exists
+        const existingImage = uploadedImages.find(img => img.path.endsWith(fileName))
+        if (existingImage) {
+          toast({
+            title: 'Duplicate Image',
+            description: `An image with the name "${fileName}" already exists.`,
+            variant: 'destructive',
+          });
+          return null;
         }
 
         // Add a placeholder for the uploading image at the beginning of the array
@@ -344,12 +364,19 @@ export default function UploadPage() {
     } finally {
       setUploading(false)
     }
-  }, [user, filesToUpload, gpsInput, toast, validateGpsData])
+  }, [user, filesToUpload, gpsInput, toast, validateGpsData, uploadedImages])
 
   const removeFile = useCallback((id: string) => {
     setFilesToUpload((prev) => {
       const updated = prev.filter((file) => file.id !== id)
       console.log('After removing file - filesToUpload:', updated)
+      
+      // Update duplicateImages
+      const remainingDuplicates = duplicateImages.filter(fileName => 
+        updated.some(file => file.file.name === fileName)
+      );
+      setDuplicateImages(remainingDuplicates);
+      
       return updated
     })
     setGpsInput((prev) => {
@@ -358,7 +385,7 @@ export default function UploadPage() {
       console.log('After removing file - gpsInput:', newInput)
       return newInput
     })
-  }, [])
+  }, [duplicateImages])
 
   const handleImageClick = (imageUrl: string) => {
     setSelectedImage(imageUrl)
@@ -497,6 +524,16 @@ export default function UploadPage() {
             >
               {uploading ? 'Uploading...' : 'Upload Files'}
             </Button>
+            {duplicateImages.length > 0 && (
+              <div className="mt-2 flex items-center text-red-500">
+                <AlertCircle className="h-4 w-4 mr-2" />
+                <span className="text-sm">
+                  {duplicateImages.length === 1
+                    ? "An image has already been uploaded to the gallery."
+                    : `${duplicateImages.length} images have already been uploaded to the gallery.`}
+                </span>
+              </div>
+            )}
           </CardContent>
         </Card>
 
