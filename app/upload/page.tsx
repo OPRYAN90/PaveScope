@@ -597,7 +597,7 @@ export default function UploadPage() {
                         <img 
                           src={image.url} 
                           alt={`Uploaded image ${image.id}`} 
-                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                           onClick={() => handleImageClick(image.url)}
                         />
                       )}
@@ -613,11 +613,11 @@ export default function UploadPage() {
                         </span>
                       </div>
                     </div>
-                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                       <Button 
                         variant="secondary" 
                         size="sm" 
-                        className="mr-2 bg-white text-black hover:bg-gray-200"
+                        className="mr-2 bg-white bg-opacity-25 hover:bg-opacity-100 text-black transition-all duration-300"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleImageClick(image.url);
@@ -629,7 +629,7 @@ export default function UploadPage() {
                       <Button 
                         variant="destructive"
                         size="sm"
-                        className="bg-white text-red-600 hover:bg-red-100 hover:text-red-700"
+                        className="bg-white bg-opacity-25 hover:bg-opacity-100 text-red-600 hover:text-red-700 transition-all duration-300"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleDeleteImage(image.path);
