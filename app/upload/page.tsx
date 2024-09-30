@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useCallback, useRef } from 'react'
-import { Upload, File, Loader2, Trash2, MapPin, ImageIcon, Compass, AlertCircle } from 'lucide-react'
+import { Upload, File, Loader2, Trash2, MapPin, ImageIcon, Compass, AlertCircle, X } from 'lucide-react'
 import DashboardLayout from '../dashboard-layout'
 import { Button } from "../../components/Login/ui/button"
 import { Card, CardContent } from "../../components/Login/ui/card"
@@ -16,6 +16,9 @@ import { useToast } from "../../components/ui/use-toast"
 import EXIF from 'exif-js'
 import { toast as hotToast } from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
+import { Badge } from "../../components/ui/badge"
+import { Separator } from "../../components/ui/separator"
+import { Label } from "../../components/Login/ui/label"
 
 interface GPSData {
   lat: number;
@@ -444,12 +447,12 @@ export default function UploadPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-6 bg-blue-50 min-h-screen">
-        <h1 className="text-3xl font-bold mb-6 text-blue-800">Upload Image Data</h1>
-        <Card className="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
-          <CardContent className="p-6">
-            <p className="text-gray-600 mb-6">Upload new images or data files for processing.</p>
-            <div className="border-2 border-dashed border-blue-300 rounded-lg p-8 text-center mb-6">
+      <div className="p-6 bg-gradient-to-b from-blue-50 to-white min-h-screen">
+        <h1 className="text-4xl font-bold mb-8 text-blue-800">Upload Image Data</h1>
+        <Card className="bg-white shadow-lg rounded-lg overflow-hidden mb-8">
+          <CardContent className="p-8">
+            <h2 className="text-2xl font-semibold mb-6 text-blue-700">Select Files</h2>
+            <div className="border-2 border-dashed border-blue-300 rounded-lg p-8 text-center mb-8 hover:border-blue-500 transition-colors duration-300">
               <input
                 type="file"
                 multiple
@@ -460,128 +463,161 @@ export default function UploadPage() {
                 key={key}
               />
               <label htmlFor="file-upload" className="cursor-pointer">
-                <Upload className="mx-auto h-12 w-12 text-blue-500 mb-4" />
-                <p className="text-blue-600 font-semibold">Click to upload or drag and drop</p>
-                <p className="text-sm text-gray-500 mt-1">PNG, JPG, GIF up to 10MB</p>
+                <Upload className="mx-auto h-16 w-16 text-blue-500 mb-4" />
+                <p className="text-blue-600 font-semibold text-lg mb-2">Click to upload or drag and drop</p>
+                <p className="text-sm text-gray-500">PNG, JPG, GIF up to 10MB</p>
               </label>
             </div>
             {filesToUpload.length > 0 && (
-              <div className="mb-6">
-                <h2 className="text-lg font-semibold mb-2 text-blue-800">Selected Files:</h2>
+              <div className="mb-8">
+                <h3 className="text-xl font-semibold mb-4 text-blue-700">Selected Files</h3>
                 <ul className="space-y-4">
                   {filesToUpload.map((fileObj) => (
-                    <li key={fileObj.id} className="flex items-center justify-between bg-blue-50 p-4 rounded">
-                      <div className="flex-grow">
-                        <div className="flex items-center">
-                          <File className="h-5 w-5 text-blue-500 mr-2" />
-                          <span className="text-sm text-gray-700">{fileObj.file.name}</span>
-                        </div>
-                        {fileObj.gps ? (
-                          <div className="mt-2 text-sm text-green-600">
-                            GPS: {fileObj.gps.lat.toFixed(6)}, {fileObj.gps.lng.toFixed(6)}
-                            {fileObj.gps.alt !== undefined && `, Alt: ${fileObj.gps.alt.toFixed(2)}m`}
+                    <li key={fileObj.id} className="bg-blue-50 p-4 rounded-lg shadow-sm">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <File className="h-8 w-8 text-blue-500" />
+                          <div>
+                            <p className="font-medium text-gray-800">{fileObj.file.name}</p>
+                            <p className="text-sm text-gray-500">{(fileObj.file.size / 1024 / 1024).toFixed(2)} MB</p>
                           </div>
-                        ) : (
-                          <div className="mt-2 flex items-center space-x-2">
+                        </div>
+                        <button onClick={() => removeFile(fileObj.id)} className="text-red-500 hover:text-red-700 transition-colors duration-300">
+                          <Trash2 className="h-6 w-6" />
+                        </button>
+                      </div>
+                      {fileObj.gps ? (
+                        <div className="mt-2 flex items-center space-x-2">
+                          <Badge variant="secondary" className="text-green-700 bg-green-100">
+                            <MapPin className="h-3 w-3 mr-1" />
+                            GPS Data Available
+                          </Badge>
+                        </div>
+                      ) : (
+                        <div className="mt-4 grid grid-cols-3 gap-4">
+                          <div className="col-span-1">
+                            <Label htmlFor={`lat-${fileObj.id}`} className="text-sm font-medium text-gray-700">Latitude</Label>
                             <Input
+                              id={`lat-${fileObj.id}`}
                               type="number"
                               step="any"
                               placeholder="Latitude"
                               value={gpsInput[fileObj.id]?.lat || ''}
                               onChange={(e) => handleGpsInput(fileObj.id, 'lat', e.target.value)}
-                              className="w-24 text-sm"
+                              className="mt-1"
                             />
+                          </div>
+                          <div className="col-span-1">
+                            <Label htmlFor={`lng-${fileObj.id}`} className="text-sm font-medium text-gray-700">Longitude</Label>
                             <Input
+                              id={`lng-${fileObj.id}`}
                               type="number"
                               step="any"
                               placeholder="Longitude"
                               value={gpsInput[fileObj.id]?.lng || ''}
                               onChange={(e) => handleGpsInput(fileObj.id, 'lng', e.target.value)}
-                              className="w-24 text-sm"
+                              className="mt-1"
                             />
+                          </div>
+                          <div className="col-span-1">
+                            <Label htmlFor={`alt-${fileObj.id}`} className="text-sm font-medium text-gray-700">Altitude</Label>
                             <Input
+                              id={`alt-${fileObj.id}`}
                               type="number"
                               step="any"
                               placeholder="Altitude"
                               value={gpsInput[fileObj.id]?.alt || ''}
                               onChange={(e) => handleGpsInput(fileObj.id, 'alt', e.target.value)}
-                              className="w-24 text-sm"
+                              className="mt-1"
                             />
-                            <MapPin className="h-4 w-4 text-blue-500" />
-                            <Compass className="h-4 w-4 text-blue-500" />
                           </div>
-                        )}
-                      </div>
-                      <button onClick={() => removeFile(fileObj.id)} className="text-red-500 hover:text-red-700 ml-2">
-                        <Trash2 className="h-5 w-5" />
-                      </button>
+                        </div>
+                      )}
                     </li>
                   ))}
                 </ul>
               </div>
             )}
             {uploading && (
-              <div className="mb-4">
-                <Progress value={progress} className="w-full" />
-                <p className="text-sm text-gray-600 mt-2">Uploading... {progress}%</p>
+              <div className="mb-6">
+                <Progress value={progress} className="w-full h-2" />
+                <p className="text-sm text-gray-600 mt-2 text-center">Uploading... {progress.toFixed(0)}%</p>
               </div>
             )}
             <Button
               onClick={handleUpload}
               disabled={filesToUpload.length === 0 || uploading || !validateGpsData()}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-300"
             >
-              {uploading ? 'Uploading...' : 'Upload Files'}
+              {uploading ? (
+                <span className="flex items-center justify-center">
+                  <Loader2 className="animate-spin mr-2 h-5 w-5" />
+                  Uploading...
+                </span>
+              ) : (
+                <span className="flex items-center justify-center">
+                  <Upload className="mr-2 h-5 w-5" />
+                  Upload Files
+                </span>
+              )}
             </Button>
             {duplicateImages.length > 0 && (
-              <div className="mt-2 flex items-center text-red-500">
-                <AlertCircle className="h-4 w-4 mr-2" />
-                <span className="text-sm">
-                  {duplicateImages.length === 1
-                    ? "An image has already been uploaded to the gallery."
-                    : `${duplicateImages.length} images have already been uploaded to the gallery.`}
-                </span>
+              <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <div className="flex items-center text-yellow-700">
+                  <AlertCircle className="h-5 w-5 mr-2" />
+                  <span className="font-medium">
+                    {duplicateImages.length === 1
+                      ? "An image has already been uploaded to the gallery."
+                      : `${duplicateImages.length} images have already been uploaded to the gallery.`}
+                  </span>
+                </div>
               </div>
             )}
           </CardContent>
         </Card>
 
         <Card className="bg-white shadow-lg rounded-lg overflow-hidden">
-          <CardContent className="p-6">
-            <h2 className="text-2xl font-bold mb-4 text-blue-800">Image Gallery</h2>
+          <CardContent className="p-8">
+            <h2 className="text-2xl font-semibold mb-6 text-blue-700">Image Gallery</h2>
             {isLoading ? (
               <div className="flex justify-center items-center py-12">
-                <Loader2 className="h-8 w-8 text-blue-500 animate-spin" />
-                <span className="ml-2 text-gray-600">Loading images...</span>
+                <Loader2 className="h-10 w-10 text-blue-500 animate-spin" />
+                <span className="ml-4 text-lg text-gray-600">Loading images...</span>
               </div>
             ) : uploadedImages.length > 0 ? (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
                 {uploadedImages.map((image) => (
                   <div key={image.id} className="relative group">
-                    <div className="absolute top-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs p-1 truncate z-10">
-                      <MapPin className="inline-block w-3 h-3 mr-1" />
-                      {image.gps ? 
-                        `${image.gps.lat.toFixed(6)}, ${image.gps.lng.toFixed(6)}${image.gps.alt !== undefined ? `, ${image.gps.alt.toFixed(1)}m` : ''}` 
-                        : 'No GPS data'
-                      }
+                    <div className="aspect-square overflow-hidden rounded-lg shadow-md">
+                      {image.isLoading ? (
+                        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                          <Loader2 className="h-8 w-8 text-blue-500 animate-spin" />
+                        </div>
+                      ) : (
+                        <img 
+                          src={image.url} 
+                          alt={`Uploaded image ${image.id}`} 
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                          onClick={() => handleImageClick(image.url)}
+                        />
+                      )}
                     </div>
-                    {image.isLoading ? (
-                      <div className="w-full h-40 bg-gray-200 rounded-lg flex items-center justify-center">
-                        <Loader2 className="h-8 w-8 text-blue-500 animate-spin" />
+                    <div className="absolute top-0 left-0 right-0 bg-gradient-to-b from-black to-transparent text-white text-xs p-2">
+                      <div className="flex items-center">
+                        <MapPin className="inline-block w-3 h-3 mr-1" />
+                        <span className="truncate">
+                          {image.gps ? 
+                            `${image.gps.lat.toFixed(6)}, ${image.gps.lng.toFixed(6)}${image.gps.alt !== undefined ? `, ${image.gps.alt.toFixed(1)}m` : ''}` 
+                            : 'No GPS data'
+                          }
+                        </span>
                       </div>
-                    ) : (
-                      <img 
-                        src={image.url} 
-                        alt={`Uploaded image ${image.id}`} 
-                        className="w-full h-40 object-cover rounded-lg cursor-pointer"
-                        onClick={() => handleImageClick(image.url)}
-                      />
-                    )}
-                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    </div>
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                       <Button 
                         variant="secondary" 
                         size="sm" 
-                        className="mr-2"
+                        className="mr-2 bg-white text-black hover:bg-gray-200"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleImageClick(image.url);
@@ -590,24 +626,27 @@ export default function UploadPage() {
                       >
                         View
                       </Button>
+                      <Button 
+                        variant="destructive"
+                        size="sm"
+                        className="bg-white text-red-600 hover:bg-red-100 hover:text-red-700"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteImage(image.path);
+                        }}
+                        disabled={image.isLoading}
+                      >
+                        Delete
+                      </Button>
                     </div>
-                    <button 
-                      className="absolute bottom-2 right-2 p-1 bg-red-500 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDeleteImage(image.path);
-                      }}
-                      disabled={image.isLoading}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="text-center py-12">
-                <ImageIcon className="mx-auto h-12 w-12 text-blue-300 mb-4" />
-                <p className="text-gray-500">No images uploaded yet</p>
+              <div className="text-center py-12 bg-gray-50 rounded-lg">
+                <ImageIcon className="mx-auto h-16 w-16 text-gray-400 mb-4" />
+                <p className="text-xl font-medium text-gray-600">No images uploaded yet</p>
+                <p className="text-gray-500 mt-2">Upload some images to see them here</p>
               </div>
             )}
           </CardContent>
