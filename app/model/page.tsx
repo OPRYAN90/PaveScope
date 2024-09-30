@@ -132,12 +132,14 @@ export default function ModelPage() {
   }, [selectedImages])
 
   const handleConfidenceChange = (value: number[]) => {
-    setConfidenceThreshold(value[0])
+    // Don't update the actual value
+    // setConfidenceThreshold(value[0])
     setShowConfidenceWarning(true)
   }
 
   const handleGPUChange = (checked: boolean) => {
-    setUseGPU(checked)
+    // Don't update the actual value
+    // setUseGPU(checked)
     setShowGPUWarning(true)
   }
 
