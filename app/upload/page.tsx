@@ -14,24 +14,33 @@ import FullScreenImageModal from '../../components/FullScreenImageModal'
 import { Input } from "../../components/Login/ui/input"
 import { useToast } from "../../components/ui/use-toast"
 import EXIF from 'exif-js'
+import { toast } from 'react-hot-toast'
+
+interface GPSData {
+  lat: number;
+  lng: number;
+  alt: number;
+}
+
+interface ImageData {
+  id: string;
+  url: string;
+  path: string;
+  gps: GPSData;
+  isLoading?: boolean;
+}
 
 export default function UploadPage() {
   const [filesToUpload, setFilesToUpload] = useState<Array<{id: string, file: File, gps?: {lat: number, lng: number, alt?: number}}>>([])
   const [uploading, setUploading] = useState(false)
   const [progress, setProgress] = useState(0)
-  const [uploadedImages, setUploadedImages] = useState<Array<{url: string, path: string, gps?: {lat: number, lng: number, alt?: number}}>>([])
+  const [uploadedImages, setUploadedImages] = useState<ImageData[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const { user } = useAuth()
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const [gpsInput, setGpsInput] = useState<{[key: string]: {lat: string, lng: string, alt: string}}>({})
   const { toast } = useToast()
-  const [key, setKey] = useState(0) // Add this line
-
-  // Add this useEffect for debugging
-  useEffect(() => {
-    console.log('Current filesToUpload:', filesToUpload)
-    console.log('Current gpsInput:', gpsInput)
-  }, [filesToUpload, gpsInput])
+  const [key, setKey] = useState(0)
 
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -95,7 +104,11 @@ export default function UploadPage() {
           return { url, path: item.fullPath, gps }
         })
       )
-      setUploadedImages(imageData)
+      const imageDataWithIds = imageData.map((img, index) => ({
+        ...img,
+        id: `img-${index}`
+      }))
+      setUploadedImages(imageDataWithIds)
       console.log("Images loaded successfully")
     } catch (error) {
       console.error("Error loading images:", error)
@@ -170,7 +183,6 @@ export default function UploadPage() {
   }, [processFiles])
 
   const handleGpsInput = useCallback((fileId: string, coord: 'lat' | 'lng' | 'alt', value: string) => {
-    // Validate input to ensure it's a valid number
     const numValue = parseFloat(value)
     if (!isNaN(numValue)) {
       setGpsInput((prev) => ({
@@ -194,32 +206,38 @@ export default function UploadPage() {
         const fileName = file.name
         const manualGps = gpsInput[id]
 
-        if (!gps && (!manualGps || !manualGps.lat || !manualGps.lng)) {
-          toast({
-            variant: 'destructive',
-            title: 'Error',
-            description: `GPS data missing for ${fileName}`,
-          })
+        if (!gps && (!manualGps || !manualGps.lat || !manualGps.lng || !manualGps.alt)) {
+          toast.error('Please insert complete GPS data (lat, lng, alt) to upload')
           return null
         }
 
         const finalGps = gps || { 
           lat: parseFloat(manualGps.lat), 
           lng: parseFloat(manualGps.lng),
-          alt: manualGps.alt ? parseFloat(manualGps.alt) : null
+          alt: parseFloat(manualGps.alt)
         }
         const metadata = {
           customMetadata: {
             gpsLat: finalGps.lat.toString(),
             gpsLng: finalGps.lng.toString(),
-            gpsAlt: finalGps.alt?.toString() ?? '', // Ensure it's a string or empty
+            gpsAlt: finalGps.alt.toString(),
           },
         }
+
+        // Add a placeholder for the uploading image
+        const placeholderId = Math.random().toString(36).substr(2, 9)
+        setUploadedImages(prev => [...prev, {
+          id: placeholderId,
+          url: '',
+          path: `users/${user.uid}/images/${fileName}`,
+          gps: finalGps,
+          isLoading: true
+        } as ImageData])
 
         const storageRef = ref(storage, `users/${user.uid}/images/${fileName}`)
         const uploadTask = uploadBytesResumable(storageRef, file, metadata)
 
-        return new Promise<{ url: string; fileName: string; gps: typeof finalGps } | null>((resolve, reject) => {
+        return new Promise<{ url: string; fileName: string; gps: typeof finalGps; placeholderId: string } | null>((resolve, reject) => {
           uploadTask.on(
             'state_changed',
             (snapshot) => {
@@ -243,7 +261,7 @@ export default function UploadPage() {
                     gps: {
                       lat: finalGps.lat,
                       lng: finalGps.lng,
-                      alt: finalGps.alt !== null ? Number(finalGps.alt) : null // Ensure it's a primitive number or null
+                      alt: finalGps.alt
                     },
                     uploadedAt: new Date(),
                   })
@@ -253,7 +271,7 @@ export default function UploadPage() {
                   throw firestoreError
                 }
 
-                resolve({ url: downloadURL, fileName, gps: finalGps })
+                resolve({ url: downloadURL, fileName, gps: finalGps, placeholderId })
               } catch (error) {
                 console.error("Upload error:", error)
                 reject(error)
@@ -264,26 +282,27 @@ export default function UploadPage() {
       })
 
       const results = await Promise.all(uploadPromises)
-      const successfulUploads = results.filter(result => result !== null) as Array<{ url: string; fileName: string; gps: { lat: number; lng: number; alt?: number | null } }>
+      const successfulUploads = results.filter(result => result !== null) as Array<{ url: string; fileName: string; gps: { lat: number; lng: number; alt: number }; placeholderId: string }>
       
-      // Update uploaded images and save metadata to Firestore
-      const newUploadedImages = successfulUploads.map(result => ({
-        url: result.url,
-        path: `users/${user.uid}/images/${result.fileName}`,
-        gps: result.gps // Ensure GPS data is included
+      // Update uploaded images
+      setUploadedImages(prev => prev.map(img => {
+        const upload = successfulUploads.find(u => u.placeholderId === img.id)
+        if (upload) {
+          return {
+            ...img,
+            url: upload.url,
+            isLoading: false
+          }
+        }
+        return img
       }))
-
-      // Remove this line:
-      // setUploadedImages((prev) => [...prev, ...newUploadedImages])
-
-      // The Firestore listener will automatically update the state
 
       // Clear all uploaded files and GPS inputs
       setFilesToUpload([])
       setGpsInput({})
-      setKey(prevKey => prevKey + 1) // Force re-render
+      setKey(prevKey => prevKey + 1)
       if (fileInputRef.current) {
-        fileInputRef.current.value = '' // Reset file input
+        fileInputRef.current.value = ''
       }
 
       toast({
@@ -380,7 +399,7 @@ export default function UploadPage() {
                 className="hidden"
                 id="file-upload"
                 ref={fileInputRef}
-                key={key} // Add this line
+                key={key}
               />
               <label htmlFor="file-upload" className="cursor-pointer">
                 <Upload className="mx-auto h-12 w-12 text-blue-500 mb-4" />
@@ -469,20 +488,26 @@ export default function UploadPage() {
               </div>
             ) : uploadedImages.length > 0 ? (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {uploadedImages.map((image, index) => (
-                  <div key={index} className="relative group">
+                {uploadedImages.map((image) => (
+                  <div key={image.id} className="relative group">
                     <div className="absolute top-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs p-1 truncate z-10">
                       {image.gps ? 
                         `${image.gps.lat.toFixed(6)}, ${image.gps.lng.toFixed(6)}${image.gps.alt !== undefined ? `, ${image.gps.alt.toFixed(1)}m` : ''}` 
                         : 'No GPS data'
                       }
                     </div>
-                    <img 
-                      src={image.url} 
-                      alt={`Uploaded image ${index + 1}`} 
-                      className="w-full h-40 object-cover rounded-lg cursor-pointer"
-                      onClick={() => handleImageClick(image.url)}
-                    />
+                    {image.isLoading ? (
+                      <div className="w-full h-40 bg-gray-200 rounded-lg flex items-center justify-center">
+                        <Loader2 className="h-8 w-8 text-blue-500 animate-spin" />
+                      </div>
+                    ) : (
+                      <img 
+                        src={image.url} 
+                        alt={`Uploaded image ${image.id}`} 
+                        className="w-full h-40 object-cover rounded-lg cursor-pointer"
+                        onClick={() => handleImageClick(image.url)}
+                      />
+                    )}
                     <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                       <Button 
                         variant="secondary" 
@@ -492,6 +517,7 @@ export default function UploadPage() {
                           e.stopPropagation();
                           handleImageClick(image.url);
                         }}
+                        disabled={image.isLoading}
                       >
                         View
                       </Button>
@@ -502,6 +528,7 @@ export default function UploadPage() {
                         e.stopPropagation();
                         handleDeleteImage(image.path);
                       }}
+                      disabled={image.isLoading}
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
