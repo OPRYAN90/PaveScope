@@ -14,7 +14,7 @@ import FullScreenImageModal from '../../components/FullScreenImageModal'
 import { Input } from "../../components/Login/ui/input"
 import { useToast } from "../../components/ui/use-toast"
 import EXIF from 'exif-js'
-import { toast } from 'react-hot-toast'
+import { toast as hotToast } from 'react-hot-toast'
 
 interface GPSData {
   lat: number;
@@ -207,7 +207,7 @@ export default function UploadPage() {
         const manualGps = gpsInput[id]
 
         if (!gps && (!manualGps || !manualGps.lat || !manualGps.lng || !manualGps.alt)) {
-          toast.error('Please insert complete GPS data (lat, lng, alt) to upload')
+          hotToast.error('Please insert complete GPS data (lat, lng, alt) to upload')
           return null
         }
 
@@ -224,15 +224,15 @@ export default function UploadPage() {
           },
         }
 
-        // Add a placeholder for the uploading image
+        // Add a placeholder for the uploading image at the beginning of the array
         const placeholderId = Math.random().toString(36).substr(2, 9)
-        setUploadedImages(prev => [...prev, {
+        setUploadedImages(prev => [{
           id: placeholderId,
           url: '',
           path: `users/${user.uid}/images/${fileName}`,
           gps: finalGps,
           isLoading: true
-        } as ImageData])
+        } as ImageData, ...prev])
 
         const storageRef = ref(storage, `users/${user.uid}/images/${fileName}`)
         const uploadTask = uploadBytesResumable(storageRef, file, metadata)
