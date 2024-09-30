@@ -15,8 +15,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Checkbox } from "../../components/ui/checkbox"
 import { useAuth } from '../../components/AuthProvider'
 import { storage, db } from '../../firebase'
-import { collection, query, getDocs, orderBy } from 'firebase/firestore'
+import { collection, query, getDocs, orderBy, addDoc, serverTimestamp } from 'firebase/firestore'
 import { ref, getDownloadURL } from 'firebase/storage'
+import { runInference } from '../../lib/huggingface'
+import { useToast } from "../../components/ui/use-toast"
+import { useRouter } from 'next/navigation'
 
 // Update the interface for image data
 interface ImageData {
@@ -50,6 +53,9 @@ export default function ModelPage() {
   const [isUploadingImages, setIsUploadingImages] = useState(false)
   const { user } = useAuth()
   const [loadingImages, setLoadingImages] = useState<{ [key: string]: boolean }>({})
+  const { toast } = useToast()
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     if (user) {
@@ -154,8 +160,57 @@ export default function ModelPage() {
     setSelectedImages([])
   }
 
-  const handleRunInference = () => {
-    console.log('Running inference...')
+  const handleRunInference = async () => {
+    if (selectedImages.length === 0) {
+      toast({
+        title: 'No images selected',
+        description: 'Please select at least one image for inference.',
+        variant: 'destructive',
+      })
+      return
+    }
+
+    setIsLoading(true)
+    try {
+      const results = await Promise.all(
+        selectedImages.map(async (imageUrl) => {
+          const result = await runInference(imageUrl)
+          return { imageUrl, result }
+        })
+      )
+
+      // Process and save results
+      for (const { imageUrl, result } of results) {
+        const imageData = userImages.find(img => img.url === imageUrl)
+        if (imageData && user) {
+          await addDoc(collection(db, 'users', user.uid, 'detections'), {
+            imageUrl: imageUrl,
+            fileName: imageData.path.split('/').pop(),
+            gps: imageData.gps,
+            detections: result,
+            timestamp: serverTimestamp(),
+          })
+        }
+      }
+
+      toast({
+        title: 'Inference completed',
+        description: `Processed ${results.length} image(s) successfully.`,
+        variant: 'default',
+      })
+
+      // Optionally, navigate to the detections page
+      router.push('/detections')
+    } catch (error) {
+      console.error('Error running inference:', error)
+      toast({
+        title: 'Inference failed',
+        description: 'An error occurred while processing the images.',
+        variant: 'destructive',
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const openGallery = () => {

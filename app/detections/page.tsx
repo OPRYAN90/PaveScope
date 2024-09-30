@@ -1,26 +1,50 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import DashboardLayout from '../dashboard-layout'
 import { Card, CardContent } from "../../components/Login/ui/card"
 import { Button } from "../../components/Login/ui/button"
 import { Upload, X, ZoomIn, ZoomOut } from 'lucide-react'
+import { useAuth } from '../../components/AuthProvider'
+import { db } from '../../firebase'
+import { collection, query, orderBy, onSnapshot } from 'firebase/firestore'
 import Link from 'next/link'
 
-// Mock data for detections (replace with actual data in production)
-const mockDetections = [
-  { id: 1, imageUrl: '/placeholder.svg?height=300&width=300', title: 'Pothole Detection 1', description: 'Severity: High' },
-  { id: 2, imageUrl: '/placeholder.svg?height=300&width=300', title: 'Crack Analysis 1', description: 'Length: 2.5m' },
-  { id: 3, imageUrl: '/placeholder.svg?height=300&width=300', title: 'Surface Degradation', description: 'Area: 5 sq.m' },
-  // Add more mock data as needed
-]
+interface Detection {
+  id: string;
+  imageUrl: string;
+  fileName: string;
+  gps: {
+    lat: number;
+    lng: number;
+    alt?: number;
+  };
+  detections: any[]; // Update this type based on the actual structure of your detections
+  timestamp: any; // Firebase Timestamp
+}
 
 export default function DetectionsPage() {
-  const [detections, setDetections] = useState(mockDetections)
-  const [selectedImage, setSelectedImage] = useState<number | null>(null)
+  const [detections, setDetections] = useState<Detection[]>([])
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const { user } = useAuth()
 
-  const openFullScreen = (id: number) => {
-    setSelectedImage(id)
+  useEffect(() => {
+    if (user) {
+      const q = query(collection(db, 'users', user.uid, 'detections'), orderBy('timestamp', 'desc'))
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const detectionData: Detection[] = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        } as Detection))
+        setDetections(detectionData)
+      })
+
+      return () => unsubscribe()
+    }
+  }, [user])
+
+  const openFullScreen = (imageUrl: string) => {
+    setSelectedImage(imageUrl)
   }
 
   const closeFullScreen = () => {
@@ -40,12 +64,18 @@ export default function DetectionsPage() {
                 <CardContent className="p-4">
                   <img
                     src={detection.imageUrl}
-                    alt={detection.title}
+                    alt={detection.fileName}
                     className="w-full h-48 object-cover mb-4 rounded"
                   />
-                  <h2 className="text-lg font-semibold text-blue-700 mb-2">{detection.title}</h2>
-                  <p className="text-gray-600 mb-4">{detection.description}</p>
-                  <Button onClick={() => openFullScreen(detection.id)} className="w-full">
+                  <h2 className="text-lg font-semibold text-blue-700 mb-2">{detection.fileName}</h2>
+                  <p className="text-gray-600 mb-2">
+                    GPS: {detection.gps.lat.toFixed(6)}, {detection.gps.lng.toFixed(6)}
+                    {detection.gps.alt !== undefined ? `, ${detection.gps.alt.toFixed(1)}m` : ''}
+                  </p>
+                  <p className="text-gray-600 mb-4">
+                    Detections: {detection.detections.length}
+                  </p>
+                  <Button onClick={() => openFullScreen(detection.imageUrl)} className="w-full">
                     <ZoomIn className="mr-2 h-4 w-4" /> View Full Screen
                   </Button>
                 </CardContent>
@@ -56,20 +86,20 @@ export default function DetectionsPage() {
           <Card className="text-center p-8">
             <Upload className="mx-auto h-12 w-12 text-blue-500 mb-4" />
             <h2 className="text-2xl font-semibold text-blue-700 mb-2">No detections yet</h2>
-            <p className="text-gray-600 mb-4">Upload images to see AI detections here.</p>
-            <Link href="/upload">
+            <p className="text-gray-600 mb-4">Run inference on images to see AI detections here.</p>
+            <Link href="/model">
               <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-                Go to Upload Page
+                Go to Model Page
               </Button>
             </Link>
           </Card>
         )}
 
-        {selectedImage !== null && (
+        {selectedImage && (
           <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
             <div className="max-w-4xl w-full p-4">
               <img
-                src={detections.find(d => d.id === selectedImage)?.imageUrl}
+                src={selectedImage}
                 alt="Full screen view"
                 className="w-full h-auto"
               />
