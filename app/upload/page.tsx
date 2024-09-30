@@ -195,10 +195,32 @@ export default function UploadPage() {
     }
   }, [])
 
+  const validateGpsData = useCallback(() => {
+    for (const fileObj of filesToUpload) {
+      const { id, gps } = fileObj;
+      const manualGps = gpsInput[id];
+
+      if (!gps && (!manualGps || !manualGps.lat || !manualGps.lng || !manualGps.alt)) {
+        return false;
+      }
+    }
+    return true;
+  }, [filesToUpload, gpsInput]);
+
   const handleUpload = useCallback(async () => {
-    if (!user) return
-    setUploading(true)
-    setProgress(0)
+    if (!user) return;
+    
+    if (!validateGpsData()) {
+      toast({
+        title: 'GPS Data Missing',
+        description: 'Please ensure all images have GPS data (either from the image or manually entered).',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setUploading(true);
+    setProgress(0);
 
     try {
       const uploadPromises = filesToUpload.map(async (fileObj) => {
@@ -322,7 +344,7 @@ export default function UploadPage() {
     } finally {
       setUploading(false)
     }
-  }, [user, filesToUpload, gpsInput, toast])
+  }, [user, filesToUpload, gpsInput, toast, validateGpsData])
 
   const removeFile = useCallback((id: string) => {
     setFilesToUpload((prev) => {
@@ -470,7 +492,7 @@ export default function UploadPage() {
             )}
             <Button
               onClick={handleUpload}
-              disabled={filesToUpload.length === 0 || uploading}
+              disabled={filesToUpload.length === 0 || uploading || !validateGpsData()}
               className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
             >
               {uploading ? 'Uploading...' : 'Upload Files'}
