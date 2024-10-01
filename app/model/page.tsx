@@ -21,7 +21,7 @@ import { runInference } from '../../lib/huggingface'
 import { useToast } from "../../components/ui/use-toast"
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-
+import { toast } from "../../components/ui/use-toast"
 interface ImageData {
   url: string;
   path: string;
@@ -104,6 +104,20 @@ function ImageSelectionDialog({
     onClose()
   }
 
+  const handleSelectAll = () => {
+    const availableImages = userImages
+      .filter(image => !selectedImages.includes(image.url) && !processedImages.includes(image.url))
+      .map(image => image.url)
+
+    if (selectedGalleryImages.length === availableImages.length) {
+      // If all are selected, deselect all
+      setSelectedGalleryImages([])
+    } else {
+      // Otherwise, select all available images
+      setSelectedGalleryImages(availableImages)
+    }
+  }
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-7xl w-full max-h-[90vh] p-0 overflow-hidden flex flex-col bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -180,10 +194,23 @@ function ImageSelectionDialog({
           )}
         </ScrollArea>
         <div className="flex justify-between items-center p-6 bg-white bg-opacity-80 backdrop-blur-md border-t border-blue-200 flex-shrink-0">
-          <Button variant="outline" onClick={onClose} className="flex items-center text-blue-600 hover:bg-blue-50">
-            <X className="w-4 h-4 mr-2" />
-            Cancel
-          </Button>
+          <div className="flex items-center space-x-4">
+            <Button variant="outline" onClick={onClose} className="flex items-center text-blue-600 hover:bg-blue-50">
+              <X className="w-4 h-4 mr-2" />
+              Cancel
+            </Button>
+            <Button
+              onClick={handleSelectAll}
+              className="bg-blue-600 hover:bg-blue-700 text-white flex items-center space-x-2 px-6 py-2 rounded-full transition-all duration-200 ease-in-out transform hover:scale-105"
+            >
+              <ImageIcon className="w-5 h-5" />
+              <span>
+                {selectedGalleryImages.length === userImages.filter(image => !selectedImages.includes(image.url) && !processedImages.includes(image.url)).length
+                  ? 'Deselect All'
+                  : 'Select All'}
+              </span>
+            </Button>
+          </div>
           <Button 
             onClick={handleUploadSelectedImages} 
             disabled={selectedGalleryImages.length === 0 || isLoadingImages || isFetchingProcessedImages} 
