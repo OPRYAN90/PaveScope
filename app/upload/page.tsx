@@ -310,7 +310,7 @@ export default function UploadPage() {
                       alt: finalGps.alt
                     },
                     uploadedAt: serverTimestamp(),
-                    detections: "NA", // Initialize detections as "NA"
+                    detections: "N/A", // Initialize detections as "NA"
                   })
                   console.log("Metadata added to Firestore:", fileName)
                 } catch (firestoreError) {

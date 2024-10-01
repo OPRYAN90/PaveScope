@@ -38,7 +38,7 @@ export default function SpreadsheetsPage() {
         const imagesData = imagesSnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data(),
-          detections: 'NA'  // Default value for unprocessed images
+          detections: 'N/A'  // Default value for unprocessed images
         }))
 
         const detectionsData = detectionsSnapshot.docs.reduce((acc, doc) => {
@@ -50,7 +50,7 @@ export default function SpreadsheetsPage() {
 
         const combinedData = imagesData.map(image => ({
           ...image,
-          detections: detectionsData.hasOwnProperty(image.url) ? detectionsData[image.url] : 'NA'
+          detections: detectionsData.hasOwnProperty(image.url) ? detectionsData[image.url] : 'N/A'
         }))
 
         setImageData(combinedData)

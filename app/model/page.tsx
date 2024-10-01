@@ -20,8 +20,8 @@ import { ref, getDownloadURL, getBlob } from 'firebase/storage'
 import { runInference } from '../../lib/huggingface'
 import { useToast } from "../../components/ui/use-toast"
 import { useRouter } from 'next/navigation'
-import InferenceResults from '../../components/ui/InferenceResults'
-// Update the interface for image data
+import { motion, AnimatePresence } from 'framer-motion'
+
 interface ImageData {
   url: string;
   path: string;
@@ -30,6 +30,140 @@ interface ImageData {
     lng: number;
     alt?: number;
   };
+}
+
+interface ImageSelectionDialogProps {
+  isOpen: boolean;
+  onClose: () => void;
+  userImages: ImageData[];
+  selectedImages: string[];
+  onSelectImages: (images: string[]) => void;
+  isLoadingImages: boolean;
+}
+
+function ImageSelectionDialog({
+  isOpen,
+  onClose,
+  userImages,
+  selectedImages,
+  onSelectImages,
+  isLoadingImages
+}: ImageSelectionDialogProps) {
+  const [selectedGalleryImages, setSelectedGalleryImages] = useState<string[]>([])
+  const [loadingImages, setLoadingImages] = useState<{ [key: string]: boolean }>({})
+
+  useEffect(() => {
+    if (isOpen) {
+      setSelectedGalleryImages([])
+    }
+  }, [isOpen])
+
+  const handleImageSelection = (image: string) => {
+    setSelectedGalleryImages(prev => 
+      prev.includes(image) 
+        ? prev.filter(img => img !== image)
+        : [...prev, image]
+    )
+  }
+
+  const handleImageLoad = (imageUrl: string) => {
+    setLoadingImages(prev => ({ ...prev, [imageUrl]: false }))
+  }
+
+  const handleUploadSelectedImages = () => {
+    onSelectImages(selectedGalleryImages)
+    onClose()
+  }
+
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="max-w-7xl w-full max-h-[90vh] p-0 overflow-hidden flex flex-col bg-gradient-to-br from-blue-50 to-indigo-100">
+        <DialogHeader className="p-6 pb-4 bg-white bg-opacity-80 backdrop-blur-md border-b border-blue-200 flex-shrink-0">
+          <DialogTitle className="text-3xl font-bold text-blue-800 flex items-center">
+            <ImageIcon className="w-8 h-8 mr-3 text-blue-600" />
+            Select Images
+          </DialogTitle>
+          <DialogDescription className="text-gray-600 mt-2">
+            Choose images for model inference
+          </DialogDescription>
+        </DialogHeader>
+        <ScrollArea className="flex-grow p-6 overflow-auto">
+          {isLoadingImages ? (
+            <div className="flex justify-center items-center h-64">
+              <Loader2 className="w-12 h-12 animate-spin text-blue-600" />
+            </div>
+          ) : (
+            <motion.div 
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <AnimatePresence>
+                {userImages
+                  .filter(image => !selectedImages.includes(image.url))
+                  .map((image, index) => (
+                    <motion.div 
+                      key={index} 
+                      className="relative group aspect-square rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                    >
+                      {loadingImages[image.url] && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-gray-200 rounded-xl">
+                          <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
+                        </div>
+                      )}
+                      <img 
+                        src={image.url} 
+                        alt={`Gallery image ${index + 1}`} 
+                        className={`w-full h-full object-cover cursor-pointer ${loadingImages[image.url] ? 'opacity-0' : 'opacity-100'}`}
+                        onLoad={() => handleImageLoad(image.url)}
+                      />
+                      <div 
+                        className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        onClick={() => handleImageSelection(image.url)}
+                      ></div>
+                      <div className="absolute top-2 right-2 z-10">
+                        <Checkbox
+                          checked={selectedGalleryImages.includes(image.url)}
+                          onCheckedChange={() => handleImageSelection(image.url)}
+                          className="h-6 w-6 border-2 border-white bg-blue-600 text-white rounded-full transition-transform duration-200 ease-in-out transform group-hover:scale-110"
+                        />
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 p-3 text-white text-sm font-medium bg-black bg-opacity-50">
+                        <div className="flex items-center space-x-2">
+                          <MapPin className="w-4 h-4" />
+                          <span className="truncate">
+                            {`${image.gps.lat.toFixed(6)}, ${image.gps.lng.toFixed(6)}${image.gps.alt !== undefined ? `, ${image.gps.alt.toFixed(1)}m` : ''}`}
+                          </span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+              </AnimatePresence>
+            </motion.div>
+          )}
+        </ScrollArea>
+        <div className="flex justify-between items-center p-6 bg-white bg-opacity-80 backdrop-blur-md border-t border-blue-200 flex-shrink-0">
+          <Button variant="outline" onClick={onClose} className="flex items-center text-blue-600 hover:bg-blue-50">
+            <X className="w-4 h-4 mr-2" />
+            Cancel
+          </Button>
+          <Button 
+            onClick={handleUploadSelectedImages} 
+            disabled={selectedGalleryImages.length === 0} 
+            className="bg-blue-600 hover:bg-blue-700 text-white flex items-center space-x-2 px-6 py-2 rounded-full transition-all duration-200 ease-in-out transform hover:scale-105"
+          >
+            <Upload className="w-5 h-5" />
+            <span>Select Images ({selectedGalleryImages.length})</span>
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+  )
 }
 
 export default function ModelPage() {
@@ -47,7 +181,6 @@ export default function ModelPage() {
   const [showGPUWarning, setShowGPUWarning] = useState(false)
   const [isGalleryOpen, setIsGalleryOpen] = useState(false)
   const [availableImages, setAvailableImages] = useState<string[]>([])
-  const [selectedGalleryImages, setSelectedGalleryImages] = useState<string[]>([])
   const [userImages, setUserImages] = useState<ImageData[]>([])
   const [isLoadingImages, setIsLoadingImages] = useState(true)
   const [isUploadingImages, setIsUploadingImages] = useState(false)
@@ -111,11 +244,10 @@ export default function ModelPage() {
           }
         }
       }))
-      const unprocessedImages = images.filter(img => !processedImages.includes(img.url))
-      setUserImages(unprocessedImages)
-      setAvailableImages(unprocessedImages.map(img => img.url))
+      setUserImages(images)
+      setAvailableImages(images.map(img => img.url))
       // Initialize loading state for each image
-      const initialLoadingState = unprocessedImages.reduce((acc, img) => {
+      const initialLoadingState = images.reduce((acc, img) => {
         acc[img.url] = true
         return acc
       }, {} as { [key: string]: boolean })
@@ -268,27 +400,12 @@ export default function ModelPage() {
     setIsGalleryOpen(true)
   }
 
-  const handleImageSelection = (image: string) => {
-    setSelectedGalleryImages(prev => 
-      prev.includes(image) 
-        ? prev.filter(img => img !== image)
-        : [...prev, image]
-    )
-  }
-
-  const handleUploadSelectedImages = () => {
-    setIsUploadingImages(true)
-    // Simulate an upload delay
-    setTimeout(() => {
-      setSelectedImages(prev => {
-        const newSelectedImages = [...prev, ...selectedGalleryImages]
-        localStorage.setItem('selectedImages', JSON.stringify(newSelectedImages))
-        return newSelectedImages
-      })
-      setSelectedGalleryImages([])
-      setIsGalleryOpen(false)
-      setIsUploadingImages(false)
-    }, 1000)
+  const handleSelectImages = (newSelectedImages: string[]) => {
+    setSelectedImages(prev => {
+      const updatedSelection = [...prev, ...newSelectedImages]
+      localStorage.setItem('selectedImages', JSON.stringify(updatedSelection))
+      return updatedSelection
+    })
   }
 
   const removeSelectedImage = (imageToRemove: string) => {
@@ -476,81 +593,14 @@ export default function ModelPage() {
           </CardContent>
         </Card>
 
-        <Dialog open={isGalleryOpen} onOpenChange={setIsGalleryOpen}>
-          <DialogContent className="max-w-7xl w-full max-h-[90vh] p-0 overflow-hidden flex flex-col">
-            <DialogHeader className="p-6 pb-4 bg-gray-100 border-b border-gray-200 flex-shrink-0">
-              <DialogTitle className="text-3xl font-bold text-blue-800 flex items-center">
-                <ImageIcon className="w-8 h-8 mr-3 text-blue-600" />
-                Select Images
-              </DialogTitle>
-              <DialogDescription className="text-gray-600 mt-2">
-                Choose images for model inference
-              </DialogDescription>
-            </DialogHeader>
-            <ScrollArea className="flex-grow p-6 overflow-auto">
-              {isLoadingImages ? (
-                <div className="flex justify-center items-center h-64">
-                  <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
-                </div>
-              ) : (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                  {userImages
-                    .filter(image => !selectedImages.includes(image.url) && !processedImages.includes(image.url))
-                    .map((image, index) => (
-                      <div key={index} className="relative group aspect-square">
-                        {loadingImages[image.url] && (
-                          <div className="absolute inset-0 flex items-center justify-center bg-gray-200 rounded-lg">
-                            <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
-                          </div>
-                        )}
-                        <img 
-                          src={image.url} 
-                          alt={`Gallery image ${index + 1}`} 
-                          className={`w-full h-full object-cover rounded-lg shadow-md cursor-pointer transition-transform duration-200 ease-in-out transform hover:scale-105 ${loadingImages[image.url] ? 'opacity-0' : 'opacity-100'}`}
-                          onLoad={() => handleImageLoad(image.url)}
-                        />
-                        <div 
-                          className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg"
-                          onClick={() => handleImageSelection(image.url)}
-                        ></div>
-                        <div className="absolute top-2 right-2">
-                          <Checkbox
-                            checked={selectedGalleryImages.includes(image.url)}
-                            onCheckedChange={() => handleImageSelection(image.url)}
-                            className="h-5 w-5 border-2 border-white bg-blue-600 text-white"
-                          />
-                        </div>
-                        <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs p-1 truncate z-10">
-                          <MapPin className="inline-block w-3 h-3 mr-1" />
-                          {`${image.gps.lat.toFixed(6)}, ${image.gps.lng.toFixed(6)}${image.gps.alt !== undefined ? `, ${image.gps.alt.toFixed(1)}m` : ''}`}
-                        </div>
-                      </div>
-                    ))}
-                </div>
-              )}
-            </ScrollArea>
-            <div className="flex justify-between items-center p-6 bg-gray-100 border-t border-gray-200 flex-shrink-0">
-              <Button variant="outline" onClick={() => setIsGalleryOpen(false)} className="flex items-center">
-                <X className="w-4 h-4 mr-2" />
-                Cancel
-              </Button>
-              <Button 
-                onClick={handleUploadSelectedImages} 
-                disabled={selectedGalleryImages.length === 0 || isUploadingImages} 
-                className="bg-blue-600 hover:bg-blue-700 text-white"
-              >
-                {isUploadingImages ? (
-                  <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Uploading...
-                  </>
-                ) : (
-                  <>Select Images ({selectedGalleryImages.length})</>
-                )}
-              </Button>
-            </div>
-          </DialogContent>
-        </Dialog>
+        <ImageSelectionDialog
+          isOpen={isGalleryOpen}
+          onClose={() => setIsGalleryOpen(false)}
+          userImages={userImages}
+          selectedImages={selectedImages}
+          onSelectImages={handleSelectImages}
+          isLoadingImages={isLoadingImages}
+        />
 
         <div className="fixed bottom-4 right-4 space-y-2">
           {showConfidenceWarning && (
