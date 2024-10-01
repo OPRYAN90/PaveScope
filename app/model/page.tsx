@@ -16,7 +16,7 @@ import { Checkbox } from "../../components/ui/checkbox"
 import { useAuth } from '../../components/AuthProvider'
 import { storage, db } from '../../firebase'
 import { collection, query, getDocs, orderBy, addDoc, serverTimestamp, where } from 'firebase/firestore'
-import { ref, getDownloadURL } from 'firebase/storage'
+import { ref, getDownloadURL, getBlob } from 'firebase/storage'
 import { runInference } from '../../lib/huggingface'
 import { useToast } from "../../components/ui/use-toast"
 import { useRouter } from 'next/navigation'
@@ -191,7 +191,11 @@ export default function ModelPage() {
       const results = await Promise.all(
         selectedImages.map(async (imageUrl) => {
           try {
-            const result = await runInference(imageUrl)
+            // Use Firebase Storage reference to get the blob
+            const imageRef = ref(storage, imageUrl)
+            const imageBlob = await getBlob(imageRef)
+
+            const result = await runInference(imageBlob)
             return { imageUrl, result, error: null }
           } catch (error) {
             console.error(`Error processing image ${imageUrl}:`, error)
@@ -381,9 +385,16 @@ export default function ModelPage() {
                   <Button 
                     onClick={handleRunInference} 
                     className="bg-green-600 hover:bg-green-700 text-white w-full h-full rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex flex-col items-center justify-center p-4"
+                    disabled={isLoading}
                   >
-                    <Play className="w-6 h-6 mb-2" />
-                    <span className="text-sm font-medium">Run Inference</span>
+                    {isLoading ? (
+                      <Loader2 className="w-6 h-6 mb-2 animate-spin" />
+                    ) : (
+                      <Play className="w-6 h-6 mb-2" />
+                    )}
+                    <span className="text-sm font-medium">
+                      {isLoading ? 'Running Inference...' : 'Run Inference'}
+                    </span>
                   </Button>
                 </div>
               </CardContent>
