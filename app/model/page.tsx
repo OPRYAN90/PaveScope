@@ -52,6 +52,7 @@ function ImageSelectionDialog({
   const [selectedGalleryImages, setSelectedGalleryImages] = useState<string[]>([])
   const [loadingImages, setLoadingImages] = useState<{ [key: string]: boolean }>({})
   const [processedImages, setProcessedImages] = useState<string[]>([])
+  const [isFetchingProcessedImages, setIsFetchingProcessedImages] = useState(false)
   const { user } = useAuth()
 
   useEffect(() => {
@@ -62,10 +63,22 @@ function ImageSelectionDialog({
 
   const fetchProcessedImages = async () => {
     if (!user) return
-    const q = query(collection(db, 'users', user.uid, 'detections'))
-    const querySnapshot = await getDocs(q)
-    const processedImageUrls = querySnapshot.docs.map(doc => doc.data().imageUrl)
-    setProcessedImages(processedImageUrls)
+    setIsFetchingProcessedImages(true)
+    try {
+      const q = query(collection(db, 'users', user.uid, 'detections'))
+      const querySnapshot = await getDocs(q)
+      const processedImageUrls = querySnapshot.docs.map(doc => doc.data().imageUrl)
+      setProcessedImages(processedImageUrls)
+    } catch (error) {
+      console.error('Error fetching processed images:', error)
+      toast({
+        title: 'Error',
+        description: 'Failed to fetch processed images. Please try again.',
+        variant: 'destructive',
+      })
+    } finally {
+      setIsFetchingProcessedImages(false)
+    }
   }
 
   useEffect(() => {
@@ -104,9 +117,12 @@ function ImageSelectionDialog({
           </DialogDescription>
         </DialogHeader>
         <ScrollArea className="flex-grow p-6 overflow-auto">
-          {isLoadingImages ? (
-            <div className="flex justify-center items-center h-64">
-              <Loader2 className="w-12 h-12 animate-spin text-blue-600" />
+          {isLoadingImages || isFetchingProcessedImages ? (
+            <div className="flex flex-col items-center justify-center h-64">
+              <Loader2 className="w-12 h-12 animate-spin text-blue-600 mb-4" />
+              <p className="text-blue-600 font-medium">
+                {isLoadingImages ? 'Loading images...' : 'Fetching processed images...'}
+              </p>
             </div>
           ) : (
             <motion.div 
@@ -170,11 +186,20 @@ function ImageSelectionDialog({
           </Button>
           <Button 
             onClick={handleUploadSelectedImages} 
-            disabled={selectedGalleryImages.length === 0} 
+            disabled={selectedGalleryImages.length === 0 || isLoadingImages || isFetchingProcessedImages} 
             className="bg-blue-600 hover:bg-blue-700 text-white flex items-center space-x-2 px-6 py-2 rounded-full transition-all duration-200 ease-in-out transform hover:scale-105"
           >
-            <Upload className="w-5 h-5" />
-            <span>Select Images ({selectedGalleryImages.length})</span>
+            {isLoadingImages || isFetchingProcessedImages ? (
+              <Loader2 className="w-5 h-5 animate-spin mr-2" />
+            ) : (
+              <Upload className="w-5 h-5" />
+            )}
+            <span>
+              {isLoadingImages || isFetchingProcessedImages
+                ? 'Loading...'
+                : `Select Images (${selectedGalleryImages.length})`
+              }
+            </span>
           </Button>
         </div>
       </DialogContent>
