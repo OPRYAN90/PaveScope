@@ -422,8 +422,8 @@ export default function ModelPage() {
 
   return (
     <DashboardLayout>
-      <div className="flex flex-col h-screen bg-blue-50">
-        <div className="p-6">
+      <div className="flex flex-col min-h-screen bg-blue-50">
+        <div className="flex-grow p-6">
           <h1 className="text-3xl font-bold mb-6 text-blue-800">Model Inference Settings</h1>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -531,24 +531,22 @@ export default function ModelPage() {
               </CardContent>
             </Card>
           </div>
-        </div>
-
-        <Card className="flex-grow overflow-hidden m-6 mt-0">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="text-xl font-semibold text-blue-700">Selected Image Gallery</CardTitle>
-            <div>
-              <Button variant="outline" onClick={openGallery}>
-                <span className="flex items-center">
-                  <Upload className="w-4 h-4 mr-2" />
-                  Select Images
-                </span>
-              </Button>
-            </div>
-          </CardHeader>
-          <CardContent className="h-full">
-            <ScrollArea className="h-[calc(100vh-400px)]">
+          
+          <Card className="mt-6">
+            <CardHeader className="flex flex-row items-center justify-between">
+              <CardTitle className="text-xl font-semibold text-blue-700">Selected Image Gallery</CardTitle>
+              <div>
+                <Button variant="outline" onClick={openGallery}>
+                  <span className="flex items-center">
+                    <Upload className="w-4 h-4 mr-2" />
+                    Select Images
+                  </span>
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
               {selectedImages.length > 0 ? (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                   {selectedImages.map((imageUrl, index) => {
                     const imageData = userImages.find(img => img.url === imageUrl)
                     return (
@@ -581,7 +579,7 @@ export default function ModelPage() {
                 </div>
               ) : (
                 <div 
-                  className="flex flex-col items-center justify-center h-full text-gray-500 cursor-pointer transition-opacity duration-200"
+                  className="flex flex-col items-center justify-center h-64 text-gray-500 cursor-pointer transition-opacity duration-200"
                   onClick={openGallery}
                 >
                   <ImageIcon className="w-16 h-16 mb-4" />
@@ -589,9 +587,9 @@ export default function ModelPage() {
                   <p className="text-sm">Click here to select images</p>
                 </div>
               )}
-            </ScrollArea>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </div>
 
         <ImageSelectionDialog
           isOpen={isGalleryOpen}
