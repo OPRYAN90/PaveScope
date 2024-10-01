@@ -20,7 +20,7 @@ import { ref, getDownloadURL, getBlob } from 'firebase/storage'
 import { runInference } from '../../lib/huggingface'
 import { useToast } from "../../components/ui/use-toast"
 import { useRouter } from 'next/navigation'
-
+import InferenceResults from '../../components/ui/InferenceResults'
 // Update the interface for image data
 interface ImageData {
   url: string;
@@ -57,6 +57,7 @@ export default function ModelPage() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [processedImages, setProcessedImages] = useState<string[]>([])
+  const [InferenceResults, setInferenceResults] = useState<{ [key: string]: any }>({})
 
   useEffect(() => {
     if (user) {
@@ -187,24 +188,35 @@ export default function ModelPage() {
     }
 
     setIsLoading(true)
+    const newResults: { [key: string]: any } = {}
+
     try {
+      console.log('Starting inference process for', selectedImages.length, 'images')
+
       const results = await Promise.all(
         selectedImages.map(async (imageUrl) => {
           try {
-            // Use Firebase Storage reference to get the blob
+            console.log('Processing image:', imageUrl)
             const imageRef = ref(storage, imageUrl)
             const imageBlob = await getBlob(imageRef)
 
+            console.log('Running inference for image:', imageUrl)
             const result = await runInference(imageBlob)
+            console.log('Inference result for image:', imageUrl, result)
+            newResults[imageUrl] = result
             return { imageUrl, result, error: null }
           } catch (error) {
             console.error(`Error processing image ${imageUrl}:`, error)
+            newResults[imageUrl] = { error: (error as Error).message }
             return { imageUrl, result: null, error: error as Error }
           }
         })
       )
 
-      // Process and save results
+      console.log('All inference results:', newResults)
+      setInferenceResults(newResults)
+
+      // Process and save results to Firestore
       for (const { imageUrl, result, error } of results) {
         const imageData = userImages.find(img => img.url === imageUrl)
         if (imageData && user) {
@@ -217,6 +229,7 @@ export default function ModelPage() {
               error: error ? error.message : null,
               timestamp: serverTimestamp(),
             })
+            console.log('Saved inference result to Firestore for image:', imageUrl)
           } catch (firestoreError) {
             console.error('Error saving to Firestore:', firestoreError)
             toast({
@@ -231,13 +244,14 @@ export default function ModelPage() {
       const successfulInferences = results.filter(r => r.result !== null).length
       const failedInferences = results.filter(r => r.error !== null).length
 
+      console.log('Inference process completed:', successfulInferences, 'successful,', failedInferences, 'failed')
+
       toast({
         title: 'Inference completed',
         description: `Processed ${successfulInferences} image(s) successfully. ${failedInferences} failed.`,
         variant: 'default',
       })
 
-      router.push('/detections')
     } catch (error) {
       console.error('Error running inference:', error)
       toast({
