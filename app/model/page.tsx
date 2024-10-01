@@ -15,7 +15,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Checkbox } from "../../components/ui/checkbox"
 import { useAuth } from '../../components/AuthProvider'
 import { storage, db } from '../../firebase'
-import { collection, query, getDocs, orderBy, addDoc, serverTimestamp } from 'firebase/firestore'
+import { collection, query, getDocs, orderBy, addDoc, serverTimestamp, where } from 'firebase/firestore'
 import { ref, getDownloadURL } from 'firebase/storage'
 import { runInference } from '../../lib/huggingface'
 import { useToast } from "../../components/ui/use-toast"
@@ -56,10 +56,12 @@ export default function ModelPage() {
   const { toast } = useToast()
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+  const [processedImages, setProcessedImages] = useState<string[]>([])
 
   useEffect(() => {
     if (user) {
       fetchUserImages()
+      fetchProcessedImages()
     }
   }, [user])
 
@@ -74,6 +76,14 @@ export default function ModelPage() {
       )
     }
   }, [userImages])
+
+  const fetchProcessedImages = async () => {
+    if (!user) return
+    const q = query(collection(db, 'users', user.uid, 'detections'))
+    const querySnapshot = await getDocs(q)
+    const processed = querySnapshot.docs.map(doc => doc.data().imageUrl)
+    setProcessedImages(processed)
+  }
 
   const fetchUserImages = async () => {
     if (!user) return
@@ -95,10 +105,11 @@ export default function ModelPage() {
           }
         }
       }))
-      setUserImages(images)
-      setAvailableImages(images.map(img => img.url))
+      const unprocessedImages = images.filter(img => !processedImages.includes(img.url))
+      setUserImages(unprocessedImages)
+      setAvailableImages(unprocessedImages.map(img => img.url))
       // Initialize loading state for each image
-      const initialLoadingState = images.reduce((acc, img) => {
+      const initialLoadingState = unprocessedImages.reduce((acc, img) => {
         acc[img.url] = true
         return acc
       }, {} as { [key: string]: boolean })
@@ -174,32 +185,49 @@ export default function ModelPage() {
     try {
       const results = await Promise.all(
         selectedImages.map(async (imageUrl) => {
-          const result = await runInference(imageUrl)
-          return { imageUrl, result }
+          try {
+            const result = await runInference(imageUrl)
+            return { imageUrl, result, error: null }
+          } catch (error) {
+            console.error(`Error processing image ${imageUrl}:`, error)
+            return { imageUrl, result: null, error: error as Error }
+          }
         })
       )
 
       // Process and save results
-      for (const { imageUrl, result } of results) {
+      for (const { imageUrl, result, error } of results) {
         const imageData = userImages.find(img => img.url === imageUrl)
         if (imageData && user) {
-          await addDoc(collection(db, 'users', user.uid, 'detections'), {
-            imageUrl: imageUrl,
-            fileName: imageData.path.split('/').pop(),
-            gps: imageData.gps,
-            detections: result,
-            timestamp: serverTimestamp(),
-          })
+          try {
+            await addDoc(collection(db, 'users', user.uid, 'detections'), {
+              imageUrl: imageUrl,
+              fileName: imageData.path.split('/').pop(),
+              gps: imageData.gps,
+              detections: result,
+              error: error ? error.message : null,
+              timestamp: serverTimestamp(),
+            })
+          } catch (firestoreError) {
+            console.error('Error saving to Firestore:', firestoreError)
+            toast({
+              title: 'Error saving detection',
+              description: 'Failed to save detection results to the database.',
+              variant: 'destructive',
+            })
+          }
         }
       }
 
+      const successfulInferences = results.filter(r => r.result !== null).length
+      const failedInferences = results.filter(r => r.error !== null).length
+
       toast({
         title: 'Inference completed',
-        description: `Processed ${results.length} image(s) successfully.`,
+        description: `Processed ${successfulInferences} image(s) successfully. ${failedInferences} failed.`,
         variant: 'default',
       })
 
-      // Optionally, navigate to the detections page
       router.push('/detections')
     } catch (error) {
       console.error('Error running inference:', error)

@@ -5,7 +5,7 @@ import DashboardLayout from '../dashboard-layout'
 import { Button } from "../../components/Login/ui/button"
 import { Input } from "../../components/Login/ui/input"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../../components/ui/select"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../components/Homepage/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../components/HomePage/ui/table"
 import { Plus, Download, Upload, Save, Trash2, Search, Filter, RefreshCw } from 'lucide-react'
 import { useAuth } from '../../components/AuthProvider'
 import { db } from '../../firebase'

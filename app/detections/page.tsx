@@ -4,11 +4,12 @@ import React, { useState, useEffect } from 'react'
 import DashboardLayout from '../dashboard-layout'
 import { Card, CardContent } from "../../components/Login/ui/card"
 import { Button } from "../../components/Login/ui/button"
-import { Upload, X, ZoomIn, ZoomOut } from 'lucide-react'
+import { Upload, X, ZoomIn, ZoomOut, Trash2 } from 'lucide-react'
 import { useAuth } from '../../components/AuthProvider'
 import { db } from '../../firebase'
-import { collection, query, orderBy, onSnapshot } from 'firebase/firestore'
+import { collection, query, orderBy, onSnapshot, deleteDoc, doc } from 'firebase/firestore'
 import Link from 'next/link'
+import { toast } from "../../components/ui/use-toast"
 
 interface Detection {
   id: string;
@@ -51,13 +52,32 @@ export default function DetectionsPage() {
     setSelectedImage(null)
   }
 
+  const deleteDetection = async (detectionId: string, imageUrl: string) => {
+    if (!user) return
+    try {
+      await deleteDoc(doc(db, 'users', user.uid, 'detections', detectionId))
+      toast({
+        title: "Detection deleted",
+        description: "The detection has been removed and the image is available for inference again.",
+      })
+      // The onSnapshot listener will automatically update the UI
+    } catch (error) {
+      console.error("Error deleting detection:", error)
+      toast({
+        title: "Error",
+        description: "Failed to delete the detection. Please try again.",
+        variant: "destructive",
+      })
+    }
+  }
+
   return (
     <DashboardLayout>
       <main className="p-6 bg-blue-50 min-h-screen">
         <h1 className="text-3xl font-bold mb-6 text-blue-800">Detections</h1>
         <p className="text-gray-600 mb-6">This page displays the results of AI detections on processed images.</p>
 
-        {detections.length > 0 ? (
+        {detections && detections.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {detections.map((detection) => (
               <Card key={detection.id} className="overflow-hidden">
@@ -73,11 +93,20 @@ export default function DetectionsPage() {
                     {detection.gps.alt !== undefined ? `, ${detection.gps.alt.toFixed(1)}m` : ''}
                   </p>
                   <p className="text-gray-600 mb-4">
-                    Detections: {detection.detections.length}
+                    Detections: {detection.detections ? detection.detections.length : 0}
                   </p>
-                  <Button onClick={() => openFullScreen(detection.imageUrl)} className="w-full">
-                    <ZoomIn className="mr-2 h-4 w-4" /> View Full Screen
-                  </Button>
+                  <div className="flex justify-between mt-4">
+                    <Button onClick={() => openFullScreen(detection.imageUrl)} className="flex-1 mr-2">
+                      <ZoomIn className="mr-2 h-4 w-4" /> View Full Screen
+                    </Button>
+                    <Button 
+                      onClick={() => deleteDetection(detection.id, detection.imageUrl)} 
+                      variant="destructive"
+                      className="flex-1 ml-2"
+                    >
+                      <Trash2 className="mr-2 h-4 w-4" /> Delete
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             ))}
