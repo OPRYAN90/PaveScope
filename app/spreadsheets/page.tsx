@@ -9,12 +9,12 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from ".
 import { Plus, Download, Upload, Save, Trash2, Search, Filter, RefreshCw } from 'lucide-react'
 import { useAuth } from '../../components/AuthProvider'
 import { db } from '../../firebase'
-import { collection, query, onSnapshot, orderBy } from 'firebase/firestore'
+import { collection, query, getDocs, orderBy } from 'firebase/firestore'
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/Login/ui/card"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../../components/ui/dialog"
 import { Label } from "../../components/Login/ui/label"
 
-const COLUMNS = ['File Name', 'URL', 'Latitude', 'Longitude', 'Altitude', 'Uploaded At', 'Actions']
+const COLUMNS = ['File Name', 'URL', 'Latitude', 'Longitude', 'Altitude', 'Uploaded At', 'Detections', 'Actions']
 
 export default function SpreadsheetsPage() {
   const [activeCell, setActiveCell] = useState<string | null>(null)
@@ -26,16 +26,37 @@ export default function SpreadsheetsPage() {
 
   useEffect(() => {
     if (user) {
-      const q = query(collection(db, 'users', user.uid, 'images'), orderBy(sortColumn, sortDirection))
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const images = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }))
-        setImageData(images)
-      })
+      const fetchData = async () => {
+        const imagesQuery = query(collection(db, 'users', user.uid, 'images'), orderBy(sortColumn, sortDirection))
+        const detectionsQuery = query(collection(db, 'users', user.uid, 'detections'))
 
-      return () => unsubscribe()
+        const [imagesSnapshot, detectionsSnapshot] = await Promise.all([
+          getDocs(imagesQuery),
+          getDocs(detectionsQuery)
+        ])
+
+        const imagesData = imagesSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+          detections: 'NA'  // Default value for unprocessed images
+        }))
+
+        const detectionsData = detectionsSnapshot.docs.reduce((acc, doc) => {
+          const data = doc.data()
+          // If the image has been processed, set the number of detections (even if it's 0)
+          acc[data.imageUrl] = Array.isArray(data.detections) ? data.detections.length : 0
+          return acc
+        }, {})
+
+        const combinedData = imagesData.map(image => ({
+          ...image,
+          detections: detectionsData.hasOwnProperty(image.url) ? detectionsData[image.url] : 'NA'
+        }))
+
+        setImageData(combinedData)
+      }
+
+      fetchData()
     }
   }, [user, sortColumn, sortDirection])
 
@@ -147,6 +168,7 @@ export default function SpreadsheetsPage() {
                       <TableCell>{image.gps.lng.toFixed(6)}</TableCell>
                       <TableCell>{image.gps.alt ? image.gps.alt.toFixed(2) : 'N/A'}</TableCell>
                       <TableCell>{new Date(image.uploadedAt.toDate()).toLocaleString()}</TableCell>
+                      <TableCell>{image.detections}</TableCell>
                       <TableCell>
                         <div className="flex justify-center space-x-2">
                           <Button variant="ghost" size="sm">

@@ -9,7 +9,7 @@ import { Progress } from "../../components/ui/progress"
 import { useAuth } from '../../components/AuthProvider'
 import { storage, db } from '../../firebase'
 import { ref, uploadBytesResumable, getDownloadURL, listAll, deleteObject, getMetadata } from 'firebase/storage'
-import { collection, addDoc, deleteDoc, doc, query, where, getDocs, orderBy, onSnapshot } from 'firebase/firestore'
+import { collection, addDoc, deleteDoc, doc, query, where, getDocs, orderBy, onSnapshot, serverTimestamp } from 'firebase/firestore'
 import FullScreenImageModal from '../../components/FullScreenImageModal'
 import { Input } from "../../components/Login/ui/input"
 import { useToast } from "../../components/ui/use-toast"
@@ -17,7 +17,6 @@ import EXIF from 'exif-js'
 import { toast as hotToast } from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { Badge } from "../../components/ui/badge"
-import { Separator } from "../../components/ui/separator"
 import { Label } from "../../components/Login/ui/label"
 
 interface GPSData {
@@ -310,7 +309,8 @@ export default function UploadPage() {
                       lng: finalGps.lng,
                       alt: finalGps.alt
                     },
-                    uploadedAt: new Date(),
+                    uploadedAt: serverTimestamp(),
+                    detections: "NA", // Initialize detections as "NA"
                   })
                   console.log("Metadata added to Firestore:", fileName)
                 } catch (firestoreError) {
