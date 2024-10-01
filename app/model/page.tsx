@@ -51,6 +51,22 @@ function ImageSelectionDialog({
 }: ImageSelectionDialogProps) {
   const [selectedGalleryImages, setSelectedGalleryImages] = useState<string[]>([])
   const [loadingImages, setLoadingImages] = useState<{ [key: string]: boolean }>({})
+  const [processedImages, setProcessedImages] = useState<string[]>([])
+  const { user } = useAuth()
+
+  useEffect(() => {
+    if (isOpen && user) {
+      fetchProcessedImages()
+    }
+  }, [isOpen, user])
+
+  const fetchProcessedImages = async () => {
+    if (!user) return
+    const q = query(collection(db, 'users', user.uid, 'detections'))
+    const querySnapshot = await getDocs(q)
+    const processedImageUrls = querySnapshot.docs.map(doc => doc.data().imageUrl)
+    setProcessedImages(processedImageUrls)
+  }
 
   useEffect(() => {
     if (isOpen) {
@@ -101,7 +117,7 @@ function ImageSelectionDialog({
             >
               <AnimatePresence>
                 {userImages
-                  .filter(image => !selectedImages.includes(image.url))
+                  .filter(image => !selectedImages.includes(image.url) && !processedImages.includes(image.url))
                   .map((image, index) => (
                     <motion.div 
                       key={index} 

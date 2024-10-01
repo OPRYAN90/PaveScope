@@ -7,7 +7,7 @@ import { Button } from "../../components/Login/ui/button"
 import { Upload, X, ZoomIn, ZoomOut, Trash2 } from 'lucide-react'
 import { useAuth } from '../../components/AuthProvider'
 import { db } from '../../firebase'
-import { collection, query, orderBy, onSnapshot, deleteDoc, doc } from 'firebase/firestore'
+import { collection, query, orderBy, onSnapshot, deleteDoc, doc, updateDoc, where, getDocs } from 'firebase/firestore'
 import Link from 'next/link'
 import { toast } from "../../components/ui/use-toast"
 
@@ -55,7 +55,20 @@ export default function DetectionsPage() {
   const deleteDetection = async (detectionId: string, imageUrl: string) => {
     if (!user) return
     try {
+      // Delete the detection document
       await deleteDoc(doc(db, 'users', user.uid, 'detections', detectionId))
+
+      // Find the corresponding image document and update its processed status
+      const imageQuery = query(collection(db, 'users', user.uid, 'images'), where('url', '==', imageUrl))
+      const imageSnapshot = await getDocs(imageQuery)
+      
+      if (!imageSnapshot.empty) {
+        const imageDoc = imageSnapshot.docs[0]
+        await updateDoc(imageDoc.ref, {
+          processed: false
+        })
+      }
+
       toast({
         title: "Detection deleted",
         description: "The detection has been removed and the image is available for inference again.",

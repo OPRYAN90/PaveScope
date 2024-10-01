@@ -9,7 +9,7 @@ import { Progress } from "../../components/ui/progress"
 import { useAuth } from '../../components/AuthProvider'
 import { storage, db } from '../../firebase'
 import { ref, uploadBytesResumable, getDownloadURL, listAll, deleteObject, getMetadata } from 'firebase/storage'
-import { collection, addDoc, deleteDoc, doc, query, where, getDocs, orderBy, onSnapshot, serverTimestamp } from 'firebase/firestore'
+import { collection, addDoc, deleteDoc, doc, query, where, getDocs, orderBy, onSnapshot, serverTimestamp, updateDoc } from 'firebase/firestore'
 import FullScreenImageModal from '../../components/FullScreenImageModal'
 import { Input } from "../../components/Login/ui/input"
 import { useToast } from "../../components/ui/use-toast"
@@ -416,6 +416,18 @@ export default function UploadPage() {
           console.log("Deleted Firestore document for:", fileName)
         } catch (error) {
           console.error("Error deleting Firestore document:", error)
+        }
+      })
+
+      // Check if the image is in the detections collection and delete it if present
+      const detectionsQuery = query(collection(db, 'users', user.uid, 'detections'), where('fileName', '==', fileName))
+      const detectionsSnapshot = await getDocs(detectionsQuery)
+      detectionsSnapshot.forEach(async (doc) => {
+        try {
+          await deleteDoc(doc.ref)
+          console.log("Deleted detection document for:", fileName)
+        } catch (error) {
+          console.error("Error deleting detection document:", error)
         }
       })
 

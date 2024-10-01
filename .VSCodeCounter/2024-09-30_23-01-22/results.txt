@@ -1,0 +1,280 @@
+Date : 2024-09-30 23:01:22
+Directory : c:\Users\rfrjo\pothole-detection-website
+Total : 182 files,  31085 codes, 8047 comments, 7716 blanks, all 46848 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JavaScript         |         92 |     13,214 |      7,777 |      7,116 |     28,107 |
+| JSON               |         28 |      9,976 |          0 |          4 |      9,980 |
+| TypeScript JSX     |         41 |      3,978 |         39 |        384 |      4,401 |
+| CSS                |          3 |      1,985 |        123 |         35 |      2,143 |
+| Markdown           |          1 |      1,383 |          0 |         35 |      1,418 |
+| TypeScript         |         14 |        475 |         85 |        139 |        699 |
+| JSON with Comments |          1 |         43 |          0 |          1 |         44 |
+| HTML               |          1 |         20 |         23 |          1 |         44 |
+| JavaScript JSX     |          1 |         11 |          0 |          1 |         12 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                        | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                           |        182 |     31,085 |      8,047 |      7,716 |     46,848 |
+| . (Files)                                                                                                   |         13 |     11,342 |          8 |         48 |     11,398 |
+| .next                                                                                                       |        116 |     15,468 |      7,955 |      7,248 |     30,671 |
+| .next (Files)                                                                                               |          4 |         56 |          0 |          0 |         56 |
+| .next\server                                                                                                |         61 |      5,926 |      3,929 |      3,605 |     13,460 |
+| .next\server (Files)                                                                                        |         11 |        225 |         39 |          1 |        265 |
+| .next\server\app                                                                                            |         10 |      1,665 |        975 |        975 |      3,615 |
+| .next\server\app\dashboard                                                                                  |          2 |        328 |        192 |        192 |        712 |
+| .next\server\app\detections                                                                                 |          2 |        308 |        180 |        180 |        668 |
+| .next\server\app\model                                                                                      |          2 |        368 |        216 |        216 |        800 |
+| .next\server\app\spreadsheets                                                                               |          2 |        328 |        192 |        192 |        712 |
+| .next\server\app\upload                                                                                     |          2 |        333 |        195 |        195 |        723 |
+| .next\server\vendor-chunks                                                                                  |         40 |      4,036 |      2,915 |      2,629 |      9,580 |
+| .next\static                                                                                                |         44 |      9,173 |      3,966 |      3,535 |     16,674 |
+| .next\static\chunks                                                                                         |         10 |      7,096 |      3,643 |      3,465 |     14,204 |
+| .next\static\chunks (Files)                                                                                 |          4 |      2,426 |        814 |        678 |      3,918 |
+| .next\static\chunks\app                                                                                     |          6 |      4,670 |      2,829 |      2,787 |     10,286 |
+| .next\static\chunks\app (Files)                                                                             |          1 |        156 |         98 |         91 |        345 |
+| .next\static\chunks\app\dashboard                                                                           |          1 |        696 |        422 |        415 |      1,533 |
+| .next\static\chunks\app\detections                                                                          |          1 |        411 |        251 |        244 |        906 |
+| .next\static\chunks\app\model                                                                               |          1 |      2,216 |      1,334 |      1,327 |      4,877 |
+| .next\static\chunks\app\spreadsheets                                                                        |          1 |        701 |        425 |        418 |      1,544 |
+| .next\static\chunks\app\upload                                                                              |          1 |        490 |        299 |        292 |      1,081 |
+| .next\static\css                                                                                            |          1 |      1,904 |        123 |         30 |      2,057 |
+| .next\static\css\app                                                                                        |          1 |      1,904 |        123 |         30 |      2,057 |
+| .next\static\development                                                                                    |          2 |          2 |          0 |          0 |          2 |
+| .next\static\webpack                                                                                        |         31 |        171 |        200 |         40 |        411 |
+| .next\static\webpack (Files)                                                                                |         21 |        101 |         90 |          0 |        191 |
+| .next\static\webpack\app                                                                                    |         10 |         70 |        110 |         40 |        220 |
+| .next\static\webpack\app (Files)                                                                            |          6 |         42 |         66 |         24 |        132 |
+| .next\static\webpack\app\model                                                                              |          4 |         28 |         44 |         16 |         88 |
+| .next\types                                                                                                 |          7 |        313 |         60 |        108 |        481 |
+| .next\types (Files)                                                                                         |          1 |          1 |          0 |          0 |          1 |
+| .next\types\app                                                                                             |          6 |        312 |         60 |        108 |        480 |
+| .next\types\app (Files)                                                                                     |          1 |         52 |         10 |         18 |         80 |
+| .next\types\app\dashboard                                                                                   |          1 |         52 |         10 |         18 |         80 |
+| .next\types\app\detections                                                                                  |          1 |         52 |         10 |         18 |         80 |
+| .next\types\app\model                                                                                       |          1 |         52 |         10 |         18 |         80 |
+| .next\types\app\spreadsheets                                                                                |          1 |         52 |         10 |         18 |         80 |
+| .next\types\app\upload                                                                                      |          1 |         52 |         10 |         18 |         80 |
+| app                                                                                                         |         15 |      2,450 |         40 |        196 |      2,686 |
+| app (Files)                                                                                                 |          4 |        125 |          0 |         12 |        137 |
+| app\api                                                                                                     |          1 |         17 |          4 |          2 |         23 |
+| app\api\auth                                                                                                |          1 |         17 |          4 |          2 |         23 |
+| app\api\auth\[auth0]                                                                                        |          1 |         17 |          4 |          2 |         23 |
+| app\components                                                                                              |          1 |         11 |          4 |          2 |         17 |
+| app\dashboard                                                                                               |          1 |        206 |          6 |         17 |        229 |
+| app\detections                                                                                              |          1 |        134 |          2 |         11 |        147 |
+| app\help                                                                                                    |          1 |        102 |          0 |          7 |        109 |
+| app\maps                                                                                                    |          1 |        268 |          0 |         19 |        287 |
+| app\model                                                                                                   |          1 |        586 |         10 |         45 |        641 |
+| app\signin                                                                                                  |          1 |        105 |          1 |          6 |        112 |
+| app\signup                                                                                                  |          1 |        122 |          1 |          8 |        131 |
+| app\spreadsheets                                                                                            |          1 |        177 |          1 |         14 |        192 |
+| app\upload                                                                                                  |          1 |        597 |         11 |         53 |        661 |
+| components                                                                                                  |         30 |      1,631 |          4 |        196 |      1,831 |
+| components (Files)                                                                                          |          3 |        155 |          0 |         19 |        174 |
+| components\HomePage                                                                                         |          7 |        428 |          1 |         36 |        465 |
+| components\HomePage (Files)                                                                                 |          4 |        253 |          1 |         17 |        271 |
+| components\HomePage\ui                                                                                      |          3 |        175 |          0 |         19 |        194 |
+| components\Login                                                                                            |          5 |        175 |          1 |         26 |        202 |
+| components\Login\ui                                                                                         |          5 |        175 |          1 |         26 |        202 |
+| components\ui                                                                                               |         15 |        873 |          2 |        115 |        990 |
+| lib                                                                                                         |          3 |         95 |         16 |         14 |        125 |
+| public                                                                                                      |          3 |         65 |         24 |          6 |         95 |
+| styles                                                                                                      |          1 |         15 |          0 |          2 |         17 |
+| utils                                                                                                       |          1 |         19 |          0 |          6 |         25 |
++-------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                                    | language           | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| c:\Users\rfrjo\pothole-detection-website\.next\app-build-manifest.json                                      | JSON               |         35 |          0 |          0 |         35 |
+| c:\Users\rfrjo\pothole-detection-website\.next\build-manifest.json                                          | JSON               |         19 |          0 |          0 |         19 |
+| c:\Users\rfrjo\pothole-detection-website\.next\package.json                                                 | JSON               |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\react-loadable-manifest.json                                 | JSON               |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\app-paths-manifest.json                               | JSON               |          7 |          0 |          0 |          7 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\app\dashboard\page.js                                 | JavaScript         |        327 |        192 |        192 |        711 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\app\dashboard\page_client-reference-manifest.js       | JavaScript         |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\app\detections\page.js                                | JavaScript         |        307 |        180 |        180 |        667 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\app\detections\page_client-reference-manifest.js      | JavaScript         |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\app\model\page.js                                     | JavaScript         |        367 |        216 |        216 |        799 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\app\model\page_client-reference-manifest.js           | JavaScript         |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\app\spreadsheets\page.js                              | JavaScript         |        327 |        192 |        192 |        711 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\app\spreadsheets\page_client-reference-manifest.js    | JavaScript         |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\app\upload\page.js                                    | JavaScript         |        332 |        195 |        195 |        722 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\app\upload\page_client-reference-manifest.js          | JavaScript         |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\interception-route-rewrite-manifest.js                | JavaScript         |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\middleware-build-manifest.js                          | JavaScript         |         20 |          0 |          1 |         21 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\middleware-manifest.json                              | JSON               |          6 |          0 |          0 |          6 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\middleware-react-loadable-manifest.js                 | JavaScript         |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\next-font-manifest.js                                 | JavaScript         |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\next-font-manifest.json                               | JSON               |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\pages-manifest.json                                   | JSON               |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\server-reference-manifest.js                          | JavaScript         |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\server-reference-manifest.json                        | JSON               |          5 |          0 |          0 |          5 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\@firebase.js                            | JavaScript         |         50 |         41 |         34 |        125 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\@floating-ui.js                         | JavaScript         |         26 |         23 |         16 |         65 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\@grpc.js                                | JavaScript         |        246 |        188 |        181 |        615 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\@protobufjs.js                          | JavaScript         |         46 |         38 |         31 |        115 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\@radix-ui.js                            | JavaScript         |        134 |        104 |         97 |        335 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\aria-hidden.js                          | JavaScript         |         10 |         11 |          4 |         25 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\asynckit.js                             | JavaScript         |         45 |         38 |         31 |        114 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\axios.js                                | JavaScript         |        283 |        176 |        169 |        628 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\class-variance-authority.js             | JavaScript         |         14 |         14 |          7 |         35 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\clsx.js                                 | JavaScript         |         10 |         11 |          4 |         25 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\combined-stream.js                      | JavaScript         |          9 |         11 |          4 |         24 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\debug.js                                | JavaScript         |         21 |         20 |         13 |         54 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\delayed-stream.js                       | JavaScript         |          9 |         11 |          4 |         24 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\exif-js.js                              | JavaScript         |          9 |         11 |          4 |         24 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\firebase.js                             | JavaScript         |         26 |         23 |         16 |         65 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\follow-redirects.js                     | JavaScript         |         13 |         14 |          7 |         34 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\framer-motion.js                        | JavaScript         |        962 |        725 |        718 |      2,405 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\get-nonce.js                            | JavaScript         |         10 |         11 |          4 |         25 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\goober.js                               | JavaScript         |         10 |         11 |          4 |         25 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\has-flag.js                             | JavaScript         |         10 |         11 |          4 |         25 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\idb.js                                  | JavaScript         |         14 |         14 |          7 |         35 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\lodash.camelcase.js                     | JavaScript         |          9 |         11 |          4 |         24 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\long.js                                 | JavaScript         |          9 |         11 |          4 |         24 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\lucide-react.js                         | JavaScript         |        134 |        104 |         97 |        335 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\mime-db.js                              | JavaScript         |         14 |         14 |          7 |         35 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\mime-types.js                           | JavaScript         |         10 |         11 |          4 |         25 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\ms.js                                   | JavaScript         |          9 |         11 |          4 |         24 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\next.js                                 | JavaScript         |      1,096 |        674 |        661 |      2,431 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\protobufjs.js                           | JavaScript         |        162 |        125 |        118 |        405 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\proxy-from-env.js                       | JavaScript         |         10 |         11 |          4 |         25 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\react-hot-toast.js                      | JavaScript         |         10 |         11 |          4 |         25 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\react-remove-scroll-bar.js              | JavaScript         |         22 |         20 |         13 |         55 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\react-remove-scroll.js                  | JavaScript         |         34 |         29 |         22 |         85 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\react-style-singleton.js                | JavaScript         |         22 |         20 |         13 |         55 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\supports-color.js                       | JavaScript         |         10 |         11 |          4 |         25 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\tailwind-merge.js                       | JavaScript         |         10 |         11 |          4 |         25 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\tslib.js                                | JavaScript         |         10 |         11 |          4 |         25 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\undici.js                               | JavaScript         |        476 |        293 |        286 |      1,055 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\use-callback-ref.js                     | JavaScript         |         18 |         17 |         10 |         45 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\use-sidecar.js                          | JavaScript         |         14 |         14 |          7 |         35 |
+| c:\Users\rfrjo\pothole-detection-website\.next\server\webpack-runtime.js                                    | JavaScript         |        181 |         39 |          0 |        220 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\app-pages-internals.js                         | JavaScript         |         63 |         41 |         34 |        138 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\app\dashboard\page.js                          | JavaScript         |        696 |        422 |        415 |      1,533 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\app\detections\page.js                         | JavaScript         |        411 |        251 |        244 |        906 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\app\layout.js                                  | JavaScript         |        156 |         98 |         91 |        345 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\app\model\page.js                              | JavaScript         |      2,216 |      1,334 |      1,327 |      4,877 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\app\spreadsheets\page.js                       | JavaScript         |        701 |        425 |        418 |      1,544 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\app\upload\page.js                             | JavaScript         |        490 |        299 |        292 |      1,081 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\main-app.js                                    | JavaScript         |      1,070 |        650 |        643 |      2,363 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\polyfills.js                                   | JavaScript         |          1 |          0 |          1 |          2 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\webpack.js                                     | JavaScript         |      1,292 |        123 |          0 |      1,415 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\css\app\layout.css                                    | CSS                |      1,904 |        123 |         30 |      2,057 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\development\_buildManifest.js                         | JavaScript         |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\development\_ssgManifest.js                           | JavaScript         |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\00c0b6e31034d73a.webpack.hot-update.json      | JSON               |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\13a2a815337e1d1b.webpack.hot-update.json      | JSON               |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\1aeb1389161142ce.webpack.hot-update.json      | JSON               |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\397c95cc2c4599a8.webpack.hot-update.json      | JSON               |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\5333f146b1fce614.webpack.hot-update.json      | JSON               |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\633457081244afec._.hot-update.json            | JSON               |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\69c39a029157b06c.webpack.hot-update.json      | JSON               |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\91a2463bc649eb31.webpack.hot-update.json      | JSON               |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\9be2dd9b393341d3.webpack.hot-update.json      | JSON               |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\layout.00c0b6e31034d73a.hot-update.js     | JavaScript         |          7 |         11 |          4 |         22 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\layout.13a2a815337e1d1b.hot-update.js     | JavaScript         |          7 |         11 |          4 |         22 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\layout.397c95cc2c4599a8.hot-update.js     | JavaScript         |          7 |         11 |          4 |         22 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\layout.5333f146b1fce614.hot-update.js     | JavaScript         |          7 |         11 |          4 |         22 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\layout.69c39a029157b06c.hot-update.js     | JavaScript         |          7 |         11 |          4 |         22 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\layout.91a2463bc649eb31.hot-update.js     | JavaScript         |          7 |         11 |          4 |         22 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\model\page.00c0b6e31034d73a.hot-update.js | JavaScript         |          7 |         11 |          4 |         22 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\model\page.13a2a815337e1d1b.hot-update.js | JavaScript         |          7 |         11 |          4 |         22 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\model\page.397c95cc2c4599a8.hot-update.js | JavaScript         |          7 |         11 |          4 |         22 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\model\page.91a2463bc649eb31.hot-update.js | JavaScript         |          7 |         11 |          4 |         22 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\cd89bd9a5ffff254.webpack.hot-update.json      | JSON               |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\e47c7a8ed9f2da79.webpack.hot-update.json      | JSON               |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.00c0b6e31034d73a.hot-update.js        | JavaScript         |          9 |          9 |          0 |         18 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.13a2a815337e1d1b.hot-update.js        | JavaScript         |          9 |          9 |          0 |         18 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.1aeb1389161142ce.hot-update.js        | JavaScript         |          9 |          9 |          0 |         18 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.397c95cc2c4599a8.hot-update.js        | JavaScript         |          9 |          9 |          0 |         18 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.5333f146b1fce614.hot-update.js        | JavaScript         |          9 |          9 |          0 |         18 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.69c39a029157b06c.hot-update.js        | JavaScript         |          9 |          9 |          0 |         18 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.91a2463bc649eb31.hot-update.js        | JavaScript         |          9 |          9 |          0 |         18 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.9be2dd9b393341d3.hot-update.js        | JavaScript         |          9 |          9 |          0 |         18 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.cd89bd9a5ffff254.hot-update.js        | JavaScript         |          9 |          9 |          0 |         18 |
+| c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.e47c7a8ed9f2da79.hot-update.js        | JavaScript         |          9 |          9 |          0 |         18 |
+| c:\Users\rfrjo\pothole-detection-website\.next\types\app\dashboard\page.ts                                  | TypeScript         |         52 |         10 |         18 |         80 |
+| c:\Users\rfrjo\pothole-detection-website\.next\types\app\detections\page.ts                                 | TypeScript         |         52 |         10 |         18 |         80 |
+| c:\Users\rfrjo\pothole-detection-website\.next\types\app\layout.ts                                          | TypeScript         |         52 |         10 |         18 |         80 |
+| c:\Users\rfrjo\pothole-detection-website\.next\types\app\model\page.ts                                      | TypeScript         |         52 |         10 |         18 |         80 |
+| c:\Users\rfrjo\pothole-detection-website\.next\types\app\spreadsheets\page.ts                               | TypeScript         |         52 |         10 |         18 |         80 |
+| c:\Users\rfrjo\pothole-detection-website\.next\types\app\upload\page.ts                                     | TypeScript         |         52 |         10 |         18 |         80 |
+| c:\Users\rfrjo\pothole-detection-website\.next\types\package.json                                           | JSON               |          1 |          0 |          0 |          1 |
+| c:\Users\rfrjo\pothole-detection-website\.prettierrc                                                        | JSON               |          4 |          0 |          1 |          5 |
+| c:\Users\rfrjo\pothole-detection-website\README.md                                                          | Markdown           |      1,383 |          0 |         35 |      1,418 |
+| c:\Users\rfrjo\pothole-detection-website\app\api\auth\[auth0]\route.js                                      | JavaScript         |         17 |          4 |          2 |         23 |
+| c:\Users\rfrjo\pothole-detection-website\app\components\Sidebar.tsx                                         | TypeScript JSX     |         11 |          4 |          2 |         17 |
+| c:\Users\rfrjo\pothole-detection-website\app\dashboard-layout.tsx                                           | TypeScript JSX     |         30 |          0 |          6 |         36 |
+| c:\Users\rfrjo\pothole-detection-website\app\dashboard\page.tsx                                             | TypeScript JSX     |        206 |          6 |         17 |        229 |
+| c:\Users\rfrjo\pothole-detection-website\app\detections\page.tsx                                            | TypeScript JSX     |        134 |          2 |         11 |        147 |
+| c:\Users\rfrjo\pothole-detection-website\app\help\page.tsx                                                  | TypeScript JSX     |        102 |          0 |          7 |        109 |
+| c:\Users\rfrjo\pothole-detection-website\app\index.css                                                      | CSS                |         66 |          0 |          3 |         69 |
+| c:\Users\rfrjo\pothole-detection-website\app\layout.jsx                                                     | JavaScript JSX     |         11 |          0 |          1 |         12 |
+| c:\Users\rfrjo\pothole-detection-website\app\maps\page.tsx                                                  | TypeScript JSX     |        268 |          0 |         19 |        287 |
+| c:\Users\rfrjo\pothole-detection-website\app\model\page.tsx                                                 | TypeScript JSX     |        586 |         10 |         45 |        641 |
+| c:\Users\rfrjo\pothole-detection-website\app\page.tsx                                                       | TypeScript JSX     |         18 |          0 |          2 |         20 |
+| c:\Users\rfrjo\pothole-detection-website\app\signin\page.tsx                                                | TypeScript JSX     |        105 |          1 |          6 |        112 |
+| c:\Users\rfrjo\pothole-detection-website\app\signup\page.tsx                                                | TypeScript JSX     |        122 |          1 |          8 |        131 |
+| c:\Users\rfrjo\pothole-detection-website\app\spreadsheets\page.tsx                                          | TypeScript JSX     |        177 |          1 |         14 |        192 |
+| c:\Users\rfrjo\pothole-detection-website\app\upload\page.tsx                                                | TypeScript JSX     |        597 |         11 |         53 |        661 |
+| c:\Users\rfrjo\pothole-detection-website\auth_config.json                                                   | JSON               |          5 |          0 |          0 |          5 |
+| c:\Users\rfrjo\pothole-detection-website\components.json                                                    | JSON               |         17 |          0 |          0 |         17 |
+| c:\Users\rfrjo\pothole-detection-website\components\AuthProvider.tsx                                        | TypeScript JSX     |         26 |          0 |          7 |         33 |
+| c:\Users\rfrjo\pothole-detection-website\components\FollowingSidebar.tsx                                    | TypeScript JSX     |        105 |          0 |          9 |        114 |
+| c:\Users\rfrjo\pothole-detection-website\components\FullScreenImageModal.tsx                                | TypeScript JSX     |         24 |          0 |          3 |         27 |
+| c:\Users\rfrjo\pothole-detection-website\components\HomePage\AutomationCard.tsx                             | TypeScript JSX     |         71 |          0 |          5 |         76 |
+| c:\Users\rfrjo\pothole-detection-website\components\HomePage\CompanyLogos.tsx                               | TypeScript JSX     |         25 |          0 |          3 |         28 |
+| c:\Users\rfrjo\pothole-detection-website\components\HomePage\MainContent.tsx                                | TypeScript JSX     |         38 |          1 |          2 |         41 |
+| c:\Users\rfrjo\pothole-detection-website\components\HomePage\Navbar.tsx                                     | TypeScript JSX     |        119 |          0 |          7 |        126 |
+| c:\Users\rfrjo\pothole-detection-website\components\HomePage\ui\FadedImage.tsx                              | TypeScript JSX     |         38 |          0 |          5 |         43 |
+| c:\Users\rfrjo\pothole-detection-website\components\HomePage\ui\button.tsx                                  | TypeScript JSX     |         50 |          0 |          5 |         55 |
+| c:\Users\rfrjo\pothole-detection-website\components\HomePage\ui\table.tsx                                   | TypeScript JSX     |         87 |          0 |          9 |         96 |
+| c:\Users\rfrjo\pothole-detection-website\components\Login\ui\button.tsx                                     | TypeScript JSX     |         51 |          0 |          6 |         57 |
+| c:\Users\rfrjo\pothole-detection-website\components\Login\ui\card.tsx                                       | TypeScript JSX     |         73 |          0 |          7 |         80 |
+| c:\Users\rfrjo\pothole-detection-website\components\Login\ui\input.tsx                                      | TypeScript JSX     |         21 |          0 |          5 |         26 |
+| c:\Users\rfrjo\pothole-detection-website\components\Login\ui\label.d.ts                                     | TypeScript         |          9 |          1 |          2 |         12 |
+| c:\Users\rfrjo\pothole-detection-website\components\Login\ui\label.tsx                                      | TypeScript JSX     |         21 |          0 |          6 |         27 |
+| c:\Users\rfrjo\pothole-detection-website\components\ui\InferenceResults.tsx                                 | TypeScript JSX     |         32 |          0 |          3 |         35 |
+| c:\Users\rfrjo\pothole-detection-website\components\ui\alert.tsx                                            | TypeScript JSX     |         53 |          0 |          6 |         59 |
+| c:\Users\rfrjo\pothole-detection-website\components\ui\avatar.tsx                                           | TypeScript JSX     |         43 |          0 |          5 |         48 |
+| c:\Users\rfrjo\pothole-detection-website\components\ui\badge.tsx                                            | TypeScript JSX     |         31 |          0 |          5 |         36 |
+| c:\Users\rfrjo\pothole-detection-website\components\ui\checkbox.tsx                                         | TypeScript JSX     |         26 |          0 |          4 |         30 |
+| c:\Users\rfrjo\pothole-detection-website\components\ui\dialog.tsx                                           | TypeScript JSX     |        111 |          0 |         12 |        123 |
+| c:\Users\rfrjo\pothole-detection-website\components\ui\progress.tsx                                         | TypeScript JSX     |         24 |          0 |          4 |         28 |
+| c:\Users\rfrjo\pothole-detection-website\components\ui\scroll-area.tsx                                      | TypeScript JSX     |         43 |          0 |          5 |         48 |
+| c:\Users\rfrjo\pothole-detection-website\components\ui\select.tsx                                           | TypeScript JSX     |        108 |          0 |         10 |        118 |
+| c:\Users\rfrjo\pothole-detection-website\components\ui\seperator.tsx                                        | TypeScript JSX     |         27 |          0 |          4 |         31 |
+| c:\Users\rfrjo\pothole-detection-website\components\ui\slider.tsx                                           | TypeScript JSX     |         28 |          0 |          4 |         32 |
+| c:\Users\rfrjo\pothole-detection-website\components\ui\switch.tsx                                           | TypeScript JSX     |         25 |          0 |          4 |         29 |
+| c:\Users\rfrjo\pothole-detection-website\components\ui\tabs.tsx                                             | TypeScript JSX     |         48 |          0 |          7 |         55 |
+| c:\Users\rfrjo\pothole-detection-website\components\ui\toast.tsx                                            | TypeScript JSX     |        115 |          0 |         12 |        127 |
+| c:\Users\rfrjo\pothole-detection-website\components\ui\use-toast.tsx                                        | TypeScript JSX     |        159 |          2 |         30 |        191 |
+| c:\Users\rfrjo\pothole-detection-website\cors.json                                                          | JSON               |          7 |          0 |          0 |          7 |
+| c:\Users\rfrjo\pothole-detection-website\firebase.ts                                                        | TypeScript         |         20 |          3 |          3 |         26 |
+| c:\Users\rfrjo\pothole-detection-website\lib\auth.ts                                                        | TypeScript         |         52 |         16 |          8 |         76 |
+| c:\Users\rfrjo\pothole-detection-website\lib\huggingface.ts                                                 | TypeScript         |         38 |          0 |          4 |         42 |
+| c:\Users\rfrjo\pothole-detection-website\lib\utils.ts                                                       | TypeScript         |          5 |          0 |          2 |          7 |
+| c:\Users\rfrjo\pothole-detection-website\next-env.d.ts                                                      | TypeScript         |          0 |          4 |          2 |          6 |
+| c:\Users\rfrjo\pothole-detection-website\next.config.js                                                     | JavaScript         |         12 |          1 |          2 |         15 |
+| c:\Users\rfrjo\pothole-detection-website\package-lock.json                                                  | JSON               |      9,753 |          0 |          1 |      9,754 |
+| c:\Users\rfrjo\pothole-detection-website\package.json                                                       | JSON               |         77 |          0 |          1 |         78 |
+| c:\Users\rfrjo\pothole-detection-website\postcss.config.js                                                  | JavaScript         |          6 |          0 |          1 |          7 |
+| c:\Users\rfrjo\pothole-detection-website\public\images.d.ts                                                 | TypeScript         |         20 |          1 |          4 |         25 |
+| c:\Users\rfrjo\pothole-detection-website\public\index.html                                                  | HTML               |         20 |         23 |          1 |         44 |
+| c:\Users\rfrjo\pothole-detection-website\public\manifest.json                                               | JSON               |         25 |          0 |          1 |         26 |
+| c:\Users\rfrjo\pothole-detection-website\styles\globals.css                                                 | CSS                |         15 |          0 |          2 |         17 |
+| c:\Users\rfrjo\pothole-detection-website\tailwind.config.js                                                 | JavaScript         |         15 |          0 |          1 |         16 |
+| c:\Users\rfrjo\pothole-detection-website\tsconfig.json                                                      | JSON with Comments |         43 |          0 |          1 |         44 |
+| c:\Users\rfrjo\pothole-detection-website\utils\navigation.ts                                                | TypeScript         |         19 |          0 |          6 |         25 |
+| Total                                                                                                       |                    |     31,085 |      8,047 |      7,716 |     46,848 |
++-------------------------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

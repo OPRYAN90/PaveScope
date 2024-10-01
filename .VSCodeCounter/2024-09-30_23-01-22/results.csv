@@ -1,0 +1,184 @@
+"filename", "language", "JSON with Comments", "TypeScript", "Markdown", "JavaScript", "CSS", "JSON", "HTML", "TypeScript JSX", "JavaScript JSX", "comment", "blank", "total"
+"c:\Users\rfrjo\pothole-detection-website\.next\app-build-manifest.json", "JSON", 0, 0, 0, 0, 0, 35, 0, 0, 0, 0, 0, 35
+"c:\Users\rfrjo\pothole-detection-website\.next\build-manifest.json", "JSON", 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 19
+"c:\Users\rfrjo\pothole-detection-website\.next\package.json", "JSON", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\react-loadable-manifest.json", "JSON", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\server\app-paths-manifest.json", "JSON", 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 7
+"c:\Users\rfrjo\pothole-detection-website\.next\server\app\dashboard\page.js", "JavaScript", 0, 0, 0, 327, 0, 0, 0, 0, 0, 192, 192, 711
+"c:\Users\rfrjo\pothole-detection-website\.next\server\app\dashboard\page_client-reference-manifest.js", "JavaScript", 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\server\app\detections\page.js", "JavaScript", 0, 0, 0, 307, 0, 0, 0, 0, 0, 180, 180, 667
+"c:\Users\rfrjo\pothole-detection-website\.next\server\app\detections\page_client-reference-manifest.js", "JavaScript", 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\server\app\model\page.js", "JavaScript", 0, 0, 0, 367, 0, 0, 0, 0, 0, 216, 216, 799
+"c:\Users\rfrjo\pothole-detection-website\.next\server\app\model\page_client-reference-manifest.js", "JavaScript", 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\server\app\spreadsheets\page.js", "JavaScript", 0, 0, 0, 327, 0, 0, 0, 0, 0, 192, 192, 711
+"c:\Users\rfrjo\pothole-detection-website\.next\server\app\spreadsheets\page_client-reference-manifest.js", "JavaScript", 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\server\app\upload\page.js", "JavaScript", 0, 0, 0, 332, 0, 0, 0, 0, 0, 195, 195, 722
+"c:\Users\rfrjo\pothole-detection-website\.next\server\app\upload\page_client-reference-manifest.js", "JavaScript", 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\server\interception-route-rewrite-manifest.js", "JavaScript", 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\server\middleware-build-manifest.js", "JavaScript", 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 1, 21
+"c:\Users\rfrjo\pothole-detection-website\.next\server\middleware-manifest.json", "JSON", 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 6
+"c:\Users\rfrjo\pothole-detection-website\.next\server\middleware-react-loadable-manifest.js", "JavaScript", 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\server\next-font-manifest.js", "JavaScript", 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\server\next-font-manifest.json", "JSON", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\server\pages-manifest.json", "JSON", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\server\server-reference-manifest.js", "JavaScript", 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\server\server-reference-manifest.json", "JSON", 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\@firebase.js", "JavaScript", 0, 0, 0, 50, 0, 0, 0, 0, 0, 41, 34, 125
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\@floating-ui.js", "JavaScript", 0, 0, 0, 26, 0, 0, 0, 0, 0, 23, 16, 65
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\@grpc.js", "JavaScript", 0, 0, 0, 246, 0, 0, 0, 0, 0, 188, 181, 615
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\@protobufjs.js", "JavaScript", 0, 0, 0, 46, 0, 0, 0, 0, 0, 38, 31, 115
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\@radix-ui.js", "JavaScript", 0, 0, 0, 134, 0, 0, 0, 0, 0, 104, 97, 335
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\aria-hidden.js", "JavaScript", 0, 0, 0, 10, 0, 0, 0, 0, 0, 11, 4, 25
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\asynckit.js", "JavaScript", 0, 0, 0, 45, 0, 0, 0, 0, 0, 38, 31, 114
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\axios.js", "JavaScript", 0, 0, 0, 283, 0, 0, 0, 0, 0, 176, 169, 628
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\class-variance-authority.js", "JavaScript", 0, 0, 0, 14, 0, 0, 0, 0, 0, 14, 7, 35
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\clsx.js", "JavaScript", 0, 0, 0, 10, 0, 0, 0, 0, 0, 11, 4, 25
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\combined-stream.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 11, 4, 24
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\debug.js", "JavaScript", 0, 0, 0, 21, 0, 0, 0, 0, 0, 20, 13, 54
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\delayed-stream.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 11, 4, 24
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\exif-js.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 11, 4, 24
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\firebase.js", "JavaScript", 0, 0, 0, 26, 0, 0, 0, 0, 0, 23, 16, 65
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\follow-redirects.js", "JavaScript", 0, 0, 0, 13, 0, 0, 0, 0, 0, 14, 7, 34
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\framer-motion.js", "JavaScript", 0, 0, 0, 962, 0, 0, 0, 0, 0, 725, 718, 2405
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\get-nonce.js", "JavaScript", 0, 0, 0, 10, 0, 0, 0, 0, 0, 11, 4, 25
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\goober.js", "JavaScript", 0, 0, 0, 10, 0, 0, 0, 0, 0, 11, 4, 25
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\has-flag.js", "JavaScript", 0, 0, 0, 10, 0, 0, 0, 0, 0, 11, 4, 25
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\idb.js", "JavaScript", 0, 0, 0, 14, 0, 0, 0, 0, 0, 14, 7, 35
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\lodash.camelcase.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 11, 4, 24
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\long.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 11, 4, 24
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\lucide-react.js", "JavaScript", 0, 0, 0, 134, 0, 0, 0, 0, 0, 104, 97, 335
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\mime-db.js", "JavaScript", 0, 0, 0, 14, 0, 0, 0, 0, 0, 14, 7, 35
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\mime-types.js", "JavaScript", 0, 0, 0, 10, 0, 0, 0, 0, 0, 11, 4, 25
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\ms.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 11, 4, 24
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\next.js", "JavaScript", 0, 0, 0, 1096, 0, 0, 0, 0, 0, 674, 661, 2431
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\protobufjs.js", "JavaScript", 0, 0, 0, 162, 0, 0, 0, 0, 0, 125, 118, 405
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\proxy-from-env.js", "JavaScript", 0, 0, 0, 10, 0, 0, 0, 0, 0, 11, 4, 25
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\react-hot-toast.js", "JavaScript", 0, 0, 0, 10, 0, 0, 0, 0, 0, 11, 4, 25
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\react-remove-scroll-bar.js", "JavaScript", 0, 0, 0, 22, 0, 0, 0, 0, 0, 20, 13, 55
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\react-remove-scroll.js", "JavaScript", 0, 0, 0, 34, 0, 0, 0, 0, 0, 29, 22, 85
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\react-style-singleton.js", "JavaScript", 0, 0, 0, 22, 0, 0, 0, 0, 0, 20, 13, 55
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\supports-color.js", "JavaScript", 0, 0, 0, 10, 0, 0, 0, 0, 0, 11, 4, 25
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\tailwind-merge.js", "JavaScript", 0, 0, 0, 10, 0, 0, 0, 0, 0, 11, 4, 25
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\tslib.js", "JavaScript", 0, 0, 0, 10, 0, 0, 0, 0, 0, 11, 4, 25
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\undici.js", "JavaScript", 0, 0, 0, 476, 0, 0, 0, 0, 0, 293, 286, 1055
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\use-callback-ref.js", "JavaScript", 0, 0, 0, 18, 0, 0, 0, 0, 0, 17, 10, 45
+"c:\Users\rfrjo\pothole-detection-website\.next\server\vendor-chunks\use-sidecar.js", "JavaScript", 0, 0, 0, 14, 0, 0, 0, 0, 0, 14, 7, 35
+"c:\Users\rfrjo\pothole-detection-website\.next\server\webpack-runtime.js", "JavaScript", 0, 0, 0, 181, 0, 0, 0, 0, 0, 39, 0, 220
+"c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\app-pages-internals.js", "JavaScript", 0, 0, 0, 63, 0, 0, 0, 0, 0, 41, 34, 138
+"c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\app\dashboard\page.js", "JavaScript", 0, 0, 0, 696, 0, 0, 0, 0, 0, 422, 415, 1533
+"c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\app\detections\page.js", "JavaScript", 0, 0, 0, 411, 0, 0, 0, 0, 0, 251, 244, 906
+"c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\app\layout.js", "JavaScript", 0, 0, 0, 156, 0, 0, 0, 0, 0, 98, 91, 345
+"c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\app\model\page.js", "JavaScript", 0, 0, 0, 2216, 0, 0, 0, 0, 0, 1334, 1327, 4877
+"c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\app\spreadsheets\page.js", "JavaScript", 0, 0, 0, 701, 0, 0, 0, 0, 0, 425, 418, 1544
+"c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\app\upload\page.js", "JavaScript", 0, 0, 0, 490, 0, 0, 0, 0, 0, 299, 292, 1081
+"c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\main-app.js", "JavaScript", 0, 0, 0, 1070, 0, 0, 0, 0, 0, 650, 643, 2363
+"c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\polyfills.js", "JavaScript", 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 2
+"c:\Users\rfrjo\pothole-detection-website\.next\static\chunks\webpack.js", "JavaScript", 0, 0, 0, 1292, 0, 0, 0, 0, 0, 123, 0, 1415
+"c:\Users\rfrjo\pothole-detection-website\.next\static\css\app\layout.css", "CSS", 0, 0, 0, 0, 1904, 0, 0, 0, 0, 123, 30, 2057
+"c:\Users\rfrjo\pothole-detection-website\.next\static\development\_buildManifest.js", "JavaScript", 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\static\development\_ssgManifest.js", "JavaScript", 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\00c0b6e31034d73a.webpack.hot-update.json", "JSON", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\13a2a815337e1d1b.webpack.hot-update.json", "JSON", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\1aeb1389161142ce.webpack.hot-update.json", "JSON", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\397c95cc2c4599a8.webpack.hot-update.json", "JSON", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\5333f146b1fce614.webpack.hot-update.json", "JSON", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\633457081244afec._.hot-update.json", "JSON", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\69c39a029157b06c.webpack.hot-update.json", "JSON", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\91a2463bc649eb31.webpack.hot-update.json", "JSON", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\9be2dd9b393341d3.webpack.hot-update.json", "JSON", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\layout.00c0b6e31034d73a.hot-update.js", "JavaScript", 0, 0, 0, 7, 0, 0, 0, 0, 0, 11, 4, 22
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\layout.13a2a815337e1d1b.hot-update.js", "JavaScript", 0, 0, 0, 7, 0, 0, 0, 0, 0, 11, 4, 22
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\layout.397c95cc2c4599a8.hot-update.js", "JavaScript", 0, 0, 0, 7, 0, 0, 0, 0, 0, 11, 4, 22
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\layout.5333f146b1fce614.hot-update.js", "JavaScript", 0, 0, 0, 7, 0, 0, 0, 0, 0, 11, 4, 22
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\layout.69c39a029157b06c.hot-update.js", "JavaScript", 0, 0, 0, 7, 0, 0, 0, 0, 0, 11, 4, 22
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\layout.91a2463bc649eb31.hot-update.js", "JavaScript", 0, 0, 0, 7, 0, 0, 0, 0, 0, 11, 4, 22
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\model\page.00c0b6e31034d73a.hot-update.js", "JavaScript", 0, 0, 0, 7, 0, 0, 0, 0, 0, 11, 4, 22
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\model\page.13a2a815337e1d1b.hot-update.js", "JavaScript", 0, 0, 0, 7, 0, 0, 0, 0, 0, 11, 4, 22
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\model\page.397c95cc2c4599a8.hot-update.js", "JavaScript", 0, 0, 0, 7, 0, 0, 0, 0, 0, 11, 4, 22
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\app\model\page.91a2463bc649eb31.hot-update.js", "JavaScript", 0, 0, 0, 7, 0, 0, 0, 0, 0, 11, 4, 22
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\cd89bd9a5ffff254.webpack.hot-update.json", "JSON", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\e47c7a8ed9f2da79.webpack.hot-update.json", "JSON", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.00c0b6e31034d73a.hot-update.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 9, 0, 18
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.13a2a815337e1d1b.hot-update.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 9, 0, 18
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.1aeb1389161142ce.hot-update.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 9, 0, 18
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.397c95cc2c4599a8.hot-update.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 9, 0, 18
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.5333f146b1fce614.hot-update.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 9, 0, 18
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.69c39a029157b06c.hot-update.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 9, 0, 18
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.91a2463bc649eb31.hot-update.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 9, 0, 18
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.9be2dd9b393341d3.hot-update.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 9, 0, 18
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.cd89bd9a5ffff254.hot-update.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 9, 0, 18
+"c:\Users\rfrjo\pothole-detection-website\.next\static\webpack\webpack.e47c7a8ed9f2da79.hot-update.js", "JavaScript", 0, 0, 0, 9, 0, 0, 0, 0, 0, 9, 0, 18
+"c:\Users\rfrjo\pothole-detection-website\.next\types\app\dashboard\page.ts", "TypeScript", 0, 52, 0, 0, 0, 0, 0, 0, 0, 10, 18, 80
+"c:\Users\rfrjo\pothole-detection-website\.next\types\app\detections\page.ts", "TypeScript", 0, 52, 0, 0, 0, 0, 0, 0, 0, 10, 18, 80
+"c:\Users\rfrjo\pothole-detection-website\.next\types\app\layout.ts", "TypeScript", 0, 52, 0, 0, 0, 0, 0, 0, 0, 10, 18, 80
+"c:\Users\rfrjo\pothole-detection-website\.next\types\app\model\page.ts", "TypeScript", 0, 52, 0, 0, 0, 0, 0, 0, 0, 10, 18, 80
+"c:\Users\rfrjo\pothole-detection-website\.next\types\app\spreadsheets\page.ts", "TypeScript", 0, 52, 0, 0, 0, 0, 0, 0, 0, 10, 18, 80
+"c:\Users\rfrjo\pothole-detection-website\.next\types\app\upload\page.ts", "TypeScript", 0, 52, 0, 0, 0, 0, 0, 0, 0, 10, 18, 80
+"c:\Users\rfrjo\pothole-detection-website\.next\types\package.json", "JSON", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1
+"c:\Users\rfrjo\pothole-detection-website\.prettierrc", "JSON", 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1, 5
+"c:\Users\rfrjo\pothole-detection-website\README.md", "Markdown", 0, 0, 1383, 0, 0, 0, 0, 0, 0, 0, 35, 1418
+"c:\Users\rfrjo\pothole-detection-website\app\api\auth\[auth0]\route.js", "JavaScript", 0, 0, 0, 17, 0, 0, 0, 0, 0, 4, 2, 23
+"c:\Users\rfrjo\pothole-detection-website\app\components\Sidebar.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 11, 0, 4, 2, 17
+"c:\Users\rfrjo\pothole-detection-website\app\dashboard-layout.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 6, 36
+"c:\Users\rfrjo\pothole-detection-website\app\dashboard\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 206, 0, 6, 17, 229
+"c:\Users\rfrjo\pothole-detection-website\app\detections\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 134, 0, 2, 11, 147
+"c:\Users\rfrjo\pothole-detection-website\app\help\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 102, 0, 0, 7, 109
+"c:\Users\rfrjo\pothole-detection-website\app\index.css", "CSS", 0, 0, 0, 0, 66, 0, 0, 0, 0, 0, 3, 69
+"c:\Users\rfrjo\pothole-detection-website\app\layout.jsx", "JavaScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 1, 12
+"c:\Users\rfrjo\pothole-detection-website\app\maps\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 268, 0, 0, 19, 287
+"c:\Users\rfrjo\pothole-detection-website\app\model\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 586, 0, 10, 45, 641
+"c:\Users\rfrjo\pothole-detection-website\app\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 2, 20
+"c:\Users\rfrjo\pothole-detection-website\app\signin\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 105, 0, 1, 6, 112
+"c:\Users\rfrjo\pothole-detection-website\app\signup\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 122, 0, 1, 8, 131
+"c:\Users\rfrjo\pothole-detection-website\app\spreadsheets\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 177, 0, 1, 14, 192
+"c:\Users\rfrjo\pothole-detection-website\app\upload\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 597, 0, 11, 53, 661
+"c:\Users\rfrjo\pothole-detection-website\auth_config.json", "JSON", 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 5
+"c:\Users\rfrjo\pothole-detection-website\components.json", "JSON", 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 17
+"c:\Users\rfrjo\pothole-detection-website\components\AuthProvider.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 26, 0, 0, 7, 33
+"c:\Users\rfrjo\pothole-detection-website\components\FollowingSidebar.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 105, 0, 0, 9, 114
+"c:\Users\rfrjo\pothole-detection-website\components\FullScreenImageModal.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 24, 0, 0, 3, 27
+"c:\Users\rfrjo\pothole-detection-website\components\HomePage\AutomationCard.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 71, 0, 0, 5, 76
+"c:\Users\rfrjo\pothole-detection-website\components\HomePage\CompanyLogos.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 25, 0, 0, 3, 28
+"c:\Users\rfrjo\pothole-detection-website\components\HomePage\MainContent.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 38, 0, 1, 2, 41
+"c:\Users\rfrjo\pothole-detection-website\components\HomePage\Navbar.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 119, 0, 0, 7, 126
+"c:\Users\rfrjo\pothole-detection-website\components\HomePage\ui\FadedImage.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 38, 0, 0, 5, 43
+"c:\Users\rfrjo\pothole-detection-website\components\HomePage\ui\button.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 5, 55
+"c:\Users\rfrjo\pothole-detection-website\components\HomePage\ui\table.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 87, 0, 0, 9, 96
+"c:\Users\rfrjo\pothole-detection-website\components\Login\ui\button.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 51, 0, 0, 6, 57
+"c:\Users\rfrjo\pothole-detection-website\components\Login\ui\card.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 73, 0, 0, 7, 80
+"c:\Users\rfrjo\pothole-detection-website\components\Login\ui\input.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 5, 26
+"c:\Users\rfrjo\pothole-detection-website\components\Login\ui\label.d.ts", "TypeScript", 0, 9, 0, 0, 0, 0, 0, 0, 0, 1, 2, 12
+"c:\Users\rfrjo\pothole-detection-website\components\Login\ui\label.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 6, 27
+"c:\Users\rfrjo\pothole-detection-website\components\ui\InferenceResults.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 32, 0, 0, 3, 35
+"c:\Users\rfrjo\pothole-detection-website\components\ui\alert.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 53, 0, 0, 6, 59
+"c:\Users\rfrjo\pothole-detection-website\components\ui\avatar.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 43, 0, 0, 5, 48
+"c:\Users\rfrjo\pothole-detection-website\components\ui\badge.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 31, 0, 0, 5, 36
+"c:\Users\rfrjo\pothole-detection-website\components\ui\checkbox.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 26, 0, 0, 4, 30
+"c:\Users\rfrjo\pothole-detection-website\components\ui\dialog.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 111, 0, 0, 12, 123
+"c:\Users\rfrjo\pothole-detection-website\components\ui\progress.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 24, 0, 0, 4, 28
+"c:\Users\rfrjo\pothole-detection-website\components\ui\scroll-area.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 43, 0, 0, 5, 48
+"c:\Users\rfrjo\pothole-detection-website\components\ui\select.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 108, 0, 0, 10, 118
+"c:\Users\rfrjo\pothole-detection-website\components\ui\seperator.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 27, 0, 0, 4, 31
+"c:\Users\rfrjo\pothole-detection-website\components\ui\slider.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 28, 0, 0, 4, 32
+"c:\Users\rfrjo\pothole-detection-website\components\ui\switch.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 25, 0, 0, 4, 29
+"c:\Users\rfrjo\pothole-detection-website\components\ui\tabs.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 48, 0, 0, 7, 55
+"c:\Users\rfrjo\pothole-detection-website\components\ui\toast.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 115, 0, 0, 12, 127
+"c:\Users\rfrjo\pothole-detection-website\components\ui\use-toast.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 159, 0, 2, 30, 191
+"c:\Users\rfrjo\pothole-detection-website\cors.json", "JSON", 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 7
+"c:\Users\rfrjo\pothole-detection-website\firebase.ts", "TypeScript", 0, 20, 0, 0, 0, 0, 0, 0, 0, 3, 3, 26
+"c:\Users\rfrjo\pothole-detection-website\lib\auth.ts", "TypeScript", 0, 52, 0, 0, 0, 0, 0, 0, 0, 16, 8, 76
+"c:\Users\rfrjo\pothole-detection-website\lib\huggingface.ts", "TypeScript", 0, 38, 0, 0, 0, 0, 0, 0, 0, 0, 4, 42
+"c:\Users\rfrjo\pothole-detection-website\lib\utils.ts", "TypeScript", 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7
+"c:\Users\rfrjo\pothole-detection-website\next-env.d.ts", "TypeScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2, 6
+"c:\Users\rfrjo\pothole-detection-website\next.config.js", "JavaScript", 0, 0, 0, 12, 0, 0, 0, 0, 0, 1, 2, 15
+"c:\Users\rfrjo\pothole-detection-website\package-lock.json", "JSON", 0, 0, 0, 0, 0, 9753, 0, 0, 0, 0, 1, 9754
+"c:\Users\rfrjo\pothole-detection-website\package.json", "JSON", 0, 0, 0, 0, 0, 77, 0, 0, 0, 0, 1, 78
+"c:\Users\rfrjo\pothole-detection-website\postcss.config.js", "JavaScript", 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 1, 7
+"c:\Users\rfrjo\pothole-detection-website\public\images.d.ts", "TypeScript", 0, 20, 0, 0, 0, 0, 0, 0, 0, 1, 4, 25
+"c:\Users\rfrjo\pothole-detection-website\public\index.html", "HTML", 0, 0, 0, 0, 0, 0, 20, 0, 0, 23, 1, 44
+"c:\Users\rfrjo\pothole-detection-website\public\manifest.json", "JSON", 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 1, 26
+"c:\Users\rfrjo\pothole-detection-website\styles\globals.css", "CSS", 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 2, 17
+"c:\Users\rfrjo\pothole-detection-website\tailwind.config.js", "JavaScript", 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 1, 16
+"c:\Users\rfrjo\pothole-detection-website\tsconfig.json", "JSON with Comments", 43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 44
+"c:\Users\rfrjo\pothole-detection-website\utils\navigation.ts", "TypeScript", 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 6, 25
+"Total", "-", 43, 475, 1383, 13214, 1985, 9976, 20, 3978, 11, 8047, 7716, 46848
