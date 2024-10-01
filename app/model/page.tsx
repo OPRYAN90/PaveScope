@@ -66,16 +66,21 @@ export default function ModelPage() {
   }, [user])
 
   useEffect(() => {
-    // This effect will run whenever userImages changes
-    if (userImages.length > 0) {
-      // Filter out any selected images that are no longer in userImages
+    // This effect will run whenever userImages or processedImages changes
+    if (userImages.length > 0 && processedImages.length > 0) {
+      // Filter out any selected images that are no longer in userImages or are in processedImages
       setSelectedImages(prevSelected => 
         prevSelected.filter(selectedImg => 
-          userImages.some(userImg => userImg.url === selectedImg)
+          userImages.some(userImg => userImg.url === selectedImg) &&
+          !processedImages.includes(selectedImg)
         )
       )
+      // Update availableImages
+      setAvailableImages(prevAvailable =>
+        prevAvailable.filter(img => !processedImages.includes(img))
+      )
     }
-  }, [userImages])
+  }, [userImages, processedImages])
 
   const fetchProcessedImages = async () => {
     if (!user) return
@@ -465,7 +470,7 @@ export default function ModelPage() {
               ) : (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                   {userImages
-                    .filter(image => !selectedImages.includes(image.url))
+                    .filter(image => !selectedImages.includes(image.url) && !processedImages.includes(image.url))
                     .map((image, index) => (
                       <div key={index} className="relative group aspect-square">
                         {loadingImages[image.url] && (
