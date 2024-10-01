@@ -196,16 +196,13 @@ export default function UploadPage() {
   }, [processFiles, uploadedImages])
 
   const handleGpsInput = useCallback((fileId: string, coord: 'lat' | 'lng' | 'alt', value: string) => {
-    const numValue = parseFloat(value)
-    if (!isNaN(numValue)) {
-      setGpsInput((prev) => ({
-        ...prev,
-        [fileId]: {
-          ...prev[fileId],
-          [coord]: value,
-        },
-      }))
-    }
+    setGpsInput((prev) => ({
+      ...prev,
+      [fileId]: {
+        ...prev[fileId],
+        [coord]: value,
+      },
+    }))
   }, [])
 
   const validateGpsData = useCallback(() => {
@@ -487,64 +484,50 @@ export default function UploadPage() {
                   {filesToUpload.map((fileObj) => (
                     <li key={fileObj.id} className="bg-blue-50 p-4 rounded-lg shadow-sm">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4">
-                          <File className="h-8 w-8 text-blue-500" />
-                          <div>
+                        <div className="flex items-center space-x-4 flex-grow">
+                          <File className="h-8 w-8 text-blue-500 flex-shrink-0" />
+                          <div className="flex-grow">
                             <p className="font-medium text-gray-800">{fileObj.file.name}</p>
                             <p className="text-sm text-gray-500">{(fileObj.file.size / 1024 / 1024).toFixed(2)} MB</p>
                           </div>
                         </div>
-                        <button onClick={() => removeFile(fileObj.id)} className="text-red-500 hover:text-red-700 transition-colors duration-300">
-                          <Trash2 className="h-6 w-6" />
-                        </button>
-                      </div>
-                      {fileObj.gps ? (
-                        <div className="mt-2 flex items-center space-x-2">
-                          <Badge variant="secondary" className="text-green-700 bg-green-100">
+                        {fileObj.gps ? (
+                          <Badge variant="secondary" className="text-green-700 bg-green-100 ml-2">
                             <MapPin className="h-3 w-3 mr-1" />
                             GPS Data Available
                           </Badge>
-                        </div>
-                      ) : (
-                        <div className="mt-4 grid grid-cols-3 gap-4">
-                          <div className="col-span-1">
-                            <Label htmlFor={`lat-${fileObj.id}`} className="text-sm font-medium text-gray-700">Latitude</Label>
+                        ) : (
+                          <div className="flex space-x-2">
                             <Input
-                              id={`lat-${fileObj.id}`}
-                              type="number"
-                              step="any"
+                              type="text"
+                              inputMode="decimal"
                               placeholder="Latitude"
                               value={gpsInput[fileObj.id]?.lat || ''}
                               onChange={(e) => handleGpsInput(fileObj.id, 'lat', e.target.value)}
-                              className="mt-1"
+                              className="w-43 text-xs"
                             />
-                          </div>
-                          <div className="col-span-1">
-                            <Label htmlFor={`lng-${fileObj.id}`} className="text-sm font-medium text-gray-700">Longitude</Label>
                             <Input
-                              id={`lng-${fileObj.id}`}
-                              type="number"
-                              step="any"
+                              type="text"
+                              inputMode="decimal"
                               placeholder="Longitude"
                               value={gpsInput[fileObj.id]?.lng || ''}
                               onChange={(e) => handleGpsInput(fileObj.id, 'lng', e.target.value)}
-                              className="mt-1"
+                              className="w-43 text-xs"
                             />
-                          </div>
-                          <div className="col-span-1">
-                            <Label htmlFor={`alt-${fileObj.id}`} className="text-sm font-medium text-gray-700">Altitude</Label>
                             <Input
-                              id={`alt-${fileObj.id}`}
-                              type="number"
-                              step="any"
+                              type="text"
+                              inputMode="decimal"
                               placeholder="Altitude"
                               value={gpsInput[fileObj.id]?.alt || ''}
                               onChange={(e) => handleGpsInput(fileObj.id, 'alt', e.target.value)}
-                              className="mt-1"
+                              className="w-43 text-xs"
                             />
                           </div>
-                        </div>
-                      )}
+                        )}
+                        <button onClick={() => removeFile(fileObj.id)} className="text-red-500 hover:text-red-700 transition-colors duration-300 ml-2">
+                          <Trash2 className="h-6 w-6" />
+                        </button>
+                      </div>
                     </li>
                   ))}
                 </ul>

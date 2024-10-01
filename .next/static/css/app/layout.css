@@ -890,6 +890,18 @@ video {
 .w-auto {
   width: auto;
 }
+.w-1\/3 {
+  width: 33.333333%;
+}
+.w-20 {
+  width: 5rem;
+}
+.w-28 {
+  width: 7rem;
+}
+.w-40 {
+  width: 10rem;
+}
 .min-w-\[8rem\] {
   min-width: 8rem;
 }
@@ -993,6 +1005,9 @@ video {
 }
 .cursor-pointer {
   cursor: pointer;
+}
+.cursor-help {
+  cursor: help;
 }
 .touch-none {
   touch-action: none;
