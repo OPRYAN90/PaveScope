@@ -9,7 +9,7 @@ import { Input } from "../../components/Login/ui/input"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../../components/ui/select"
 import { Slider } from "../../components/ui/slider"
 import { Switch } from "../../components/ui/switch"
-import { MapPin, Layers, Filter, Search, ChevronUp, ChevronDown, X, Loader2, Menu } from 'lucide-react'
+import { MapPin, Layers, Filter, Search, ChevronUp, ChevronDown, X, Loader2, Menu, Maximize2 } from 'lucide-react'
 import { Label } from "../../components/Login/ui/label"
 import Script from 'next/script'
 import { useAuth } from '../../components/AuthProvider'
@@ -20,7 +20,7 @@ export default function MapsPage() {
   const [selectedArea, setSelectedArea] = useState('')
   const [filterType, setFilterType] = useState('')
   const [zoomLevel, setZoomLevel] = useState(2)
-  const [showControls, setShowControls] = useState(true)
+  const [showControls, setShowControls] = useState(false)
   const mapRef = useRef<HTMLDivElement>(null)
   const [mapLoaded, setMapLoaded] = useState(false)
   const [map, setMap] = useState<google.maps.Map | null>(null)
@@ -29,6 +29,7 @@ export default function MapsPage() {
   const { user } = useAuth()
   const [selectedImage, setSelectedImage] = useState<{url: string, gps: {lat: number, lng: number}} | null>(null)
   const [isImageLoading, setIsImageLoading] = useState(false)
+  const [showFullImage, setShowFullImage] = useState(false)
 
   const handleAreaChange = (value: string) => {
     setSelectedArea(value)
@@ -190,9 +191,9 @@ export default function MapsPage() {
         </div>
 
         {selectedImage && (
-          <Card className="absolute top-4 right-4 w-64 bg-white shadow-xl z-10">
-            <CardHeader className="p-2 relative flex items-center justify-between">
-              <CardTitle className="text-sm font-semibold text-blue-700 leading-none translate-y-[5px]">
+          <Card className="absolute top-4 right-4 w-72 bg-white shadow-xl z-10 overflow-hidden transition-all duration-300 ease-in-out transform translate-y-0 opacity-100">
+            <CardHeader className="p-3 relative flex items-center justify-between bg-blue-600">
+              <CardTitle className="text-sm font-semibold text-white leading-none">
                 Image Details
               </CardTitle>
               <Button 
@@ -201,14 +202,15 @@ export default function MapsPage() {
                 onClick={() => {
                   setSelectedImage(null)
                   setIsImageLoading(false)
+                  setShowFullImage(false)
                 }}
-                className="absolute top-1 right-1 p-1 h-auto -translate-y-[.5px]"
+                className="absolute top-2 right-2 p-1 h-auto text-white hover:bg-blue-700"
               >
                 <X className="h-4 w-4" />
               </Button>
             </CardHeader>
-            <CardContent className="p-2">
-              <div className="w-full h-32 relative">
+            <CardContent className="p-4">
+              <div className="w-full h-40 relative rounded-md overflow-hidden mb-3 group">
                 {isImageLoading && (
                   <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
                     <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
@@ -217,17 +219,52 @@ export default function MapsPage() {
                 <img 
                   src={selectedImage.url} 
                   alt="Selected location" 
-                  className={`w-full h-32 object-cover rounded-md mb-2 ${isImageLoading ? 'invisible' : 'visible'}`}
+                  className={`w-full h-full object-cover ${isImageLoading ? 'invisible' : 'visible'}`}
                   onLoad={() => setIsImageLoading(false)}
                 />
+                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => setShowFullImage(true)}
+                    className="text-white bg-opacity-75 hover:bg-opacity-100"
+                  >
+                    <Maximize2 className="mr-2 h-4 w-4" />
+                    View Full Image
+                  </Button>
+                </div>
               </div>
               <div className="text-center">
+                <p className="text-sm text-gray-700 font-medium mb-1">Location Coordinates</p>
                 <p className="text-xs text-gray-600">
-                  Lat: {selectedImage.gps.lat.toFixed(6)}, Lng: {selectedImage.gps.lng.toFixed(6)}
+                  Latitude: {selectedImage.gps.lat.toFixed(6)}
+                </p>
+                <p className="text-xs text-gray-600">
+                  Longitude: {selectedImage.gps.lng.toFixed(6)}
                 </p>
               </div>
             </CardContent>
           </Card>
+        )}
+
+        {showFullImage && selectedImage && (
+          <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+            <div className="relative max-w-[90vw] max-h-[90vh] bg-white shadow-lg">
+              <img 
+                src={selectedImage.url} 
+                alt="Full size image" 
+                className="max-w-full max-h-full w-auto h-auto object-contain"
+              />
+              <Button
+                variant="secondary"
+                size="icon"
+                onClick={() => setShowFullImage(false)}
+                className="absolute top-2 right-2 bg-white bg-opacity-75 hover:bg-opacity-100 shadow-md z-10"
+              >
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+          </div>
         )}
       </div>
     </DashboardLayout>

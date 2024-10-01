@@ -475,6 +475,9 @@ video {
 .relative {
   position: relative;
 }
+.sticky {
+  position: sticky;
+}
 .inset-0 {
   inset: 0px;
 }
@@ -552,6 +555,9 @@ video {
 }
 .m-6 {
   margin: 1.5rem;
+}
+.m-2 {
+  margin: 0.5rem;
 }
 .-mx-1 {
   margin-left: -0.25rem;
@@ -655,6 +661,9 @@ video {
 }
 .mb-\[calc\(100vh-5rem\+56px\)\] {
   margin-bottom: calc(100vh - 5rem + 56px);
+}
+.mb-3 {
+  margin-bottom: 0.75rem;
 }
 .block {
   display: block;
@@ -776,6 +785,9 @@ video {
 .h-\[calc\(100vh-200px\)\] {
   height: calc(100vh - 200px);
 }
+.h-40 {
+  height: 10rem;
+}
 .max-h-\[90vh\] {
   max-height: 90vh;
 }
@@ -790,6 +802,9 @@ video {
 }
 .max-h-\[calc\(100vh-20rem\)\] {
   max-height: calc(100vh - 20rem);
+}
+.max-h-\[80vh\] {
+  max-height: 80vh;
 }
 .min-h-screen {
   min-height: 100vh;
@@ -869,6 +884,12 @@ video {
 .w-32 {
   width: 8rem;
 }
+.w-72 {
+  width: 18rem;
+}
+.w-auto {
+  width: auto;
+}
 .min-w-\[8rem\] {
   min-width: 8rem;
 }
@@ -892,6 +913,9 @@ video {
 }
 .max-w-md {
   max-width: 28rem;
+}
+.max-w-\[90vw\] {
+  max-width: 90vw;
 }
 .flex-1 {
   flex: 1 1 0%;
@@ -929,6 +953,18 @@ video {
 }
 .translate-y-\[5px\] {
   --tw-translate-y: 5px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.translate-y-0 {
+  --tw-translate-y: 0px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.-translate-y-full {
+  --tw-translate-y: -100%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.translate-x-full {
+  --tw-translate-x: 100%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .transform {
@@ -1270,6 +1306,9 @@ video {
 }
 .bg-opacity-90 {
   --tw-bg-opacity: 0.9;
+}
+.bg-opacity-75 {
+  --tw-bg-opacity: 0.75;
 }
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
