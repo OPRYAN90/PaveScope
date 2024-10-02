@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
-import DashboardLayout from '../dashboard-layout'
+import MapLayout from './maplayout'
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/Login/ui/card"
 import { Button } from "../../components/Login/ui/button"
 import { Input } from "../../components/Login/ui/input"
@@ -111,13 +111,13 @@ export default function MapsPage() {
   }
 
   return (
-    <DashboardLayout>
+    <MapLayout>
       <Script
         src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyAtRjdZYF7O3721qyEjn1c6d47hvJDe4sc&libraries=places`}
         onLoad={() => setMapLoaded(true)}
       />
-      <div className="absolute inset-0">
-        <div ref={mapRef} className="w-full h-full" />
+      <div className="w-full h-full relative">
+        <div ref={mapRef} className="w-full h-full absolute inset-0 overflow-hidden" />
         
         {/* Menu button */}
         <div className={`absolute bottom-4 right-4 z-20 transition-all duration-300 ${showControls ? 'opacity-0 pointer-events-none' : ''}`}>
@@ -267,6 +267,6 @@ export default function MapsPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </MapLayout>
   )
 }
