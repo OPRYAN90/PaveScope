@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { ZoomIn, ZoomOut, Trash2, Upload, MapPin, Calendar, Image as ImageIcon, ChevronLeft, ChevronRight } from 'lucide-react'
 import DashboardLayout from '../dashboard-layout'
 import { Button } from "../../components/Login/ui/button"
@@ -28,12 +28,77 @@ interface Detection {
   timestamp: any;
 }
 
+const drawBoundingBoxes = (imgElement: HTMLImageElement, detections: any[]): string => {
+  // Create an off-screen canvas
+  const canvas = document.createElement('canvas')
+  canvas.width = imgElement.naturalWidth
+  canvas.height = imgElement.naturalHeight
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return imgElement.src
+
+  // Draw the original image onto the canvas
+  ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height)
+
+  detections.forEach((detection) => {
+    const { box, score } = detection
+    const { xmin, ymin, xmax, ymax } = box
+
+    // Draw rectangle
+    ctx.strokeStyle = 'red'
+    ctx.lineWidth = 2
+    ctx.strokeRect(xmin, ymin, xmax - xmin, ymax - ymin)
+
+    // Draw label
+    ctx.fillStyle = 'red'
+    ctx.font = '16px Arial'
+    const label_text = "Pothole Detection"
+    const score_text = `Score: ${score.toFixed(2)}`
+    
+    // Position the text
+    const textY = ymin > 30 ? ymin - 5 : ymin + (ymax - ymin) + 20
+    ctx.fillText(label_text, xmin, textY)
+    ctx.fillText(score_text, xmin, textY + 20)
+  })
+
+  // Convert the canvas to a data URL
+  return canvas.toDataURL()
+}
+
+const DetectionImage: React.FC<{ detection: Detection }> = ({ detection }) => {
+  const [imageSrc, setImageSrc] = useState(detection.imageUrl)
+  const imgRef = useRef<HTMLImageElement>(null)
+
+  useEffect(() => {
+    const img = new Image()
+    img.crossOrigin = "anonymous"  // Important for avoiding CORS issues
+    img.onload = () => {
+      if (detection.detections && detection.detections.length > 0) {
+        const newSrc = drawBoundingBoxes(img, detection.detections)
+        setImageSrc(newSrc)
+      }
+    }
+    img.src = detection.imageUrl
+  }, [detection])
+
+  return (
+    <div className="relative w-full h-48">
+      <img
+        ref={imgRef}
+        src={imageSrc}
+        alt={detection.fileName}
+        className="w-full h-full object-cover"
+      />
+    </div>
+  )
+}
+
 export default function DetectionsPage() {
   const [detections, setDetections] = useState<Detection[]>([])
   const [selectedImage, setSelectedImage] = useState<Detection | null>(null)
   const [loading, setLoading] = useState(true)
   const { user } = useAuth()
   const { toast } = useToast()
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   useEffect(() => {
     if (user) {
@@ -45,6 +110,18 @@ export default function DetectionsPage() {
         } as Detection))
         setDetections(detectionData)
         setLoading(false)
+
+        // Log bounding box coordinates for each detection
+        detectionData.forEach((detection) => {
+          console.log(`Bounding boxes for ${detection.fileName}:`)
+          if (detection.detections && Array.isArray(detection.detections)) {
+            detection.detections.forEach((det, index) => {
+              console.log(`  Detection ${index + 1}: ${JSON.stringify(det.box)}`)
+            })
+          } else {
+            console.log('  No detections found for this image.')
+          }
+        })
       })
 
       return () => unsubscribe()
@@ -79,8 +156,6 @@ export default function DetectionsPage() {
       })
     }
   }
-
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % detections.length)
@@ -126,7 +201,7 @@ export default function DetectionsPage() {
               transition={{ staggerChildren: 0.1 }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {detections.map((detection, index) => (
+              {detections.map((detection) => (
                 <motion.div
                   key={detection.id}
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -137,16 +212,10 @@ export default function DetectionsPage() {
                 >
                   <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg">
                     <CardHeader className="p-0">
-                      <div className="relative">
-                        <img
-                          src={detection.imageUrl}
-                          alt={detection.fileName}
-                          className="w-full h-48 object-cover"
-                        />
-                        <Badge className="absolute top-2 right-2 bg-blue-600 text-white">
-                          {detection.detections?.length || 0} detections
-                        </Badge>
-                      </div>
+                      <DetectionImage detection={detection} />
+                      <Badge className="absolute top-2 right-2 bg-blue-600 text-white">
+                        {detection.detections?.length || 0} detections
+                      </Badge>
                     </CardHeader>
                     <CardContent className="p-4">
                       <CardTitle className="text-lg font-semibold text-blue-700 mb-2 truncate">
@@ -171,7 +240,7 @@ export default function DetectionsPage() {
                             variant="outline" 
                             onClick={() => {
                               setSelectedImage(detection)
-                              setCurrentImageIndex(index)
+                              setCurrentImageIndex(detections.indexOf(detection))
                             }}
                             className="w-full mr-2 bg-blue-50 hover:bg-blue-100 text-blue-600 border-blue-200 hover:border-blue-300 transition-all duration-300"
                           >
@@ -184,9 +253,7 @@ export default function DetectionsPage() {
                             <DialogDescription>Detection details</DialogDescription>
                           </DialogHeader>
                           <div className="mt-4 relative">
-                            <img
-                              src={detections[currentImageIndex]?.imageUrl}
-                              alt="Full screen view"
+                            <canvas
                               className="w-full h-auto rounded-lg shadow-lg"
                             />
                             <Button
