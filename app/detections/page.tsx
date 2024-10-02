@@ -9,10 +9,10 @@ import { useAuth } from '../../components/AuthProvider'
 import { db } from '../../firebase'
 import { collection, query, orderBy, onSnapshot, deleteDoc, doc, updateDoc, where, getDocs } from 'firebase/firestore'
 import Link from 'next/link'
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "../../components/ui/use-toast"
 import { motion, AnimatePresence } from 'framer-motion'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Badge } from "@/components/ui/badge"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../../components/ui/dialog"
+import { Badge } from "../../components/ui/badge"
 import { Skeleton } from "../../components/ui/skeleton"
 
 interface Detection {
@@ -144,7 +144,7 @@ export default function DetectionsPage() {
                           className="w-full h-48 object-cover"
                         />
                         <Badge className="absolute top-2 right-2 bg-blue-600 text-white">
-                          {detection.detections.length} detections
+                          {detection.detections?.length || 0} detections
                         </Badge>
                       </div>
                     </CardHeader>
@@ -215,7 +215,7 @@ export default function DetectionsPage() {
                               <strong>Timestamp:</strong> {detections[currentImageIndex]?.timestamp.toDate().toLocaleString()}
                             </p>
                             <p className="text-sm text-gray-600">
-                              <strong>Detections:</strong> {detections[currentImageIndex]?.detections.length}
+                              <strong>Detections:</strong> {detections[currentImageIndex]?.detections?.length || 0}
                             </p>
                           </div>
                         </DialogContent>

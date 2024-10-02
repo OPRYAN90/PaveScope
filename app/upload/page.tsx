@@ -46,6 +46,7 @@ export default function UploadPage() {
   const [key, setKey] = useState(0)
   const [duplicateImages, setDuplicateImages] = useState<string[]>([])
   const router = useRouter()
+  const [isDragging, setIsDragging] = useState(false)
 
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -454,6 +455,51 @@ export default function UploadPage() {
     }
   }
 
+  const handleDragEnter = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(true)
+  }, [])
+
+  const handleDragLeave = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(false)
+  }, [])
+
+  const handleDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(true)
+  }, [])
+
+  const handleDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(false)
+    
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      const newFiles = Array.from(e.dataTransfer.files).map((file) => ({ 
+        id: Math.random().toString(36).substr(2, 9),
+        file 
+      }))
+      processFiles(newFiles).then(processedFiles => {
+        setFilesToUpload((prev) => {
+          const updated = [...prev, ...processedFiles]
+          console.log('Updated filesToUpload:', updated)
+          return updated
+        })
+
+        // Check for duplicates
+        const duplicates = processedFiles.filter(file => 
+          uploadedImages.some(img => img.path.endsWith(file.file.name))
+        ).map(file => file.file.name);
+        
+        setDuplicateImages(duplicates);
+      })
+    }
+  }, [processFiles, uploadedImages])
+
   return (
     <DashboardLayout>
       <div className="p-6 bg-gradient-to-b from-blue-50 to-white min-h-screen">
@@ -461,7 +507,17 @@ export default function UploadPage() {
         <Card className="bg-white shadow-lg rounded-lg overflow-hidden mb-8">
           <CardContent className="p-8">
             <h2 className="text-2xl font-semibold mb-6 text-blue-700">Select Files</h2>
-            <div className="border-2 border-dashed border-blue-300 rounded-lg p-8 text-center mb-8 hover:border-blue-500 transition-colors duration-300">
+            <div 
+              className={`border-2 border-dashed rounded-lg p-8 text-center mb-8 transition-all duration-300 ${
+                isDragging 
+                  ? 'border-blue-500 bg-blue-50' 
+                  : 'border-blue-300 hover:border-blue-500'
+              }`}
+              onDragEnter={handleDragEnter}
+              onDragLeave={handleDragLeave}
+              onDragOver={handleDragOver}
+              onDrop={handleDrop}
+            >
               <input
                 type="file"
                 multiple
@@ -472,8 +528,14 @@ export default function UploadPage() {
                 key={key}
               />
               <label htmlFor="file-upload" className="cursor-pointer">
-                <Upload className="mx-auto h-16 w-16 text-blue-500 mb-4" />
-                <p className="text-blue-600 font-semibold text-lg mb-2">Click to upload or drag and drop</p>
+                <Upload className={`mx-auto h-16 w-16 mb-4 transition-colors duration-300 ${
+                  isDragging ? 'text-blue-600' : 'text-blue-500'
+                }`} />
+                <p className={`font-semibold text-lg mb-2 transition-colors duration-300 ${
+                  isDragging ? 'text-blue-700' : 'text-blue-600'
+                }`}>
+                  {isDragging ? 'Drop files here' : 'Click to upload or drag and drop'}
+                </p>
                 <p className="text-sm text-gray-500">PNG, JPG, GIF up to 10MB</p>
               </label>
             </div>
