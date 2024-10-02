@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import { ZoomIn, ZoomOut, Trash2, Upload, MapPin, Calendar, Image as ImageIcon, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ZoomIn, ZoomOut, Trash2, Upload, MapPin, Calendar, Image as ImageIcon, ChevronLeft, ChevronRight, X } from 'lucide-react'
 import DashboardLayout from '../dashboard-layout'
 import { Button } from "../../components/Login/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../../components/Login/ui/card"
@@ -11,7 +11,7 @@ import { collection, query, orderBy, onSnapshot, deleteDoc, doc, updateDoc, wher
 import Link from 'next/link'
 import { useToast } from "../../components/ui/use-toast"
 import { motion, AnimatePresence } from 'framer-motion'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../../components/ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../../components/ui/dialog"
 import { Badge } from "../../components/ui/badge"
 import { Skeleton } from "../../components/ui/skeleton"
 
@@ -29,48 +29,48 @@ interface Detection {
 }
 
 const drawBoundingBoxes = (imgElement: HTMLImageElement, detections: any[]): string => {
-  // Create an off-screen canvas
   const canvas = document.createElement('canvas')
   canvas.width = imgElement.naturalWidth
   canvas.height = imgElement.naturalHeight
   const ctx = canvas.getContext('2d')
   if (!ctx) return imgElement.src
 
-  // Draw the original image onto the canvas
   ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height)
+
+  const scaleFactor = Math.min(canvas.width, canvas.height) / 1000
+  const fontSize = Math.max(12, Math.round(16 * scaleFactor))
+  const padding = Math.round(4 * scaleFactor)
+  const labelHeight = fontSize + padding * 2
 
   detections.forEach((detection) => {
     const { box, score } = detection
     const { xmin, ymin, xmax, ymax } = box
 
-    // Draw rectangle
     ctx.strokeStyle = 'red'
-    ctx.lineWidth = 2
+    ctx.lineWidth = Math.max(2, Math.round(2 * scaleFactor))
     ctx.strokeRect(xmin, ymin, xmax - xmin, ymax - ymin)
 
-    // Draw label
+    const scoreText = score.toFixed(2)
+    ctx.font = `bold ${fontSize}px Arial`
+    const textWidth = ctx.measureText(scoreText).width
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'
+    ctx.fillRect(xmin, ymin - labelHeight, textWidth + padding * 2, labelHeight)
+
     ctx.fillStyle = 'red'
-    ctx.font = '16px Arial'
-    const label_text = "Pothole Detection"
-    const score_text = `Score: ${score.toFixed(2)}`
-    
-    // Position the text
-    const textY = ymin > 30 ? ymin - 5 : ymin + (ymax - ymin) + 20
-    ctx.fillText(label_text, xmin, textY)
-    ctx.fillText(score_text, xmin, textY + 20)
+    ctx.fillText(scoreText, xmin + padding, ymin - padding)
   })
 
-  // Convert the canvas to a data URL
   return canvas.toDataURL()
 }
 
-const DetectionImage: React.FC<{ detection: Detection }> = ({ detection }) => {
+const DetectionImage: React.FC<{ detection: Detection; onClick: () => void }> = ({ detection, onClick }) => {
   const [imageSrc, setImageSrc] = useState(detection.imageUrl)
   const imgRef = useRef<HTMLImageElement>(null)
 
   useEffect(() => {
     const img = new Image()
-    img.crossOrigin = "anonymous"  // Important for avoiding CORS issues
+    img.crossOrigin = "anonymous"
     img.onload = () => {
       if (detection.detections && detection.detections.length > 0) {
         const newSrc = drawBoundingBoxes(img, detection.detections)
@@ -81,13 +81,89 @@ const DetectionImage: React.FC<{ detection: Detection }> = ({ detection }) => {
   }, [detection])
 
   return (
-    <div className="relative w-full h-48">
+    <div className="relative w-full h-48 cursor-pointer" onClick={onClick}>
       <img
         ref={imgRef}
         src={imageSrc}
         alt={detection.fileName}
         className="w-full h-full object-cover"
       />
+    </div>
+  )
+}
+
+const DetailedView: React.FC<{ detection: Detection; onClose: () => void; onPrev: () => void; onNext: () => void }> = ({ detection, onClose, onPrev, onNext }) => {
+  const [imageSrc, setImageSrc] = useState(detection.imageUrl)
+
+  useEffect(() => {
+    const img = new Image()
+    img.crossOrigin = "anonymous"
+    img.onload = () => {
+      if (detection.detections && detection.detections.length > 0) {
+        const newSrc = drawBoundingBoxes(img, detection.detections)
+        setImageSrc(newSrc)
+      }
+    }
+    img.src = detection.imageUrl
+  }, [detection])
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+        <div className="p-4 flex justify-between items-center border-b">
+          <h2 className="text-2xl font-bold text-gray-800">{detection.fileName}</h2>
+          <Button variant="ghost" size="icon" onClick={onClose}>
+            <X className="h-6 w-6" />
+          </Button>
+        </div>
+        <div className="flex-grow overflow-auto">
+          <div className="relative">
+            <img src={imageSrc} alt={detection.fileName} className="w-full h-auto" />
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute top-2 left-2 bg-white/80 hover:bg-white"
+              onClick={onPrev}
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="absolute top-2 right-2 bg-white/80 hover:bg-white"
+              onClick={onNext}
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+          <div className="p-6 space-y-4">
+            <div className="flex items-center text-sm text-gray-600">
+              <MapPin className="mr-2 h-4 w-4" />
+              <span>
+                {detection.gps.lat.toFixed(6)}, {detection.gps.lng.toFixed(6)}
+                {detection.gps.alt !== undefined ? `, ${detection.gps.alt.toFixed(1)}m` : ''}
+              </span>
+            </div>
+            <div className="flex items-center text-sm text-gray-600">
+              <Calendar className="mr-2 h-4 w-4" />
+              <span>{new Date(detection.timestamp.toDate()).toLocaleString()}</span>
+            </div>
+            <div className="text-sm text-gray-600">
+              <strong>Detections:</strong> {detection.detections?.length || 0}
+            </div>
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold mb-2">Detection Scores</h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+                {detection.detections.map((det, index) => (
+                  <div key={index} className="bg-gray-100 rounded p-2 text-sm">
+                    Score: {det.score.toFixed(2)}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
@@ -110,18 +186,6 @@ export default function DetectionsPage() {
         } as Detection))
         setDetections(detectionData)
         setLoading(false)
-
-        // Log bounding box coordinates for each detection
-        detectionData.forEach((detection) => {
-          console.log(`Bounding boxes for ${detection.fileName}:`)
-          if (detection.detections && Array.isArray(detection.detections)) {
-            detection.detections.forEach((det, index) => {
-              console.log(`  Detection ${index + 1}: ${JSON.stringify(det.box)}`)
-            })
-          } else {
-            console.log('  No detections found for this image.')
-          }
-        })
       })
 
       return () => unsubscribe()
@@ -159,10 +223,17 @@ export default function DetectionsPage() {
 
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % detections.length)
+    setSelectedImage(detections[(currentImageIndex + 1) % detections.length])
   }
 
   const prevImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex - 1 + detections.length) % detections.length)
+    setSelectedImage(detections[(currentImageIndex - 1 + detections.length) % detections.length])
+  }
+
+  const handleImageClick = (detection: Detection) => {
+    setSelectedImage(detection)
+    setCurrentImageIndex(detections.indexOf(detection))
   }
 
   return (
@@ -212,7 +283,10 @@ export default function DetectionsPage() {
                 >
                   <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg">
                     <CardHeader className="p-0">
-                      <DetectionImage detection={detection} />
+                      <DetectionImage 
+                        detection={detection} 
+                        onClick={() => handleImageClick(detection)}
+                      />
                       <Badge className="absolute top-2 right-2 bg-blue-600 text-white">
                         {detection.detections?.length || 0} detections
                       </Badge>
@@ -234,59 +308,13 @@ export default function DetectionsPage() {
                       </div>
                     </CardContent>
                     <CardFooter className="p-4 pt-0 flex justify-between">
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button 
-                            variant="outline" 
-                            onClick={() => {
-                              setSelectedImage(detection)
-                              setCurrentImageIndex(detections.indexOf(detection))
-                            }}
-                            className="w-full mr-2 bg-blue-50 hover:bg-blue-100 text-blue-600 border-blue-200 hover:border-blue-300 transition-all duration-300"
-                          >
-                            <ZoomIn className="mr-2 h-4 w-4" /> View Details
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent className="max-w-4xl w-full">
-                          <DialogHeader>
-                            <DialogTitle>{selectedImage?.fileName}</DialogTitle>
-                            <DialogDescription>Detection details</DialogDescription>
-                          </DialogHeader>
-                          <div className="mt-4 relative">
-                            <canvas
-                              className="w-full h-auto rounded-lg shadow-lg"
-                            />
-                            <Button
-                              variant="outline"
-                              size="icon"
-                              className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/80 hover:bg-white"
-                              onClick={prevImage}
-                            >
-                              <ChevronLeft className="h-4 w-4" />
-                            </Button>
-                            <Button
-                              variant="outline"
-                              size="icon"
-                              className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/80 hover:bg-white"
-                              onClick={nextImage}
-                            >
-                              <ChevronRight className="h-4 w-4" />
-                            </Button>
-                          </div>
-                          <div className="mt-4 space-y-2">
-                            <p className="text-sm text-gray-600">
-                              <strong>GPS:</strong> {detections[currentImageIndex]?.gps.lat.toFixed(6)}, {detections[currentImageIndex]?.gps.lng.toFixed(6)}
-                              {detections[currentImageIndex]?.gps.alt !== undefined ? `, ${detections[currentImageIndex].gps.alt.toFixed(1)}m` : ''}
-                            </p>
-                            <p className="text-sm text-gray-600">
-                              <strong>Timestamp:</strong> {detections[currentImageIndex]?.timestamp.toDate().toLocaleString()}
-                            </p>
-                            <p className="text-sm text-gray-600">
-                              <strong>Detections:</strong> {detections[currentImageIndex]?.detections?.length || 0}
-                            </p>
-                          </div>
-                        </DialogContent>
-                      </Dialog>
+                      <Button 
+                        variant="outline" 
+                        onClick={() => handleImageClick(detection)}
+                        className="w-full mr-2 bg-blue-50 hover:bg-blue-100 text-blue-600 border-blue-200 hover:border-blue-300 transition-all duration-300"
+                      >
+                        <ZoomIn className="mr-2 h-4 w-4" /> View Details
+                      </Button>
                       <Button 
                         onClick={() => deleteDetection(detection.id, detection.imageUrl)} 
                         variant="destructive"
@@ -319,6 +347,15 @@ export default function DetectionsPage() {
           )}
         </AnimatePresence>
       </motion.div>
+
+      {selectedImage && (
+        <DetailedView
+          detection={selectedImage}
+          onClose={() => setSelectedImage(null)}
+          onPrev={prevImage}
+          onNext={nextImage}
+        />
+      )}
     </DashboardLayout>
   )
 }
