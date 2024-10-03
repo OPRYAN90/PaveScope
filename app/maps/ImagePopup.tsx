@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/Login/ui/card"
 import { Button } from "../../components/Login/ui/button"
 import { Loader2, X, Maximize2 } from 'lucide-react'
+import { drawBoundingBoxes } from '../detections/utils'
 
 interface ImageData {
   url: string;
   gps: { lat: number; lng: number };
   detectionCount: number;
   detectionImageUrl?: string;
+  detections?: any[];
 }
 
 interface ImagePopupProps {
@@ -19,6 +21,34 @@ interface ImagePopupProps {
 const ImagePopup: React.FC<ImagePopupProps> = ({ imageUrl, onClose, imageData }) => {
   const [isImageLoading, setIsImageLoading] = useState(true)
   const [showFullImage, setShowFullImage] = useState(false)
+  const [imageSrc, setImageSrc] = useState(imageData?.url || '')
+
+  useEffect(() => {
+    if (imageData) {
+      setIsImageLoading(true)
+      const img = new Image()
+      img.crossOrigin = "anonymous"
+      img.onload = () => {
+        if (imageData.detections && imageData.detections.length > 0) {
+          try {
+            const newSrc = drawBoundingBoxes(img, imageData.detections)
+            setImageSrc(newSrc)
+          } catch (error) {
+            console.error('Error drawing bounding boxes:', error)
+            setImageSrc(imageData.url) // Fallback to original image
+          }
+        } else {
+          setImageSrc(imageData.url)
+        }
+        setIsImageLoading(false)
+      }
+      img.onerror = () => {
+        console.error('Error loading image:', imageData.url)
+        setIsImageLoading(false)
+      }
+      img.src = imageData.url
+    }
+  }, [imageData])
 
   if (!imageData) return null
 
@@ -46,11 +76,9 @@ const ImagePopup: React.FC<ImagePopupProps> = ({ imageUrl, onClose, imageData })
               </div>
             )}
             <img 
-              src={imageData.detectionImageUrl || imageData.url} 
+              src={imageSrc} 
               alt="Selected location" 
               className={`w-full h-full object-cover ${isImageLoading ? 'invisible' : 'visible'}`}
-              onLoad={() => setIsImageLoading(false)}
-              onError={() => setIsImageLoading(false)}
             />
             <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <Button
@@ -85,7 +113,7 @@ const ImagePopup: React.FC<ImagePopupProps> = ({ imageUrl, onClose, imageData })
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
           <div className="relative max-w-[90vw] max-h-[90vh] bg-white shadow-lg">
             <img 
-              src={imageData.url} 
+              src={imageSrc} 
               alt="Full size image" 
               className="max-w-full max-h-full w-auto h-auto object-contain"
             />

@@ -21,6 +21,7 @@ interface ImageData {
   gps: { lat: number; lng: number };
   detectionCount: number;
   detectionImageUrl?: string;
+  detections?: any[]; // Add this line
 }
 
 export default function MapsPage() {
@@ -77,19 +78,21 @@ export default function MapsPage() {
         const data = doc.data()
         acc[data.imageUrl] = {
           detectionCount: data.detections ? data.detections.length : 0,
-          detectionImageUrl: data.imageUrl
+          detectionImageUrl: data.imageUrl,
+          detections: data.detections || []
         }
         return acc
-      }, {} as { [key: string]: { detectionCount: number; detectionImageUrl: string } })
+      }, {} as { [key: string]: { detectionCount: number; detectionImageUrl: string; detections: any[] } })
 
       const images = imagesSnapshot.docs.map(doc => {
         const data = doc.data()
-        const detection = detections[data.url] || { detectionCount: 0, detectionImageUrl: undefined }
+        const detection = detections[data.url] || { detectionCount: 0, detectionImageUrl: undefined, detections: [] }
         return {
           url: data.url,
           gps: data.gps,
           detectionCount: detection.detectionCount,
-          detectionImageUrl: detection.detectionImageUrl
+          detectionImageUrl: detection.detectionImageUrl,
+          detections: detection.detections
         }
       })
 
