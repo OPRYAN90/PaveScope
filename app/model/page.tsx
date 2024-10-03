@@ -448,7 +448,7 @@ export default function ModelPage() {
 
       // Update the toast message
       toast({
-        title: 'Inference completed',
+        title: failedInferences > 0 ? 'Inference Attempted' : 'Inference Completed',
         description: (
           <div>
             <p>Inference process completed: {successfulInferences} successful, {failedInferences} failed.</p>
@@ -477,7 +477,7 @@ export default function ModelPage() {
     } catch (error) {
       console.error('Error running inference:', error)
       toast({
-        title: 'Inference failed',
+        title: 'Inference Failed',
         description: 'An error occurred while processing the images. Please try again.',
         variant: 'destructive',
         duration: 10000, // Show for 10 seconds
