@@ -214,7 +214,7 @@ export default function WorkPage() {
           </div>
 
           {/* Metrics */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             <MetricCard title="Total Images" value="1,234" icon={Image} />
             <MetricCard title="Detections" value="567" icon={BarChart2} />
             <MetricCard title="Estimated Cost" value="$12,345" icon={DollarSign} />
@@ -232,8 +232,8 @@ export default function WorkPage() {
                     Maps
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="flex-grow p-0">
-                  <div className="w-full h-[400px] relative overflow-hidden">
+                <CardContent className="flex-grow p-0 overflow-hidden">
+                  <div className="w-full h-full relative">
                     {isMapScriptLoaded && recentDetections.length > 0 ? (
                       <GoogleMapPreview detections={recentDetections} />
                     ) : (
@@ -257,7 +257,7 @@ export default function WorkPage() {
                 </CardHeader>
                 <CardContent className="flex-grow p-4">
                   <div className="grid grid-cols-3 gap-4">
-                    {recentDetections.slice(0, 6).map((detection, i) => (
+                    {recentDetections.slice(0, 5).map((detection, i) => (
                       <div key={detection.id} className="aspect-square bg-gray-200 relative overflow-hidden rounded-lg">
                         <img 
                           src={detection.imageUrl || `/placeholder.svg?height=100&width=100&text=Image+${i+1}`} 
@@ -266,9 +266,14 @@ export default function WorkPage() {
                         />
                       </div>
                     ))}
-                    {[...Array(Math.max(0, 6 - recentDetections.length))].map((_, i) => (
+                    {[...Array(Math.max(0, 5 - recentDetections.length))].map((_, i) => (
                       <div key={i} className="aspect-square bg-gray-200 rounded-lg" />
                     ))}
+                    <div className="aspect-square bg-blue-100 rounded-lg flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                      </svg>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
