@@ -16,6 +16,13 @@ import { useAuth } from '../../components/AuthProvider'
 import { db } from '../../firebase'
 import { collection, query, where, getDocs } from 'firebase/firestore'
 
+interface ImageData {
+  url: string;
+  gps: { lat: number; lng: number };
+  detectionCount: number;
+  detectionImageUrl?: string;
+}
+
 export default function MapsPage() {
   const [selectedArea, setSelectedArea] = useState('')
   const [filterType, setFilterType] = useState('')
@@ -25,9 +32,9 @@ export default function MapsPage() {
   const [mapLoaded, setMapLoaded] = useState(false)
   const [map, setMap] = useState<google.maps.Map | null>(null)
   const pathname = usePathname()
-  const [userImages, setUserImages] = useState<Array<{url: string, gps: {lat: number, lng: number}}>>([])
+  const [userImages, setUserImages] = useState<ImageData[]>([])
   const { user } = useAuth()
-  const [selectedImage, setSelectedImage] = useState<{url: string, gps: {lat: number, lng: number}} | null>(null)
+  const [selectedImage, setSelectedImage] = useState<ImageData | null>(null)
   const [isImageLoading, setIsImageLoading] = useState(false)
   const [showFullImage, setShowFullImage] = useState(false)
 
@@ -62,40 +69,68 @@ export default function MapsPage() {
 
   useEffect(() => {
     if (user && map) {
-      fetchUserImages()
+      fetchUserImagesAndDetections()
     }
   }, [user, map])
 
-  const fetchUserImages = async () => {
+  const fetchUserImagesAndDetections = async () => {
     if (!user) return
 
     try {
-      const q = query(collection(db, 'users', user.uid, 'images'))
-      const querySnapshot = await getDocs(q)
-      const images = querySnapshot.docs.map(doc => {
+      const imagesQuery = query(collection(db, 'users', user.uid, 'images'))
+      const detectionsQuery = query(collection(db, 'users', user.uid, 'detections'))
+
+      const [imagesSnapshot, detectionsSnapshot] = await Promise.all([
+        getDocs(imagesQuery),
+        getDocs(detectionsQuery)
+      ])
+
+      const detections = detectionsSnapshot.docs.reduce((acc, doc) => {
         const data = doc.data()
+        acc[data.imageUrl] = {
+          detectionCount: data.detections ? data.detections.length : 0,
+          detectionImageUrl: data.imageUrl
+        }
+        return acc
+      }, {} as { [key: string]: { detectionCount: number; detectionImageUrl: string } })
+
+      const images = imagesSnapshot.docs.map(doc => {
+        const data = doc.data()
+        const detection = detections[data.url] || { detectionCount: 0, detectionImageUrl: undefined }
         return {
           url: data.url,
-          gps: data.gps
+          gps: data.gps,
+          detectionCount: detection.detectionCount,
+          detectionImageUrl: detection.detectionImageUrl
         }
       })
+
       setUserImages(images)
       addMarkersToMap(images)
     } catch (error) {
-      console.error('Error fetching user images:', error)
+      console.error('Error fetching user images and detections:', error)
     }
   }
 
-  const addMarkersToMap = (images: Array<{url: string, gps: {lat: number, lng: number}}>) => {
+  const addMarkersToMap = (images: ImageData[]) => {
     if (!map) return
 
     images.forEach((image) => {
+      let fillColor
+      if (image.detectionCount > 0) {
+        fillColor = '#FF0000' // Red for detections
+      } else if (image.detectionImageUrl === undefined) {
+        fillColor = '#808080' // Gray for unprocessed images
+      } else {
+        fillColor = '#00FF00' // Green for no detections
+      }
+
       const marker = new google.maps.Marker({
         position: { lat: image.gps.lat, lng: image.gps.lng },
         map: map,
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
-          fillColor: '#808080',
+          fillColor: fillColor,
           fillOpacity: 1,
           strokeColor: '#ffffff',
           strokeWeight: 2,
@@ -217,7 +252,7 @@ export default function MapsPage() {
                   </div>
                 )}
                 <img 
-                  src={selectedImage.url} 
+                  src={selectedImage.detectionImageUrl || selectedImage.url} 
                   alt="Selected location" 
                   className={`w-full h-full object-cover ${isImageLoading ? 'invisible' : 'visible'}`}
                   onLoad={() => setIsImageLoading(false)}
@@ -241,6 +276,11 @@ export default function MapsPage() {
                 </p>
                 <p className="text-xs text-gray-600">
                   Longitude: {selectedImage.gps.lng.toFixed(6)}
+                </p>
+                <p className="text-xs text-gray-600 mt-2">
+                  Status: {selectedImage.detectionCount > 0 
+                    ? `${selectedImage.detectionCount} Pothole${selectedImage.detectionCount === 1 ? '' : 's'} Detected` 
+                    : (selectedImage.detectionImageUrl === undefined ? 'Not Processed' : 'No Potholes Detected')}
                 </p>
               </div>
             </CardContent>

@@ -743,6 +743,9 @@ video {
 .h-\[72px\] {
   height: 72px;
 }
+.h-\[90vh\] {
+  height: 90vh;
+}
 .h-\[var\(--radix-select-trigger-height\)\] {
   height: var(--radix-select-trigger-height);
 }
@@ -757,9 +760,6 @@ video {
 }
 .h-screen {
   height: 100vh;
-}
-.h-\[90vh\] {
-  height: 90vh;
 }
 .max-h-\[90vh\] {
   max-height: 90vh;
