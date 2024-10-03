@@ -8,7 +8,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from ".
 import { Slider } from "../../components/ui/slider"
 import { Switch } from "../../components/ui/switch"
 import { Label } from "../../components/Login/ui/label"
-import { Save, RefreshCw, Play, AlertCircle, X, Image as ImageIcon, Upload, Settings, Trash2, Loader2, MapPin } from 'lucide-react'
+import { Save, RefreshCw, Play, AlertCircle, X, Image as ImageIcon, Upload, Settings, Trash2, Loader2, MapPin, AlertTriangle } from 'lucide-react'
 import { Alert, AlertDescription } from "../../components/ui/alert"
 import { ScrollArea } from "../../components/ui/scroll-area"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../../components/ui/dialog"
@@ -383,12 +383,14 @@ export default function ModelPage() {
         title: 'No images selected',
         description: 'Please select at least one image for inference.',
         variant: 'destructive',
+        duration: 5000, // Display for 5 seconds
       })
       return
     }
 
     setIsLoading(true)
     const newResults: { [key: string]: any } = {}
+    const failedImages: string[] = []
 
     try {
       console.log('Starting inference process for', selectedImages.length, 'images')
@@ -408,6 +410,7 @@ export default function ModelPage() {
           } catch (error) {
             console.error(`Error processing image ${imageUrl}:`, error)
             newResults[imageUrl] = { error: (error as Error).message }
+            failedImages.push(imageUrl)
             return { imageUrl, result: null, error: error as Error }
           }
         })
@@ -416,48 +419,68 @@ export default function ModelPage() {
       console.log('All inference results:', newResults)
       setInferenceResults(newResults)
 
-      // Process and save results to Firestore
+      // Process and save results to Firestore only for successful inferences
       for (const { imageUrl, result, error } of results) {
-        const imageData = userImages.find(img => img.url === imageUrl)
-        if (imageData && user) {
-          try {
-            await addDoc(collection(db, 'users', user.uid, 'detections'), {
-              imageUrl: imageUrl,
-              fileName: imageData.path.split('/').pop(),
-              gps: imageData.gps,
-              detections: result,
-              error: error ? error.message : null,
-              timestamp: serverTimestamp(),
-            })
-            console.log('Saved inference result to Firestore for image:', imageUrl)
-          } catch (firestoreError) {
-            console.error('Error saving to Firestore:', firestoreError)
-            toast({
-              title: 'Error saving detection',
-              description: 'Failed to save detection results to the database.',
-              variant: 'destructive',
-            })
+        if (!error) {
+          const imageData = userImages.find(img => img.url === imageUrl)
+          if (imageData && user) {
+            try {
+              await addDoc(collection(db, 'users', user.uid, 'detections'), {
+                imageUrl: imageUrl,
+                fileName: imageData.path.split('/').pop(),
+                gps: imageData.gps,
+                detections: result,
+                timestamp: serverTimestamp(),
+              })
+              console.log('Saved inference result to Firestore for image:', imageUrl)
+            } catch (firestoreError) {
+              console.error('Error saving to Firestore:', firestoreError)
+              failedImages.push(imageUrl)
+            }
           }
         }
       }
 
-      const successfulInferences = results.filter(r => r.result !== null).length
-      const failedInferences = results.filter(r => r.error !== null).length
+      const successfulInferences = results.length - failedImages.length
+      const failedInferences = failedImages.length
 
       console.log('Inference process completed:', successfulInferences, 'successful,', failedInferences, 'failed')
 
+      // Update the toast message
       toast({
         title: 'Inference completed',
-        description: `Processed ${successfulInferences} image(s) successfully. ${failedInferences} failed.`,
-        variant: 'default',
+        description: (
+          <div>
+            <p>Inference process completed: {successfulInferences} successful, {failedInferences} failed.</p>
+            {failedInferences > 0 && (
+              <p className="mt-2 flex items-center text-yellow-600">
+                <AlertTriangle className="w-4 h-4 mr-2" />
+                Please try again. The Hugging Face API might need time to initialize.
+              </p>
+            )}
+          </div>
+        ),
+        variant: failedInferences > 0 ? 'warning' : 'default',
+        duration: 10000, // Show for 10 seconds
       })
+
+      // Update the selected images and available images
+      setSelectedImages(prevSelected => prevSelected.filter(img => !failedImages.includes(img)))
+      setAvailableImages(prevAvailable => [...new Set([...prevAvailable, ...failedImages])])
+
+      // Update processedImages
+      setProcessedImages(prevProcessed => [
+        ...prevProcessed,
+        ...selectedImages.filter(img => !failedImages.includes(img))
+      ])
 
     } catch (error) {
       console.error('Error running inference:', error)
       toast({
         title: 'Inference failed',
-        description: 'An error occurred while processing the images.',
+        description: 'An error occurred while processing the images. Please try again.',
         variant: 'destructive',
+        duration: 10000, // Show for 10 seconds
       })
     } finally {
       setIsLoading(false)
