@@ -83,6 +83,10 @@ const DetectionImage: React.FC<{ detection: Detection; onClick: () => void }> = 
     img.src = detection.imageUrl
   }, [detection])
 
+  const detectionCount = detection.detections?.length || 0;
+  const badgeColor = detectionCount === 0 ? 'bg-green-600' : 'bg-red-600';
+  const textColor = detectionCount === 0 ? 'text-green-600' : 'text-red-600';
+
   return (
     <div className="relative w-full h-48 cursor-pointer" onClick={onClick}>
       {isLoading && (
@@ -96,6 +100,9 @@ const DetectionImage: React.FC<{ detection: Detection; onClick: () => void }> = 
         alt={detection.fileName}
         className={`w-full h-full object-cover ${isLoading ? 'opacity-0' : 'opacity-100'}`}
       />
+      <Badge className={`absolute top-2 right-2 ${badgeColor} text-white`}>
+        {detectionCount} Detection{detectionCount !== 1 ? 's' : ''}
+      </Badge>
     </div>
   )
 }
@@ -346,60 +353,66 @@ export default function DetectionsPage() {
               transition={{ staggerChildren: 0.1 }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {detections.map((detection) => (
-                <motion.div
-                  key={detection.id}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg">
-                    <CardHeader className="p-0">
-                      <DetectionImage 
-                        detection={detection} 
-                        onClick={() => handleImageClick(detection)}
-                      />
-                      <Badge className="absolute top-2 right-2 bg-blue-600 text-white">
-                        {detection.detections?.length || 0} detections
-                      </Badge>
-                    </CardHeader>
-                    <CardContent className="p-4">
-                      <CardTitle className="text-lg font-semibold text-blue-700 mb-2 truncate">
-                        {detection.fileName}
-                      </CardTitle>
-                      <div className="flex items-center text-sm text-gray-600 mb-2">
-                        <MapPin className="mr-2 h-4 w-4" />
-                        <span className="truncate">
-                          {detection.gps.lat.toFixed(6)}, {detection.gps.lng.toFixed(6)}
-                          {detection.gps.alt !== undefined ? `, ${detection.gps.alt.toFixed(1)}m` : ''}
-                        </span>
-                      </div>
-                      <div className="flex items-center text-sm text-gray-600">
-                        <Calendar className="mr-2 h-4 w-4" />
-                        <span>{new Date(detection.timestamp.toDate()).toLocaleString()}</span>
-                      </div>
-                    </CardContent>
-                    <CardFooter className="p-4 pt-0 flex justify-between">
-                      <Button 
-                        variant="outline" 
-                        onClick={() => handleImageClick(detection)} 
-                        className="w-full mr-2 bg-blue-50 hover:bg-blue-100 text-blue-600 border-blue-200 hover:border-blue-300 transition-all duration-300"
-                      >
-                        <ZoomIn className="mr-2 h-4 w-4" /> View Details
-                      </Button>
-                      <Button 
-                        onClick={() => deleteDetection(detection.id, detection.imageUrl)} 
-                        variant="destructive"
-                        className="w-full ml-2 bg-red-50 hover:bg-red-100 text-red-600 border-red-200 hover:border-red-300 transition-all duration-300"
-                      >
-                        <Trash2 className="mr-2 h-4 w-4" /> Delete
-                      </Button>
-                    </CardFooter>
-                  </Card>
-                </motion.div>
-              ))}
+              {detections.map((detection) => {
+                const detectionCount = detection.detections?.length || 0;
+                const textColor = detectionCount === 0 ? 'text-green-600' : 'text-red-600';
+
+                return (
+                  <motion.div
+                    key={detection.id}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    whileHover={{ scale: 1.03 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg">
+                      <CardHeader className="p-0">
+                        <DetectionImage 
+                          detection={detection} 
+                          onClick={() => handleImageClick(detection)}
+                        />
+                      </CardHeader>
+                      <CardContent className="p-4">
+                        <CardTitle className="text-lg font-semibold text-blue-700 mb-2 truncate">
+                          {detection.fileName}
+                        </CardTitle>
+                        <div className="flex items-center text-sm text-gray-600 mb-2">
+                          <MapPin className="mr-2 h-4 w-4" />
+                          <span className="truncate">
+                            {detection.gps.lat.toFixed(6)}, {detection.gps.lng.toFixed(6)}
+                            {detection.gps.alt !== undefined ? `, ${detection.gps.alt.toFixed(1)}m` : ''}
+                          </span>
+                        </div>
+                        <div className="flex items-center text-sm text-gray-600">
+                          <Calendar className="mr-2 h-4 w-4" />
+                          <span>{new Date(detection.timestamp.toDate()).toLocaleString()}</span>
+                        </div>
+                        <div className={`flex items-center text-sm ${textColor} mt-2`}>
+                          <ImageIcon className="mr-2 h-4 w-4" />
+                          <span>{detectionCount} Detection{detectionCount !== 1 ? 's' : ''}</span>
+                        </div>
+                      </CardContent>
+                      <CardFooter className="p-4 pt-0 flex justify-between">
+                        <Button 
+                          variant="outline" 
+                          onClick={() => handleImageClick(detection)} 
+                          className="w-full mr-2 bg-blue-50 hover:bg-blue-100 text-blue-600 border-blue-200 hover:border-blue-300 transition-all duration-300"
+                        >
+                          <ZoomIn className="mr-2 h-4 w-4" /> View Details
+                        </Button>
+                        <Button 
+                          onClick={() => deleteDetection(detection.id, detection.imageUrl)} 
+                          variant="destructive"
+                          className="w-full ml-2 bg-red-50 hover:bg-red-100 text-red-600 border-red-200 hover:border-red-300 transition-all duration-300"
+                        >
+                          <Trash2 className="mr-2 h-4 w-4" /> Delete
+                        </Button>
+                      </CardFooter>
+                    </Card>
+                  </motion.div>
+                );
+              })}
             </motion.div>
           ) : (
             <motion.div
