@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import { ZoomIn, ZoomOut, Trash2, Upload, MapPin, Calendar, Image as ImageIcon, ChevronLeft, ChevronRight, X } from 'lucide-react'
+import { ZoomIn, ZoomOut, Trash2, Upload, MapPin, Calendar, Image as ImageIcon, ChevronLeft, ChevronRight, X, Loader } from 'lucide-react'
 import DashboardLayout from '../dashboard-layout'
 import { Button } from "../../components/Login/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../../components/Login/ui/card"
@@ -66,9 +66,11 @@ const drawBoundingBoxes = (imgElement: HTMLImageElement, detections: any[]): str
 
 const DetectionImage: React.FC<{ detection: Detection; onClick: () => void }> = ({ detection, onClick }) => {
   const [imageSrc, setImageSrc] = useState(detection.imageUrl)
+  const [isLoading, setIsLoading] = useState(true)
   const imgRef = useRef<HTMLImageElement>(null)
 
   useEffect(() => {
+    setIsLoading(true)
     const img = new Image()
     img.crossOrigin = "anonymous"
     img.onload = () => {
@@ -76,17 +78,23 @@ const DetectionImage: React.FC<{ detection: Detection; onClick: () => void }> = 
         const newSrc = drawBoundingBoxes(img, detection.detections)
         setImageSrc(newSrc)
       }
+      setIsLoading(false)
     }
     img.src = detection.imageUrl
   }, [detection])
 
   return (
     <div className="relative w-full h-48 cursor-pointer" onClick={onClick}>
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
+          <Loader className="w-8 h-8 animate-spin text-blue-600" />
+        </div>
+      )}
       <img
         ref={imgRef}
         src={imageSrc}
         alt={detection.fileName}
-        className="w-full h-full object-cover"
+        className={`w-full h-full object-cover ${isLoading ? 'opacity-0' : 'opacity-100'}`}
       />
     </div>
   )
@@ -94,22 +102,46 @@ const DetectionImage: React.FC<{ detection: Detection; onClick: () => void }> = 
 
 const DetailedView: React.FC<{ detection: Detection; onClose: () => void; onPrev: () => void; onNext: () => void }> = ({ detection, onClose, onPrev, onNext }) => {
   const [imageSrc, setImageSrc] = useState(detection.imageUrl)
+  const [isImageLoading, setIsImageLoading] = useState(true)
+  const [isBoundingBoxLoading, setIsBoundingBoxLoading] = useState(true)
+  const [showControls, setShowControls] = useState(false)
 
   useEffect(() => {
+    setIsImageLoading(true)
+    setIsBoundingBoxLoading(true)
+
     const img = new Image()
     img.crossOrigin = "anonymous"
     img.onload = () => {
+      setIsImageLoading(false)
       if (detection.detections && detection.detections.length > 0) {
-        const newSrc = drawBoundingBoxes(img, detection.detections)
-        setImageSrc(newSrc)
+        setTimeout(() => {
+          const newSrc = drawBoundingBoxes(img, detection.detections)
+          setImageSrc(newSrc)
+          setIsBoundingBoxLoading(false)
+        }, 0)
+      } else {
+        setIsBoundingBoxLoading(false)
       }
     }
     img.src = detection.imageUrl
   }, [detection])
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+    >
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        transition={{ duration: 0.3 }}
+        className="bg-white rounded-lg shadow-2xl w-full max-w-4xl h-[90vh] flex flex-col overflow-hidden"
+      >
         <div className="p-4 flex justify-between items-center border-b">
           <h2 className="text-2xl font-bold text-gray-800">{detection.fileName}</h2>
           <Button variant="ghost" size="icon" onClick={onClose}>
@@ -117,24 +149,62 @@ const DetailedView: React.FC<{ detection: Detection; onClose: () => void; onPrev
           </Button>
         </div>
         <div className="flex-grow overflow-auto">
-          <div className="relative">
-            <img src={imageSrc} alt={detection.fileName} className="w-full h-auto" />
-            <Button
-              variant="outline"
-              size="icon"
-              className="absolute top-2 left-2 bg-white/80 hover:bg-white"
-              onClick={onPrev}
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="absolute top-2 right-2 bg-white/80 hover:bg-white"
-              onClick={onNext}
-            >
-              <ChevronRight className="h-4 w-4" />
-            </Button>
+          <div 
+            className="relative"
+            onMouseEnter={() => setShowControls(true)}
+            onMouseLeave={() => setShowControls(false)}
+          >
+            {(isImageLoading || isBoundingBoxLoading) && (
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
+                <div className="text-center">
+                  <Loader className="w-12 h-12 animate-spin text-blue-600 mb-2" />
+                  <p className="text-sm text-gray-600 font-medium">
+                    {isImageLoading ? "Loading image..." : "Rendering detections..."}
+                  </p>
+                </div>
+              </div>
+            )}
+            <img 
+              src={imageSrc} 
+              alt={detection.fileName} 
+              className={`w-full h-auto ${(isImageLoading || isBoundingBoxLoading) ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+            />
+            <AnimatePresence>
+              {showControls && (
+                <>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="absolute left-2 top-1/2 transform -translate-y-1/2"
+                  >
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="bg-white/80 hover:bg-white"
+                      onClick={onPrev}
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                    </Button>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                  >
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="bg-white/80 hover:bg-white"
+                      onClick={onNext}
+                    >
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
           </div>
           <div className="p-6 space-y-4">
             <div className="flex items-center text-sm text-gray-600">
@@ -163,8 +233,8 @@ const DetailedView: React.FC<{ detection: Detection; onClose: () => void; onPrev
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   )
 }
 
@@ -251,16 +321,20 @@ export default function DetectionsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[...Array(6)].map((_, index) => (
                 <Card key={index} className="overflow-hidden shadow-lg">
+                  <CardContent className="p-0">
+                    <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
+                      <Loader className="w-8 h-8 animate-spin text-blue-600" />
+                    </div>
+                  </CardContent>
                   <CardContent className="p-4">
-                    <Skeleton className="w-full h-48 rounded mb-4" />
                     <Skeleton className="w-3/4 h-6 mb-2" />
                     <Skeleton className="w-full h-4 mb-2" />
                     <Skeleton className="w-1/2 h-4 mb-4" />
-                    <div className="flex justify-between mt-4">
-                      <Skeleton className="w-2/5 h-10" />
-                      <Skeleton className="w-2/5 h-10" />
-                    </div>
                   </CardContent>
+                  <CardFooter className="p-4 pt-0 flex justify-between">
+                    <Skeleton className="w-2/5 h-10" />
+                    <Skeleton className="w-2/5 h-10" />
+                  </CardFooter>
                 </Card>
               ))}
             </div>
@@ -310,7 +384,7 @@ export default function DetectionsPage() {
                     <CardFooter className="p-4 pt-0 flex justify-between">
                       <Button 
                         variant="outline" 
-                        onClick={() => handleImageClick(detection)}
+                        onClick={() => handleImageClick(detection)} 
                         className="w-full mr-2 bg-blue-50 hover:bg-blue-100 text-blue-600 border-blue-200 hover:border-blue-300 transition-all duration-300"
                       >
                         <ZoomIn className="mr-2 h-4 w-4" /> View Details
