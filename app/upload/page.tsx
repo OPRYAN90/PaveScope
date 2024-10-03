@@ -18,6 +18,8 @@ import { toast as hotToast } from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import { Badge } from "../../components/ui/badge"
 import { Label } from "../../components/Login/ui/label"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../components/ui/tooltip"
+import { AnimatePresence, motion } from 'framer-motion'
 
 interface GPSData {
   lat: number;
@@ -47,6 +49,7 @@ export default function UploadPage() {
   const [duplicateImages, setDuplicateImages] = useState<string[]>([])
   const router = useRouter()
   const [isDragging, setIsDragging] = useState(false)
+  const [showDeleteWarning, setShowDeleteWarning] = useState(false)
 
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -439,7 +442,7 @@ export default function UploadPage() {
 
       toast({
         title: 'Image Deleted',
-        description: 'The image has been successfully deleted.',
+        description: 'The image has been successfully deleted from the database.',
         variant: 'default',
       })
 
@@ -692,6 +695,8 @@ export default function UploadPage() {
                           handleDeleteImage(image.path);
                         }}
                         disabled={image.isLoading}
+                        onMouseEnter={() => setShowDeleteWarning(true)}
+                        onMouseLeave={() => setShowDeleteWarning(false)}
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
@@ -709,6 +714,22 @@ export default function UploadPage() {
           </CardContent>
         </Card>
       </div>
+
+      <AnimatePresence>
+        {showDeleteWarning && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.2 }}
+            className="fixed bottom-4 right-4 bg-red-100 text-red-800 border border-red-300 p-3 rounded-lg shadow-lg max-w-xs z-50"
+          >
+            <p className="text-sm">
+              Warning: Deleting an image will remove it from the entire database
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {selectedImage && (
         <FullScreenImageModal imageUrl={selectedImage} onClose={closeModal} />
