@@ -9,7 +9,7 @@ import { Button } from "../../components/Login/ui/button";
 import { Input } from "../../components/Login/ui/input";
 import { Label } from "../../components/Login/ui/label";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../../components/ui/select";
-import { Upload, BarChart2, Map, FileSpreadsheet, HelpCircle, Image, DollarSign, Box, ChevronDown, LogOut, Settings, User, Table, Sliders, MapPin } from 'lucide-react';
+import { Upload, BarChart2, Map, FileSpreadsheet, HelpCircle, Image, DollarSign, Box, ChevronDown, LogOut, Settings, User, Table, Sliders, MapPin, ChevronRight } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
 import { useNavigateOrScrollTop } from '../../utils/navigation';
 import DashboardLayout from '../dashboard-layout';
@@ -107,7 +107,7 @@ const GoogleMapPreview: React.FC<{ detections: Detection[] }> = ({ detections })
       setMarkers(newMarkers);
       map.fitBounds(bounds);
     }
-  }, [map, detections]);``
+  }, [map, detections]);
 
   return (
     <div className="relative w-full h-full">
@@ -232,7 +232,7 @@ export default function WorkPage() {
           </div>
 
           {/* Main content areas */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
             {/* Maps */}
             <Link href="/maps" className="block h-full">
               <Card className="cursor-pointer hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
@@ -355,6 +355,37 @@ export default function WorkPage() {
               </Card>
             </Link>
           </div>
+
+          {/* Help Section */}
+          <Link href="/help" className="block w-full mt-2">
+            <Card className="cursor-pointer hover:shadow-lg transition-shadow duration-300">
+              <CardHeader className="bg-gray-100 text-gray-800 py-3">
+                <CardTitle className="flex items-center justify-between text-lg">
+                  <div className="flex items-center">
+                    <HelpCircle className="h-5 w-5 mr-2" />
+                    Help Center
+                  </div>
+                  <ChevronRight className="h-5 w-5" />
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-4">
+                <div className="grid md:grid-cols-3 gap-4">
+                  <div>
+                    <h3 className="font-semibold text-blue-700 mb-2">How do I upload images?</h3>
+                    <p className="text-gray-600 text-sm">Navigate to the Upload page and follow the instructions to upload your images for analysis.</p>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-blue-700 mb-2">Supported file formats</h3>
+                    <p className="text-gray-600 text-sm">PaveScope supports JPG, PNG, and TIFF formats. Use high-resolution images for best results.</p>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-blue-700 mb-2">Need more help?</h3>
+                    <p className="text-gray-600 text-sm">Visit our Help Center for FAQs, tutorials, and contact information for our support team.</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
         </div>
       </DashboardLayout>
     </>

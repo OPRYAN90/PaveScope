@@ -1363,6 +1363,9 @@ video {
 .p-\[1px\] {
   padding: 1px;
 }
+.p-5 {
+  padding: 1.25rem;
+}
 .px-0 {
   padding-left: 0px;
   padding-right: 0px;
@@ -1423,10 +1426,6 @@ video {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
-.py-5 {
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
-}
 .pb-2 {
   padding-bottom: 0.5rem;
 }
@@ -1453,12 +1452,6 @@ video {
 }
 .pt-1 {
   padding-top: 0.25rem;
-}
-.pb-1 {
-  padding-bottom: 0.25rem;
-}
-.pt-2 {
-  padding-top: 0.5rem;
 }
 .text-left {
   text-align: left;
