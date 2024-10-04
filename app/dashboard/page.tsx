@@ -266,25 +266,33 @@ export default function WorkPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow p-4">
-                  <div className="grid grid-cols-3 gap-4">
-                    {recentDetections.slice(0, 5).map((detection, i) => (
-                      <div key={detection.id} className="aspect-square bg-gray-200 relative overflow-hidden rounded-lg">
-                        <img 
-                          src={detection.imageUrl || `/placeholder.svg?height=100&width=100&text=Image+${i+1}`} 
-                          alt={`Recent detection ${i+1}`}
-                          className="w-full h-full object-cover"
-                        />
+                  {recentDetections.length > 0 ? (
+                    <div className="grid grid-cols-3 gap-4">
+                      {recentDetections.slice(0, 5).map((detection, i) => (
+                        <div key={detection.id} className="aspect-square bg-gray-200 relative overflow-hidden rounded-lg">
+                          <img 
+                            src={detection.imageUrl || `/placeholder.svg?height=100&width=100&text=Image+${i+1}`} 
+                            alt={`Recent detection ${i+1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ))}
+                      {[...Array(Math.max(0, 5 - recentDetections.length))].map((_, i) => (
+                        <div key={i} className="aspect-square bg-gray-200 rounded-lg" />
+                      ))}
+                      <div className="aspect-square bg-blue-100 rounded-lg flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                        </svg>
                       </div>
-                    ))}
-                    {[...Array(Math.max(0, 5 - recentDetections.length))].map((_, i) => (
-                      <div key={i} className="aspect-square bg-gray-200 rounded-lg" />
-                    ))}
-                    <div className="aspect-square bg-blue-100 rounded-lg flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                      </svg>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center h-full text-gray-500">
+                      <Image className="h-16 w-16 mb-4 text-gray-400" />
+                      <p className="text-center">No images uploaded yet.</p>
+                      <p className="text-center text-sm mt-2">Click here to upload your first image.</p>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </Link>
@@ -299,26 +307,34 @@ export default function WorkPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow p-0">
-                  <div className="overflow-x-auto">
-                    <table className="w-full">
-                      <thead>
-                        <tr className="bg-gray-50">
-                          <th className="px-4 py-2 text-left font-semibold text-gray-600">File Name</th>
-                          <th className="px-4 py-2 text-left font-semibold text-gray-600">Detections</th>
-                          <th className="px-4 py-2 text-left font-semibold text-gray-600">Uploaded At</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {recentDetections.slice(0, 5).map((detection, i) => (
-                          <tr key={detection.id} className="border-b border-gray-200 hover:bg-gray-50">
-                            <td className="px-4 py-2">{detection.fileName || `File ${i+1}`}</td>
-                            <td className="px-4 py-2">{detection.detections?.length || 0}</td>
-                            <td className="px-4 py-2">{new Date(detection.timestamp?.toDate()).toLocaleDateString()}</td>
+                  {recentDetections.length > 0 ? (
+                    <div className="overflow-x-auto">
+                      <table className="w-full">
+                        <thead>
+                          <tr className="bg-gray-50">
+                            <th className="px-4 py-2 text-left font-semibold text-gray-600">File Name</th>
+                            <th className="px-4 py-2 text-left font-semibold text-gray-600">Detections</th>
+                            <th className="px-4 py-2 text-left font-semibold text-gray-600">Uploaded At</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                        </thead>
+                        <tbody>
+                          {recentDetections.slice(0, 5).map((detection, i) => (
+                            <tr key={detection.id} className="border-b border-gray-200 hover:bg-gray-50">
+                              <td className="px-4 py-2">{detection.fileName || `File ${i+1}`}</td>
+                              <td className="px-4 py-2">{detection.detections?.length || 0}</td>
+                              <td className="px-4 py-2">{new Date(detection.timestamp?.toDate()).toLocaleDateString()}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center h-full text-gray-500 p-4">
+                      <FileSpreadsheet className="h-16 w-16 mb-4 text-gray-400" />
+                      <p className="text-center">No data available yet.</p>
+                      <p className="text-center text-sm mt-2">Upload images to generate spreadsheet data.</p>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </Link>
