@@ -43,7 +43,17 @@ const MetricCard: React.FC<MetricCardProps> = ({ title, value, icon: Icon }) => 
   </Card>
 );
 
-const GoogleMapPreview = ({ detections }) => {
+interface Detection {
+  id: string;
+  gps?: {
+    lat: number;
+    lng: number;
+  };
+  detections?: any[];
+  // Add other properties as needed
+}
+
+const GoogleMapPreview: React.FC<{ detections: Detection[] }> = ({ detections }) => {
   const mapRef = useRef(null);
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [markers, setMarkers] = useState<{ [key: string]: google.maps.Marker }>({});
@@ -65,7 +75,7 @@ const GoogleMapPreview = ({ detections }) => {
       const bounds = new window.google.maps.LatLngBounds();
       const newMarkers: { [key: string]: google.maps.Marker } = {};
 
-      detections.forEach((detection) => {
+      detections.forEach((detection: Detection) => {
         if (detection.gps) {
           const position = new window.google.maps.LatLng(detection.gps.lat, detection.gps.lng);
           
@@ -97,7 +107,7 @@ const GoogleMapPreview = ({ detections }) => {
       setMarkers(newMarkers);
       map.fitBounds(bounds);
     }
-  }, [map, detections]);
+  }, [map, detections]);``
 
   return (
     <div className="relative w-full h-full">
@@ -166,7 +176,7 @@ export default function WorkPage() {
         onLoad={() => setIsMapScriptLoaded(true)}
       />
       <DashboardLayout>
-        <div className="flex flex-col min-h-screen p-6">
+        <div className="flex flex-col min-h-screen p-2"> {/* Reduced overall padding */}
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-3xl font-bold text-gray-800">Work Dashboard</h1>
             <div className="relative">
@@ -226,7 +236,7 @@ export default function WorkPage() {
             {/* Maps */}
             <Link href="/maps" className="block h-full">
               <Card className="cursor-pointer hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
-                <CardHeader className="bg-blue-100 text-blue-800">
+                <CardHeader className="bg-blue-100 text-blue-800 py-3">
                   <CardTitle className="flex items-center text-lg">
                     <Map className="h-5 w-5 mr-2" />
                     Maps
@@ -249,7 +259,7 @@ export default function WorkPage() {
             {/* Gallery */}
             <Link href="/upload" className="block h-full">
               <Card className="cursor-pointer hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
-                <CardHeader className="bg-green-100 text-green-800">
+                <CardHeader className="bg-green-100 text-green-800 py-3">
                   <CardTitle className="flex items-center text-lg">
                     <Image className="h-5 w-5 mr-2" />
                     Gallery
@@ -282,7 +292,7 @@ export default function WorkPage() {
             {/* Spreadsheet */}
             <Link href="/spreadsheets" className="block h-full">
               <Card className="cursor-pointer hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
-                <CardHeader className="bg-purple-100 text-purple-800">
+                <CardHeader className="bg-purple-100 text-purple-800 py-3">
                   <CardTitle className="flex items-center text-lg">
                     <Table className="h-5 w-5 mr-2" />
                     Spreadsheet
@@ -316,7 +326,7 @@ export default function WorkPage() {
             {/* Model Parameters */}
             <Link href="/model" className="block h-full">
               <Card className="cursor-pointer hover:shadow-lg transition-shadow duration-300 h-full flex flex-col">
-                <CardHeader className="bg-yellow-100 text-yellow-800">
+                <CardHeader className="bg-yellow-100 text-yellow-800 py-3">
                   <CardTitle className="flex items-center text-lg">
                     <Sliders className="h-5 w-5 mr-2" />
                     Model Parameters
