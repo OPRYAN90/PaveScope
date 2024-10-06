@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import { usePathname } from 'next/navigation'
 import MapLayout from './maplayout'
 import { Button } from "../../components/Login/ui/button"
 import { Menu } from 'lucide-react'
@@ -21,7 +20,6 @@ interface ImageData {
 }
 
 export default function MapsPage() {
-  const [zoomLevel, setZoomLevel] = useState(2)
   const [showControls, setShowControls] = useState(false)
   const mapRef = useRef<HTMLDivElement>(null)
   const [mapLoaded, setMapLoaded] = useState(false)
@@ -38,7 +36,7 @@ export default function MapsPage() {
     if (mapLoaded && mapRef.current && !map) {
       const newMap = new google.maps.Map(mapRef.current, {
         center: { lat: 0, lng: 0 },
-        zoom: zoomLevel,
+        zoom: 2,
         fullscreenControl: false,
         mapTypeControl: false,
         streetViewControl: false,
@@ -46,7 +44,7 @@ export default function MapsPage() {
       })
       setMap(newMap)
     }
-  }, [mapLoaded, zoomLevel, map])
+  }, [mapLoaded, map])
 
   useEffect(() => {
     if (user && map) {
@@ -168,8 +166,6 @@ export default function MapsPage() {
 
         {showControls && (
           <AdvancedControls
-            zoomLevel={zoomLevel}
-            setZoomLevel={setZoomLevel}
             onClose={() => setShowControls(false)}
             showDetections={showDetections}
             setShowDetections={setShowDetections}
