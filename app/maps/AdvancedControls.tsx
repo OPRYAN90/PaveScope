@@ -11,9 +11,25 @@ interface AdvancedControlsProps {
   zoomLevel: number;
   setZoomLevel: (level: number) => void;
   onClose: () => void;
+  showDetections: boolean;
+  setShowDetections: (show: boolean) => void;
+  showNonDetections: boolean;
+  setShowNonDetections: (show: boolean) => void;
+  showUnprocessed: boolean;
+  setShowUnprocessed: (show: boolean) => void;
 }
 
-const AdvancedControls: React.FC<AdvancedControlsProps> = ({ zoomLevel, setZoomLevel, onClose }) => {
+const AdvancedControls: React.FC<AdvancedControlsProps> = ({
+  zoomLevel,
+  setZoomLevel,
+  onClose,
+  showDetections,
+  setShowDetections,
+  showNonDetections,
+  setShowNonDetections,
+  showUnprocessed,
+  setShowUnprocessed
+}) => {
   return (
     <Card className="absolute bottom-4 right-4 w-80 bg-white shadow-xl overflow-auto max-h-[calc(100vh-5rem)] z-30">
       <CardHeader className="flex flex-row items-center justify-between">
@@ -52,16 +68,28 @@ const AdvancedControls: React.FC<AdvancedControlsProps> = ({ zoomLevel, setZoomL
           <h3 className="font-medium">Map Layers</h3>
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <Label htmlFor="potholes" className="cursor-pointer">Show Potholes</Label>
-              <Switch id="potholes" />
+              <Label htmlFor="detections" className="cursor-pointer">Show Detections</Label>
+              <Switch 
+                id="detections" 
+                checked={showDetections}
+                onCheckedChange={setShowDetections}
+              />
             </div>
             <div className="flex items-center justify-between">
-              <Label htmlFor="cracks" className="cursor-pointer">Show Cracks</Label>
-              <Switch id="cracks" />
+              <Label htmlFor="nonDetections" className="cursor-pointer">Show Non-Detections</Label>
+              <Switch 
+                id="nonDetections" 
+                checked={showNonDetections}
+                onCheckedChange={setShowNonDetections}
+              />
             </div>
             <div className="flex items-center justify-between">
-              <Label htmlFor="degradation" className="cursor-pointer">Show Surface Degradation</Label>
-              <Switch id="degradation" />
+              <Label htmlFor="unprocessed" className="cursor-pointer">Show Unprocessed Images</Label>
+              <Switch 
+                id="unprocessed" 
+                checked={showUnprocessed}
+                onCheckedChange={setShowUnprocessed}
+              />
             </div>
           </div>
           <Button className="w-full">

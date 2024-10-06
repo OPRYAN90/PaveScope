@@ -4,24 +4,20 @@ import React, { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import MapLayout from './maplayout'
 import { Button } from "../../components/Login/ui/button"
-import { Input } from "../../components/Login/ui/input"
-import { Slider } from "../../components/ui/slider"
-import { Switch } from "../../components/ui/switch"
-import { MapPin, Layers, Search, Menu } from 'lucide-react'
-import { Label } from "../../components/Login/ui/label"
+import { Menu } from 'lucide-react'
 import Script from 'next/script'
 import { useAuth } from '../../components/AuthProvider'
 import { db } from '../../firebase'
 import { collection, query, getDocs } from 'firebase/firestore'
-import ImagePopup from './ImagePopup'  // We'll create this component next
-import AdvancedControls from './AdvancedControls'  // We'll create this component next
+import ImagePopup from './ImagePopup'
+import AdvancedControls from './AdvancedControls'
 
 interface ImageData {
   url: string;
   gps: { lat: number; lng: number };
   detectionCount: number;
   detectionImageUrl?: string;
-  detections?: any[]; // Add this line
+  detections?: any[];
 }
 
 export default function MapsPage() {
@@ -34,6 +30,9 @@ export default function MapsPage() {
   const { user } = useAuth()
   const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null)
   const [markers, setMarkers] = useState<{ [key: string]: google.maps.Marker }>({})
+  const [showDetections, setShowDetections] = useState(true)
+  const [showNonDetections, setShowNonDetections] = useState(true)
+  const [showUnprocessed, setShowUnprocessed] = useState(true)
 
   useEffect(() => {
     if (mapLoaded && mapRef.current && !map) {
@@ -47,13 +46,6 @@ export default function MapsPage() {
       })
       setMap(newMap)
     }
-
-    return () => {
-      if (map) {
-        google.maps.event.clearInstanceListeners(map)
-        setMap(null)
-      }
-    }
   }, [mapLoaded, zoomLevel, map])
 
   useEffect(() => {
@@ -61,6 +53,12 @@ export default function MapsPage() {
       fetchUserImagesAndDetections()
     }
   }, [user, map])
+
+  useEffect(() => {
+    if (map && userImages.length > 0) {
+      updateMarkers()
+    }
+  }, [map, userImages, showDetections, showNonDetections, showUnprocessed])
 
   const fetchUserImagesAndDetections = async () => {
     if (!user) return
@@ -97,70 +95,58 @@ export default function MapsPage() {
       })
 
       setUserImages(images)
-      addMarkersToMap(images)
     } catch (error) {
       console.error('Error fetching user images and detections:', error)
     }
   }
 
-  const addMarkersToMap = (images: ImageData[]) => {
+  const updateMarkers = () => {
     if (!map) return
+
+    // Clear existing markers
+    Object.values(markers).forEach(marker => marker.setMap(null))
 
     const newMarkers: { [key: string]: google.maps.Marker } = {}
 
-    images.forEach((image) => {
+    userImages.forEach((image) => {
       let fillColor
+      let shouldShow = false
+
       if (image.detectionCount > 0) {
         fillColor = '#FF0000' // Red for detections
+        shouldShow = showDetections
       } else if (image.detectionImageUrl === undefined) {
         fillColor = '#808080' // Gray for unprocessed images
+        shouldShow = showUnprocessed
       } else {
         fillColor = '#00FF00' // Green for no detections
+        shouldShow = showNonDetections
       }
 
-      const marker = new google.maps.Marker({
-        position: { lat: image.gps.lat, lng: image.gps.lng },
-        map: map,
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          fillColor: fillColor,
-          fillOpacity: 1,
-          strokeColor: '#ffffff',
-          strokeWeight: 2,
-          scale: 8,
-        }
-      })
+      if (shouldShow) {
+        const marker = new google.maps.Marker({
+          position: { lat: image.gps.lat, lng: image.gps.lng },
+          map: map,
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: fillColor,
+            fillOpacity: 1,
+            strokeColor: '#ffffff',
+            strokeWeight: 2,
+            scale: 8,
+          }
+        })
 
-      marker.addListener('click', () => {
-        setSelectedImageUrl(prevUrl => prevUrl === image.url ? null : image.url)
-      })
+        marker.addListener('click', () => {
+          setSelectedImageUrl(prevUrl => prevUrl === image.url ? null : image.url)
+        })
 
-      newMarkers[image.url] = marker
+        newMarkers[image.url] = marker
+      }
     })
 
     setMarkers(newMarkers)
   }
-
-  useEffect(() => {
-    const handleMapClick = (e: google.maps.MapMouseEvent) => {
-      if (e.latLng && selectedImageUrl) {
-        const clickedMarker = markers[selectedImageUrl]
-        if (clickedMarker && e.latLng !== clickedMarker.getPosition()) {
-          setSelectedImageUrl(null)
-        }
-      }
-    }
-
-    if (map) {
-      map.addListener('click', handleMapClick)
-    }
-
-    return () => {
-      if (map) {
-        google.maps.event.clearListeners(map, 'click')
-      }
-    }
-  }, [map, selectedImageUrl, markers])
 
   return (
     <MapLayout>
@@ -185,6 +171,12 @@ export default function MapsPage() {
             zoomLevel={zoomLevel}
             setZoomLevel={setZoomLevel}
             onClose={() => setShowControls(false)}
+            showDetections={showDetections}
+            setShowDetections={setShowDetections}
+            showNonDetections={showNonDetections}
+            setShowNonDetections={setShowNonDetections}
+            showUnprocessed={showUnprocessed}
+            setShowUnprocessed={setShowUnprocessed}
           />
         )}
 

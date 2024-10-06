@@ -1,4 +1,4 @@
-// File: C:\Users\rfrjo\pothole-detection-website\app\model\page.tsx
+// File: C:\Users\rfrjo\Downloads\PaveScope dell\PaveScope\app\model\page.tsx
 import * as entry from '../../../../app/model/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
