@@ -23,6 +23,46 @@ const faqs = [
   {
     question: "Can I export my analysis results?",
     answer: "Yes, you can export your results in various formats including PDF reports and CSV data files from the Results page."
+  },
+  {
+    question: "Do I need to provide GPS data for my images?",
+    answer: "It's recommended to use images with embedded GPS data. If your images don't have GPS information, you can manually enter the coordinates during the upload process."
+  },
+  {
+    question: "How accurate is the pothole detection?",
+    answer: "Our system uses advanced AI models for pothole detection. While accuracy can vary depending on image quality and conditions, we typically achieve high accuracy rates. You can adjust the confidence threshold in the Model Parameters section for more or less strict detection."
+  },
+  {
+    question: "Can I view my analyzed images on a map?",
+    answer: "Yes, after analysis, you can view your uploaded images and detected potholes on an interactive map in the Dashboard. This helps visualize the geographical distribution of road defects."
+  },
+  {
+    question: "Is there a limit to how many images I can upload?",
+    answer: "There's no strict limit on the number of images you can upload. However, very large batches may take longer to process. We recommend uploading in manageable batches for optimal performance."
+  },
+  {
+    question: "How do I interpret the analysis results?",
+    answer: "The analysis results show detected potholes and their severity. You can view these results visually on the images, on a map, and in detailed reports. The Dashboard provides an overview of your analyzed data."
+  },
+  {
+    question: "Can I delete uploaded images?",
+    answer: "Yes, you can delete uploaded images from the Upload page. However, please note that deleting an image will remove it and its associated data from the entire database."
+  },
+  {
+    question: "What happens if I upload duplicate images?",
+    answer: "The system will notify you if an image with the same name already exists in your gallery. You can choose to rename the file or skip the upload."
+  },
+  {
+    question: "How is my data secured?",
+    answer: "PaveScope uses Firebase for secure user authentication and Firebase for data storage. Your data is protected with industry-standard security measures."
+  },
+  {
+    question: "Can I adjust the AI model settings?",
+    answer: "This feature has not been added yet, but it will be available soon. In the future, you'll be able to adjust the confidence threshold and other parameters to fine-tune the detection accuracy."
+  },
+  {
+    question: "What should I do if I encounter an error?",
+    answer: "If you encounter any errors, please contact our support team via email or phone. You can also use the live chat feature available during business hours."
   }
 ]
 
