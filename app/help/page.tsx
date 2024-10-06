@@ -9,6 +9,10 @@ import { Search, Mail, Phone, MessageCircle } from 'lucide-react'
 
 const faqs = [
   {
+    question: "I am not able to run inference with the model on my images. What should I do?",
+    answer: "Occasionally, the HuggingFace API takes time to warm up. If you encounter this issue, please try again after a short wait. The model should then be able to process your images successfully."
+  },
+  {
     question: "How do I upload images for analysis?",
     answer: "Navigate to the Upload page, click on the 'Choose Files' button or drag and drop your images into the designated area. Then click 'Upload' to process your images."
   },

@@ -195,49 +195,49 @@ export default function SpreadsheetsPage() {
 
   return (
     <DashboardLayout>
-      <div className="flex flex-col h-screen bg-gray-100">
-        <Card className="m-6">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold text-blue-800">Image Data Spreadsheet</CardTitle>
+      <div className="flex flex-col h-full bg-gray-50 overflow-hidden">
+        <Card className="m-6 flex-grow flex flex-col shadow-md">
+          <CardHeader className="bg-gradient-to-r from-blue-100 to-blue-200">
+            <CardTitle className="text-2xl font-bold text-blue-900">Image Data Spreadsheet</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="flex-grow flex flex-col overflow-hidden p-6">
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center space-x-2">
                 <Input
                   placeholder="Search images..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-64"
+                  className="w-64 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
                 />
-                <Button variant="outline" size="icon">
+                <Button variant="outline" size="icon" className="text-blue-600 hover:bg-blue-50">
                   <Search className="h-4 w-4" />
                 </Button>
-                <span className="text-sm text-gray-500">All Images</span>
+                <span className="text-sm text-gray-600">All Images</span>
               </div>
               <div className="flex space-x-2">
-                <Button variant="outline" size="sm" onClick={fetchData}>
+                <Button variant="outline" size="sm" onClick={fetchData} className="text-green-600 hover:bg-green-50">
                   <RefreshCw className="h-4 w-4 mr-2" />
                   Refresh
                 </Button>
-                <Button variant="outline" size="sm" onClick={handleExportClick}>
+                <Button variant="outline" size="sm" onClick={handleExportClick} className="text-purple-600 hover:bg-purple-50">
                   <Download className="h-4 w-4 mr-2" />
                   Export CSV
                 </Button>
               </div>
             </div>
-            <div className="border rounded-lg overflow-hidden">
+            <div className="border rounded-lg overflow-auto flex-grow bg-white">
               <Table>
                 <TableHeader>
-                  <TableRow>
+                  <TableRow className="bg-gray-100">
                     {COLUMNS.map((column) => (
                       <TableHead
                         key={column.key}
-                        className="text-center cursor-pointer"
+                        className="text-center cursor-pointer sticky top-0 bg-gray-100 text-gray-700"
                         onClick={() => handleSort(column.key)}
                       >
                         {column.label}
                         {sortConfig.key === column.key && (
-                          <ArrowUpDown className="ml-2 h-4 w-4 inline" />
+                          <ArrowUpDown className="ml-2 h-4 w-4 inline text-blue-500" />
                         )}
                       </TableHead>
                     ))}
@@ -245,7 +245,7 @@ export default function SpreadsheetsPage() {
                 </TableHeader>
                 <TableBody>
                   {filteredAndSortedData.map((image) => (
-                    <TableRow key={image.id}>
+                    <TableRow key={image.id} className="hover:bg-gray-50">
                       <TableCell>{image.fileName}</TableCell>
                       <TableCell>
                         <a href={image.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
@@ -259,10 +259,10 @@ export default function SpreadsheetsPage() {
                       <TableCell>{image.detections}</TableCell>
                       <TableCell>
                         <div className="flex justify-center space-x-2">
-                          <Button variant="ghost" size="sm" onClick={handleSave}>
+                          <Button variant="ghost" size="sm" onClick={handleSave} className="text-green-600 hover:bg-green-50">
                             <Save className="h-4 w-4" />
                           </Button>
-                          <Button variant="ghost" size="sm" onClick={handleDelete}>
+                          <Button variant="ghost" size="sm" onClick={handleDelete} className="text-red-600 hover:bg-red-50">
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
