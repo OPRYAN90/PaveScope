@@ -1,83 +1,197 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import DashboardLayout from '../dashboard-layout'
 import { Button } from "../../components/Login/ui/button"
 import { Input } from "../../components/Login/ui/input"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../../components/ui/select"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../components/HomePage/ui/table"
-import { Plus, Download, Upload, Save, Trash2, Search, Filter, RefreshCw } from 'lucide-react'
+import { Plus, Download, Upload, Save, Trash2, Search, Filter, RefreshCw, ArrowUpDown } from 'lucide-react'
 import { useAuth } from '../../components/AuthProvider'
 import { db } from '../../firebase'
-import { collection, query, getDocs, orderBy } from 'firebase/firestore'
+import { collection, query, getDocs, orderBy, Timestamp } from 'firebase/firestore'
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/Login/ui/card"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../../components/ui/dialog"
 import { Label } from "../../components/Login/ui/label"
+import { useToast } from "../../components/ui/use-toast"
 
-const COLUMNS = ['File Name', 'URL', 'Latitude', 'Longitude', 'Altitude', 'Uploaded At', 'Detections', 'Actions']
+interface ImageData {
+  id: string;
+  fileName: string;
+  url: string;
+  gps: {
+    lat: number;
+    lng: number;
+    alt: number;
+  };
+  uploadedAt: Timestamp;
+  detections: number | 'N/A';
+}
+
+const COLUMNS = [
+  { key: 'fileName', label: 'File Name' },
+  { key: 'url', label: 'URL' },
+  { key: 'lat', label: 'Latitude' },
+  { key: 'lng', label: 'Longitude' },
+  { key: 'alt', label: 'Altitude' },
+  { key: 'uploadedAt', label: 'Uploaded At' },
+  { key: 'detections', label: 'Detections' },
+  { key: 'actions', label: 'Actions' },
+]
 
 export default function SpreadsheetsPage() {
-  const [activeCell, setActiveCell] = useState<string | null>(null)
-  const [imageData, setImageData] = useState<any[]>([])
+  const [imageData, setImageData] = useState<ImageData[]>([])
   const [searchTerm, setSearchTerm] = useState('')
-  const [sortColumn, setSortColumn] = useState('uploadedAt')
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc')
+  const [sortConfig, setSortConfig] = useState({ key: 'uploadedAt', direction: 'desc' as 'asc' | 'desc' })
   const { user } = useAuth()
+  const { toast } = useToast()
 
   useEffect(() => {
     if (user) {
-      const fetchData = async () => {
-        const imagesQuery = query(collection(db, 'users', user.uid, 'images'), orderBy(sortColumn, sortDirection))
-        const detectionsQuery = query(collection(db, 'users', user.uid, 'detections'))
-
-        const [imagesSnapshot, detectionsSnapshot] = await Promise.all([
-          getDocs(imagesQuery),
-          getDocs(detectionsQuery)
-        ])
-
-        const imagesData = imagesSnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data(),
-          detections: 'N/A'  // Default value for unprocessed images
-        }))
-
-        const detectionsData = detectionsSnapshot.docs.reduce((acc, doc) => {
-          const data = doc.data()
-          // If the image has been processed, set the number of detections (even if it's 0)
-          acc[data.imageUrl] = Array.isArray(data.detections) ? data.detections.length : 0
-          return acc
-        }, {})
-
-        const combinedData = imagesData.map(image => ({
-          ...image,
-          detections: detectionsData.hasOwnProperty(image.url) ? detectionsData[image.url] : 'N/A'
-        }))
-
-        setImageData(combinedData)
-      }
-
       fetchData()
     }
-  }, [user, sortColumn, sortDirection])
+  }, [user])
 
-  const handleCellFocus = (cellId: string) => {
-    setActiveCell(cellId)
-  }
+  const fetchData = async () => {
+    try {
+      const imagesQuery = query(collection(db, 'users', user!.uid, 'images'))
+      const detectionsQuery = query(collection(db, 'users', user!.uid, 'detections'))
 
-  const handleSort = (column: string) => {
-    if (column === sortColumn) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
-    } else {
-      setSortColumn(column)
-      setSortDirection('asc')
+      const [imagesSnapshot, detectionsSnapshot] = await Promise.all([
+        getDocs(imagesQuery),
+        getDocs(detectionsQuery)
+      ])
+
+      const imagesData = imagesSnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+        detections: 'N/A'
+      } as ImageData))
+
+      const detectionsData = detectionsSnapshot.docs.reduce((acc, doc) => {
+        const data = doc.data()
+        acc[data.imageUrl] = Array.isArray(data.detections) ? data.detections.length : 0
+        return acc
+      }, {} as { [key: string]: number })
+
+      const combinedData = imagesData.map(image => ({
+        ...image,
+        detections: detectionsData.hasOwnProperty(image.url) ? detectionsData[image.url] : 'N/A'
+      }))
+
+      setImageData(combinedData)
+      toast({
+        title: "Data refreshed",
+        description: "The spreadsheet data has been updated.",
+        variant: "default",
+      })
+    } catch (error) {
+      console.error("Error fetching data:", error)
+      toast({
+        title: "Error",
+        description: "Failed to fetch data. Please try again.",
+        variant: "destructive",
+      })
     }
   }
 
-  const filteredData = imageData.filter(image =>
-    image.fileName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    image.gps.lat.toString().includes(searchTerm) ||
-    image.gps.lng.toString().includes(searchTerm)
-  )
+  const handleSort = (key: string) => {
+    setSortConfig(prevConfig => ({
+      key,
+      direction: prevConfig.key === key && prevConfig.direction === 'asc' ? 'desc' : 'asc',
+    }))
+  }
+
+  const filteredAndSortedData = useMemo(() => {
+    let filteredData = imageData.filter(image =>
+      image.fileName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      image.gps.lat.toString().includes(searchTerm) ||
+      image.gps.lng.toString().includes(searchTerm)
+    )
+
+    return filteredData.sort((a, b) => {
+      if (sortConfig.key === 'uploadedAt') {
+        return sortConfig.direction === 'asc' 
+          ? a.uploadedAt.seconds - b.uploadedAt.seconds
+          : b.uploadedAt.seconds - a.uploadedAt.seconds
+      }
+      if (sortConfig.key === 'lat' || sortConfig.key === 'lng' || sortConfig.key === 'alt') {
+        return sortConfig.direction === 'asc'
+          ? a.gps[sortConfig.key] - b.gps[sortConfig.key]
+          : b.gps[sortConfig.key] - a.gps[sortConfig.key]
+      }
+      if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.direction === 'asc' ? -1 : 1
+      if (a[sortConfig.key] > b[sortConfig.key]) return sortConfig.direction === 'asc' ? 1 : -1
+      return 0
+    })
+  }, [imageData, searchTerm, sortConfig])
+
+  const formatCellValue = (column: string, value: any) => {
+    if (column === 'uploadedAt' && value instanceof Timestamp) {
+      return value.toDate().toLocaleString()
+    }
+    if (column === 'lat' || column === 'lng') {
+      return value.toFixed(6)
+    }
+    if (column === 'alt') {
+      return value ? value.toFixed(2) : 'N/A'
+    }
+    return value
+  }
+
+  const handleExportClick = () => {
+    const csvContent = [
+      COLUMNS.map(col => col.label).join(','),
+      ...filteredAndSortedData.map(item => 
+        COLUMNS.map(col => {
+          if (col.key === 'uploadedAt') {
+            return item[col.key].toDate().toLocaleString()
+          } else if (col.key === 'lat') {
+            return item.gps.lat.toFixed(6)
+          } else if (col.key === 'lng') {
+            return item.gps.lng.toFixed(6)
+          } else if (col.key === 'alt') {
+            return item.gps.alt ? item.gps.alt.toFixed(2) : 'N/A'
+          } else {
+            return item[col.key]
+          }
+        }).join(',')
+      )
+    ].join('\n')
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+    const link = document.createElement('a')
+    if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob)
+      link.setAttribute('href', url)
+      link.setAttribute('download', 'image_data.csv')
+      link.style.visibility = 'hidden'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    }
+    toast({
+      title: "Export successful",
+      description: "The CSV file has been downloaded.",
+      variant: "default",
+    })
+  }
+
+  const handleSave = () => {
+    toast({
+      title: "Feature not available",
+      description: "The save feature is not enabled yet.",
+      variant: "warning",
+    })
+  }
+
+  const handleDelete = () => {
+    toast({
+      title: "Feature not available",
+      description: "The delete feature is not enabled yet.",
+      variant: "warning",
+    })
+  }
 
   return (
     <DashboardLayout>
@@ -98,46 +212,16 @@ export default function SpreadsheetsPage() {
                 <Button variant="outline" size="icon">
                   <Search className="h-4 w-4" />
                 </Button>
-                <Select>
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Filter by..." />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Images</SelectItem>
-                    <SelectItem value="recent">Recently Uploaded</SelectItem>
-                    <SelectItem value="highAltitude">High Altitude</SelectItem>
-                  </SelectContent>
-                </Select>
+                <span className="text-sm text-gray-500">All Images</span>
               </div>
               <div className="flex space-x-2">
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button variant="outline" size="sm">
-                      <Upload className="h-4 w-4 mr-2" />
-                      Import
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Import Data</DialogTitle>
-                      <DialogDescription>
-                        Upload a CSV file to import data into your spreadsheet.
-                      </DialogDescription>
-                    </DialogHeader>
-                    <div className="grid gap-4 py-4">
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="file" className="text-right">
-                          File
-                        </Label>
-                        <Input id="file" type="file" className="col-span-3" />
-                      </div>
-                    </div>
-                    <Button type="submit">Upload and Import</Button>
-                  </DialogContent>
-                </Dialog>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" onClick={fetchData}>
+                  <RefreshCw className="h-4 w-4 mr-2" />
+                  Refresh
+                </Button>
+                <Button variant="outline" size="sm" onClick={handleExportClick}>
                   <Download className="h-4 w-4 mr-2" />
-                  Export
+                  Export CSV
                 </Button>
               </div>
             </div>
@@ -146,17 +230,21 @@ export default function SpreadsheetsPage() {
                 <TableHeader>
                   <TableRow>
                     {COLUMNS.map((column) => (
-                      <TableHead key={column} className="text-center cursor-pointer" onClick={() => handleSort(column.toLowerCase())}>
-                        {column}
-                        {sortColumn === column.toLowerCase() && (
-                          <span className="ml-1">{sortDirection === 'asc' ? '▲' : '▼'}</span>
+                      <TableHead
+                        key={column.key}
+                        className="text-center cursor-pointer"
+                        onClick={() => handleSort(column.key)}
+                      >
+                        {column.label}
+                        {sortConfig.key === column.key && (
+                          <ArrowUpDown className="ml-2 h-4 w-4 inline" />
                         )}
                       </TableHead>
                     ))}
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredData.map((image) => (
+                  {filteredAndSortedData.map((image) => (
                     <TableRow key={image.id}>
                       <TableCell>{image.fileName}</TableCell>
                       <TableCell>
@@ -164,17 +252,17 @@ export default function SpreadsheetsPage() {
                           View Image
                         </a>
                       </TableCell>
-                      <TableCell>{image.gps.lat.toFixed(6)}</TableCell>
-                      <TableCell>{image.gps.lng.toFixed(6)}</TableCell>
-                      <TableCell>{image.gps.alt ? image.gps.alt.toFixed(2) : 'N/A'}</TableCell>
-                      <TableCell>{new Date(image.uploadedAt.toDate()).toLocaleString()}</TableCell>
+                      <TableCell>{formatCellValue('lat', image.gps.lat)}</TableCell>
+                      <TableCell>{formatCellValue('lng', image.gps.lng)}</TableCell>
+                      <TableCell>{formatCellValue('alt', image.gps.alt)}</TableCell>
+                      <TableCell>{formatCellValue('uploadedAt', image.uploadedAt)}</TableCell>
                       <TableCell>{image.detections}</TableCell>
                       <TableCell>
                         <div className="flex justify-center space-x-2">
-                          <Button variant="ghost" size="sm">
+                          <Button variant="ghost" size="sm" onClick={handleSave}>
                             <Save className="h-4 w-4" />
                           </Button>
-                          <Button variant="ghost" size="sm">
+                          <Button variant="ghost" size="sm" onClick={handleDelete}>
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
