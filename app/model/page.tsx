@@ -138,6 +138,12 @@ function ImageSelectionDialog({
                 {isLoadingImages ? 'Loading images...' : 'Fetching processed images...'}
               </p>
             </div>
+          ) : userImages.filter(image => !selectedImages.includes(image.url) && !processedImages.includes(image.url)).length === 0 ? (
+            <div className="flex flex-col items-center justify-center h-64 text-gray-500">
+              <ImageIcon className="w-16 h-16 mb-4" />
+              <p className="text-lg font-semibold">No images available for detection</p>
+              <p className="text-sm mt-2">Upload some images to get started</p>
+            </div>
           ) : (
             <motion.div 
               className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
