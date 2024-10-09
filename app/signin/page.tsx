@@ -9,7 +9,7 @@ import { Input } from "../../components/Login/ui/input"
 import { Label } from "../../components/Login/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/Login/ui/card"
 import { Home } from 'lucide-react' // Import the Home icon
-
+import React from 'react'
 export default function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -100,7 +100,7 @@ export default function SignIn() {
           <CardFooter className="bg-gray-50 p-6 rounded-b-2xl">
             <p className="text-sm text-gray-600 text-center w-full">
               Don't have an account?{' '}
-              <Link href="/get-started" className="font-medium text-blue-600 hover:underline transition duration-200">
+              <Link href="/signup" className="font-medium text-blue-600 hover:underline transition duration-200">
                 Get Started
               </Link>
             </p>

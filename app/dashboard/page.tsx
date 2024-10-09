@@ -15,7 +15,7 @@ import { useNavigateOrScrollTop } from '../../utils/navigation';
 import DashboardLayout from '../dashboard-layout';
 import Link from 'next/link';
 import { db } from '../../firebase';
-import { collection, query, getDocs, limit } from 'firebase/firestore';
+import { collection, query, getDocs, limit, orderBy } from 'firebase/firestore';
 import Script from 'next/script';
 
 interface User {
@@ -124,6 +124,7 @@ export default function WorkPage() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [recentDetections, setRecentDetections] = useState<any[]>([]);
   const [isMapScriptLoaded, setIsMapScriptLoaded] = useState(false);
+  const [recentImages, setRecentImages] = useState<any[]>([]);
 
   const handleSidebarCollapse = (collapsed: boolean) => {
     setIsSidebarCollapsed(collapsed);
@@ -158,7 +159,21 @@ export default function WorkPage() {
       }
     };
 
+    const fetchRecentImages = async () => {
+      if (user) {
+        const q = query(
+          collection(db, 'users', user.uid, 'images'),
+          orderBy('uploadedAt', 'desc'),
+          limit(6)
+        );
+        const querySnapshot = await getDocs(q);
+        const images = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setRecentImages(images);
+      }
+    };
+
     fetchRecentDetections();
+    fetchRecentImages();
   }, [user]);
 
   if (loading) {
@@ -266,19 +281,16 @@ export default function WorkPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow p-4">
-                  {recentDetections.length > 0 ? (
+                  {recentImages.length > 0 ? (
                     <div className="grid grid-cols-3 gap-4">
-                      {recentDetections.slice(0, 5).map((detection, i) => (
-                        <div key={detection.id} className="aspect-square bg-gray-200 relative overflow-hidden rounded-lg">
+                      {recentImages.slice(0, 5).map((image, i) => (
+                        <div key={image.id} className="aspect-square bg-gray-200 relative overflow-hidden rounded-lg">
                           <img 
-                            src={detection.imageUrl || `/placeholder.svg?height=100&width=100&text=Image+${i+1}`} 
-                            alt={`Recent detection ${i+1}`}
+                            src={image.url || `/placeholder.svg?height=100&width=100&text=Image+${i+1}`} 
+                            alt={`Recent image ${i+1}`}
                             className="w-full h-full object-cover"
                           />
                         </div>
-                      ))}
-                      {[...Array(Math.max(0, 5 - recentDetections.length))].map((_, i) => (
-                        <div key={i} className="aspect-square bg-gray-200 rounded-lg" />
                       ))}
                       <div className="aspect-square bg-blue-100 rounded-lg flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
