@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useAuth } from '../../components/AuthProvider';
 import { useRouter } from 'next/navigation';
 import { signOutUser } from '../../lib/auth';
@@ -9,14 +9,13 @@ import { Button } from "../../components/Login/ui/button";
 import { Input } from "../../components/Login/ui/input";
 import { Label } from "../../components/Login/ui/label";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../../components/ui/select";
-import { Upload, BarChart2, Map, FileSpreadsheet, HelpCircle, Image, DollarSign, Box, ChevronDown, LogOut, Settings, User, Table, Sliders, MapPin, ChevronRight } from 'lucide-react';
+import { Upload, BarChart2, Map, FileSpreadsheet, HelpCircle, Image, DollarSign, Box, ChevronDown, LogOut, Settings, User, Table, Sliders, MapPin, ChevronRight, Loader } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
 import { useNavigateOrScrollTop } from '../../utils/navigation';
 import DashboardLayout from '../dashboard-layout';
 import Link from 'next/link';
 import { db } from '../../firebase';
 import { collection, query, getDocs, limit, orderBy } from 'firebase/firestore';
-import Script from 'next/script';
 
 interface User {
   uid: string;
@@ -54,12 +53,14 @@ interface Detection {
 }
 
 const GoogleMapPreview: React.FC<{ detections: Detection[] }> = ({ detections }) => {
-  const mapRef = useRef(null);
+  const mapRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [markers, setMarkers] = useState<{ [key: string]: google.maps.Marker }>({});
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+  const initializeMap = useCallback(() => {
     if (window.google && mapRef.current && !map) {
+      setIsLoading(false);
       const newMap = new window.google.maps.Map(mapRef.current, {
         center: { lat: 0, lng: 0 },
         zoom: 2,
@@ -69,6 +70,19 @@ const GoogleMapPreview: React.FC<{ detections: Detection[] }> = ({ detections })
       setMap(newMap);
     }
   }, [map]);
+
+  useEffect(() => {
+    if (window.google) {
+      initializeMap();
+    } else {
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAtRjdZYF7O3721qyEjn1c6d47hvJDe4sc&libraries=places`;
+      script.async = true;
+      script.defer = true;
+      script.onload = initializeMap;
+      document.head.appendChild(script);
+    }
+  }, [initializeMap]);
 
   useEffect(() => {
     if (map && detections.length > 0) {
@@ -111,6 +125,11 @@ const GoogleMapPreview: React.FC<{ detections: Detection[] }> = ({ detections })
 
   return (
     <div className="relative w-full h-full">
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+          <Loader className="h-8 w-8 animate-spin text-blue-500" />
+        </div>
+      )}
       <div ref={mapRef} className="w-full h-full" />
     </div>
   );
@@ -123,7 +142,6 @@ export default function WorkPage() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [recentDetections, setRecentDetections] = useState<any[]>([]);
-  const [isMapScriptLoaded, setIsMapScriptLoaded] = useState(false);
   const [recentImages, setRecentImages] = useState<any[]>([]);
 
   const handleSidebarCollapse = (collapsed: boolean) => {
@@ -186,10 +204,6 @@ export default function WorkPage() {
 
   return (
     <>
-      <Script
-        src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyAtRjdZYF7O3721qyEjn1c6d47hvJDe4sc&libraries=places`}
-        onLoad={() => setIsMapScriptLoaded(true)}
-      />
       <DashboardLayout>
         <div className="flex flex-col min-h-screen p-2"> {/* Reduced overall padding */}
           <div className="flex justify-between items-center mb-6">
@@ -259,11 +273,11 @@ export default function WorkPage() {
                 </CardHeader>
                 <CardContent className="flex-grow p-0 overflow-hidden">
                   <div className="w-full h-full relative">
-                    {isMapScriptLoaded && recentDetections.length > 0 ? (
+                    {recentDetections.length > 0 ? (
                       <GoogleMapPreview detections={recentDetections} />
                     ) : (
                       <div className="flex items-center justify-center h-full text-gray-500">
-                        <span>{isMapScriptLoaded ? 'No recent detections' : 'Loading map...'}</span>
+                        <span>No recent detections</span>
                       </div>
                     )}
                   </div>

@@ -1,10 +1,9 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import MapLayout from './maplayout'
 import { Button } from "../../components/Login/ui/button"
-import { Menu } from 'lucide-react'
-import Script from 'next/script'
+import { Menu, Loader } from 'lucide-react'
 import { useAuth } from '../../components/AuthProvider'
 import { db } from '../../firebase'
 import { collection, query, getDocs } from 'firebase/firestore'
@@ -22,7 +21,6 @@ interface ImageData {
 export default function MapsPage() {
   const [showControls, setShowControls] = useState(false)
   const mapRef = useRef<HTMLDivElement>(null)
-  const [mapLoaded, setMapLoaded] = useState(false)
   const [map, setMap] = useState<google.maps.Map | null>(null)
   const [userImages, setUserImages] = useState<ImageData[]>([])
   const { user } = useAuth()
@@ -31,9 +29,11 @@ export default function MapsPage() {
   const [showDetections, setShowDetections] = useState(true)
   const [showNonDetections, setShowNonDetections] = useState(true)
   const [showUnprocessed, setShowUnprocessed] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    if (mapLoaded && mapRef.current && !map) {
+  const initializeMap = useCallback(() => {
+    if (window.google && mapRef.current && !map) {
+      setIsLoading(false)
       const newMap = new google.maps.Map(mapRef.current, {
         center: { lat: 0, lng: 0 },
         zoom: 2,
@@ -44,7 +44,20 @@ export default function MapsPage() {
       })
       setMap(newMap)
     }
-  }, [mapLoaded, map])
+  }, [map])
+
+  useEffect(() => {
+    if (window.google) {
+      initializeMap();
+    } else {
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAtRjdZYF7O3721qyEjn1c6d47hvJDe4sc&libraries=places`;
+      script.async = true;
+      script.defer = true;
+      script.onload = initializeMap;
+      document.head.appendChild(script);
+    }
+  }, [initializeMap]);
 
   useEffect(() => {
     if (user && map) {
@@ -148,11 +161,12 @@ export default function MapsPage() {
 
   return (
     <MapLayout>
-      <Script
-        src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyAtRjdZYF7O3721qyEjn1c6d47hvJDe4sc&libraries=places`}
-        onLoad={() => setMapLoaded(true)}
-      />
       <div className="w-full h-full relative">
+        {isLoading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-100 z-50">
+            <Loader className="h-8 w-8 animate-spin text-blue-500" />
+          </div>
+        )}
         <div ref={mapRef} className="w-full h-full absolute inset-0 overflow-hidden" />
         
         <Button 
