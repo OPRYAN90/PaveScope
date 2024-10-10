@@ -6,16 +6,14 @@ import { useRouter } from 'next/navigation';
 import { signOutUser } from '../../lib/auth';
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/Login/ui/card";
 import { Button } from "../../components/Login/ui/button";
-import { Input } from "../../components/Login/ui/input";
-import { Label } from "../../components/Login/ui/label";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../../components/ui/select";
-import { Upload, BarChart2, Map, FileSpreadsheet, HelpCircle, Image, DollarSign, Box, ChevronDown, LogOut, Settings, User, Table, Sliders, MapPin, ChevronRight, Loader } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
 import { useNavigateOrScrollTop } from '../../utils/navigation';
 import DashboardLayout from '../dashboard-layout';
 import Link from 'next/link';
 import { db } from '../../firebase';
 import { collection, query, getDocs, limit, orderBy } from 'firebase/firestore';
+import { Skeleton } from "../../components/ui/skeleton";
+import { Upload, BarChart2, Map, FileSpreadsheet, HelpCircle, Image, DollarSign, Box, ChevronDown, LogOut, Settings, User, Table, Sliders, MapPin, ChevronRight, Loader } from 'lucide-react';
 
 interface User {
   uid: string;
@@ -23,6 +21,7 @@ interface User {
   displayName: string | null;
   photoURL: string | null;
 }
+
 
 interface MetricCardProps {
   title: string;
@@ -52,15 +51,15 @@ interface Detection {
   // Add other properties as needed
 }
 
-const GoogleMapPreview: React.FC<{ detections: Detection[] }> = ({ detections }) => {
+const GoogleMapPreview: React.FC<{ detections: Detection[]; isLoading: boolean }> = ({ detections, isLoading }) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [markers, setMarkers] = useState<{ [key: string]: google.maps.Marker }>({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [isMapLoading, setIsMapLoading] = useState(true);
 
   const initializeMap = useCallback(() => {
     if (window.google && mapRef.current && !map) {
-      setIsLoading(false);
+      setIsMapLoading(false);
       const newMap = new window.google.maps.Map(mapRef.current, {
         center: { lat: 0, lng: 0 },
         zoom: 2,
@@ -113,36 +112,104 @@ const GoogleMapPreview: React.FC<{ detections: Detection[] }> = ({ detections })
             }
           });
 
+
           newMarkers[detection.id] = marker;
           bounds.extend(position);
         }
       });
+
 
       setMarkers(newMarkers);
       map.fitBounds(bounds);
     }
   }, [map, detections]);
 
+  if (isLoading) {
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-gray-100">
+        <Loader className="h-8 w-8 animate-spin text-blue-500" />
+      </div>
+    );
+  }
+
   return (
     <div className="relative w-full h-full">
-      {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-          <Loader className="h-8 w-8 animate-spin text-blue-500" />
-        </div>
-      )}
       <div ref={mapRef} className="w-full h-full" />
     </div>
   );
 };
 
+const LoadingAnimation: React.FC = () => (
+  <div className="flex items-center justify-center h-full">
+    <div className="text-center">
+      <Loader className="h-12 w-12 animate-spin text-blue-500 mx-auto mb-4" />
+      <p className="text-gray-600 font-semibold">Loading your dashboard...</p>
+    </div>
+  </div>
+);
+
 export default function WorkPage() {
-  const { user, loading } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const router = useRouter();
-  const handlePaveScopeClick = useNavigateOrScrollTop('/dashboard');
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [recentDetections, setRecentDetections] = useState<any[]>([]);
   const [recentImages, setRecentImages] = useState<any[]>([]);
+  const [isPageLoading, setIsPageLoading] = useState(true);
+  const [isLoadingDetections, setIsLoadingDetections] = useState(true);
+  const [isLoadingImages, setIsLoadingImages] = useState(true);
+  const [isLoadingMetrics, setIsLoadingMetrics] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      if (user) {
+        await Promise.all([
+          fetchRecentDetections(),
+          fetchRecentImages(),
+          fetchMetrics()
+        ]);
+        setIsPageLoading(false);
+      }
+    };
+
+    if (user) {
+      loadData();
+    }
+  }, [user]);
+
+  const fetchRecentDetections = async () => {
+    setIsLoadingDetections(true);
+    if (user) {
+      const q = query(collection(db, 'users', user.uid, 'detections'), limit(5));
+      const querySnapshot = await getDocs(q);
+      const detections = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setRecentDetections(detections);
+    }
+    setIsLoadingDetections(false);
+  };
+
+  const fetchRecentImages = async () => {
+    setIsLoadingImages(true);
+    if (user) {
+      const q = query(
+        collection(db, 'users', user.uid, 'images'),
+        orderBy('uploadedAt', 'desc'),
+        limit(6)
+      );
+      const querySnapshot = await getDocs(q);
+      const images = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setRecentImages(images);
+    }
+    setIsLoadingImages(false);
+  };
+
+  const fetchMetrics = async () => {
+    setIsLoadingMetrics(true);
+    // Implement your metrics fetching logic here
+    // For now, we'll just simulate a delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setIsLoadingMetrics(false);
+  };
 
   const handleSidebarCollapse = (collapsed: boolean) => {
     setIsSidebarCollapsed(collapsed);
@@ -158,44 +225,17 @@ export default function WorkPage() {
   };
 
   useEffect(() => {
-    if (!loading && !user) {
+    if (!authLoading && !user) {
       router.push('/signin');
     }
-  }, [user, loading, router]);
+  }, [user, authLoading, router]);
 
   useEffect(() => {
     useNavigateOrScrollTop.setScrollableElement(window);
   }, []);
 
-  useEffect(() => {
-    const fetchRecentDetections = async () => {
-      if (user) {
-        const q = query(collection(db, 'users', user.uid, 'detections'), limit(5));
-        const querySnapshot = await getDocs(q);
-        const detections = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setRecentDetections(detections);
-      }
-    };
-
-    const fetchRecentImages = async () => {
-      if (user) {
-        const q = query(
-          collection(db, 'users', user.uid, 'images'),
-          orderBy('uploadedAt', 'desc'),
-          limit(6)
-        );
-        const querySnapshot = await getDocs(q);
-        const images = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setRecentImages(images);
-      }
-    };
-
-    fetchRecentDetections();
-    fetchRecentImages();
-  }, [user]);
-
-  if (loading) {
-    return <div>Loading...</div>;
+  if (authLoading) {
+    return <DashboardLayout><LoadingAnimation /></DashboardLayout>;
   }
 
   if (!user) {
@@ -203,9 +243,12 @@ export default function WorkPage() {
   }
 
   return (
-    <>
-      <DashboardLayout>
-        <div className="flex flex-col min-h-screen p-2"> {/* Reduced overall padding */}
+    <DashboardLayout>
+      {isPageLoading ? (
+        <LoadingAnimation />
+      ) : (
+        <div className="flex flex-col min-h-screen p-2">
+          {/* Header */}
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-3xl font-bold text-gray-800">Work Dashboard</h1>
             <div className="relative">
@@ -254,10 +297,21 @@ export default function WorkPage() {
 
           {/* Metrics */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <MetricCard title="Total Images" value="1,234" icon={Image} />
-            <MetricCard title="Detections" value="567" icon={BarChart2} />
-            <MetricCard title="Estimated Cost" value="$12,345" icon={DollarSign} />
-            <MetricCard title="Volume of Materials" value="890 m³" icon={Box} />
+            {isLoadingMetrics ? (
+              <>
+                <Skeleton className="h-24" />
+                <Skeleton className="h-24" />
+                <Skeleton className="h-24" />
+                <Skeleton className="h-24" />
+              </>
+            ) : (
+              <>
+                <MetricCard title="Total Images" value="1,234" icon={Image} />
+                <MetricCard title="Detections" value="567" icon={BarChart2} />
+                <MetricCard title="Estimated Cost" value="$12,345" icon={DollarSign} />
+                <MetricCard title="Volume of Materials" value="890 m³" icon={Box} />
+              </>
+            )}
           </div>
 
           {/* Main content areas */}
@@ -273,13 +327,7 @@ export default function WorkPage() {
                 </CardHeader>
                 <CardContent className="flex-grow p-0 overflow-hidden">
                   <div className="w-full h-full relative">
-                    {recentDetections.length > 0 ? (
-                      <GoogleMapPreview detections={recentDetections} />
-                    ) : (
-                      <div className="flex items-center justify-center h-full text-gray-500">
-                        <span>No recent detections</span>
-                      </div>
-                    )}
+                    <GoogleMapPreview detections={recentDetections} isLoading={isLoadingDetections} />
                   </div>
                 </CardContent>
               </Card>
@@ -295,7 +343,13 @@ export default function WorkPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow p-4">
-                  {recentImages.length > 0 ? (
+                  {isLoadingImages ? (
+                    <div className="grid grid-cols-3 gap-4">
+                      {[...Array(6)].map((_, i) => (
+                        <Skeleton key={i} className="aspect-square rounded-lg" />
+                      ))}
+                    </div>
+                  ) : recentImages.length > 0 ? (
                     <div className="grid grid-cols-3 gap-4">
                       {recentImages.slice(0, 5).map((image, i) => (
                         <div key={image.id} className="aspect-square bg-gray-200 relative overflow-hidden rounded-lg">
@@ -333,7 +387,15 @@ export default function WorkPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow p-0">
-                  {recentDetections.length > 0 ? (
+                  {isLoadingDetections ? (
+                    <div className="p-4 space-y-2">
+                      <Skeleton className="h-6 w-full" />
+                      <Skeleton className="h-6 w-full" />
+                      <Skeleton className="h-6 w-full" />
+                      <Skeleton className="h-6 w-full" />
+                      <Skeleton className="h-6 w-full" />
+                    </div>
+                  ) : recentDetections.length > 0 ? (
                     <div className="overflow-x-auto">
                       <table className="w-full">
                         <thead>
@@ -375,24 +437,32 @@ export default function WorkPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow p-4">
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center bg-gray-50 p-2 rounded">
-                      <span className="font-medium text-gray-700">Model Type</span>
-                      <span className="text-blue-600">YOLOv8</span>
+                  {isLoadingMetrics ? (
+                    <div className="space-y-4">
+                      {[...Array(4)].map((_, i) => (
+                        <Skeleton key={i} className="h-8 w-full" />
+                      ))}
                     </div>
-                    <div className="flex justify-between items-center bg-gray-50 p-2 rounded">
-                      <span className="font-medium text-gray-700">Confidence Threshold</span>
-                      <span className="text-blue-600">0.5</span>
+                  ) : (
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center bg-gray-50 p-2 rounded">
+                        <span className="font-medium text-gray-700">Model Type</span>
+                        <span className="text-blue-600">YOLOv8</span>
+                      </div>
+                      <div className="flex justify-between items-center bg-gray-50 p-2 rounded">
+                        <span className="font-medium text-gray-700">Confidence Threshold</span>
+                        <span className="text-blue-600">0.5</span>
+                      </div>
+                      <div className="flex justify-between items-center bg-gray-50 p-2 rounded">
+                        <span className="font-medium text-gray-700">GPU Acceleration</span>
+                        <span className="text-red-600">Disabled</span>
+                      </div>
+                      <div className="flex justify-between items-center bg-gray-50 p-2 rounded">
+                        <span className="font-medium text-gray-700">Selected Images</span>
+                        <span className="text-blue-600">{recentDetections.length}</span>
+                      </div>
                     </div>
-                    <div className="flex justify-between items-center bg-gray-50 p-2 rounded">
-                      <span className="font-medium text-gray-700">GPU Acceleration</span>
-                      <span className="text-red-600">Disabled</span>
-                    </div>
-                    <div className="flex justify-between items-center bg-gray-50 p-2 rounded">
-                      <span className="font-medium text-gray-700">Selected Images</span>
-                      <span className="text-blue-600">{recentDetections.length}</span>
-                    </div>
-                  </div>
+                  )}
                 </CardContent>
               </Card>
             </Link>
@@ -429,7 +499,7 @@ export default function WorkPage() {
             </Card>
           </Link>
         </div>
-      </DashboardLayout>
-    </>
+      )}
+    </DashboardLayout>
   );
 }
