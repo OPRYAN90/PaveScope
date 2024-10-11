@@ -54,9 +54,9 @@ export default function MapsPage() {
   }, [map])
 
   useEffect(() => {
-    if (window.google) {
+    if (typeof window !== 'undefined' && window.google) {
       initializeMap();
-    } else {
+    } else if (typeof window !== 'undefined') {
       const script = document.createElement('script');
       script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAtRjdZYF7O3721qyEjn1c6d47hvJDe4sc&libraries=places`;
       script.async = true;

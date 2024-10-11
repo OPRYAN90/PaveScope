@@ -58,7 +58,7 @@ const GoogleMapPreview: React.FC<{ detections: Detection[]; isLoading: boolean }
   const [isMapLoading, setIsMapLoading] = useState(true);
 
   const initializeMap = useCallback(() => {
-    if (window.google && mapRef.current && !map) {
+    if (typeof window !== 'undefined' && window.google && mapRef.current && !map) {
       setIsMapLoading(false);
       const newMap = new window.google.maps.Map(mapRef.current, {
         center: { lat: 0, lng: 0 },
@@ -71,9 +71,9 @@ const GoogleMapPreview: React.FC<{ detections: Detection[]; isLoading: boolean }
   }, [map]);
 
   useEffect(() => {
-    if (window.google) {
+    if (typeof window !== 'undefined' && window.google) {
       initializeMap();
-    } else {
+    } else if (typeof window !== 'undefined') {
       const script = document.createElement('script');
       script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAtRjdZYF7O3721qyEjn1c6d47hvJDe4sc&libraries=places`;
       script.async = true;
