@@ -41,7 +41,15 @@ export default function HomePage() {
               transition={{ duration: 0.5 }}
             >
               <Link href="/">
-                <Image src="/images/logo.png" alt="PaveScope Logo" width={50} height={50} className="rounded-full" />
+                <div style={{ position: 'relative', width: '50px', height: '50px' }}>
+                  <Image 
+                    src="/images/logo.png" 
+                    alt="PaveScope Logo" 
+                    layout="fill"
+                    objectFit="contain"
+                    style={{ position: 'absolute', top: '2px', left: '13px' }}
+                  />
+                </div>
               </Link>
               <span className="text-2xl font-bold text-blue-600 ml-2">PaveScope</span>
             </motion.div>

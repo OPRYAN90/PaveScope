@@ -80,7 +80,8 @@ export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick,
             )}
           </>
         ) : (
-          <div className="w-8 h-8">
+          // Adjust the size of the logo when collapsed
+          <div className="w-9 h-9">
             <img src="/images/logo.png" alt="PaveScope Icon" className="w-full h-full object-contain" />
           </div>
         )}
