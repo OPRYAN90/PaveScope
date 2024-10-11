@@ -25,8 +25,8 @@ export function DroneAnimation() {
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      droneY = canvas.height * 0.3;
+      canvas.height = window.innerHeight * 1.5; // Increased the height by 50%
+      droneY = canvas.height * 0.2; // Adjusted drone's vertical position
       scanLineY = canvas.height;
       generatePotholes();
     };

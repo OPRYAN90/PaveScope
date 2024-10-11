@@ -7,8 +7,10 @@ import { Button } from "@/components/HomePage/ui/button";
 import { DroneAnimation } from "@/components/HomePage/DroneAnimation";
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function HomePage() {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
@@ -19,6 +21,9 @@ export default function HomePage() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleLogin = () => router.push('/signin');
+  const handleSignUp = () => router.push('/signup');
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-100 to-white relative overflow-hidden">
@@ -41,26 +46,16 @@ export default function HomePage() {
               <span className="text-2xl font-bold text-blue-600 ml-2">PaveScope</span>
             </motion.div>
             <div className="hidden md:flex space-x-4">
-              {['About', 'Services', 'Contact'].map((item, index) => (
-                <motion.div
-                  key={item}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <Button variant="ghost" className="text-blue-600 hover:text-blue-800">
-                    {item}
-                  </Button>
-                </motion.div>
-              ))}
-            </div>
-            <div className="hidden md:flex space-x-2">
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <Button variant="outline" className="text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white">
+                <Button 
+                  variant="outline" 
+                  onClick={handleLogin}
+                  className="text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 rounded-full px-6 py-2"
+                >
                   Log In
                 </Button>
               </motion.div>
@@ -69,7 +64,10 @@ export default function HomePage() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <Button className="bg-blue-600 text-white hover:bg-blue-700">
+                <Button 
+                  onClick={handleSignUp}
+                  className="bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 ease-in-out transform hover:scale-105 rounded-full px-6 py-2 shadow-md"
+                >
                   Sign Up
                 </Button>
               </motion.div>
@@ -95,23 +93,29 @@ export default function HomePage() {
             <Button variant="ghost" onClick={toggleMenu} className="absolute top-4 right-4 text-white">
               <X size={24} />
             </Button>
-            {['About', 'Services', 'Contact', 'Log In', 'Sign Up'].map((item, index) => (
-              <motion.div
-                key={item}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Button variant="ghost" className="text-white text-2xl my-2" onClick={toggleMenu}>
-                  {item}
-                </Button>
-              </motion.div>
-            ))}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <Button variant="ghost" className="text-white text-2xl my-2" onClick={() => { handleLogin(); toggleMenu(); }}>
+                Log In
+              </Button>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <Button variant="ghost" className="text-white text-2xl my-2" onClick={() => { handleSignUp(); toggleMenu(); }}>
+                Sign Up
+              </Button>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <main className="flex-grow flex items-center justify-center px-4 mt-20 relative z-10">
+      <main className="flex-grow flex items-center justify-center px-4 relative z-10">
         <div className="max-w-4xl w-full space-y-12 text-center">
           <motion.h1 
             className="text-6xl font-bold text-blue-800"
@@ -134,8 +138,12 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
+            className="flex justify-center"
           >
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-xl font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 shadow-lg">
+            <Button 
+              onClick={handleSignUp}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full text-xl font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 shadow-lg flex items-center justify-center"
+            >
               Start Your Analysis <ArrowRight className="ml-2 h-6 w-6" />
             </Button>
           </motion.div>
