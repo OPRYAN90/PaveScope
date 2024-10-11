@@ -65,7 +65,7 @@ export default function SpreadsheetsPage() {
       const imagesData = imagesSnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data(),
-        detections: 'N/A'
+        detections: 'N/A' as 'N/A' // Ensure 'N/A' is explicitly typed
       } as ImageData))
 
       const detectionsData = detectionsSnapshot.docs.reduce((acc, doc) => {
@@ -76,7 +76,7 @@ export default function SpreadsheetsPage() {
 
       const combinedData = imagesData.map(image => ({
         ...image,
-        detections: detectionsData.hasOwnProperty(image.url) ? detectionsData[image.url] : 'N/A'
+        detections: detectionsData.hasOwnProperty(image.url) ? detectionsData[image.url] : 'N/A' as 'N/A'
       }))
 
       setImageData(combinedData)
@@ -120,8 +120,15 @@ export default function SpreadsheetsPage() {
           ? a.gps[sortConfig.key] - b.gps[sortConfig.key]
           : b.gps[sortConfig.key] - a.gps[sortConfig.key]
       }
-      if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.direction === 'asc' ? -1 : 1
-      if (a[sortConfig.key] > b[sortConfig.key]) return sortConfig.direction === 'asc' ? 1 : -1
+      if (sortConfig.key === 'detections') {
+        const aDetections = a.detections === 'N/A' ? -1 : a.detections;
+        const bDetections = b.detections === 'N/A' ? -1 : b.detections;
+        return sortConfig.direction === 'asc'
+          ? aDetections - bDetections
+          : bDetections - aDetections;
+      }
+      if ((a as any)[sortConfig.key] < (b as any)[sortConfig.key]) return sortConfig.direction === 'asc' ? -1 : 1
+      if ((a as any)[sortConfig.key] > (b as any)[sortConfig.key]) return sortConfig.direction === 'asc' ? 1 : -1
       return 0
     })
   }, [imageData, searchTerm, sortConfig])
@@ -153,7 +160,7 @@ export default function SpreadsheetsPage() {
           } else if (col.key === 'alt') {
             return item.gps.alt ? item.gps.alt.toFixed(2) : 'N/A'
           } else {
-            return item[col.key]
+            return (item as { [key: string]: any })[col.key]
           }
         }).join(',')
       )
@@ -181,7 +188,7 @@ export default function SpreadsheetsPage() {
     toast({
       title: "Feature not available",
       description: "The save feature is not enabled yet.",
-      variant: "warning",
+      // variant: "warning",
     })
   }
 
@@ -189,7 +196,7 @@ export default function SpreadsheetsPage() {
     toast({
       title: "Feature not available",
       description: "The delete feature is not enabled yet.",
-      variant: "warning",
+      // variant: "warning",
     })
   }
 
