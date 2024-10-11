@@ -231,7 +231,9 @@ export default function WorkPage() {
   }, [user, authLoading, router]);
 
   useEffect(() => {
-    useNavigateOrScrollTop.setScrollableElement(window);
+    if (typeof window !== 'undefined') {
+      useNavigateOrScrollTop.setScrollableElement(window);
+    }
   }, []);
 
   if (authLoading) {
