@@ -167,7 +167,8 @@ export function DroneAnimation() {
       drawPotholes();
       drawDrone(droneX, droneY);
       
-      droneX += 2;
+      // Reduce the speed of the drone
+      droneX += 1.25; // Changed from 2 to 0.5
       scanAngle = Math.sin(Date.now() / 200) * 0.2;
       
       if (droneX > canvas.width) {
