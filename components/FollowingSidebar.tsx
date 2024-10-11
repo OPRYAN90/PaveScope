@@ -68,22 +68,14 @@ export const FollowingSidebar: React.FC<FollowingSidebarProps> = ({ onLogoClick,
       onMouseLeave={handleMouseLeave}
     >
       <div className={`py-2 px-3 flex items-center ${isCollapsed && !isHovered ? 'justify-center' : 'justify-start'} cursor-pointer h-[72px]`} onClick={onLogoClick}>
-        {!isCollapsed || isHovered ? (
-          <>
-            <div className="w-16 h-16 flex-shrink-0 mr-3 flex items-center justify-center ml-[-10px] mt-[4px]">
-              <img src="/images/logo.png" alt="PaveScope Logo" className="w-full h-full object-contain" />
-            </div>
-            {showText && (
-              <h2 className="text-xl font-bold text-left ml-[-20px] transition-opacity duration-200 ease-in-out">
-                PaveScope
-              </h2>
-            )}
-          </>
-        ) : (
-          // Adjust the size of the logo when collapsed
-          <div className="w-9 h-9">
-            <img src="/images/logo.png" alt="PaveScope Icon" className="w-full h-full object-contain" />
-          </div>
+        <div className={`flex-shrink-0 flex items-center justify-center transition-all duration-300 ease-in-out
+          ${isCollapsed && !isHovered ? 'w-16 h-16 -ml-0.5' : 'w-16 h-16 mr-3 ml-[-10px] mt-[4px]'}`}>
+          <img src="/images/logo.png" alt="PaveScope Logo" className="w-full h-full object-contain" />
+        </div>
+        {(!isCollapsed || isHovered) && showText && (
+          <h2 className="text-xl font-bold text-left ml-[-20px] transition-opacity duration-200 ease-in-out">
+            PaveScope
+          </h2>
         )}
       </div>
       <nav className="flex-grow overflow-y-auto pt-1 pb-2">

@@ -1,8 +1,6 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
-  "/upload/page": "app/upload/page.js",
   "/detections/page": "app/detections/page.js",
+  "/upload/page": "app/upload/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
   "/maps/page": "app/maps/page.js",
-  "/spreadsheets/page": "app/spreadsheets/page.js"
-}
+  "/spreadsheets/page": "app/spreadsheets/pa
