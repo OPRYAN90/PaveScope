@@ -1,7 +1,7 @@
 {
+  "/spreadsheets/page": "app/spreadsheets/page.js",
   "/upload/page": "app/upload/page.js",
   "/maps/page": "app/maps/page.js",
-  "/model/page": "app/model/page.js",
-  "/spreadsheets/page": "app/spreadsheets/page.js",
-  "/detections/page": "app/detections/page.js"
+  "/detections/page": "app/detections/page.js",
+  "/model/page": "app/model/page.js"
 }

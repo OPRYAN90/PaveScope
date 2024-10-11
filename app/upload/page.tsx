@@ -82,7 +82,13 @@ export default function UploadPage() {
               gps: gps
             }
           }))
-          setUploadedImages(images)
+          setUploadedImages(images.map(img => ({
+            ...img,
+            gps: {
+              ...img.gps,
+              alt: img.gps.alt ?? 0 // Use 0 as default if alt is undefined
+            }
+          })))
         }, (error) => {
           console.error("Firestore listener error:", error)
         })
@@ -117,7 +123,10 @@ export default function UploadPage() {
         ...img,
         id: `img-${index}`
       }))
-      setUploadedImages(imageDataWithIds)
+      setUploadedImages(imageDataWithIds.map(img => ({
+        ...img,
+        gps: { ...img.gps, alt: img.gps.alt ?? 0 }
+      })))
       console.log("Images loaded successfully")
     } catch (error) {
       console.error("Error loading images:", error)
@@ -256,7 +265,7 @@ export default function UploadPage() {
           customMetadata: {
             gpsLat: finalGps.lat.toString(),
             gpsLng: finalGps.lng.toString(),
-            gpsAlt: finalGps.alt.toString(),
+            gpsAlt: finalGps.alt?.toString() ?? "0",
           },
         }
 
@@ -408,7 +417,7 @@ export default function UploadPage() {
       await deleteObject(storageRef)
 
       // Delete from Firestore
-      const fileName = imagePath.split('/').pop()
+      const fileName = imagePath.split('/').pop() ?? '';
       const q = query(collection(db, 'users', user.uid, 'images'), where('fileName', '==', fileName))
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach(async (doc) => {
@@ -436,8 +445,8 @@ export default function UploadPage() {
       setUploadedImages((prevImages) => prevImages.filter((img) => img.path !== imagePath))
 
       // Remove the deleted image from localStorage
-      const savedImages = JSON.parse(localStorage.getItem('selectedImages') || '[]')
-      const updatedSavedImages = savedImages.filter((img: string) => !img.endsWith(fileName))
+      const savedImages = JSON.parse(localStorage.getItem('selectedImages') ?? '[]')
+      const updatedSavedImages = savedImages.filter((img: string) => !img.endsWith(fileName ?? ''));
       localStorage.setItem('selectedImages', JSON.stringify(updatedSavedImages))
 
       toast({

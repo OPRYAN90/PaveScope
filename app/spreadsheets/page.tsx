@@ -76,7 +76,7 @@ export default function SpreadsheetsPage() {
 
       const combinedData = imagesData.map(image => ({
         ...image,
-        detections: detectionsData.hasOwnProperty(image.url) ? detectionsData[image.url] : 'N/A' as 'N/A'
+        detections: typeof detectionsData[image.url] === 'number' ? detectionsData[image.url] : 'N/A' as 'N/A'
       }))
 
       setImageData(combinedData)
