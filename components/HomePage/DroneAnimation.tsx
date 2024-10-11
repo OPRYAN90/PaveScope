@@ -21,7 +21,7 @@ export function DroneAnimation() {
     let droneY = 0;
     let scanLineY = 0;
     let scanAngle = 0;
-    let potholes: { x: number; y: number; radius: number; scanned: boolean; scanProgress: number }[] = [];
+    let potholes: { x: number; y: number; radius: number; scanned: boolean; scanProgress: number; detected: boolean }[] = [];
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -33,9 +33,9 @@ export function DroneAnimation() {
 
     const generatePotholes = () => {
       potholes = [
-        { x: canvas.width * 0.25, y: canvas.height * 0.8, radius: 15, scanned: false, scanProgress: 0 },
-        { x: canvas.width * 0.5, y: canvas.height * 0.75, radius: 20, scanned: false, scanProgress: 0 },
-        { x: canvas.width * 0.75, y: canvas.height * 0.85, radius: 18, scanned: false, scanProgress: 0 },
+        { x: canvas.width * 0.25, y: canvas.height * 0.8, radius: 15, scanned: false, scanProgress: 0, detected: false },
+        { x: canvas.width * 0.5, y: canvas.height * 0.75, radius: 20, scanned: false, scanProgress: 0, detected: false },
+        { x: canvas.width * 0.75, y: canvas.height * 0.85, radius: 18, scanned: false, scanProgress: 0, detected: false },
       ];
     };
 
@@ -97,50 +97,49 @@ export function DroneAnimation() {
     };
 
     const drawPotholes = () => {
-      ctx.fillStyle = '#333333';
       potholes.forEach(pothole => {
+        // Draw the pothole
+        ctx.fillStyle = '#333333';
         ctx.beginPath();
         ctx.arc(pothole.x, pothole.y, pothole.radius, 0, Math.PI * 2);
         ctx.fill();
-        if (pothole.scanProgress > 0) {
-          ctx.strokeStyle = `rgba(255, 0, 0, ${pothole.scanProgress})`;
-          ctx.lineWidth = 2;
-          ctx.strokeRect(
-            pothole.x - pothole.radius - 5, 
-            pothole.y - pothole.radius - 5, 
-            (pothole.radius + 5) * 2, 
-            (pothole.radius + 5) * 2
-          );
-        }
-        if (pothole.scanned) {
-          ctx.fillStyle = 'rgba(139, 0, 0, 0.3)'; // Semi-transparent deep red
-          ctx.fillRect(
-            pothole.x - pothole.radius - 10, 
-            pothole.y - pothole.radius - 10, 
-            (pothole.radius + 10) * 2, 
-            (pothole.radius + 10) * 2
-          );
-          ctx.strokeStyle = '#8B0000'; // Deep red color for the border
-          ctx.lineWidth = 3;
-          ctx.strokeRect(
-            pothole.x - pothole.radius - 10, 
-            pothole.y - pothole.radius - 10, 
-            (pothole.radius + 10) * 2, 
-            (pothole.radius + 10) * 2
-          );
+
+        if (pothole.detected) {
+          drawDetectionIndicator(pothole, 1);
+        } else if (pothole.scanProgress > 0) {
+          drawDetectionIndicator(pothole, pothole.scanProgress);
         }
       });
     };
 
+    const drawDetectionIndicator = (pothole: { x: number; y: number; radius: number }, progress: number) => {
+      const size = pothole.radius + 10;
+      const segments = 60; // Increased number of segments for a more circular appearance
+      const angleStep = (Math.PI * 2) / segments;
+      
+      ctx.strokeStyle = `rgba(255, 0, 0, ${progress})`;
+      ctx.lineWidth = 2;
+      
+      for (let i = 0; i < segments; i++) {
+        const startAngle = i * angleStep;
+        const endAngle = startAngle + (angleStep * 0.8); // Reduced arc length to create small gaps
+        
+        ctx.beginPath();
+        ctx.arc(pothole.x, pothole.y, size, startAngle, endAngle);
+        ctx.stroke();
+      }
+    };
+
     const scanPotholes = () => {
       potholes.forEach((pothole, index) => {
-        const scanWidth = 50; // Reduced scan width for more precise detection
+        const scanWidth = 50;
         
         if (Math.abs(droneX - pothole.x) < scanWidth / 2) {
           pothole.scanProgress = Math.min(pothole.scanProgress + 0.02, 1);
           
           if (pothole.scanProgress >= 1 && !pothole.scanned) {
             pothole.scanned = true;
+            pothole.detected = true;
             console.log(`Pothole ${index + 1} fully scanned at position (${pothole.x.toFixed(2)}, ${pothole.y.toFixed(2)})`);
           }
         }
@@ -156,6 +155,7 @@ export function DroneAnimation() {
       potholes.forEach(p => {
         p.scanned = false;
         p.scanProgress = 0;
+        p.detected = false;
       });
     };
 
@@ -167,8 +167,8 @@ export function DroneAnimation() {
       drawPotholes();
       drawDrone(droneX, droneY);
       
-      droneX += 2; // Adjusted drone speed
-      scanAngle = Math.sin(Date.now() / 200) * 0.2; // Add some movement to the scan beam
+      droneX += 2;
+      scanAngle = Math.sin(Date.now() / 200) * 0.2;
       
       if (droneX > canvas.width) {
         resetAnimation();
