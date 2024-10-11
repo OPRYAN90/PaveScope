@@ -67,6 +67,10 @@ const faqs = [
   {
     question: "What should I do if I encounter an error?",
     answer: "If you encounter any errors, please contact our support team via email or phone. You can also use the live chat feature available during business hours."
+  },
+  {
+    question: "Can&apos;t find what you&apos;re looking for?",
+    answer: "If you can&apos;t find the answer to your question, please contact our support team via email or phone. You can also use the live chat feature available during business hours."
   }
 ]
 
@@ -128,7 +132,7 @@ export default function HelpPage() {
             </CardHeader>
             <CardContent>
               <p className="text-gray-600 mb-4">
-                Can't find what you're looking for? Our support team is here to help.
+                Can&apos;t find what you&apos;re looking for? Our support team is here to help.
               </p>
               <div className="space-y-3">
                 <div className="flex items-center">

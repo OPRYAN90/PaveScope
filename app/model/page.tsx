@@ -467,13 +467,13 @@ export default function ModelPage() {
             )}
           </div>
         ),
-        variant: failedInferences > 0 ? 'warning' : 'default',
+        // variant: failedInferences > 0 ? 'warning' : 'default',
         duration: 5000, // Show for 10 seconds
       })
 
       // Update the selected images and available images
       setSelectedImages(prevSelected => prevSelected.filter(img => !failedImages.includes(img)))
-      setAvailableImages(prevAvailable => [...new Set([...prevAvailable, ...failedImages])])
+      setAvailableImages(prevAvailable => [...prevAvailable, ...failedImages])
 
       // Update processedImages
       setProcessedImages(prevProcessed => [
@@ -536,7 +536,7 @@ export default function ModelPage() {
       <div className="flex flex-col min-h-screen bg-blue-50">
         {showWarmupWarning && (
           <div className="fixed top-4 right-4 z-50">
-            <Alert variant="warning" className="w-96 bg-yellow-100 border-yellow-500 text-yellow-800 shadow-lg">
+            <Alert className="w-96 bg-yellow-100 border-yellow-500 text-yellow-800 shadow-lg">
               <AlertTriangle className="h-4 w-4 mr-2" />
               <AlertDescription>
                 The Hugging Face API may need time to warm up after long periods of inactivity. If inference fails on the first attempt, please try again.

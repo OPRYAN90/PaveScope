@@ -1,5 +1,12 @@
 'use client'
 
+// Add this type declaration at the top of your file
+declare global {
+  interface Window {
+    google: any;
+  }
+}
+
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import MapLayout from './maplayout'
 import { Button } from "../../components/Login/ui/button"
