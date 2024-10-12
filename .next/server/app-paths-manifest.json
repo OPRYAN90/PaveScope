@@ -1,7 +1,6 @@
 {
+  "/detections/page": "app/detections/page.js",
   "/dashboard/page": "app/dashboard/page.js",
-  "/spreadsheets/page": "app/spreadsheets/page.js",
-  "/help/page": "app/help/page.js",
-  "/page": "app/page.js",
-  "/signin/page": "app/signin/page.js"
+  "/model/page": "app/model/page.js",
+  "/upload/page": "app/upload/page.js"
 }

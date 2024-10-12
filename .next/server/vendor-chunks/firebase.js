@@ -11,16 +11,6 @@ exports.id = "vendor-chunks/firebase";
 exports.ids = ["vendor-chunks/firebase"];
 exports.modules = {
 
-/***/ "(ssr)/./node_modules/firebase/analytics/dist/index.mjs":
-/*!********************************************************!*\
-  !*** ./node_modules/firebase/analytics/dist/index.mjs ***!
-  \********************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   getAnalytics: () => (/* reexport safe */ _firebase_analytics__WEBPACK_IMPORTED_MODULE_0__.getAnalytics),\n/* harmony export */   getGoogleAnalyticsClientId: () => (/* reexport safe */ _firebase_analytics__WEBPACK_IMPORTED_MODULE_0__.getGoogleAnalyticsClientId),\n/* harmony export */   initializeAnalytics: () => (/* reexport safe */ _firebase_analytics__WEBPACK_IMPORTED_MODULE_0__.initializeAnalytics),\n/* harmony export */   isSupported: () => (/* reexport safe */ _firebase_analytics__WEBPACK_IMPORTED_MODULE_0__.isSupported),\n/* harmony export */   logEvent: () => (/* reexport safe */ _firebase_analytics__WEBPACK_IMPORTED_MODULE_0__.logEvent),\n/* harmony export */   setAnalyticsCollectionEnabled: () => (/* reexport safe */ _firebase_analytics__WEBPACK_IMPORTED_MODULE_0__.setAnalyticsCollectionEnabled),\n/* harmony export */   setConsent: () => (/* reexport safe */ _firebase_analytics__WEBPACK_IMPORTED_MODULE_0__.setConsent),\n/* harmony export */   setCurrentScreen: () => (/* reexport safe */ _firebase_analytics__WEBPACK_IMPORTED_MODULE_0__.setCurrentScreen),\n/* harmony export */   setDefaultEventParameters: () => (/* reexport safe */ _firebase_analytics__WEBPACK_IMPORTED_MODULE_0__.setDefaultEventParameters),\n/* harmony export */   setUserId: () => (/* reexport safe */ _firebase_analytics__WEBPACK_IMPORTED_MODULE_0__.setUserId),\n/* harmony export */   setUserProperties: () => (/* reexport safe */ _firebase_analytics__WEBPACK_IMPORTED_MODULE_0__.setUserProperties),\n/* harmony export */   settings: () => (/* reexport safe */ _firebase_analytics__WEBPACK_IMPORTED_MODULE_0__.settings)\n/* harmony export */ });\n/* harmony import */ var _firebase_analytics__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @firebase/analytics */ \"(ssr)/./node_modules/@firebase/analytics/dist/esm/index.esm2017.js\");\n\n//# sourceMappingURL=index.mjs.map\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9ub2RlX21vZHVsZXMvZmlyZWJhc2UvYW5hbHl0aWNzL2Rpc3QvaW5kZXgubWpzIiwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBb0M7QUFDcEMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9wb3Rob2xlLWRldGVjdGlvbi13ZWJzaXRlLy4vbm9kZV9tb2R1bGVzL2ZpcmViYXNlL2FuYWx5dGljcy9kaXN0L2luZGV4Lm1qcz8wZmFkIl0sInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCAqIGZyb20gJ0BmaXJlYmFzZS9hbmFseXRpY3MnO1xuLy8jIHNvdXJjZU1hcHBpbmdVUkw9aW5kZXgubWpzLm1hcFxuIl0sIm5hbWVzIjpbXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(ssr)/./node_modules/firebase/analytics/dist/index.mjs\n");
-
-/***/ }),
-
 /***/ "(ssr)/./node_modules/firebase/app/dist/index.mjs":
 /*!**************************************************!*\
   !*** ./node_modules/firebase/app/dist/index.mjs ***!
