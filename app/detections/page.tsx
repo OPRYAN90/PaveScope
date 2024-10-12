@@ -91,7 +91,10 @@ const DetectionImage: React.FC<{ detection: Detection; onClick: () => void; onSe
 
   const handleClick = () => {
     if (isSelectMode) {
-      onSelect(detection.id, !isSelected)
+      // Only allow selection if there are detections
+      if (detectionCount > 0) {
+        onSelect(detection.id, !isSelected)
+      }
     } else {
       onClick()
     }
@@ -113,7 +116,7 @@ const DetectionImage: React.FC<{ detection: Detection; onClick: () => void; onSe
       <Badge className={`absolute top-2 right-2 ${badgeColor} text-white`}>
         {detectionCount} Detection{detectionCount !== 1 ? 's' : ''}
       </Badge>
-      {isSelectMode && (
+      {isSelectMode && detectionCount > 0 && (
         <div className={`absolute top-2 left-2 w-6 h-6 rounded-full border-2 ${isSelected ? 'bg-blue-500 border-blue-500' : 'border-white'} flex items-center justify-center`}>
           {isSelected && <Check className="text-white" size={16} />}
         </div>
@@ -334,15 +337,18 @@ export default function DetectionsPage() {
   }
 
   const handleSelectDetection = (id: string, selected: boolean) => {
-    setSelectedDetections(prev => {
-      const newSet = new Set(prev)
-      if (selected) {
-        newSet.add(id)
-      } else {
-        newSet.delete(id)
-      }
-      return newSet
-    })
+    const detection = detections.find(d => d.id === id);
+    if (detection && detection.detections && detection.detections.length > 0) {
+      setSelectedDetections(prev => {
+        const newSet = new Set(prev)
+        if (selected) {
+          newSet.add(id)
+        } else {
+          newSet.delete(id)
+        }
+        return newSet
+      })
+    }
   }
 
   const toggleSelectMode = () => {
