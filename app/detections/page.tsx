@@ -1,13 +1,13 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import { ZoomIn, Trash2, Upload, MapPin, Calendar, Image as ImageIcon, ChevronLeft, ChevronRight, X, Loader, Check } from 'lucide-react'
+import { ZoomIn, Trash2, Upload, MapPin, Calendar, Image as ImageIcon, ChevronLeft, ChevronRight, X, Loader, Check, DollarSign } from 'lucide-react'
 import DashboardLayout from '../dashboard-layout'
 import { Button } from "../../components/Login/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../../components/Login/ui/card"
 import { useAuth } from '../../components/AuthProvider'
 import { db } from '../../firebase'
-import { collection, query, orderBy, onSnapshot, deleteDoc, doc, updateDoc, where, getDocs } from 'firebase/firestore'
+import { collection, query, orderBy, onSnapshot, deleteDoc, doc, updateDoc, where, getDocs, writeBatch } from 'firebase/firestore'
 import Link from 'next/link'
 import { useToast } from "../../components/ui/use-toast"
 import { motion, AnimatePresence } from 'framer-motion'
@@ -28,6 +28,9 @@ interface Detection {
   };
   detections: any[];
   timestamp: any;
+  volume?: number;
+  material?: string;
+  cost?: number;
 }
 
 const drawBoundingBoxes = (imgElement: HTMLImageElement, detections: any[]): string => {
@@ -91,8 +94,8 @@ const DetectionImage: React.FC<{ detection: Detection; onClick: () => void; onSe
 
   const handleClick = () => {
     if (isSelectMode) {
-      // Only allow selection if there are detections
-      if (detectionCount > 0) {
+      // Only allow selection if there are detections and volume hasn't been calculated yet
+      if (detectionCount > 0 && detection.volume === undefined) {
         onSelect(detection.id, !isSelected)
       }
     } else {
@@ -116,10 +119,20 @@ const DetectionImage: React.FC<{ detection: Detection; onClick: () => void; onSe
       <Badge className={`absolute top-2 right-2 ${badgeColor} text-white`}>
         {detectionCount} Detection{detectionCount !== 1 ? 's' : ''}
       </Badge>
-      {isSelectMode && detectionCount > 0 && (
+      {isSelectMode && detectionCount > 0 && detection.volume === undefined && (
         <div className={`absolute top-2 left-2 w-6 h-6 rounded-full border-2 ${isSelected ? 'bg-blue-500 border-blue-500' : 'border-white'} flex items-center justify-center`}>
           {isSelected && <Check className="text-white" size={16} />}
         </div>
+      )}
+      {detection.volume !== undefined && (
+        <Badge className="absolute bottom-2 right-2 bg-purple-600 text-white">
+          Volume: {detection.volume.toFixed(2)} m³
+        </Badge>
+      )}
+      {detection.cost !== undefined && (
+        <Badge className="absolute bottom-2 left-2 bg-green-600 text-white">
+          Cost: ${detection.cost.toFixed(2)}
+        </Badge>
       )}
     </div>
   )
@@ -256,6 +269,11 @@ const DetailedView: React.FC<{ detection: Detection; onClose: () => void; onPrev
                 ))}
               </div>
             </div>
+            {detection.volume !== undefined && (
+              <div className="text-sm text-gray-600">
+                <strong>Volume:</strong> {detection.volume.toFixed(2)} m³
+              </div>
+            )}
           </div>
         </div>
       </motion.div>
@@ -275,6 +293,9 @@ export default function DetectionsPage() {
   const [showVolumeDialog, setShowVolumeDialog] = useState(false)
   const [selectedDevice, setSelectedDevice] = useState('')
   const [calculatedVolume, setCalculatedVolume] = useState<number | null>(null)
+  const [totalVolume, setTotalVolume] = useState<number>(0)
+  const [selectedMaterial, setSelectedMaterial] = useState('')
+  const [materialCost, setMaterialCost] = useState(0)
 
   useEffect(() => {
     if (user) {
@@ -358,30 +379,55 @@ export default function DetectionsPage() {
     }
   }
 
-  const handleCalculateVolume = async () => {
-    if (selectedDevice && selectedDetections.size > 0) {
+  const handleCalculateVolumeAndCost = async () => {
+    if (selectedDevice && selectedMaterial && selectedDetections.size > 0) {
       const selectedDetectionObjects = detections.filter(d => selectedDetections.has(d.id))
       const phoneHeight = 1.5 // meters, adjust as needed
       const imageWidth = 4032 // pixels, adjust based on device
       const imageHeight = 3024 // pixels, adjust based on device
       
-      const volume = await calculateVolume(
-        selectedDetectionObjects.filter(d => d.gps.alt !== undefined) as import("./types").Detection[],
-        phoneHeight,
-        imageWidth,
-        imageHeight
-      )      
-      setCalculatedVolume(volume)
-      
+      const volumes = await Promise.all(selectedDetectionObjects.map(async (detection) => {
+        if (detection.gps.alt !== undefined) {
+          const volume = await calculateVolume(
+            [detection] as import("./types").Detection[],
+            phoneHeight,
+            imageWidth,
+            imageHeight
+          )
+          const cost = volume * materialCost
+          return { id: detection.id, volume, cost }
+        }
+        return { id: detection.id, volume: 0, cost: 0 }
+      }))
+
+      const totalVolume = volumes.reduce((sum, { volume }) => sum + volume, 0)
+      const totalCost = volumes.reduce((sum, { cost }) => sum + cost, 0)
+      setTotalVolume(totalVolume)
+
+      // Update detections with calculated volumes and costs
+      const updatedDetections = detections.map(detection => {
+        const calculated = volumes.find(v => v.id === detection.id)
+        return calculated ? { ...detection, volume: calculated.volume, material: selectedMaterial, cost: calculated.cost } : detection
+      })
+      setDetections(updatedDetections)
+
+      // Update volumes, materials, and costs in Firestore
+      const batch = writeBatch(db)
+      volumes.forEach(({ id, volume, cost }) => {
+        const detectionRef = doc(db, 'users', user!.uid, 'detections', id)
+        batch.update(detectionRef, { volume, material: selectedMaterial, cost })
+      })
+      await batch.commit()
+
       toast({
-        title: "Volume Calculated",
-        description: `The total volume of selected potholes is ${volume.toFixed(2)} cubic meters.`,
+        title: "Volume and Cost Calculated",
+        description: `Total volume: ${totalVolume.toFixed(2)} m³. Total cost: $${totalCost.toFixed(2)}`,
       })
       setShowVolumeDialog(false)
     } else {
       toast({
         title: "Error",
-        description: "Please select a device and at least one image.",
+        description: "Please select a device, material, and at least one image.",
         variant: "destructive",
       })
     }
@@ -411,8 +457,13 @@ export default function DetectionsPage() {
                 disabled={selectedDetections.size === 0}
                 className="bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300"
               >
-                Calculate Volume ({selectedDetections.size})
+                Calculate Volume & Cost ({selectedDetections.size})
               </Button>
+            )}
+            {totalVolume > 0 && (
+              <span className="text-lg font-semibold text-purple-600">
+                Total Volume: {totalVolume.toFixed(2)} m³
+              </span>
             )}
           </div>
         </div>
@@ -542,22 +593,39 @@ export default function DetectionsPage() {
       )}
 
       <Dialog open={showVolumeDialog} onOpenChange={setShowVolumeDialog}>
-        <DialogContent>
+        <DialogContent className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full">
           <DialogHeader>
-            <DialogTitle>Calculate Volume</DialogTitle>
+            <DialogTitle className="text-2xl font-bold text-blue-800 mb-4">Calculate Volume and Cost</DialogTitle>
           </DialogHeader>
-          <div className="p-4 space-y-4">
-            <p>Select your device:</p>
-            <Select onValueChange={setSelectedDevice}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select device" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="iphone14pro">iPhone 14 Pro (Main Camera, 4:3)</SelectItem>
-              </SelectContent>
-            </Select>
-            <Button onClick={handleCalculateVolume}>
-              Calculate
+          <div className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Select your device:</label>
+              <Select onValueChange={setSelectedDevice}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select device" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="iphone14pro">iPhone 14 Pro (Main Camera, 4:3)</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Select material:</label>
+              <Select onValueChange={(value) => {
+                setSelectedMaterial(value)
+                setMaterialCost(value === 'standard' ? 100 : 150) // Example costs
+              }}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select material" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="standard">Standard Asphalt ($100/m³)</SelectItem>
+                  <SelectItem value="premium">Premium Asphalt ($150/m³)</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <Button onClick={handleCalculateVolumeAndCost} className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+              Calculate Volume and Cost
             </Button>
           </div>
         </DialogContent>

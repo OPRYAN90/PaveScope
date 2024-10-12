@@ -26,6 +26,9 @@ interface ImageData {
   };
   uploadedAt: Timestamp;
   detections: number | 'N/A';
+  volume: number | 'N/A';
+  material: string | 'N/A';
+  cost: number | 'N/A';
 }
 
 const COLUMNS = [
@@ -36,6 +39,9 @@ const COLUMNS = [
   { key: 'alt', label: 'Altitude' },
   { key: 'uploadedAt', label: 'Uploaded At' },
   { key: 'detections', label: 'Detections' },
+  { key: 'volume', label: 'Volume (m³)' },
+  { key: 'material', label: 'Material' },
+  { key: 'cost', label: 'Cost ($)' },
   { key: 'actions', label: 'Actions' },
 ]
 
@@ -65,18 +71,29 @@ export default function SpreadsheetsPage() {
       const imagesData = imagesSnapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data(),
-        detections: 'N/A' as 'N/A' // Ensure 'N/A' is explicitly typed
+        detections: 'N/A' as 'N/A',
+        volume: 'N/A' as 'N/A',
+        material: 'N/A' as 'N/A',
+        cost: 'N/A' as 'N/A'
       } as ImageData))
 
       const detectionsData = detectionsSnapshot.docs.reduce((acc, doc) => {
         const data = doc.data()
-        acc[data.imageUrl] = Array.isArray(data.detections) ? data.detections.length : 0
+        acc[data.imageUrl] = {
+          detections: Array.isArray(data.detections) ? data.detections.length : 0,
+          volume: data.volume || 'N/A',
+          material: data.material || 'N/A',
+          cost: data.cost || 'N/A'
+        }
         return acc
-      }, {} as { [key: string]: number })
+      }, {} as { [key: string]: { detections: number, volume: number | 'N/A', material: string | 'N/A', cost: number | 'N/A' } })
 
       const combinedData = imagesData.map(image => ({
         ...image,
-        detections: typeof detectionsData[image.url] === 'number' ? detectionsData[image.url] : 'N/A' as 'N/A'
+        detections: typeof detectionsData[image.url]?.detections === 'number' ? detectionsData[image.url].detections : 'N/A' as 'N/A',
+        volume: detectionsData[image.url]?.volume || 'N/A' as 'N/A',
+        material: detectionsData[image.url]?.material || 'N/A' as 'N/A',
+        cost: detectionsData[image.url]?.cost || 'N/A' as 'N/A'
       }))
 
       setImageData(combinedData)
@@ -127,6 +144,20 @@ export default function SpreadsheetsPage() {
           ? aDetections - bDetections
           : bDetections - aDetections;
       }
+      if (sortConfig.key === 'volume' || sortConfig.key === 'cost') {
+        const aValue = a[sortConfig.key] === 'N/A' ? -1 : a[sortConfig.key];
+        const bValue = b[sortConfig.key] === 'N/A' ? -1 : b[sortConfig.key];
+        return sortConfig.direction === 'asc'
+          ? aValue - bValue
+          : bValue - aValue;
+      }
+      if (sortConfig.key === 'material') {
+        const aValue = a.material === 'N/A' ? '' : a.material;
+        const bValue = b.material === 'N/A' ? '' : b.material;
+        return sortConfig.direction === 'asc'
+          ? aValue.localeCompare(bValue)
+          : bValue.localeCompare(aValue);
+      }
       if ((a as any)[sortConfig.key] < (b as any)[sortConfig.key]) return sortConfig.direction === 'asc' ? -1 : 1
       if ((a as any)[sortConfig.key] > (b as any)[sortConfig.key]) return sortConfig.direction === 'asc' ? 1 : -1
       return 0
@@ -142,6 +173,12 @@ export default function SpreadsheetsPage() {
     }
     if (column === 'alt') {
       return value ? value.toFixed(2) : 'N/A'
+    }
+    if (column === 'volume' && typeof value === 'number') {
+      return value.toFixed(2)
+    }
+    if (column === 'cost' && typeof value === 'number') {
+      return `$${value.toFixed(2)}`
     }
     return value
   }
@@ -159,6 +196,10 @@ export default function SpreadsheetsPage() {
             return item.gps.lng.toFixed(6)
           } else if (col.key === 'alt') {
             return item.gps.alt ? item.gps.alt.toFixed(2) : 'N/A'
+          } else if (col.key === 'volume') {
+            return typeof item.volume === 'number' ? item.volume.toFixed(2) : 'N/A'
+          } else if (col.key === 'cost') {
+            return typeof item.cost === 'number' ? `$${item.cost.toFixed(2)}` : 'N/A'
           } else {
             return (item as { [key: string]: any })[col.key]
           }
@@ -264,6 +305,9 @@ export default function SpreadsheetsPage() {
                       <TableCell>{formatCellValue('alt', image.gps.alt)}</TableCell>
                       <TableCell>{formatCellValue('uploadedAt', image.uploadedAt)}</TableCell>
                       <TableCell>{image.detections}</TableCell>
+                      <TableCell>{formatCellValue('volume', image.volume)}</TableCell>
+                      <TableCell>{image.material}</TableCell>
+                      <TableCell>{formatCellValue('cost', image.cost)}</TableCell>
                       <TableCell>
                         <div className="flex justify-center space-x-2">
                           <Button variant="ghost" size="sm" onClick={handleSave} className="text-green-600 hover:bg-green-50">
