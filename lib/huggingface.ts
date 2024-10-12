@@ -1,11 +1,15 @@
 import axios from 'axios';
 
-const HUGGINGFACE_ENDPOINT = 'https://e2vww405kc1mzsts.eastus.azure.endpoints.huggingface.cloud';
-const HUGGINGFACE_API_KEY = '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';
+const HUGGINGFACE_ENDPOINT = process.env.NEXT_PUBLIC_HUGGINGFACE_ENDPOINT;
+const HUGGINGFACE_API_KEY = process.env.NEXT_PUBLIC_HUGGINGFACE_API_KEY;
 
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export async function runInference(imageBlob: Blob, maxRetries = 3) {
+  if (!HUGGINGFACE_ENDPOINT || !HUGGINGFACE_API_KEY) {
+    throw new Error('Hugging Face API credentials are not set in the environment variables.');
+  }
+
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       console.log('Image content type:', imageBlob.type);
@@ -25,9 +29,10 @@ export async function runInference(imageBlob: Blob, maxRetries = 3) {
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if (error.response?.status === 503 && attempt < maxRetries) {
-          console.log(`Attempt ${attempt} failed. Retrying in ${attempt * 2} seconds...`);
-          await delay(attempt * 2000);
+        if (attempt < maxRetries) {
+          const delayTime = attempt === 1 ? 2000 : 25000;
+          console.log(`Attempt ${attempt} failed. Retrying in ${delayTime / 1000} seconds...`);
+          await delay(delayTime);
           continue;
         }
         console.error('Axios error:', error.response?.status, error.response?.data);

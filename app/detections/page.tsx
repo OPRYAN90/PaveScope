@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import { ZoomIn, ZoomOut, Trash2, Upload, MapPin, Calendar, Image as ImageIcon, ChevronLeft, ChevronRight, X, Loader } from 'lucide-react'
+import { ZoomIn, Trash2, Upload, MapPin, Calendar, Image as ImageIcon, ChevronLeft, ChevronRight, X, Loader, Check } from 'lucide-react'
 import DashboardLayout from '../dashboard-layout'
 import { Button } from "../../components/Login/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../../components/Login/ui/card"
@@ -14,6 +14,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../../components/ui/dialog"
 import { Badge } from "../../components/ui/badge"
 import { Skeleton } from "../../components/ui/skeleton"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select"
+import { calculateVolume } from './volumeCalculation'
 
 interface Detection {
   id: string;
@@ -64,7 +66,7 @@ const drawBoundingBoxes = (imgElement: HTMLImageElement, detections: any[]): str
   return canvas.toDataURL()
 }
 
-const DetectionImage: React.FC<{ detection: Detection; onClick: () => void }> = ({ detection, onClick }) => {
+const DetectionImage: React.FC<{ detection: Detection; onClick: () => void; onSelect: (id: string, selected: boolean) => void; isSelected: boolean; isSelectMode: boolean }> = ({ detection, onClick, onSelect, isSelected, isSelectMode }) => {
   const [imageSrc, setImageSrc] = useState(detection.imageUrl)
   const [isLoading, setIsLoading] = useState(true)
   const imgRef = useRef<HTMLImageElement>(null)
@@ -87,8 +89,16 @@ const DetectionImage: React.FC<{ detection: Detection; onClick: () => void }> = 
   const badgeColor = detectionCount === 0 ? 'bg-green-600' : 'bg-red-600';
   const textColor = detectionCount === 0 ? 'text-green-600' : 'text-red-600';
 
+  const handleClick = () => {
+    if (isSelectMode) {
+      onSelect(detection.id, !isSelected)
+    } else {
+      onClick()
+    }
+  }
+
   return (
-    <div className="relative w-full h-48 cursor-pointer" onClick={onClick}>
+    <div className="relative w-full h-48 cursor-pointer" onClick={handleClick}>
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-200">
           <Loader className="w-8 h-8 animate-spin text-blue-600" />
@@ -103,6 +113,11 @@ const DetectionImage: React.FC<{ detection: Detection; onClick: () => void }> = 
       <Badge className={`absolute top-2 right-2 ${badgeColor} text-white`}>
         {detectionCount} Detection{detectionCount !== 1 ? 's' : ''}
       </Badge>
+      {isSelectMode && (
+        <div className={`absolute top-2 left-2 w-6 h-6 rounded-full border-2 ${isSelected ? 'bg-blue-500 border-blue-500' : 'border-white'} flex items-center justify-center`}>
+          {isSelected && <Check className="text-white" size={16} />}
+        </div>
+      )}
     </div>
   )
 }
@@ -252,6 +267,11 @@ export default function DetectionsPage() {
   const { user } = useAuth()
   const { toast } = useToast()
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [selectedDetections, setSelectedDetections] = useState<Set<string>>(new Set())
+  const [isSelectMode, setIsSelectMode] = useState(false)
+  const [showVolumeDialog, setShowVolumeDialog] = useState(false)
+  const [selectedDevice, setSelectedDevice] = useState('')
+  const [calculatedVolume, setCalculatedVolume] = useState<number | null>(null)
 
   useEffect(() => {
     if (user) {
@@ -313,6 +333,54 @@ export default function DetectionsPage() {
     setCurrentImageIndex(detections.indexOf(detection))
   }
 
+  const handleSelectDetection = (id: string, selected: boolean) => {
+    setSelectedDetections(prev => {
+      const newSet = new Set(prev)
+      if (selected) {
+        newSet.add(id)
+      } else {
+        newSet.delete(id)
+      }
+      return newSet
+    })
+  }
+
+  const toggleSelectMode = () => {
+    setIsSelectMode(!isSelectMode)
+    if (isSelectMode) {
+      setSelectedDetections(new Set())
+    }
+  }
+
+  const handleCalculateVolume = async () => {
+    if (selectedDevice && selectedDetections.size > 0) {
+      const selectedDetectionObjects = detections.filter(d => selectedDetections.has(d.id))
+      const phoneHeight = 1.5 // meters, adjust as needed
+      const imageWidth = 4032 // pixels, adjust based on device
+      const imageHeight = 3024 // pixels, adjust based on device
+      
+      const volume = await calculateVolume(
+        selectedDetectionObjects.filter(d => d.gps.alt !== undefined) as import("./types").Detection[],
+        phoneHeight,
+        imageWidth,
+        imageHeight
+      )      
+      setCalculatedVolume(volume)
+      
+      toast({
+        title: "Volume Calculated",
+        description: `The total volume of selected potholes is ${volume.toFixed(2)} cubic meters.`,
+      })
+      setShowVolumeDialog(false)
+    } else {
+      toast({
+        title: "Error",
+        description: "Please select a device and at least one image.",
+        variant: "destructive",
+      })
+    }
+  }
+
   return (
     <DashboardLayout>
       <motion.div 
@@ -321,7 +389,27 @@ export default function DetectionsPage() {
         transition={{ duration: 0.5 }}
         className="p-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen"
       >
-        <h1 className="text-4xl font-bold mb-8 text-blue-800 tracking-tight">Detections Gallery</h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-4xl font-bold text-blue-800 tracking-tight">Detections Gallery</h1>
+          <div className="space-x-4">
+            <Button
+              onClick={toggleSelectMode}
+              variant={isSelectMode ? "secondary" : "outline"}
+              className="transition-all duration-300"
+            >
+              {isSelectMode ? "Cancel Selection" : "Select Images"}
+            </Button>
+            {isSelectMode && (
+              <Button
+                onClick={() => setShowVolumeDialog(true)}
+                disabled={selectedDetections.size === 0}
+                className="bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300"
+              >
+                Calculate Volume ({selectedDetections.size})
+              </Button>
+            )}
+          </div>
+        </div>
 
         <AnimatePresence mode="wait">
           {loading ? (
@@ -370,7 +458,10 @@ export default function DetectionsPage() {
                       <CardHeader className="p-0">
                         <DetectionImage 
                           detection={detection} 
-                          onClick={() => handleImageClick(detection)}
+                          onClick={() => !isSelectMode && handleImageClick(detection)}
+                          onSelect={handleSelectDetection}
+                          isSelected={selectedDetections.has(detection.id)}
+                          isSelectMode={isSelectMode}
                         />
                       </CardHeader>
                       <CardContent className="p-4">
@@ -443,6 +534,28 @@ export default function DetectionsPage() {
           onNext={nextImage}
         />
       )}
+
+      <Dialog open={showVolumeDialog} onOpenChange={setShowVolumeDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Calculate Volume</DialogTitle>
+          </DialogHeader>
+          <div className="p-4 space-y-4">
+            <p>Select your device:</p>
+            <Select onValueChange={setSelectedDevice}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select device" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="iphone14pro">iPhone 14 Pro (Main Camera, 4:3)</SelectItem>
+              </SelectContent>
+            </Select>
+            <Button onClick={handleCalculateVolume}>
+              Calculate
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </DashboardLayout>
   )
 }
