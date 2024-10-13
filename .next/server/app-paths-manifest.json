@@ -1,6 +1,6 @@
 {
-  "/detections/page": "app/detections/page.js",
   "/dashboard/page": "app/dashboard/page.js",
+  "/detections/page": "app/detections/page.js",
   "/help/page": "app/help/page.js",
   "/upload/page": "app/upload/page.js",
   "/spreadsheets/page": "app/spreadsheets/page.js"

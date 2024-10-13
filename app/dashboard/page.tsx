@@ -29,7 +29,7 @@ interface MetricCardProps {
 }
 
 const MetricCard: React.FC<MetricCardProps> = ({ title, value, icon: Icon }) => (
-  <Card className="bg-white shadow-sm hover:shadow-md transition-shadow duration-200">
+  <Card className="bg-white shadow-sm hover:shadow-md transition-shadow duration-200 cursor-pointer">
     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
       <CardTitle className="text-sm font-medium text-gray-600">{title}</CardTitle>
       <Icon className="h-4 w-4 text-gray-400" />
@@ -331,7 +331,7 @@ export default function WorkPage() {
                 <div onClick={() => router.push('/upload')}>
                   <MetricCard title="Total Images" value={totalImages.toString()} icon={Image} />
                 </div>
-                <div onClick={() => router.push('/spreadsheets')}>
+                <div onClick={() => router.push('/detections')}>
                   <MetricCard title="Detections" value={totalDetections.toString()} icon={BarChart2} />
                 </div>
                 <div onClick={() => router.push('/spreadsheets')}>
