@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useRef } from 'react'
-import { ZoomIn, Trash2, Upload, MapPin, Calendar, Image as ImageIcon, ChevronLeft, ChevronRight, X, Loader, Check, DollarSign } from 'lucide-react'
+import { ZoomIn, Trash2, Upload, MapPin, Calendar, Image as ImageIcon, ChevronLeft, ChevronRight, X, Loader, Check, DollarSign, Box, Layers, BarChart2 } from 'lucide-react'
 import DashboardLayout from '../dashboard-layout'
 import { Button } from "../../components/Login/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../../components/Login/ui/card"
@@ -16,6 +16,7 @@ import { Badge } from "../../components/ui/badge"
 import { Skeleton } from "../../components/ui/skeleton"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select"
 import { calculateVolume } from './volumeCalculation'
+import { Separator } from "../../components/ui/seperator"
 
 interface Detection {
   id: string;
@@ -245,35 +246,62 @@ const DetailedView: React.FC<{ detection: Detection; onClose: () => void; onPrev
             </AnimatePresence>
           </div>
           <div className="p-6 space-y-4">
-            <div className="flex items-center text-sm text-gray-600">
-              <MapPin className="mr-2 h-4 w-4" />
-              <span>
-                {detection.gps.lat.toFixed(6)}, {detection.gps.lng.toFixed(6)}
-                {detection.gps.alt !== undefined ? `, ${detection.gps.alt.toFixed(1)}m` : ''}
-              </span>
-            </div>
-            <div className="flex items-center text-sm text-gray-600">
-              <Calendar className="mr-2 h-4 w-4" />
-              <span>{new Date(detection.timestamp.toDate()).toLocaleString()}</span>
-            </div>
-            <div className="text-sm text-gray-600">
-              <strong>Detections:</strong> {detection.detections?.length || 0}
-            </div>
-            <div className="mt-4">
-              <h3 className="text-lg font-semibold mb-2">Detection Scores</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
-                {detection.detections.map((det, index) => (
-                  <div key={index} className="bg-gray-100 rounded p-2 text-sm">
-                    Score: {det.score.toFixed(2)}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <div className="flex items-center text-sm text-gray-600">
+                  <MapPin className="mr-2 h-4 w-4 text-blue-500" />
+                  <span>
+                    {detection.gps.lat.toFixed(6)}, {detection.gps.lng.toFixed(6)}
+                    {detection.gps.alt !== undefined ? `, ${detection.gps.alt.toFixed(1)}m` : ''}
+                  </span>
+                </div>
+                <div className="flex items-center text-sm text-gray-600">
+                  <Calendar className="mr-2 h-4 w-4 text-green-500" />
+                  <span>{new Date(detection.timestamp.toDate()).toLocaleString()}</span>
+                </div>
+                {detection.cost !== undefined && (
+                  <div className="flex items-center text-sm text-gray-600">
+                    <DollarSign className="mr-2 h-4 w-4 text-green-500" />
+                    <span><strong>Estimated Cost:</strong> ${detection.cost.toFixed(2)}</span>
                   </div>
-                ))}
+                )}
+              </div>
+              <div className="space-y-2">
+                <div className="flex items-center text-sm text-gray-600">
+                  <ImageIcon className="mr-2 h-4 w-4 text-purple-500" />
+                  <span><strong>Detections:</strong> {detection.detections?.length || 0}</span>
+                </div>
+                {detection.volume !== undefined && (
+                  <div className="flex items-center text-sm text-gray-600">
+                    <Box className="mr-2 h-4 w-4 text-orange-500" />
+                    <span><strong>Volume:</strong> {detection.volume.toFixed(2)} m³</span>
+                  </div>
+                )}
+                {detection.material && (
+                  <div className="flex items-center text-sm text-gray-600">
+                    <Layers className="mr-2 h-4 w-4 text-yellow-500" />
+                    <span><strong>Material:</strong> {detection.material}</span>
+                  </div>
+                )}
               </div>
             </div>
-            {detection.volume !== undefined && (
-              <div className="text-sm text-gray-600">
-                <strong>Volume:</strong> {detection.volume.toFixed(2)} m³
+            <Separator className="my-2" />
+            <div>
+              <div className="flex items-center mb-2">
+                <BarChart2 className="mr-2 h-4 w-4 text-indigo-500" />
+                <h3 className="text-sm font-semibold text-gray-700">Detection Scores</h3>
               </div>
-            )}
+              <div className="bg-gray-50 rounded-lg p-2">
+                <div className="grid grid-cols-3 gap-2">
+                  {detection.detections.map((det, index) => (
+                    <div key={index} className="bg-white rounded shadow-sm p-2 text-center">
+                      <div className="text-xs text-gray-500 mb-1">Detection {index + 1}</div>
+                      <div className="text-sm font-semibold text-indigo-600">{det.score.toFixed(2)}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </motion.div>
@@ -441,7 +469,7 @@ export default function DetectionsPage() {
         transition={{ duration: 0.5 }}
         className="p-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen"
       >
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center mb-8"o>
           <h1 className="text-4xl font-bold text-blue-800 tracking-tight">Detections Gallery</h1>
           <div className="space-x-4">
             <Button
