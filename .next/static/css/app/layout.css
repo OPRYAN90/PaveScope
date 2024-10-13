@@ -583,6 +583,9 @@ video {
 .z-\[100\] {
   z-index: 100;
 }
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
 .m-6 {
   margin: 1.5rem;
 }
@@ -680,6 +683,15 @@ video {
 }
 .mt-\[4px\] {
   margin-top: 4px;
+}
+.ml-1 {
+  margin-left: 0.25rem;
+}
+.mb-1\.5 {
+  margin-bottom: 0.375rem;
+}
+.mr-1\.5 {
+  margin-right: 0.375rem;
 }
 .block {
   display: block;
@@ -794,6 +806,9 @@ video {
 }
 .h-screen {
   height: 100vh;
+}
+.h-\[calc\(100vh-10rem\)\] {
+  height: calc(100vh - 10rem);
 }
 .max-h-\[90vh\] {
   max-height: 90vh;
@@ -1024,6 +1039,18 @@ video {
 }
 .gap-6 {
   gap: 1.5rem;
+}
+.gap-x-2 {
+  column-gap: 0.5rem;
+}
+.gap-y-1 {
+  row-gap: 0.25rem;
+}
+.gap-x-3 {
+  column-gap: 0.75rem;
+}
+.gap-y-2 {
+  row-gap: 0.5rem;
 }
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -1262,6 +1289,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(243 232 255 / var(--tw-bg-opacity));
 }
+.bg-purple-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(147 51 234 / var(--tw-bg-opacity));
+}
 .bg-red-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 226 226 / var(--tw-bg-opacity));
@@ -1295,10 +1326,6 @@ video {
 .bg-yellow-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 252 232 / var(--tw-bg-opacity));
-}
-.bg-purple-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(147 51 234 / var(--tw-bg-opacity));
 }
 .bg-opacity-0 {
   --tw-bg-opacity: 0;
@@ -1669,6 +1696,14 @@ video {
   --tw-text-opacity: 1;
   color: rgb(113 63 18 / var(--tw-text-opacity));
 }
+.text-amber-500 {
+  --tw-text-opacity: 1;
+  color: rgb(245 158 11 / var(--tw-text-opacity));
+}
+.text-green-500 {
+  --tw-text-opacity: 1;
+  color: rgb(34 197 94 / var(--tw-text-opacity));
+}
 .underline-offset-4 {
   text-underline-offset: 4px;
 }
@@ -1896,6 +1931,9 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(234 179 8 / var(--tw-bg-opacity));
 }
+.hover\:bg-blue-700\/50:hover {
+  background-color: rgb(29 78 216 / 0.5);
+}
 .hover\:bg-opacity-100:hover {
   --tw-bg-opacity: 1;
 }
@@ -2030,13 +2068,6 @@ video {
 }
 .group:hover .group-hover\:opacity-100 {
   opacity: 1;
-}
-.group:hover .group-hover\:opacity-20 {
-  opacity: 0.2;
-}
-.group:hover .group-hover\:brightness-105 {
-  --tw-brightness: brightness(1.05);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .group.destructive .group-\[\.destructive\]\:text-red-300 {
   --tw-text-opacity: 1;

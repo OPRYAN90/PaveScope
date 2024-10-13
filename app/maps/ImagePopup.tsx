@@ -1,9 +1,13 @@
+"use client"
+
 import React, { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/Login/ui/card"
-import { Button } from "../../components/Login/ui/button"
-import { Loader2, X, Maximize2 } from 'lucide-react'
+import { Button } from "../../components/HomePage/ui/button"
+import { Loader2, X, Maximize2, MapPin, Image as ImageIcon, DollarSign, Box } from 'lucide-react'
 import { drawBoundingBoxes } from '../detections/utils'
-
+import { db } from '../../firebase'
+import { collection, query, where, getDocs } from 'firebase/firestore'
+import { useAuth } from '../../components/AuthProvider'
 interface ImageData {
   url: string;
   gps: { lat: number; lng: number };
@@ -12,19 +16,27 @@ interface ImageData {
   detections?: any[];
 }
 
+interface DetectionData {
+  volume?: number;
+  cost?: number;
+  material?: string;
+}
+
 interface ImagePopupProps {
   imageUrl: string;
   onClose: () => void;
   imageData: ImageData | undefined;
 }
 
-const ImagePopup: React.FC<ImagePopupProps> = ({ imageUrl, onClose, imageData }) => {
+export default function ImagePopup({ imageUrl, onClose, imageData }: ImagePopupProps) {
   const [isImageLoading, setIsImageLoading] = useState(true)
   const [showFullImage, setShowFullImage] = useState(false)
   const [imageSrc, setImageSrc] = useState(imageData?.url || '')
+  const [detectionData, setDetectionData] = useState<DetectionData | null>(null)
+  const { user } = useAuth()
 
   useEffect(() => {
-    if (imageData) {
+    if (imageData && user) {
       setIsImageLoading(true)
       const img = new Image()
       img.crossOrigin = "anonymous"
@@ -47,29 +59,43 @@ const ImagePopup: React.FC<ImagePopupProps> = ({ imageUrl, onClose, imageData })
         setIsImageLoading(false)
       }
       img.src = imageData.url
+
+      // Fetch detection data
+      const fetchDetectionData = async () => {
+        const detectionsRef = collection(db, 'users', user.uid, 'detections')
+        const q = query(detectionsRef, where('imageUrl', '==', imageData.url))
+        const querySnapshot = await getDocs(q)
+        if (!querySnapshot.empty) {
+          const detectionDoc = querySnapshot.docs[0].data() as DetectionData
+          setDetectionData(detectionDoc)
+        }
+      }
+      fetchDetectionData()
     }
-  }, [imageData])
+  }, [imageData, user])
 
   if (!imageData) return null
 
   return (
     <>
       <Card className="absolute top-4 right-4 w-72 bg-white shadow-xl z-10 overflow-hidden">
-        <CardHeader className="p-3 relative flex items-center justify-between bg-blue-600">
-          <CardTitle className="text-sm font-semibold text-white leading-none">
+        <CardHeader className="p-4 relative flex items-center justify-between bg-gradient-to-r from-blue-600 to-blue-700">
+          <CardTitle className="text-lg font-semibold text-white leading-none flex items-center">
+            <ImageIcon className="mr-2 h-5 w-5" />
             Image Details
           </CardTitle>
           <Button 
             variant="ghost" 
-            size="sm" 
+            size="icon"
             onClick={onClose}
-            className="absolute top-2 right-2 p-1 h-auto text-white hover:bg-blue-700 -translate-y-[6.9px]"
+            className="absolute top-2 right-2 text-white hover:bg-blue-700/50"
           >
-            <X className="h-4 w-4"/>
+            <X className="h-4 w-4" />
+            <span className="sr-only">Close</span>
           </Button>
         </CardHeader>
-        <CardContent className="p-4">
-          <div className="w-full h-40 relative rounded-md overflow-hidden mb-3 group">
+        <CardContent className="p-3">
+          <div className="w-full h-40 relative rounded-md overflow-hidden group mb-1.5">
             {isImageLoading && (
               <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
                 <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
@@ -92,26 +118,67 @@ const ImagePopup: React.FC<ImagePopupProps> = ({ imageUrl, onClose, imageData })
               </Button>
             </div>
           </div>
-          <div className="text-center">
-            <p className="text-sm text-gray-700 font-medium mb-1">Location Coordinates</p>
-            <p className="text-xs text-gray-600">
-              Latitude: {imageData.gps.lat.toFixed(6)}
-            </p>
-            <p className="text-xs text-gray-600">
-              Longitude: {imageData.gps.lng.toFixed(6)}
-            </p>
-            <p className="text-xs text-gray-600 mt-2">
-              Status: {imageData.detectionCount > 0 
-                ? `${imageData.detectionCount} Pothole${imageData.detectionCount === 1 ? '' : 's'} Detected` 
-                : (imageData.detectionImageUrl === undefined ? 'Not Processed' : 'No Potholes Detected')}
-            </p>
+          <div className="grid grid-cols-2 gap-x-2 gap-y-1 text-xs">
+            <div className="flex items-center">
+              <MapPin className="h-4 w-4 mr-1.5 text-blue-500 flex-shrink-0" />
+              <div>
+                <span className="font-medium">Lat:</span>
+                <span className="ml-1">{imageData.gps.lat.toFixed(6)}</span>
+              </div>
+            </div>
+            <div className="flex items-center">
+              <MapPin className="h-4 w-4 mr-1.5 text-blue-500 flex-shrink-0" />
+              <div>
+                <span className="font-medium">Lng:</span>
+                <span className="ml-1">{imageData.gps.lng.toFixed(6)}</span>
+              </div>
+            </div>
+            <div className="flex items-center">
+              <ImageIcon className="h-4 w-4 mr-1.5 text-blue-500 flex-shrink-0" />
+              <div>
+                <span className="font-medium">Status:</span>
+                <span className="ml-1">
+                  {imageData.detectionCount > 0 
+                    ? `${imageData.detectionCount} Pothole${imageData.detectionCount === 1 ? '' : 's'}`
+                    : (imageData.detectionImageUrl === undefined ? 'Not Processed' : 'No Potholes')}
+                </span>
+              </div>
+            </div>
+            {detectionData?.volume !== undefined && (
+              <div className="flex items-center">
+                <Box className="h-4 w-4 mr-1.5 text-blue-500 flex-shrink-0" />
+                <div>
+                  <span className="font-medium">Volume:</span>
+                  <span className="ml-1">{detectionData.volume.toFixed(2)} m³</span>
+                </div>
+              </div>
+            )}
+            {detectionData?.cost !== undefined && (
+              <div className="flex items-center">
+                <DollarSign className="h-4 w-4 mr-1.5 text-green-500 flex-shrink-0" />
+                <div>
+                  <span className="font-medium">Cost:</span>
+                  <span className="ml-1">${detectionData.cost.toFixed(2)}</span>
+                </div>
+              </div>
+            )}
+            {detectionData?.material && (
+              <div className="flex items-center">
+                <Box className="h-4 w-4 mr-1.5 text-amber-500 flex-shrink-0" />
+                <div>
+                  <span className="font-medium">Material:</span>
+                  <span className="ml-1">{detectionData.material}</span>
+                </div>
+              </div>
+            )}
           </div>
+          
         </CardContent>
       </Card>
 
       {showFullImage && (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-          <div className="relative max-w-[90vw] max-h-[90vh] bg-white shadow-lg">
+          <div className="relative max-w-[90vw] max-h-[90vh] bg-white shadow-lg rounded-lg overflow-hidden">
             <img 
               src={imageSrc} 
               alt="Full size image" 
@@ -124,6 +191,7 @@ const ImagePopup: React.FC<ImagePopupProps> = ({ imageUrl, onClose, imageData })
               className="absolute top-2 right-2 bg-white bg-opacity-75 hover:bg-opacity-100 shadow-md z-10"
             >
               <X className="h-5 w-5" />
+              <span className="sr-only">Close full image view</span>
             </Button>
           </div>
         </div>
@@ -131,5 +199,3 @@ const ImagePopup: React.FC<ImagePopupProps> = ({ imageUrl, onClose, imageData })
     </>
   )
 }
-
-export default ImagePopup
