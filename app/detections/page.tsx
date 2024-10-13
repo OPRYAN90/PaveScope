@@ -17,7 +17,6 @@ import { Skeleton } from "../../components/ui/skeleton"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select"
 import { calculateVolume } from './volumeCalculation'
 import { Separator } from "../../components/ui/seperator"
-import { CSVLink } from "react-csv";
 
 interface Detection {
   id: string;
@@ -476,6 +475,25 @@ export default function DetectionsPage() {
     }));
   };
 
+  const exportToCSV = () => {
+    const csvContent = [
+      Object.keys(prepareCSVData()[0]).join(','), // Header
+      ...prepareCSVData().map(row => Object.values(row).join(','))
+    ].join('\n');
+    
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement("a");
+    if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute("download", "detections_export.csv");
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   return (
     <DashboardLayout>
       <motion.div 
@@ -509,14 +527,13 @@ export default function DetectionsPage() {
               </span>
             )}
             {detections.length > 0 && (
-              <CSVLink
-                data={prepareCSVData()}
-                filename={"detections_export.csv"}
+              <Button
+                onClick={exportToCSV}
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
               >
                 <Upload className="mr-2 h-4 w-4" />
                 Export CSV
-              </CSVLink>
+              </Button>
             )}
           </div>
         </div>
