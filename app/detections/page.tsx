@@ -17,6 +17,7 @@ import { Skeleton } from "../../components/ui/skeleton"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select"
 import { calculateVolume } from './volumeCalculation'
 import { Separator } from "../../components/ui/seperator"
+import { CSVLink } from "react-csv";
 
 interface Detection {
   id: string;
@@ -461,6 +462,20 @@ export default function DetectionsPage() {
     }
   }
 
+  const prepareCSVData = () => {
+    return detections.map(detection => ({
+      'File Name': detection.fileName,
+      'Latitude': detection.gps.lat,
+      'Longitude': detection.gps.lng,
+      'Altitude': detection.gps.alt || 'N/A',
+      'Timestamp': new Date(detection.timestamp.toDate()).toLocaleString(),
+      'Number of Detections': detection.detections?.length || 0,
+      'Volume (m³)': detection.volume?.toFixed(2) || 'N/A',
+      'Material': detection.material || 'N/A',
+      'Cost': detection.cost?.toFixed(2) || 'N/A'
+    }));
+  };
+
   return (
     <DashboardLayout>
       <motion.div 
@@ -492,6 +507,16 @@ export default function DetectionsPage() {
               <span className="text-lg font-semibold text-purple-600">
                 Total Volume: {totalVolume.toFixed(2)} m³
               </span>
+            )}
+            {detections.length > 0 && (
+              <CSVLink
+                data={prepareCSVData()}
+                filename={"detections_export.csv"}
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              >
+                <Upload className="mr-2 h-4 w-4" />
+                Export CSV
+              </CSVLink>
             )}
           </div>
         </div>
@@ -536,10 +561,9 @@ export default function DetectionsPage() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
-                    whileHover={{ scale: 1.03 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg">
+                    <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white bg-opacity-80 border-2 border-transparent hover:border-blue-300 cursor-pointer">
                       <CardHeader className="p-0">
                         <DetectionImage 
                           detection={detection} 
