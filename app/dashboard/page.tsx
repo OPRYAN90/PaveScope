@@ -7,11 +7,10 @@ import { signOutUser } from '../../lib/auth';
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/Login/ui/card";
 import { Button } from "../../components/Login/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
-import { useNavigateOrScrollTop } from '../../utils/navigation';
 import DashboardLayout from '../dashboard-layout';
 import Link from 'next/link';
 import { db } from '../../firebase';
-import { collection, query, getDocs, limit, orderBy } from 'firebase/firestore';
+import { collection, query, getDocs, limit, orderBy, where } from 'firebase/firestore';
 import { Skeleton } from "../../components/ui/skeleton";
 import { Upload, BarChart2, Map, FileSpreadsheet, HelpCircle, Image, DollarSign, Box, ChevronDown, LogOut, Settings, User, Table, Sliders, MapPin, ChevronRight, Loader } from 'lucide-react';
 
@@ -159,6 +158,10 @@ export default function WorkPage() {
   const [isLoadingDetections, setIsLoadingDetections] = useState(true);
   const [isLoadingImages, setIsLoadingImages] = useState(true);
   const [isLoadingMetrics, setIsLoadingMetrics] = useState(true);
+  const [totalImages, setTotalImages] = useState(0);
+  const [totalDetections, setTotalDetections] = useState(0);
+  const [totalCost, setTotalCost] = useState(0);
+  const [totalVolume, setTotalVolume] = useState(0);
 
   useEffect(() => {
     const loadData = async () => {
@@ -205,9 +208,32 @@ export default function WorkPage() {
 
   const fetchMetrics = async () => {
     setIsLoadingMetrics(true);
-    // Implement your metrics fetching logic here
-    // For now, we'll just simulate a delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    if (user) {
+      try {
+        // Fetch total images
+        const imagesQuery = query(collection(db, 'users', user.uid, 'images'));
+        const imagesSnapshot = await getDocs(imagesQuery);
+        setTotalImages(imagesSnapshot.size);
+
+        // Fetch detections, cost, and volume
+        const detectionsQuery = query(collection(db, 'users', user.uid, 'detections'));
+        const detectionsSnapshot = await getDocs(detectionsQuery);
+        let detections = 0;
+        let cost = 0;
+        let volume = 0;
+        detectionsSnapshot.forEach(doc => {
+          const data = doc.data();
+          detections += data.detections?.length || 0;
+          cost += data.cost || 0;
+          volume += data.volume || 0;
+        });
+        setTotalDetections(detections);
+        setTotalCost(cost);
+        setTotalVolume(volume);
+      } catch (error) {
+        console.error("Error fetching metrics:", error);
+      }
+    }
     setIsLoadingMetrics(false);
   };
 
@@ -229,10 +255,6 @@ export default function WorkPage() {
       router.push('/signin');
     }
   }, [user, authLoading, router]);
-
-  useEffect(() => {
-    useNavigateOrScrollTop.setScrollableElement(window);
-  }, []);
 
   if (authLoading) {
     return <DashboardLayout><LoadingAnimation /></DashboardLayout>;
@@ -306,10 +328,18 @@ export default function WorkPage() {
               </>
             ) : (
               <>
-                <MetricCard title="Total Images" value="1,234" icon={Image} />
-                <MetricCard title="Detections" value="567" icon={BarChart2} />
-                <MetricCard title="Estimated Cost" value="$12,345" icon={DollarSign} />
-                <MetricCard title="Volume of Materials" value="890 m³" icon={Box} />
+                <div onClick={() => router.push('/upload')}>
+                  <MetricCard title="Total Images" value={totalImages.toString()} icon={Image} />
+                </div>
+                <div onClick={() => router.push('/spreadsheets')}>
+                  <MetricCard title="Detections" value={totalDetections.toString()} icon={BarChart2} />
+                </div>
+                <div onClick={() => router.push('/spreadsheets')}>
+                  <MetricCard title="Estimated Cost" value={`$${totalCost.toFixed(2)}`} icon={DollarSign} />
+                </div>
+                <div onClick={() => router.push('/spreadsheets')}>
+                  <MetricCard title="Volume of Materials" value={`${totalVolume.toFixed(2)} m³`} icon={Box} />
+                </div>
               </>
             )}
           </div>

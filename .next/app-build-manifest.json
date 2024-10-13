@@ -1,9 +1,9 @@
 {
   "pages": {
-    "/spreadsheets/page": [
+    "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/spreadsheets/page.js"
+      "static/chunks/app/page.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
@@ -11,15 +11,10 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/maps/page": [
+    "/signin/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/maps/page.js"
-    ],
-    "/help/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/help/page.js"
+      "static/chunks/app/signin/page.js"
     ],
     "/dashboard/page": [
       "static/chunks/webpack.js",
@@ -31,20 +26,20 @@
       "static/chunks/main-app.js",
       "static/chunks/app/detections/page.js"
     ],
-    "/page": [
+    "/help/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/help/page.js"
     ],
-    "/signin/page": [
+    "/spreadsheets/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/signin/page.js"
+      "static/chunks/app/spreadsheets/page.js"
     ],
-    "/signup/page": [
+    "/upload/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/signup/page.js"
+      "static/chunks/app/upload/page.js"
     ]
   }
 }

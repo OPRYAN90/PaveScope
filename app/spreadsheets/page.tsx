@@ -14,6 +14,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../../components/Login
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../../components/ui/dialog"
 import { Label } from "../../components/Login/ui/label"
 import { useToast } from "../../components/ui/use-toast"
+import SummaryStatistics from '../../components/SummaryStatistics'
 
 interface ImageData {
   id: string;
@@ -262,6 +263,7 @@ export default function SpreadsheetsPage() {
                 </Button>
                 <span className="text-sm text-gray-600">All Images</span>
               </div>
+              <SummaryStatistics data={filteredAndSortedData} />
               <div className="flex space-x-2">
                 <Button variant="outline" size="sm" onClick={fetchData} className="text-green-600 hover:bg-green-50">
                   <RefreshCw className="h-4 w-4 mr-2" />
