@@ -13,6 +13,7 @@ import { db } from '../../firebase';
 import { collection, query, getDocs, limit, orderBy, where } from 'firebase/firestore';
 import { Skeleton } from "../../components/ui/skeleton";
 import { Upload, BarChart2, Map, FileSpreadsheet, HelpCircle, Image, DollarSign, Box, ChevronDown, LogOut, Settings, User, Table, Sliders, MapPin, ChevronRight, Loader } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../components/ui/tooltip"
 
 interface User {
   uid: string;
@@ -291,20 +292,38 @@ export default function WorkPage() {
                     <p className="text-sm font-semibold text-gray-700">{user?.displayName || 'User'}</p>
                     <p className="text-xs text-gray-500">{user?.email}</p>
                   </div>
-                  <button
-                    className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-150"
-                    onClick={() => {/* Add profile action */}}
-                  >
-                    <User className="h-4 w-4 mr-2" />
-                    Profile
-                  </button>
-                  <button
-                    className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-150"
-                    onClick={() => {/* Add settings action */}}
-                  >
-                    <Settings className="h-4 w-4 mr-2" />
-                    Settings
-                  </button>
+                  <TooltipProvider>
+                    <Tooltip delayDuration={300}>
+                      <TooltipTrigger asChild>
+                        <button
+                          className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-150"
+                          onClick={() => {/* Add profile action */}}
+                        >
+                          <User className="h-4 w-4 mr-2" />
+                          Profile
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent side="left" align="end" className="bg-yellow-100 text-yellow-800 border border-yellow-200">
+                        <p>Not supported yet</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                  <TooltipProvider>
+                    <Tooltip delayDuration={300}>
+                      <TooltipTrigger asChild>
+                        <button
+                          className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-150"
+                          onClick={() => {/* Add settings action */}}
+                        >
+                          <Settings className="h-4 w-4 mr-2" />
+                          Settings
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent side="left" align="end" className="bg-yellow-100 text-yellow-800 border border-yellow-200">
+                        <p>Not supported yet</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                   <button
                     onClick={handleSignOut}
                     className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors duration-150"
