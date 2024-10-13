@@ -145,8 +145,8 @@ export default function SpreadsheetsPage() {
           : bDetections - aDetections;
       }
       if (sortConfig.key === 'volume' || sortConfig.key === 'cost') {
-        const aValue = a[sortConfig.key] === 'N/A' ? -1 : a[sortConfig.key];
-        const bValue = b[sortConfig.key] === 'N/A' ? -1 : b[sortConfig.key];
+        const aValue = a[sortConfig.key] === 'N/A' ? -Infinity : a[sortConfig.key] as number;
+        const bValue = b[sortConfig.key] === 'N/A' ? -Infinity : b[sortConfig.key] as number;
         return sortConfig.direction === 'asc'
           ? aValue - bValue
           : bValue - aValue;

@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Menu, X } from 'lucide-react';
-import { Button } from "@/components/HomePage/ui/button";
-import { DroneAnimation } from "@/components/HomePage/DroneAnimation";
+import { Button } from "../components/HomePage/ui/button";
+import { DroneAnimation } from "../components/HomePage/DroneAnimation";
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';

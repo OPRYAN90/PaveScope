@@ -85,7 +85,8 @@ export default function ImagePopup({ imageUrl, onClose, imageData }: ImagePopupP
             Image Details
           </CardTitle>
           <Button 
-            variant="ghost" 
+            variant="ghost"
+            // @ts-ignore 
             size="icon"
             onClick={onClose}
             className="absolute top-2 right-2 text-white hover:bg-blue-700/50"
@@ -186,6 +187,7 @@ export default function ImagePopup({ imageUrl, onClose, imageData }: ImagePopupP
             />
             <Button
               variant="secondary"
+              // @ts-ignore
               size="icon"
               onClick={() => setShowFullImage(false)}
               className="absolute top-2 right-2 bg-white bg-opacity-75 hover:bg-opacity-100 shadow-md z-10"

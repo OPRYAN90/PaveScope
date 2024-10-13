@@ -469,7 +469,7 @@ export default function DetectionsPage() {
         transition={{ duration: 0.5 }}
         className="p-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen"
       >
-        <div className="flex justify-between items-center mb-8"o>
+        <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold text-blue-800 tracking-tight">Detections Gallery</h1>
           <div className="space-x-4">
             <Button

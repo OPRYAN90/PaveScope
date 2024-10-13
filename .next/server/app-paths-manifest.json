@@ -1,6 +1,9 @@
 {
+  "/spreadsheets/page": "app/spreadsheets/page.js",
+  "/maps/page": "app/maps/page.js",
   "/dashboard/page": "app/dashboard/page.js",
   "/detections/page": "app/detections/page.js",
-  "/maps/page": "app/maps/page.js",
-  "/spreadsheets/page": "app/spreadsheets/page.js"
+  "/page": "app/page.js",
+  "/signin/page": "app/signin/page.js",
+  "/signup/page": "app/signup/page.js"
 }
