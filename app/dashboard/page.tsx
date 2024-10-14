@@ -391,37 +391,44 @@ export default function WorkPage() {
                     Gallery
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="flex-grow p-4">
-                  {isLoadingImages ? (
-                    <div className="grid grid-cols-3 gap-4">
-                      {[...Array(6)].map((_, i) => (
-                        <Skeleton key={i} className="aspect-square rounded-lg" />
-                      ))}
-                    </div>
-                  ) : recentImages.length > 0 ? (
-                    <div className="grid grid-cols-3 gap-4">
-                      {recentImages.slice(0, 5).map((image, i) => (
-                        <div key={image.id} className="aspect-square bg-gray-200 relative overflow-hidden rounded-lg">
-                          <img 
-                            src={image.url || `/placeholder.svg?height=100&width=100&text=Image+${i+1}`} 
-                            alt={`Recent image ${i+1}`}
-                            className="w-full h-full object-cover"
-                          />
+                <CardContent className="flex-grow p-4 relative">
+                  <div className="w-full pb-[66.67%] relative"> {/* 2:3 aspect ratio */}
+                    <div className="absolute inset-0">
+                      {isLoadingImages ? (
+                        <div className="grid grid-cols-3 gap-4 h-full">
+                          {[...Array(6)].map((_, i) => (
+                            <Skeleton key={i} className="w-full h-full rounded-lg" />
+                          ))}
                         </div>
-                      ))}
-                      <div className="aspect-square bg-blue-100 rounded-lg flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                        </svg>
-                      </div>
+                      ) : recentImages.length > 0 ? (
+                        <div className="grid grid-cols-3 gap-4 h-full">
+                          {recentImages.slice(0, 5).map((image, i) => (
+                            <div key={image.id} className="aspect-square bg-gray-200 relative overflow-hidden rounded-lg">
+                              <img 
+                                src={image.url || `/placeholder.svg?height=100&width=100&text=Image+${i+1}`} 
+                                alt={`Recent image ${i+1}`}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                          ))}
+                          <div className="aspect-square bg-blue-100 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                            </svg>
+                          </div>
+                          {[...Array(Math.max(0, 6 - recentImages.length - 1))].map((_, i) => (
+                            <div key={`empty-${i}`} className="aspect-square bg-gray-100 rounded-lg" />
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="flex flex-col items-center justify-center h-full text-gray-500">
+                          <Image className="h-16 w-16 mb-4 text-gray-400" />
+                          <p className="text-center">No images uploaded yet.</p>
+                          <p className="text-center text-sm mt-2">Click here to upload your first image.</p>
+                        </div>
+                      )}
                     </div>
-                  ) : (
-                    <div className="flex flex-col items-center justify-center h-full text-gray-500">
-                      <Image className="h-16 w-16 mb-4 text-gray-400" />
-                      <p className="text-center">No images uploaded yet.</p>
-                      <p className="text-center text-sm mt-2">Click here to upload your first image.</p>
-                    </div>
-                  )}
+                  </div>
                 </CardContent>
               </Card>
             </Link>

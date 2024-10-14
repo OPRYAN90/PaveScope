@@ -78,7 +78,7 @@ const faqs = [
   },
   {
     question: "What information is needed for accurate volume calculations?",
-    answer: "For accurate volume calculations, PaveScope requires images with embedded GPS data (including altitude), the phone model used for capturing images (currently optimized for iPhone 14 Pro main camera at 4:3 aspect ratio), and clear, unobstructed views of the potholes."
+    answer: "For accurate volume calculations, PaveScope requires images with embedded GPS data (including altitude), the phone model used for capturing images (currently optimized for iPhone 14 Pro main camera at 4:3 aspect ratio), and head-on, unobstructed views of the potholes."
   },
   {
     question: "How accurate are the volume calculations?",
@@ -171,7 +171,7 @@ export default function HelpPage() {
           </CardContent>
         </Card>
 
-        <Card className="mb-6">
+        <Card>
           <CardHeader>
             <CardTitle className="text-xl font-semibold text-blue-800">Frequently Asked Questions</CardTitle>
           </CardHeader>
@@ -188,31 +188,6 @@ export default function HelpPage() {
             ) : (
               <p className="text-gray-500">No matching questions found. Try a different search term.</p>
             )}
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-xl font-semibold text-blue-800">Contact Support</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-gray-600 mb-4">
-              Can&apos;t find what you&apos;re looking for? Our support team is here to help.
-            </p>
-            <div className="flex flex-wrap gap-6">
-              <div className="flex items-center">
-                <Mail className="h-5 w-5 text-blue-600 mr-2" />
-                <span className="text-gray-700">support@pavescope.com</span>
-              </div>
-              <div className="flex items-center">
-                <Phone className="h-5 w-5 text-blue-600 mr-2" />
-                <span className="text-gray-700">+1 (555) 123-4567</span>
-              </div>
-              <div className="flex items-center">
-                <MessageCircle className="h-5 w-5 text-blue-600 mr-2" />
-                <span className="text-gray-700">Live chat available 9AM-5PM EST</span>
-              </div>
-            </div>
           </CardContent>
         </Card>
       </div>
