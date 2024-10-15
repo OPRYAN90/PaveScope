@@ -798,7 +798,14 @@ export default function DetectionsPage() {
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Device:</label>
-              <p className="text-sm text-gray-600">iPhone 14 Pro (Main Camera, 4:3)</p>
+              <Select value="iPhone 14 Pro (Main Camera, 4:3)">
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select device" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="iPhone 14 Pro (Main Camera, 4:3)">iPhone 14 Pro (Main Camera, 4:3)</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Select material:</label>

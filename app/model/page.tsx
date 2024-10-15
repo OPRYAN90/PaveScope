@@ -265,7 +265,6 @@ export default function ModelPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [processedImages, setProcessedImages] = useState<string[]>([])
   const [InferenceResults, setInferenceResults] = useState<{ [key: string]: any }>({})
-  const [showWarmupWarning, setShowWarmupWarning] = useState(true)
 
   useEffect(() => {
     if (user) {
@@ -518,41 +517,9 @@ export default function ModelPage() {
     setLoadingImages(prev => ({ ...prev, [imageUrl]: false }))
   }
 
-  useEffect(() => {
-    // Show the warning when the component mounts
-    setShowWarmupWarning(true)
-
-    // Hide the warning after 10 seconds
-    const timer = setTimeout(() => {
-      setShowWarmupWarning(false)
-    }, 5000)
-
-    // Clear the timer if the component unmounts
-    return () => clearTimeout(timer)
-  }, [])
-
   return (
     <DashboardLayout>
       <div className="flex flex-col min-h-screen bg-blue-50">
-        {showWarmupWarning && (
-          <div className="fixed top-4 right-4 z-50">
-            <Alert className="w-96 bg-yellow-100 border-yellow-500 text-yellow-800 shadow-lg">
-              <AlertTriangle className="h-4 w-4 mr-2" />
-              <AlertDescription>
-                The Hugging Face API may need time to warm up after long periods of inactivity. If inference fails on the first attempt, please try again.
-              </AlertDescription>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="absolute top-2 right-2"
-                onClick={() => setShowWarmupWarning(false)}
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            </Alert>
-          </div>
-        )}
-
         <div className="flex-grow p-6">
           <h1 className="text-3xl font-bold mb-6 text-blue-800">Model Inference Settings</h1>
 
