@@ -26,15 +26,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/detections/page.js"
     ],
-    "/spreadsheets/page": [
+    "/model/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/spreadsheets/page.js"
-    ],
-    "/maps/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/maps/page.js"
+      "static/chunks/app/model/page.js"
     ]
   }
 }
