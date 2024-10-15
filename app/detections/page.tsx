@@ -17,6 +17,7 @@ import { Skeleton } from "../../components/ui/skeleton"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select"
 import { calculateVolume } from './volumeCalculation'
 import { Separator } from "../../components/ui/seperator"
+import { Input } from "../../components/Login/ui/input"
 
 interface Detection {
   id: string;
@@ -139,11 +140,23 @@ const DetectionImage: React.FC<{ detection: Detection; onClick: () => void; onSe
   )
 }
 
+const MaterialOptions = [
+  { name: "Hot Mix Asphalt", price: 70 },  // Average of $55 and $85
+  { name: "Warm Mix Asphalt", price: 75 }, // Average of $60 and $90
+  { name: "Cold Mix Asphalt", price: 37.5 }, // Average of $25 and $50
+  { name: "Porous Asphalt", price: 92.5 }, // Average of $75 and $110
+  { name: "Custom", price: 0 }, // Custom option with default price 0
+];
+
 const DetailedView: React.FC<{ detection: Detection; onClose: () => void; onPrev: () => void; onNext: () => void }> = ({ detection, onClose, onPrev, onNext }) => {
-  const [imageSrc, setImageSrc] = useState(detection.imageUrl)
   const [isImageLoading, setIsImageLoading] = useState(true)
   const [isBoundingBoxLoading, setIsBoundingBoxLoading] = useState(true)
   const [showControls, setShowControls] = useState(false)
+  const [currentImage, setCurrentImage] = useState<string | null>(null)
+  const [nextImage, setNextImage] = useState<string | null>(null)
+  const [selectedMaterial, setSelectedMaterial] = useState(detection.material || '')
+  const [customMaterial, setCustomMaterial] = useState('')
+  const [customPrice, setCustomPrice] = useState(0)
 
   useEffect(() => {
     setIsImageLoading(true)
@@ -154,17 +167,67 @@ const DetailedView: React.FC<{ detection: Detection; onClose: () => void; onPrev
     img.onload = () => {
       setIsImageLoading(false)
       if (detection.detections && detection.detections.length > 0) {
-        setTimeout(() => {
-          const newSrc = drawBoundingBoxes(img, detection.detections)
-          setImageSrc(newSrc)
-          setIsBoundingBoxLoading(false)
-        }, 0)
+        const newSrc = drawBoundingBoxes(img, detection.detections)
+        setNextImage(newSrc)
       } else {
-        setIsBoundingBoxLoading(false)
+        setNextImage(detection.imageUrl)
       }
+      setIsBoundingBoxLoading(false)
     }
     img.src = detection.imageUrl
   }, [detection])
+
+  useEffect(() => {
+    if (nextImage) {
+      setTimeout(() => {
+        setCurrentImage(nextImage)
+        setNextImage(null)
+      }, 50) // Small delay to ensure smooth transition
+    }
+  }, [nextImage])
+
+  const handlePrev = () => {
+    setCurrentImage(null)
+    setNextImage(null)
+    setIsImageLoading(true)
+    setIsBoundingBoxLoading(true)
+    onPrev()
+  }
+
+  const handleNext = () => {
+    setCurrentImage(null)
+    setNextImage(null)
+    setIsImageLoading(true)
+    setIsBoundingBoxLoading(true)
+    onNext()
+  }
+
+  const handleMaterialChange = (value: string) => {
+    setSelectedMaterial(value)
+    if (value !== 'Custom') {
+      const selectedOption = MaterialOptions.find(option => option.name === value)
+      if (selectedOption && detection.volume) {
+        const newCost = selectedOption.price * detection.volume
+        // Here you would update the detection's cost in your state and database
+        // For example:
+        // updateDetectionCost(detection.id, newCost)
+      }
+    }
+  }
+
+  const handleCustomMaterialChange = (value: string) => {
+    setCustomMaterial(value)
+  }
+
+  const handleCustomPriceChange = (value: string) => {
+    const price = parseFloat(value)
+    setCustomPrice(isNaN(price) ? 0 : price)
+    if (!isNaN(price) && detection.volume) {
+      const newCost = price * detection.volume
+      // Update the detection's cost in your state and database
+      // updateDetectionCost(detection.id, newCost)
+    }
+  }
 
   return (
     <motion.div 
@@ -189,7 +252,8 @@ const DetailedView: React.FC<{ detection: Detection; onClose: () => void; onPrev
         </div>
         <div className="flex-grow overflow-auto">
           <div 
-            className="relative"
+            className="relative w-full"
+            style={{ paddingBottom: '75%' }} // 4:3 aspect ratio
             onMouseEnter={() => setShowControls(true)}
             onMouseLeave={() => setShowControls(false)}
           >
@@ -203,47 +267,56 @@ const DetailedView: React.FC<{ detection: Detection; onClose: () => void; onPrev
                 </div>
               </div>
             )}
-            <img 
-              src={imageSrc} 
-              alt={detection.fileName} 
-              className={`w-full h-auto ${(isImageLoading || isBoundingBoxLoading) ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
-            />
-            <AnimatePresence>
-              {showControls && (
-                <>
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="absolute left-2 top-1/2 transform -translate-y-1/2"
-                  >
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="bg-white/80 hover:bg-white"
-                      onClick={onPrev}
-                    >
-                      <ChevronLeft className="h-4 w-4" />
-                    </Button>
-                  </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2"
-                  >
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="bg-white/80 hover:bg-white"
-                      onClick={onNext}
-                    >
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
-                  </motion.div>
-                </>
+            <div className="absolute inset-0">
+              {currentImage && (
+                <motion.img 
+                  key={currentImage}
+                  src={currentImage} 
+                  alt={detection.fileName} 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="w-full h-full object-contain"
+                />
               )}
-            </AnimatePresence>
+              <AnimatePresence>
+                {showControls && (
+                  <>
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="absolute left-2 top-1/2 transform -translate-y-1/2"
+                    >
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="bg-white/80 hover:bg-white"
+                        onClick={handlePrev}
+                      >
+                        <ChevronLeft className="h-4 w-4" />
+                      </Button>
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                    >
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="bg-white/80 hover:bg-white"
+                        onClick={handleNext}
+                      >
+                        <ChevronRight className="h-4 w-4" />
+                      </Button>
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
           <div className="p-6 space-y-4">
             <div className="grid grid-cols-2 gap-4">
@@ -277,10 +350,47 @@ const DetailedView: React.FC<{ detection: Detection; onClose: () => void; onPrev
                     <span><strong>Volume:</strong> {detection.volume.toFixed(2)} m³</span>
                   </div>
                 )}
-                {detection.material && (
+                <div className="flex items-center text-sm text-gray-600">
+                  <Layers className="mr-2 h-4 w-4 text-yellow-500" />
+                  <span><strong>Material:</strong></span>
+                  <Select value={selectedMaterial} onValueChange={handleMaterialChange}>
+                    <SelectTrigger className="w-[180px] ml-2">
+                      <SelectValue placeholder="Select material" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {MaterialOptions.map((option) => (
+                        <SelectItem key={option.name} value={option.name}>
+                          {option.name} {option.name !== 'Custom' && `($${option.price}/ton)`}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                {selectedMaterial === 'Custom' && (
+                  <div className="flex items-center text-sm text-gray-600 mt-2">
+                    <Input
+                      type="text"
+                      placeholder="Custom material name"
+                      value={customMaterial}
+                      onChange={(e) => handleCustomMaterialChange(e.target.value)}
+                      className="w-[180px] mr-2"
+                    />
+                    <Input
+                      type="number"
+                      placeholder="Price per ton"
+                      value={customPrice.toString()}
+                      onChange={(e) => handleCustomPriceChange(e.target.value)}
+                      className="w-[120px]"
+                    />
+                  </div>
+                )}
+                {detection.volume !== undefined && selectedMaterial && (
                   <div className="flex items-center text-sm text-gray-600">
-                    <Layers className="mr-2 h-4 w-4 text-yellow-500" />
-                    <span><strong>Material:</strong> {detection.material}</span>
+                    <DollarSign className="mr-2 h-4 w-4 text-green-500" />
+                    <span>
+                      <strong>Estimated Cost:</strong> $
+                      {(detection.volume * (selectedMaterial === 'Custom' ? customPrice : (MaterialOptions.find(o => o.name === selectedMaterial)?.price || 0))).toFixed(2)}
+                    </span>
                   </div>
                 )}
               </div>
@@ -319,11 +429,13 @@ export default function DetectionsPage() {
   const [selectedDetections, setSelectedDetections] = useState<Set<string>>(new Set())
   const [isSelectMode, setIsSelectMode] = useState(false)
   const [showVolumeDialog, setShowVolumeDialog] = useState(false)
-  const [selectedDevice, setSelectedDevice] = useState('')
+  const [selectedDevice, setSelectedDevice] = useState('iphone14pro') // Set default device
   const [calculatedVolume, setCalculatedVolume] = useState<number | null>(null)
   const [totalVolume, setTotalVolume] = useState<number>(0)
   const [selectedMaterial, setSelectedMaterial] = useState('')
-  const [materialCost, setMaterialCost] = useState(0)
+  const [customMaterial, setCustomMaterial] = useState('')
+  const [customPrice, setCustomPrice] = useState(0)
+  const [isCalculating, setIsCalculating] = useState(false)
 
   useEffect(() => {
     if (user) {
@@ -408,54 +520,71 @@ export default function DetectionsPage() {
   }
 
   const handleCalculateVolumeAndCost = async () => {
-    if (selectedDevice && selectedMaterial && selectedDetections.size > 0) {
+    if (selectedMaterial && selectedDetections.size > 0) {
+      setIsCalculating(true)
       const selectedDetectionObjects = detections.filter(d => selectedDetections.has(d.id))
       const phoneHeight = 1.5 // meters, adjust as needed
       const imageWidth = 4032 // pixels, adjust based on device
       const imageHeight = 3024 // pixels, adjust based on device
       
-      const volumes = await Promise.all(selectedDetectionObjects.map(async (detection) => {
-        if (detection.gps.alt !== undefined) {
-          const volume = await calculateVolume(
-            [detection] as import("./types").Detection[],
-            phoneHeight,
-            imageWidth,
-            imageHeight
-          )
-          const cost = volume * materialCost
-          return { id: detection.id, volume, cost }
-        }
-        return { id: detection.id, volume: 0, cost: 0 }
-      }))
+      try {
+        const volumes = await Promise.all(selectedDetectionObjects.map(async (detection) => {
+          if (detection.gps.alt !== undefined) {
+            const volume = await calculateVolume(
+              [detection] as import("./types").Detection[],
+              phoneHeight,
+              imageWidth,
+              imageHeight
+            )
+            const materialPrice = selectedMaterial === 'Custom' ? customPrice : MaterialOptions.find(o => o.name === selectedMaterial)?.price || 0
+            const cost = volume * materialPrice
+            return { id: detection.id, volume, cost }
+          }
+          return { id: detection.id, volume: 0, cost: 0 }
+        }))
 
-      const totalVolume = volumes.reduce((sum, { volume }) => sum + volume, 0)
-      const totalCost = volumes.reduce((sum, { cost }) => sum + cost, 0)
-      setTotalVolume(totalVolume)
+        const totalVolume = volumes.reduce((sum, { volume }) => sum + volume, 0)
+        const totalCost = volumes.reduce((sum, { cost }) => sum + cost, 0)
+        setTotalVolume(totalVolume)
 
-      // Update detections with calculated volumes and costs
-      const updatedDetections = detections.map(detection => {
-        const calculated = volumes.find(v => v.id === detection.id)
-        return calculated ? { ...detection, volume: calculated.volume, material: selectedMaterial, cost: calculated.cost } : detection
-      })
-      setDetections(updatedDetections)
+        // Update detections with calculated volumes and costs
+        const updatedDetections = detections.map(detection => {
+          const calculated = volumes.find(v => v.id === detection.id)
+          return calculated ? { ...detection, volume: calculated.volume, material: selectedMaterial === 'Custom' ? customMaterial : selectedMaterial, cost: calculated.cost } : detection
+        })
+        setDetections(updatedDetections)
 
-      // Update volumes, materials, and costs in Firestore
-      const batch = writeBatch(db)
-      volumes.forEach(({ id, volume, cost }) => {
-        const detectionRef = doc(db, 'users', user!.uid, 'detections', id)
-        batch.update(detectionRef, { volume, material: selectedMaterial, cost })
-      })
-      await batch.commit()
+        // Update volumes, materials, and costs in Firestore
+        const batch = writeBatch(db)
+        volumes.forEach(({ id, volume, cost }) => {
+          const detectionRef = doc(db, 'users', user!.uid, 'detections', id)
+          batch.update(detectionRef, { 
+            volume, 
+            material: selectedMaterial === 'Custom' ? customMaterial : selectedMaterial, 
+            cost 
+          })
+        })
+        await batch.commit()
 
-      toast({
-        title: "Volume and Cost Calculated",
-        description: `Total volume: ${totalVolume.toFixed(2)} m³. Total cost: $${totalCost.toFixed(2)}`,
-      })
-      setShowVolumeDialog(false)
+        toast({
+          title: "Volume and Cost Calculated",
+          description: `Total volume: ${totalVolume.toFixed(2)} m³. Total cost: $${totalCost.toFixed(2)}`,
+        })
+        setShowVolumeDialog(false)
+      } catch (error) {
+        console.error("Error calculating volume and cost:", error)
+        toast({
+          title: "Error",
+          description: "An error occurred while calculating volume and cost. Please try again.",
+          variant: "destructive",
+        })
+      } finally {
+        setIsCalculating(false)
+      }
     } else {
       toast({
         title: "Error",
-        description: "Please select a device, material, and at least one image.",
+        description: "Please select a material and at least one image.",
         variant: "destructive",
       })
     }
@@ -668,33 +797,56 @@ export default function DetectionsPage() {
           </DialogHeader>
           <div className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Select your device:</label>
-              <Select onValueChange={setSelectedDevice}>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select device" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="iphone14pro">iPhone 14 Pro (Main Camera, 4:3)</SelectItem>
-                </SelectContent>
-              </Select>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Device:</label>
+              <p className="text-sm text-gray-600">iPhone 14 Pro (Main Camera, 4:3)</p>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Select material:</label>
-              <Select onValueChange={(value) => {
-                setSelectedMaterial(value)
-                setMaterialCost(value === 'standard' ? 100 : 150) // Example costs
-              }}>
+              <Select onValueChange={setSelectedMaterial}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select material" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="standard">Standard Asphalt ($100/m³)</SelectItem>
-                  <SelectItem value="premium">Premium Asphalt ($150/m³)</SelectItem>
+                  {MaterialOptions.map((option) => (
+                    <SelectItem key={option.name} value={option.name}>
+                      {option.name} {option.name !== 'Custom' && `($${option.price}/m³)`}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
-            <Button onClick={handleCalculateVolumeAndCost} className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-              Calculate Volume and Cost
+            {selectedMaterial === 'Custom' && (
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700">Custom Material Details:</label>
+                <Input
+                  type="text"
+                  placeholder="Enter custom material name"
+                  value={customMaterial}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCustomMaterial(e.target.value)}
+                  className="w-full"
+                />
+                <Input
+                  type="number"
+                  placeholder="Enter price per cubic meter ($/m³)"
+                  value={customPrice === 0 ? '' : customPrice.toString()}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCustomPrice(parseFloat(e.target.value) || 0)}
+                  className="w-full"
+                />
+              </div>
+            )}
+            <Button 
+              onClick={handleCalculateVolumeAndCost} 
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+              disabled={isCalculating}
+            >
+              {isCalculating ? (
+                <>
+                  <Loader className="mr-2 h-4 w-4 animate-spin" />
+                  Calculating...
+                </>
+              ) : (
+                'Calculate Volume and Cost'
+              )}
             </Button>
           </div>
         </DialogContent>
