@@ -1,6 +1,6 @@
 [
   {
-    "origin": ["http://localhost:3000", "https://pave-scope.vercel.app/"],
+    "origin": ["http://localhost:3000", "https://pave-scope.vercel.app"],
     "method": ["GET", "HEAD", "PUT", "POST", "DELETE"],
     "maxAgeSeconds": 3600
   }
