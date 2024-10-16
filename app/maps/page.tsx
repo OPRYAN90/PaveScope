@@ -28,11 +28,11 @@ interface ImageData {
 export default function MapsPage() {
   const [showControls, setShowControls] = useState(false)
   const mapRef = useRef<HTMLDivElement>(null)
-  const [map, setMap] = useState<google.maps.Map | null>(null)
+  const [map, setMap] = useState<any>(null)
   const [userImages, setUserImages] = useState<ImageData[]>([])
   const { user } = useAuth()
   const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null)
-  const [markers, setMarkers] = useState<{ [key: string]: google.maps.Marker }>({})
+  const [markers, setMarkers] = useState<{ [key: string]: any }>({})
   const [showDetections, setShowDetections] = useState(true)
   const [showNonDetections, setShowNonDetections] = useState(true)
   const [showUnprocessed, setShowUnprocessed] = useState(true)
@@ -41,7 +41,7 @@ export default function MapsPage() {
   const initializeMap = useCallback(() => {
     if (window.google && mapRef.current && !map) {
       setIsLoading(false)
-      const newMap = new google.maps.Map(mapRef.current, {
+      const newMap = new window.google.maps.Map(mapRef.current, {
         center: { lat: 0, lng: 0 },
         zoom: 2,
         fullscreenControl: false,
@@ -124,7 +124,7 @@ export default function MapsPage() {
     // Clear existing markers
     Object.values(markers).forEach(marker => marker.setMap(null))
 
-    const newMarkers: { [key: string]: google.maps.Marker } = {}
+    const newMarkers: { [key: string]: any } = {}
 
     userImages.forEach((image) => {
       let fillColor
@@ -142,11 +142,11 @@ export default function MapsPage() {
       }
 
       if (shouldShow) {
-        const marker = new google.maps.Marker({
+        const marker = new (window as any).google.maps.Marker({
           position: { lat: image.gps.lat, lng: image.gps.lng },
           map: map,
           icon: {
-            path: google.maps.SymbolPath.CIRCLE,
+            path: (window as any).google.maps.SymbolPath.CIRCLE,
             fillColor: fillColor,
             fillOpacity: 1,
             strokeColor: '#ffffff',

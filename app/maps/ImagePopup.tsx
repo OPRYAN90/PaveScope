@@ -31,13 +31,15 @@ interface ImagePopupProps {
 export default function ImagePopup({ imageUrl, onClose, imageData }: ImagePopupProps) {
   const [isImageLoading, setIsImageLoading] = useState(true)
   const [showFullImage, setShowFullImage] = useState(false)
-  const [imageSrc, setImageSrc] = useState(imageData?.url || '')
+  const [imageSrc, setImageSrc] = useState('')
   const [detectionData, setDetectionData] = useState<DetectionData | null>(null)
   const { user } = useAuth()
 
   useEffect(() => {
     if (imageData && user) {
       setIsImageLoading(true)
+      setImageSrc('') // Clear the previous image
+
       const img = new Image()
       img.crossOrigin = "anonymous"
       img.onload = () => {
@@ -68,6 +70,8 @@ export default function ImagePopup({ imageUrl, onClose, imageData }: ImagePopupP
         if (!querySnapshot.empty) {
           const detectionDoc = querySnapshot.docs[0].data() as DetectionData
           setDetectionData(detectionDoc)
+        } else {
+          setDetectionData(null) // Reset detection data if not found
         }
       }
       fetchDetectionData()
@@ -102,11 +106,13 @@ export default function ImagePopup({ imageUrl, onClose, imageData }: ImagePopupP
                 <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
               </div>
             )}
-            <img 
-              src={imageSrc} 
-              alt="Selected location" 
-              className={`w-full h-full object-cover ${isImageLoading ? 'invisible' : 'visible'}`}
-            />
+            {imageSrc && (
+              <img 
+                src={imageSrc} 
+                alt="Selected location" 
+                className={`w-full h-full object-cover ${isImageLoading ? 'invisible' : 'visible'}`}
+              />
+            )}
             <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <Button
                 variant="secondary"
@@ -180,11 +186,13 @@ export default function ImagePopup({ imageUrl, onClose, imageData }: ImagePopupP
       {showFullImage && (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
           <div className="relative max-w-[90vw] max-h-[90vh] bg-white shadow-lg rounded-lg overflow-hidden">
-            <img 
-              src={imageSrc} 
-              alt="Full size image" 
-              className="max-w-full max-h-full w-auto h-auto object-contain"
-            />
+            {imageSrc && (
+              <img 
+                src={imageSrc} 
+                alt="Full size image" 
+                className="max-w-full max-h-full w-auto h-auto object-contain"
+              />
+            )}
             <Button
               variant="secondary"
               // @ts-ignore
