@@ -155,9 +155,16 @@ const DetailedView: React.FC<{ detection: Detection; onClose: () => void; onPrev
   const [showControls, setShowControls] = useState(false)
   const [currentImage, setCurrentImage] = useState<string | null>(null)
   const [nextImage, setNextImage] = useState<string | null>(null)
-  const [selectedMaterial, setSelectedMaterial] = useState(detection.material || '')
-  const [customMaterial, setCustomMaterial] = useState('')
-  const [customPrice, setCustomPrice] = useState(0)
+
+  useEffect(() => {
+    // Disable scrolling on the main page
+    document.body.style.overflow = 'hidden'
+
+    // Re-enable scrolling when the component is unmounted
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [])
 
   useEffect(() => {
     setIsImageLoading(true)
@@ -201,33 +208,6 @@ const DetailedView: React.FC<{ detection: Detection; onClose: () => void; onPrev
     setIsImageLoading(true)
     setIsBoundingBoxLoading(true)
     onNext()
-  }
-
-  const handleMaterialChange = (value: string) => {
-    setSelectedMaterial(value)
-    if (value !== 'Custom') {
-      const selectedOption = MaterialOptions.find(option => option.name === value)
-      if (selectedOption && detection.volume) {
-        const newCost = selectedOption.price * detection.volume
-        // Here you would update the detection's cost in your state and database
-        // For example:
-        // updateDetectionCost(detection.id, newCost)
-      }
-    }
-  }
-
-  const handleCustomMaterialChange = (value: string) => {
-    setCustomMaterial(value)
-  }
-
-  const handleCustomPriceChange = (value: string) => {
-    const price = parseFloat(value)
-    setCustomPrice(isNaN(price) ? 0 : price)
-    if (!isNaN(price) && detection.volume) {
-      const newCost = price * detection.volume
-      // Update the detection's cost in your state and database
-      // updateDetectionCost(detection.id, newCost)
-    }
   }
 
   return (
@@ -351,47 +331,10 @@ const DetailedView: React.FC<{ detection: Detection; onClose: () => void; onPrev
                     <span><strong>Volume:</strong> {detection.volume.toFixed(2)} m³</span>
                   </div>
                 )}
-                <div className="flex items-center text-sm text-gray-600">
-                  <Layers className="mr-2 h-4 w-4 text-yellow-500" />
-                  <span><strong>Material:</strong></span>
-                  <Select value={selectedMaterial} onValueChange={handleMaterialChange}>
-                    <SelectTrigger className="w-[180px] ml-2">
-                      <SelectValue placeholder="Select material" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {MaterialOptions.map((option) => (
-                        <SelectItem key={option.name} value={option.name}>
-                          {option.name} {option.name !== 'Custom' && `($${option.price}/ton)`}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                {selectedMaterial === 'Custom' && (
-                  <div className="flex items-center text-sm text-gray-600 mt-2">
-                    <Input
-                      type="text"
-                      placeholder="Custom material name"
-                      value={customMaterial}
-                      onChange={(e) => handleCustomMaterialChange(e.target.value)}
-                      className="w-[180px] mr-2"
-                    />
-                    <Input
-                      type="number"
-                      placeholder="Price per ton"
-                      value={customPrice.toString()}
-                      onChange={(e) => handleCustomPriceChange(e.target.value)}
-                      className="w-[120px]"
-                    />
-                  </div>
-                )}
-                {detection.volume !== undefined && selectedMaterial && (
+                {detection.material && (
                   <div className="flex items-center text-sm text-gray-600">
-                    <DollarSign className="mr-2 h-4 w-4 text-green-500" />
-                    <span>
-                      <strong>Estimated Cost:</strong> $
-                      {(detection.volume * (selectedMaterial === 'Custom' ? customPrice : (MaterialOptions.find(o => o.name === selectedMaterial)?.price || 0))).toFixed(2)}
-                    </span>
+                    <Layers className="mr-2 h-4 w-4 text-yellow-500" />
+                    <span><strong>Material:</strong> {detection.material}</span>
                   </div>
                 )}
               </div>
