@@ -18,6 +18,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { calculateVolume } from './volumeCalculation'
 import { Separator } from "../../components/ui/seperator"
 import { Input } from "../../components/Login/ui/input"
+import Head from 'next/head'
 
 interface Detection {
   id: string;
@@ -625,6 +626,10 @@ export default function DetectionsPage() {
 
   return (
     <DashboardLayout>
+      <Head>
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        {/* Add other favicon-related links here if needed */}
+      </Head>
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
