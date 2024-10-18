@@ -280,6 +280,21 @@ export default function UploadPage() {
           return null;
         }
 
+        // Instead of resizing here, we'll send the file to our API
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const response = await fetch('/api/resize-image', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to resize image');
+        }
+
+        const resizedFile = await response.blob();
+
         // Add a placeholder for the uploading image at the beginning of the array
         const placeholderId = Math.random().toString(36).substr(2, 9)
         setUploadedImages(prev => [{
@@ -291,7 +306,7 @@ export default function UploadPage() {
         } as ImageData, ...prev])
 
         const storageRef = ref(storage, `users/${user.uid}/images/${fileName}`)
-        const uploadTask = uploadBytesResumable(storageRef, file, metadata)
+        const uploadTask = uploadBytesResumable(storageRef, resizedFile, metadata)
 
         return new Promise<{ url: string; fileName: string; gps: typeof finalGps; placeholderId: string } | null>((resolve, reject) => {
           uploadTask.on(

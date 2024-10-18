@@ -1,3 +1,8 @@
 {
+  "/upload/page": "app/upload/page.js",
+  "/signin/page": "app/signin/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/api/resize-image/route": "app/api/resize-image/route.js",
+  "/model/page": "app/model/page.js",
   "/detections/page": "app/detections/page.js"
 }
