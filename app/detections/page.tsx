@@ -363,6 +363,128 @@ const DetailedView: React.FC<{ detection: Detection; onClose: () => void; onPrev
   )
 }
 
+const VolumeDialog: React.FC<{ onClose: () => void, onCalculate: (params: any) => void, isCalculating: boolean }> = ({ onClose, onCalculate, isCalculating }) => {
+  const [selectedDevice, setSelectedDevice] = useState('iPhone 14 Pro');
+  const [customCamera, setCustomCamera] = useState(false);
+  const [horizontalFoV, setHorizontalFoV] = useState(84);
+  const [verticalFoV, setVerticalFoV] = useState(68.3);
+  const [selectedMaterial, setSelectedMaterial] = useState('')
+  const [customMaterial, setCustomMaterial] = useState('')
+  const [customPrice, setCustomPrice] = useState(0)
+
+  const handleCalculate = () => {
+    onCalculate({
+      device: selectedDevice,
+      horizontalFoV: customCamera ? horizontalFoV : 84,
+      verticalFoV: customCamera ? verticalFoV : 68.3,
+      material: selectedMaterial,
+      customMaterial,
+      customPrice,
+    });
+  };
+
+  return (
+    <Dialog open={true} onOpenChange={onClose}>
+      <DialogContent className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-bold text-blue-800 mb-4">Calculate Volume and Cost</DialogTitle>
+        </DialogHeader>
+        <div className="space-y-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Device:</label>
+            <Select
+              value={selectedDevice}
+              onValueChange={(value) => {
+                setSelectedDevice(value);
+                setCustomCamera(value === 'custom');
+              }}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select device" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="iPhone 14 Pro">iPhone 14 Pro (Main Camera, 4:3)</SelectItem>
+                <SelectItem value="custom">Custom Camera</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          
+          {customCamera && (
+            <>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Horizontal Field of View (degrees):</label>
+                <Input 
+                  type="number" 
+                  value={horizontalFoV} 
+                  onChange={(e) => setHorizontalFoV(Number(e.target.value))} 
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Vertical Field of View (degrees):</label>
+                <Input 
+                  type="number" 
+                  value={verticalFoV} 
+                  onChange={(e) => setVerticalFoV(Number(e.target.value))} 
+                />
+              </div>
+            </>
+          )}
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Select material:</label>
+            <Select onValueChange={setSelectedMaterial}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select material" />
+              </SelectTrigger>
+              <SelectContent>
+                {MaterialOptions.map((option) => (
+                  <SelectItem key={option.name} value={option.name}>
+                    {option.name} {option.name !== 'Custom' && `($${option.price}/m³)`}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          {selectedMaterial === 'Custom' && (
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">Custom Material Details:</label>
+              <Input
+                type="text"
+                placeholder="Enter custom material name"
+                value={customMaterial}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCustomMaterial(e.target.value)}
+                className="w-full"
+              />
+              <Input
+                type="number"
+                placeholder="Enter price per cubic meter ($/m³)"
+                value={customPrice === 0 ? '' : customPrice.toString()}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCustomPrice(parseFloat(e.target.value) || 0)}
+                className="w-full"
+              />
+            </div>
+          )}
+          
+          <Button 
+            onClick={handleCalculate} 
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+            disabled={isCalculating}
+          >
+            {isCalculating ? (
+              <>
+                <Loader className="mr-2 h-4 w-4 animate-spin" />
+                Calculating...
+              </>
+            ) : (
+              'Calculate Volume and Cost'
+            )}
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
 export default function DetectionsPage() {
   const [detections, setDetections] = useState<Detection[]>([])
   const [selectedImage, setSelectedImage] = useState<Detection | null>(null)
@@ -463,76 +585,83 @@ export default function DetectionsPage() {
     }
   }
 
-  const handleCalculateVolumeAndCost = async () => {
-    if (selectedMaterial && selectedDetections.size > 0) {
-      setIsCalculating(true)
-      const selectedDetectionObjects = detections.filter(d => selectedDetections.has(d.id))
-      const phoneHeight = 1.5 // meters, adjust as needed
-      const imageWidth = 4032 // pixels, adjust based on device
-      const imageHeight = 3024 // pixels, adjust based on device
+  const handleCalculateVolumeAndCost = async (cameraParams: any) => {
+    if (cameraParams.material && selectedDetections.size > 0) {
+      setIsCalculating(true);
+      const selectedDetectionObjects = detections.filter(d => selectedDetections.has(d.id));
+      const phoneHeight = 1.5; // meters, adjust as needed
       
       try {
         const volumes = await Promise.all(selectedDetectionObjects.map(async (detection) => {
           if (detection.gps.alt !== undefined) {
+            // Get image dimensions
+            const img = new Image();
+            img.src = detection.imageUrl;
+            await new Promise((resolve) => { img.onload = resolve; });
+            const imageWidth = img.width;
+            const imageHeight = img.height;
+
             const volume = await calculateVolume(
               [detection] as import("./types").Detection[],
               phoneHeight,
               imageWidth,
-              imageHeight
-            )
-            const materialPrice = selectedMaterial === 'Custom' ? customPrice : MaterialOptions.find(o => o.name === selectedMaterial)?.price || 0
-            const cost = volume * materialPrice
-            return { id: detection.id, volume, cost }
+              imageHeight,
+              cameraParams.horizontalFoV,
+              cameraParams.verticalFoV
+            );
+            const materialPrice = cameraParams.material === 'Custom' ? cameraParams.customPrice : MaterialOptions.find(o => o.name === cameraParams.material)?.price || 0;
+            const cost = volume * materialPrice;
+            return { id: detection.id, volume, cost };
           }
-          return { id: detection.id, volume: 0, cost: 0 }
-        }))
+          return { id: detection.id, volume: 0, cost: 0 };
+        }));
 
-        const totalVolume = volumes.reduce((sum, { volume }) => sum + volume, 0)
-        const totalCost = volumes.reduce((sum, { cost }) => sum + cost, 0)
-        setTotalVolume(totalVolume)
+        const totalVolume = volumes.reduce((sum, { volume }) => sum + volume, 0);
+        const totalCost = volumes.reduce((sum, { cost }) => sum + cost, 0);
+        setTotalVolume(totalVolume);
 
         // Update detections with calculated volumes and costs
         const updatedDetections = detections.map(detection => {
-          const calculated = volumes.find(v => v.id === detection.id)
-          return calculated ? { ...detection, volume: calculated.volume, material: selectedMaterial === 'Custom' ? customMaterial : selectedMaterial, cost: calculated.cost } : detection
-        })
-        setDetections(updatedDetections)
+          const calculated = volumes.find(v => v.id === detection.id);
+          return calculated ? { ...detection, volume: calculated.volume, material: cameraParams.material === 'Custom' ? cameraParams.customMaterial : cameraParams.material, cost: calculated.cost } : detection;
+        });
+        setDetections(updatedDetections);
 
         // Update volumes, materials, and costs in Firestore
-        const batch = writeBatch(db)
+        const batch = writeBatch(db);
         volumes.forEach(({ id, volume, cost }) => {
-          const detectionRef = doc(db, 'users', user!.uid, 'detections', id)
+          const detectionRef = doc(db, 'users', user!.uid, 'detections', id);
           batch.update(detectionRef, { 
             volume, 
-            material: selectedMaterial === 'Custom' ? customMaterial : selectedMaterial, 
+            material: cameraParams.material === 'Custom' ? cameraParams.customMaterial : cameraParams.material, 
             cost 
-          })
-        })
-        await batch.commit()
+          });
+        });
+        await batch.commit();
 
         toast({
           title: "Volume and Cost Calculated",
           description: `Total volume: ${totalVolume.toFixed(2)} m³. Total cost: $${totalCost.toFixed(2)}`,
-        })
-        setShowVolumeDialog(false)
+        });
+        setShowVolumeDialog(false);
       } catch (error) {
-        console.error("Error calculating volume and cost:", error)
+        console.error("Error calculating volume and cost:", error);
         toast({
           title: "Error",
           description: "An error occurred while calculating volume and cost. Please try again.",
           variant: "destructive",
-        })
+        });
       } finally {
-        setIsCalculating(false)
+        setIsCalculating(false);
       }
     } else {
       toast({
         title: "Error",
         description: "Please select a material and at least one image.",
         variant: "destructive",
-      })
+      });
     }
-  }
+  };
 
   const prepareCSVData = () => {
     return detections.map(detection => ({
@@ -738,74 +867,13 @@ export default function DetectionsPage() {
         />
       )}
 
-      <Dialog open={showVolumeDialog} onOpenChange={setShowVolumeDialog}>
-        <DialogContent className="bg-white p-6 rounded-lg shadow-xl max-w-md w-full">
-          <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-blue-800 mb-4">Calculate Volume and Cost</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Device:</label>
-              <Select value="iPhone 14 Pro (Main Camera, 4:3)">
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select device" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="iPhone 14 Pro (Main Camera, 4:3)">iPhone 14 Pro (Main Camera, 4:3)</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Select material:</label>
-              <Select onValueChange={setSelectedMaterial}>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select material" />
-                </SelectTrigger>
-                <SelectContent>
-                  {MaterialOptions.map((option) => (
-                    <SelectItem key={option.name} value={option.name}>
-                      {option.name} {option.name !== 'Custom' && `($${option.price}/m³)`}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-            {selectedMaterial === 'Custom' && (
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">Custom Material Details:</label>
-                <Input
-                  type="text"
-                  placeholder="Enter custom material name"
-                  value={customMaterial}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCustomMaterial(e.target.value)}
-                  className="w-full"
-                />
-                <Input
-                  type="number"
-                  placeholder="Enter price per cubic meter ($/m³)"
-                  value={customPrice === 0 ? '' : customPrice.toString()}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCustomPrice(parseFloat(e.target.value) || 0)}
-                  className="w-full"
-                />
-              </div>
-            )}
-            <Button 
-              onClick={handleCalculateVolumeAndCost} 
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-              disabled={isCalculating}
-            >
-              {isCalculating ? (
-                <>
-                  <Loader className="mr-2 h-4 w-4 animate-spin" />
-                  Calculating...
-                </>
-              ) : (
-                'Calculate Volume and Cost'
-              )}
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+      {showVolumeDialog && (
+        <VolumeDialog
+          onClose={() => setShowVolumeDialog(false)}
+          onCalculate={handleCalculateVolumeAndCost}
+          isCalculating={isCalculating}
+        />
+      )}
     </DashboardLayout>
   )
 }

@@ -17,10 +17,18 @@ async function getElevation(lat: number, lng: number): Promise<number> {
   }
 }
 
-export async function calculateVolume(selectedDetections: Detection[], phoneHeight: number, imageWidth: number, imageHeight: number) {
+export async function calculateVolume(
+  selectedDetections: Detection[], 
+  phoneHeight: number, 
+  imageWidth: number, 
+  imageHeight: number,
+  horizontalFoV: number,
+  verticalFoV: number
+) {
   let totalVolume = 0;
   console.log(`Starting volume calculation for ${selectedDetections.length} detections`);
   console.log(`Phone height: ${phoneHeight}m, Image dimensions: ${imageWidth}x${imageHeight} pixels`);
+  console.log(`Horizontal FoV: ${horizontalFoV}°, Vertical FoV: ${verticalFoV}°`);
 
   for (const detection of selectedDetections) {
     console.log(`Processing detection: ${detection.id}`);
@@ -33,8 +41,10 @@ export async function calculateVolume(selectedDetections: Detection[], phoneHeig
       const cameraHeight = detection.gps.alt - groundElevation;
       console.log(`Calculated camera height: ${cameraHeight}m`);
 
-      // Calculate total image area
-      const totalImageArea = (cameraHeight * 1.58) * (cameraHeight * 1.18);
+      // Calculate total image area using provided FoV
+      const widthMultiplier = 2 * Math.tan((horizontalFoV / 2) * (Math.PI / 180));
+      const heightMultiplier = 2 * Math.tan((verticalFoV / 2) * (Math.PI / 180));
+      const totalImageArea = (cameraHeight * widthMultiplier) * (cameraHeight * heightMultiplier);
       console.log(`Total image area: ${totalImageArea.toFixed(2)} sq meters`);
 
       for (const box of detection.detections) {
@@ -63,7 +73,6 @@ export async function calculateVolume(selectedDetections: Detection[], phoneHeig
         console.error('Response:', error.response?.data);
         console.error('Request:', error.request);
       }
-      // You might want to handle this error, e.g., skip this detection or show a user message
     }
   }
 
