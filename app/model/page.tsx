@@ -461,7 +461,7 @@ export default function ModelPage() {
             {failedInferences > 0 && (
               <p className="mt-2 flex items-center text-yellow-600">
                 <AlertTriangle className="w-4 h-4 mr-2" />
-                Please try again. The Hugging Face API might need time to initialize.
+                Please ensure your images are in proper format and try again or select fewer images. The Hugging Face API might need time to initialize.
               </p>
             )}
           </div>

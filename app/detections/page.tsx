@@ -644,6 +644,10 @@ export default function DetectionsPage() {
           description: `Total volume: ${totalVolume.toFixed(2)} m³. Total cost: $${totalCost.toFixed(2)}`,
         });
         setShowVolumeDialog(false);
+
+        // Reset selection state
+        setSelectedDetections(new Set());
+        setIsSelectMode(false);
       } catch (error) {
         console.error("Error calculating volume and cost:", error);
         toast({
@@ -718,10 +722,9 @@ export default function DetectionsPage() {
             >
               {isSelectMode ? "Cancel Selection" : "Select Images"}
             </Button>
-            {isSelectMode && (
+            {isSelectMode && selectedDetections.size > 0 && (
               <Button
                 onClick={() => setShowVolumeDialog(true)}
-                disabled={selectedDetections.size === 0}
                 className="bg-blue-600 hover:bg-blue-700 text-white transition-all duration-300"
               >
                 Calculate Volume & Cost ({selectedDetections.size})
